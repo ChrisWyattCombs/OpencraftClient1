@@ -22,8 +22,8 @@ public class World {
 	public static int lastRegionZ = 0;
 	public static int currentRegionIndex = -1;
 	public static void loadWorld() {
-		for(int x = -16; x < 16; x++) {
-			for(int z = -16; z < 16; z++) {
+		for(int x = -8; x < 8; x++) {
+			for(int z = -8; z <8 ; z++) {
 				try {
 				
 				loadChunk(x,z);
@@ -60,7 +60,7 @@ public class World {
 	public static void loadChunk(int cx, int cz) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IOException {
 		int regionX = cx >> 4;
 		int regionZ = cz >> 4;
-		 
+
 		 int x = cx -(regionX * 16);
 		 int z = cz-(regionZ * 16);
 		//Region region = null;
@@ -85,10 +85,23 @@ public class World {
 		
 		int chunkX = x >> 4;
 		int chunkZ = z >> 4;
+		
 			int regionX = chunkX >> 4;
 			int regionZ = chunkZ >> 4;
+			int localCX =chunkX-(regionX*16);
+			int localCZ =chunkZ-(regionZ*16);
+			int localX = x - (localCX*16);
+			int localZ = z - (localCZ*16);
+			if(x < 0) {
+				localX += 256;
+			}
+			if(z < 0) {
+				localZ += 256;
+			}
+			System.out.println("X: "+localX);
 		try {
-			return regions[getRegionIndex(regionX, regionZ)].chunks[chunkX-(regionX*16)][chunkZ-(regionZ*16)].blocks[x - ((chunkX-(regionX*16))*16)][y][z - ((chunkZ-(regionZ*16))*16)];
+			
+			return regions[getRegionIndex(regionX, regionZ)].chunks[chunkX-(regionX*16)][chunkZ-(regionZ*16)].blocks[localX][y][localZ];
 		}catch( Exception e){
 			e.printStackTrace();
 			
