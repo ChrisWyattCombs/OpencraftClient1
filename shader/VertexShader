@@ -1,0 +1,14 @@
+#version 120
+	   		 
+
+
+
+varying vec4 passColor;
+varying vec2 passTextureCoord;
+	   		 
+ void main() {
+gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
+passColor = gl_Color;
+passTextureCoord = vec2(gl_MultiTexCoord0);
+
+}
