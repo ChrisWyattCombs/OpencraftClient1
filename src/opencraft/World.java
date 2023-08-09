@@ -31,7 +31,7 @@ public class World {
 					e.printStackTrace();
 					System.exit(0);
 				}
-				worldLoadProgress = (float)(x+16)/32.00f + (float)(z+16f)/(32*32);
+				worldLoadProgress = (float)(x+8f)/16.00f + (float)(z+8f)/(16*16);
 			}
 		}
 		worldLoadProgress = 1;

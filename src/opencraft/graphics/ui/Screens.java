@@ -188,18 +188,20 @@ try {
 }catch(Exception e) {
 	
 }
-float nx = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
-float nz = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
+float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
+float nx = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 		float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
 DisplayUtills.font.drawText("looking at Block: "+bx+" "+" "+by+" "+bz, -0.0165f, 0.0060f, 0.00002f);
 DisplayUtills.font.drawText("looking at: "+nx+" "+" "+ny+" "+nz, -0.0165f, 0.0050f, 0.00002f);
 GL11.glDisable(GL11.GL_TEXTURE_2D);
+DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
+DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
 controls();
 
 	}
 	public void controls() {
-		DisplayVariables.camYaw += Mouse.getDX()/2;
-		DisplayVariables.CamPitch += Mouse.getDY()/2;
+		DisplayVariables.camYaw += Mouse.getDX()/4f;
+		DisplayVariables.CamPitch += Mouse.getDY()/4f;
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			DisplayVariables.camZ += 0.01f*Math.cos(Math.toRadians( DisplayVariables.camYaw))*DisplayVariables.deltaTime;
 			DisplayVariables.camX += 0.01f*Math.sin(Math.toRadians( DisplayVariables.camYaw))*DisplayVariables.deltaTime;

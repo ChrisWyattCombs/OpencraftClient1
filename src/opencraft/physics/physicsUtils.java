@@ -6,7 +6,10 @@ import opencraft.graphics.DisplayVariables;
 
 public class physicsUtils {
 public static int convertFloatCoordToBlockCoord(float c) {
-	return (int)(c+0.5f);
+	if(c - (int)(c) < 0.5f) {
+		return (int)(c+1);
+	}
+	return (int)(c);
 }
 public static Block getNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range) {
 	float x = startX;
@@ -26,8 +29,8 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 	return b;
 }
 public static Block getBlockLookingAt() {
-	float nx = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
-			float nz = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
+	float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
+			float nx = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 					float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
 	return getNextBlockInDirection( DisplayVariables.camX,DisplayVariables.camY,DisplayVariables.camZ,nx,ny,nz,10);
 }

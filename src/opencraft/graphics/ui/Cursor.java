@@ -36,7 +36,6 @@ DisplayUtills.shader.bind();
 	x += Mouse.getDX()/50000f;
 	y += Mouse.getDY()/50000f;
 	//org.newdawn.slick.Color.white.bind();
-
 	GL30.glUniform1ui(DisplayUtills.shader.uniforms.get("tex"), t.getTextureID());
 	//GL13.glActiveTexture(GL13.GL_TEXTURE0);
 	GL11.glBindTexture(GL11.GL_TEXTURE_2D, t.getTextureID());
