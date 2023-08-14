@@ -8,8 +8,13 @@ private int chunkX;
 private int chunkZ; 
 private int regionX;
 private int regionZ;
-
-
+public float topLight = 1f;
+public float bottomLight = 1f;
+public float frontLight = 1f;
+public float backLight = 1f;
+public float rightLight = 1f;
+public float leftLight = 1f;
+//public float[] nextBlockCoords = new float[12];
 
 public Block(int x, int y, int z, int chunkX, int chunkZ, int regionX, int regionZ) {
 	super();

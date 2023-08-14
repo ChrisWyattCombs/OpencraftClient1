@@ -27,5 +27,6 @@
 	<classpathentry kind="lib" path="libs/slick-util.jar"/>
 	<classpathentry kind="lib" path="libs/TWL-LWJGL2.jar"/>
 	<classpathentry kind="lib" path="libs/freetype-jni.jar"/>
+	<classpathentry kind="lib" path="libs/guava-32.1.2-jre.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

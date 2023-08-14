@@ -44,6 +44,7 @@ private static TrueTypeFont font2;
 private static HashMap<Character, Vector2f> charToCoord = new HashMap<>(); 
 public static ShaderProgram fontShader;
 public static ShaderProgram shader;
+public static ShaderProgram worldShader;
 public static void createWindow(String title, int width, int height, boolean isFullscreen) {
 	try {
 		 DisplayMode displayMode = null;
@@ -89,6 +90,7 @@ public static void setupOpenGl() throws Exception {
     //glEnable(GL13.GL_TEXTURE1);
     ///GL11.glCullFace(4);
     glEnable (GL_DEPTH_TEST); 
+    
     //glDepthFunc (GL_); 
     //glClearColor(0, 0,0, 1);
     //GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -136,6 +138,26 @@ public static void setupOpenGl() throws Exception {
 	
 	shader.link();
 	shader.createUniform("tex");
+	
+	
+	
+	
+	worldShader =new ShaderProgram();
+	Scanner f3 = new Scanner(new File("shader/WorldFragShader"));
+	String f3c = "";
+	while(f3.hasNextLine()) {
+		f3c+=f3.nextLine()+"\n";
+	}
+	f2.close();
+	
+	worldShader.createFragmentShader(f3c);
+
+	
+	worldShader.createVertexShader(vc);
+	
+	worldShader.link();
+	worldShader.createUniform("tex");
+	worldShader.createUniform("viewPos");
 	Cursor.setup();
 
 	

@@ -14,7 +14,7 @@ public class BlockStone extends Block {
 
 	@Override
 	public void draw() {
-		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0});
+		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight);
 	}
 
 }

@@ -18,9 +18,9 @@ public class Main {
 
 	}
 	public static void runOpencraft(String version) throws Exception {
-		DisplayUtills.createWindow("opencraft "+version, 1920, 1080, false);
+		DisplayUtills.createWindow("opencraft "+version, 1920, 1080, true);
 		DisplayUtills.setupOpenGl();
-		DisplayUtills.loadResources();
+	DisplayUtills.loadResources();
 		
 		while (!Display.isCloseRequested() && !DisplayVariables.close) {
 			long startTime = System.currentTimeMillis();
@@ -34,6 +34,7 @@ public class Main {
             if(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             	DisplayVariables.pressedEsc = false;
             }
+           
            
 		}
 	}

@@ -1,6 +1,8 @@
 package opencraft;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +15,7 @@ import opencraft.blocks.BlockDirt;
 import opencraft.blocks.BlockGrass;
 import opencraft.blocks.BlockStone;
 import opencraft.graphics.DisplayUtills;
+import opencraft.physics.physicsUtils;
 
 public class Chunk {
 	private int x;
@@ -72,8 +75,8 @@ public class Chunk {
 			for (int x = 0; x < 16; x++) {
 
 				for (int z = 0; z < 16; z++) {
-
-					int endHeight = FlatWorldGenerator.generateHeight(x * (this.x * 16), z * (this.z * 16));
+					
+					int endHeight = NormalWorldGenerator.generateHeight(x + (this.getGlobalX() * 16), z + (this.getGlobalZ() * 16));
 					for (int height = 0; height <= endHeight; height++) {
 						if (endHeight - height == 0) {
 							blocks[x][height][z] = new BlockGrass(x, height, z, this.x, this.z, regionX, regionZ);
@@ -85,34 +88,50 @@ public class Chunk {
 
 						// fw.write();
 					}
-					fw.append("BlockGrass " + x + " " + endHeight + " " + z + " " + 0+"\n");
-					fw.append("BlockDirt " + x + " " + (endHeight - 4) + " " + z + " " + 3+"\n");
-
-					fw.append("BlockStone " + x + " " + (endHeight - endHeight) + " " + z + " " + (endHeight - 5)+"\n");
+					int startY = 0;
+					String lastBlockType = blocks[x][0][z].getClass().getName();
+					String blockType = null;
+					for (int y = 1; y < 256; y++) {
+						
+						if(blocks[x][y][z] == null) {
+							blockType = "air";
+						}else {
+							blockType = blocks[x][y][z].getClass().getName();
+						}
+						if(!blockType.equals(lastBlockType)) {
+							fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+							startY = y;
+							lastBlockType = blockType;
+						}
+					}
+					
+					fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
 				}
 			}
 			fw.close();
 
 		} else {
-			Scanner chunkReader = new Scanner(chunkFile);
-
-			while (chunkReader.hasNextLine()) {
-				String string = chunkReader.nextLine();
+			BufferedReader chunkReader = new BufferedReader(new FileReader(chunkFile));
+			String string = "";
+			while ((string = chunkReader.readLine()) != null) {
+				
 				
 				String[] data = string.split(" ");
 				
 				
 				int x = Integer.valueOf(data[1]);
 				int z = Integer.valueOf(data[3]);
-
+				
 				int endY = Integer.valueOf(data[4]);
 				int startPos = Integer.valueOf(data[2]);
+				if(!data[0].equals("air")) {
+					
 				for (int y = startPos; y <=startPos+ endY; y++) {
-
-					blocks[x][y][z] = (Block) Class.forName("opencraft.blocks." + data[0]).getConstructors()[0]
+					
+					blocks[x][y][z] = (Block) Class.forName(data[0]).getConstructors()[0]
 							.newInstance(x, y, z, this.x, this.z, regionX, regionZ);
 				
-				}
+					}}
 				
 			}
 			chunkReader.close();
@@ -120,10 +139,78 @@ public class Chunk {
 		}
 
 	}
+public void calculateLighting() {
+	for(int localX = 0; localX < 16; localX++) {
+		for(int y = 0; y < 256; y++) {
+			for(int localZ = 0; localZ < 16; localZ++) {
+				if(blocks[localX][y][localZ] != null) {
+				int x = (int) blocks[localX][y][localZ].getGlobalX();
+				int z = (int) blocks[localX][y][localZ].getGlobalZ();
+				
+				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,100- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,100- (int)y)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,100- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,100- (int)y)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,100- (int)y)!=null ) {
+					 blocks[localX][y][localZ].topLight = 0.1f;
+				}
+				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0,(int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y-1, z, 1, 0, 0,(int)y)!=null && physicsUtils.getNextBlockInDirection(x, y-1, z, -1, 0, 0,(int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, 1,(int)y)!=null&&physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1,(int)y)!=null ) {
+					 blocks[localX][y][localZ].bottomLight = 0.1f;
+				}
+				if(physicsUtils.getNextBlockInDirection(x,y,z, 1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,0,1,100)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,0,-1,100) !=null) {
+					 blocks[localX][y][localZ].rightLight = 0.1f;
+				}
+		if(physicsUtils.getNextBlockInDirection(x,y,z, -1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,0,1,100)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,0,-1,100) !=null) {
+			 blocks[localX][y][localZ].leftLight = 0.1f;
+				}
+		if(physicsUtils.getNextBlockInDirection(x,y,z, 0,0,-1,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, -1,0,0,100) !=null) {
+			 blocks[localX][y][localZ].frontLight = 0.1f;
+		}
+		if(physicsUtils.getNextBlockInDirection(x,y,z, 0,0,1,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, -1,0,0,100) !=null) {
+			 blocks[localX][y][localZ].backLight = 0.1f;
+		}
+				}
+			}
+		}
+	}
+}
+	public void save() throws IOException {
+		File chunkFile = new File("C:\\Opencraft\\worlds\\Test\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
+		
+		
+			FileWriter fw = new FileWriter(chunkFile);
+			
+			fw.write("");
+			for (int x = 0; x < 16; x++) {
 
+				for (int z = 0; z < 16; z++) {
+					int startY = 0;
+					String lastBlockType = blocks[x][0][z].getClass().getName();
+					String blockType = null;
+					for (int y = 1; y < 256; y++) {
+						
+						if(blocks[x][0][z] == null) {
+							blockType = "air";
+						}else {
+							blockType = blocks[x][y][z].getClass().getName();
+						}
+						if(!blockType.equals(lastBlockType)) {
+							fw.append(blockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+							startY = y;
+							lastBlockType = blockType;
+						}
+					}
+					
+					fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+				}
+				}
+			
+	}
 	public void setup() {
+		//if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,255- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,255- (int)y)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,255- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,255- (int)y)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,255- (int)y)!=null )
+		if(id == -1) {
 		id = GL11.glGenLists(1);
+		}else {
+			GL11.glDeleteLists(id,1);
+		}
 		GL11.glNewList(id, GL11.GL_COMPILE);
+		
 		GL11.glBegin(GL11.GL_QUADS);
 		//DisplayUtills.shader.bind();
 		//GL30.glUniform1ui(DisplayUtills.shader.uniforms.get("tex"),World.blockTextures.getTextureID());
@@ -142,7 +229,7 @@ public class Chunk {
 					Block block5 = null;
 					Block block6 = null;
 					try {
-					/*
+					
 						block1 = World.getBlock((int)blocks[x][y][z].getGlobalX(), y+1, (int)blocks[x][y][z].getGlobalZ());
 						block2 = World.getBlock((int)blocks[x][y][z].getGlobalX(), y-1, (int)blocks[x][y][z].getGlobalZ());
 						block3 = World.getBlock((int)blocks[x][y][z].getGlobalX()+1, y, (int)blocks[x][y][z].getGlobalZ());
@@ -150,14 +237,15 @@ public class Chunk {
 						block5 = World.getBlock((int)blocks[x][y][z].getGlobalX(), y, (int)blocks[x][y][z].getGlobalZ()+1);
 						block6 = World.getBlock((int)blocks[x][y][z].getGlobalX(), y, (int)blocks[x][y][z].getGlobalZ()-1);
 					
-						*/
+						
+						/*
 						block1 = blocks[x+1][y][z];
 						block2 = blocks[x-1][y][z];
 						block3 = blocks[x][y+1][z];
 						block4 = blocks[x][y-1][z];
 						block5 = blocks[x][y][z+1];
 						block6 = blocks[x][y][z-1];
-					
+					*/
 					}catch(Exception e) {
 						
 					}
@@ -177,9 +265,14 @@ public class Chunk {
 }
 
 	public void draw() {
-		System.out.println("DID: "+id);
+		//.out.println("DID: "+id);
 		GL11.glCallList(id);
 		
+	}
+	public void delete() {
+		if(id != -1) {
+		GL11.glDeleteLists(id,1);
+		}
 	}
 
 }

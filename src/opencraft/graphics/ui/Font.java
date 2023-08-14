@@ -31,13 +31,13 @@ public class Font {
 		Face face = ft.newFace(path, 0);
 		face.setPixelSizes( 0, 48);  
 		
-		System.out.println("works");
+		//System.out.println("works");
 		
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
 		  
 		for (char c = 0; c < 128; c++)
 		{
-			System.out.println("works1.5");
+			//System.out.println("works1.5");
 		    // load character glyph 
 			
 		    face.loadChar(c, FT_LOAD_RENDER);
@@ -87,7 +87,7 @@ public class Font {
 		    );
 		    Characters.put(c, character);
 		}
-		System.out.println("works4");
+		//System.out.println("works4");
 	face.delete();
 	ft.delete();
 	//glBindTexture(GL_TEXTURE_2D,0);
@@ -114,7 +114,44 @@ public class Font {
 	        x += (ch.Advance >> 6) * scale;
 	        glBindTexture(GL_TEXTURE_2D, 0);
 	}
-		
+		DisplayUtills.fontShader.unbind();
+	}
+		public void drawText(String text, float x, float y, float scale,float textFieldRightPos, float textFieldLeftPos, int textFieldInsertPos) {
+			DisplayUtills.fontShader.bind();
+			text = " " + text;
+			boolean firstTime = true;
+			//x -= textFieldInsertPos * scale;
+			int n = 0;
+			for(char c : text.toCharArray() )
+		    {
+		        CharacterData ch = Characters.get(c);
+		        //System.out.println("ID: "+ ch.TextureID);
+		        float xpos = x + ch.Bearing.getX() * scale;
+		        float ypos = y - (ch.Size.getY() - ch.Bearing.getY()) * scale;
+		        if(n == textFieldInsertPos) {
+		        	float insertXpos = x + (ch.Bearing.getX()*2) * scale;
+			        
+			        
+		        }
+		        float w = ch.Size.getX() * scale;
+		        float h = ch.Size.getY() * scale;
+		        //System.out.println("w: "+w);
+		        GL30.glUniform1ui(DisplayUtills.fontShader.uniforms.get("tex"), ch.TextureID);
+		        //GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+		        if((xpos > textFieldLeftPos && xpos < textFieldRightPos)||firstTime) {
+		        DisplayUtills.DrawLetterQuad(xpos, ypos, -0.02f, w, h);
+		        firstTime = false;
+		        }
+		        glBindTexture(GL_TEXTURE_2D, 0);
+		        n++;
+		        
+		        
+		        	
+		        x += (ch.Advance >> 6) * scale;
+		        
+		        
+		}
 		DisplayUtills.fontShader.unbind();
 		 
 }

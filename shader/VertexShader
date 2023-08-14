@@ -2,12 +2,16 @@
 	   		 
 
 
-
+varying vec3 position;
 varying vec4 passColor;
+varying vec3 passNormal;
 varying vec2 passTextureCoord;
-	   		 
+uniform vec3 viewPos;	   		 
  void main() {
+ passNormal = gl_Normal;
+
 gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
+position = vec3(gl_Position.x,gl_Position.y,gl_Position.z);
 passColor = gl_Color;
 passTextureCoord = vec2(gl_MultiTexCoord0);
 
