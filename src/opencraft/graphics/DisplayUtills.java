@@ -177,66 +177,12 @@ public static void loadResources() throws IOException {
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 4);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glBindTexture(GL_TEXTURE_2D, 0);//skybox = TextureLoader.getTexture =("PNG", ResourceLoader.getResourceAsStream("D:\\Downloads\\530-90_4f5e88db7cac4.png"));
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-
-/*
-glEnable(GL13.GL_TEXTURE_CUBE_MAP);
-glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-PNGDecoder pngDecoder = new PNGDecoder(ResourceLoader.getResourceAsStream("D:\\Downloads\\530-90_4f5e88db7cac4.png"));
-ByteBuffer temp = ByteBuffer.allocateDirect(4*pngDecoder.getWidth() * pngDecoder.getHeight());
-pngDecoder.decode(temp, pngDecoder.getWidth()*4, PNGDecoder.RGBA);
-temp.flip();
-glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X,0,GL_RGBA,pngDecoder.getWidth(), pngDecoder.getHeight(),0,GL_RGBA,GL_UNSIGNED_BYTE,temp);
-glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X,0,GL_RGBA,pngDecoder.getWidth(), pngDecoder.getHeight(),0,GL_RGBA,GL_UNSIGNED_BYTE,temp);
-glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y,0,GL_RGBA,pngDecoder.getWidth(), pngDecoder.getHeight(),0,GL_RGBA,GL_UNSIGNED_BYTE,temp);
-glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,0,GL_RGBA,pngDecoder.getWidth(), pngDecoder.getHeight(),0,GL_RGBA,GL_UNSIGNED_BYTE,temp);
-glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z,0,GL_RGBA,pngDecoder.getWidth(), pngDecoder.getHeight(),0,GL_RGBA,GL_UNSIGNED_BYTE,temp);
-glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,0,GL_RGBA,pngDecoder.getWidth(), pngDecoder.getHeight(),0,GL_RGBA,GL_UNSIGNED_BYTE,temp);
-glDisable(GL13.GL_TEXTURE_CUBE_MAP);
-*/
 }
+
 public static void renderNextFrame() {
-	/*
-	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
-	glLoadIdentity();
-	
-	glDepthMask(false);
- glColor3f(	135f/255f, 206f/255f, 235f/255f);
-	
-	drawSkybox();
-	//glBindTexture(GL_TEXTURE_2D, 0);
-	glDepthMask(true);
-	
-	//glBindTexture(GL_TEXTURE_2D, 0);
-	
-	//GLU.gluPerspective (50f,(float)DisplayVariables.width/(float)DisplayVariables.height, 0.01f, 100.0f);  
-	
-	
-   
-    
-	glRotatef(-DisplayVariables.camYaw,0.0f,1.0f,0.0f);
-    glRotatef(-DisplayVariables.CamPitch,(float)(Math.cos(Math.toRadians(DisplayVariables.CamPitch))),0.0f,(float)(Math.sin(Math.toRadians(DisplayVariables.CamPitch))));
-    glTranslatef (-DisplayVariables.camX, -DisplayVariables.camY, DisplayVariables.camZ);  
-    glBegin(GL_QUADS);
-    glColor3f(1, 1, 1);
-    ModelCube.drawModel(0, 0, -2, new float[] {0,0,0,0,0,0,0,0,0,0,0,0});
-	glEnd();
-   
-    glLoadIdentity();
-    glColor3f(1, 1, 1);
-    font.drawText("Fps: "+String.valueOf(Math.round(DisplayVariables.fps)), -0.0165f, 0.0080f, 0.00002f);
-    
-    glColor3f(1, 1, 1);
-    
-    
-    glDisable(GL_TEXTURE_2D);
-    */
+
 	Screens.currentScreen.drawScreen();
     
 
@@ -290,6 +236,17 @@ public static void drawSqaureFromLeft(float width,float height, float x,float y,
 	//glTexCoord2f(1f, 0);
 	glEnd();
 }
-
+public static void drawSqaureFromTop(float width,float height, float x,float y,float z) {
+	glBegin(GL_QUADS);
+	glTexCoord2f(1, 0);glVertex3f(0.005f * width+x, 0.005f +y, z);
+	
+	glTexCoord2f(0, 0f);glVertex3f(-0.005f * width+x, 0.005f +y, z);
+	
+	glTexCoord2f(0, 1f);glVertex3f(-0.005f * width+x, -0.005f * (height*2)+y, z);
+	
+	glTexCoord2f(1, 1f);glVertex3f(0.005f * width+x, -0.005f * (height*2)+y, z);
+	
+	glEnd();
+}
 
 }

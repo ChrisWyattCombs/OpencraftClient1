@@ -5,10 +5,9 @@ import org.lwjgl.opengl.GL11;
 
 import opencraft.graphics.DisplayUtills;
 
-public abstract class Button {
+public abstract class Button extends UIComponent {
 private String text;
-private float x;
-private float y;
+
 public float width;
 public float heght;
 public float reltiveTextX;
@@ -19,17 +18,16 @@ public float textScale;
 
 public Button(String text, float x, float y, float width, float heght, float reltiveTextX, float reltiveTextY,
 		float textScale) {
-	super();
+	super(x,y);
 	this.text = text;
-	this.x = x;
-	this.y = y;
 	this.width = width;
 	this.heght = heght;
 	this.reltiveTextX = reltiveTextX;
 	this.reltiveTextY = reltiveTextY;
 	this.textScale = textScale;
 }
-public void drawButton() {
+@Override
+public void drawAndUpdate() {
 	GL11.glColor3f(169f/255f,169f/255f,169f/255f);
 	DisplayUtills.drawSqaure(width, heght,x, y, -0.02f);
 	GL11.glColor3f(0,0,0);

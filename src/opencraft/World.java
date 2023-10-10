@@ -185,7 +185,7 @@ public class World {
 		}
 	
 
-		if(chunksToSetup != null) {
+		if(chunksToSetup != null && !loadingChunks) {
 			System.out.println("works 500 " + chunksToSetup.size());
 			Vector2i chunkPosition = chunksToSetup.get(setupIndex);
 			

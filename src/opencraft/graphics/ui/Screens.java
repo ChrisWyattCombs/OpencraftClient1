@@ -58,7 +58,7 @@ public static Screen mainMenu = new Screen() {
 		//glBindTexture(GL_TEXTURE_2D, 0);
 	//glDepthMask(true);
 	GL11.glEnable(GL11.GL_TEXTURE_2D);
-		playButton.drawButton();
+		playButton.drawAndUpdate();
 		Cursor.updateAndDrawMouse();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
@@ -81,8 +81,8 @@ public static Screen worlds = new Screen() {
 			}.start();
 		
 			
+			//currentScreen = createWorld;
 			currentScreen = loadingWorld;
-			
 		}
 		
 	};
@@ -105,8 +105,8 @@ glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		GL11.glClearColor(135f/255f, 206f/255f, 235f/255f,1);
 	GL11.glEnable(GL11.GL_TEXTURE_2D);
 		//playButton.drawButton();
-	 drawOuutline();
-	 createButton.drawButton();
+	 //drawOuutline();
+	 createButton.drawAndUpdate();
 		Cursor.updateAndDrawMouse();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
@@ -116,18 +116,7 @@ glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 	}
 	
-public void drawOuutline() {
-	GL11.glColor3f(131f/255f,101f/255f,57f/255f);
-	DisplayUtills.drawSqaure(3, 0.00775f/0.005f, 0, 0, -0.02f);
-	glColor3f(	0,0, 0);
-	DisplayUtills.drawSqaure(3, 0.05f, 0, 0.0075f, -0.02f);
-	DisplayUtills.drawSqaure(3, 0.05f, 0, -0.0075f, -0.02f);
-	DisplayUtills.drawSqaure(0.05f,0.00775f/0.005f, 0.005f*3, 0, -0.02f);
-	DisplayUtills.drawSqaure(0.05f,0.00775f/0.005f, -0.005f*3, 0, -0.02f);
-	glColor3f(	1,1, 1);
-	
-	
-}
+
 };
 public static Screen createWorld = new Screen() {
 	TextField worldName = new TextField("", 0, 0, 0.3f,12);
@@ -135,6 +124,12 @@ public static Screen createWorld = new Screen() {
 	public void drawScreen() {
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
 		worldName.drawAndUpdate();
+		Cursor.updateAndDrawMouse();
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
+			currentScreen = mainMenu;
+			DisplayVariables.pressedEsc = true;
+        }
 		
 	}
 	
@@ -328,7 +323,7 @@ GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 //GL11.glDisable(GL11.GL_BLEND);
 GL11.glBegin(GL11.GL_QUADS);
 
-ModelCube.drawModel(bx, by+1, bz, new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1);
+ModelCube.drawModel(bx, by, bz, new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1);
 GL11.glEnd();
 //GL11.glEnable(GL11.GL_BLEND);
 //GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
