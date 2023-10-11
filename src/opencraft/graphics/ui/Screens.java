@@ -26,6 +26,7 @@ import org.lwjgl.util.glu.GLU;
 
 import opencraft.Block;
 import opencraft.Chunk;
+import opencraft.Player;
 import opencraft.World;
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
@@ -356,7 +357,8 @@ DisplayUtills.font.drawText("Position: "+DisplayVariables.camX+" "+(DisplayVaria
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
 DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
-controls();
+Player.updatePostitionAndRotation();
+Player.setCamToPlayer();
 if(DisplayVariables.fps > DisplayVariables.fpsRecord) {
 	DisplayVariables.fpsRecord = (float) DisplayVariables.fps;
 }

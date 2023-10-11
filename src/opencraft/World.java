@@ -26,10 +26,10 @@ public class World {
 	public static boolean firstTime = true;
 	public static int lastRegionX = 0;
 	public static int lastRegionZ = 0;
-	public static float x;
-	public static float z;
+	public static float x = Player.x;
+	public static float z= -Player.z;
 	
-	public static int renderDistance = 16;
+	public static int renderDistance = 6;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -82,7 +82,8 @@ public class World {
 		chunksToSetup = chunks;
 	}
 	public static void drawWorld() {
-		if(Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2))>(16*2)/2) {
+		System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2)));
+		if(Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2))>(16*1/2)) {
 			x = DisplayVariables.camX;
 			System.out.println("works23");
 			z = -DisplayVariables.camZ;
