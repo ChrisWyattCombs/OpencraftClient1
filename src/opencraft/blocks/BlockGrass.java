@@ -17,4 +17,9 @@ public class BlockGrass extends Block {
 		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight);
 	}
 
+	@Override
+	public int getID() {
+		return 1;
+	}
+
 }

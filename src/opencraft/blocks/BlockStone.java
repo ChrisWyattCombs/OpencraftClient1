@@ -16,5 +16,9 @@ public class BlockStone extends Block {
 	public void draw() {
 		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight);
 	}
+	public int getID() {
+		
+		return 3;
+	}
 
 }

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import org.lwjgl.opengl.GL11;
@@ -24,7 +25,7 @@ public class Chunk {
 	private int regionZ;
 	private int id = -1;
 	public Block[][][] blocks;
-
+	public static String[] BlockTypes = {"air","opencraft.blocks.BlockGrass","opencraft.blocks.BlockDirt","opencraft.blocks.BlockStone"};
 	public Chunk(int x, int z, int regionX, int regionZ) {
 		super();
 		this.x = x;
@@ -89,46 +90,55 @@ public class Chunk {
 						// fw.write();
 					}
 					int startY = 0;
-					String lastBlockType = blocks[x][0][z].getClass().getName();
-					String blockType = null;
+					int lastBlockType = blocks[x][0][z].getID();
+					int blockType = 0;
 					for (int y = 1; y < 256; y++) {
 						
-						if(blocks[x][y][z] == null) {
-							blockType = "air";
+						if(blocks[x][y][z] != null) {
+							blockType = blocks[x][y][z].getID();
 						}else {
-							blockType = blocks[x][y][z].getClass().getName();
+							blockType = 0;
 						}
-						if(!blockType.equals(lastBlockType)) {
-							fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+						if(blockType != lastBlockType) {
+							//fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+							fw.append(new String(new int[] {lastBlockType, x, startY,z,((y-1)-startY)}, 0, 5));
 							startY = y;
 							lastBlockType = blockType;
 						}
 					}
 					
-					fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+					//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+					fw.append(new String(new int[] {blockType, x, startY,z,(255-startY)}, 0, 5));
 				}
 			}
 			fw.close();
 
 		} else {
 			BufferedReader chunkReader = new BufferedReader(new FileReader(chunkFile));
-			String string = "";
-			while ((string = chunkReader.readLine()) != null) {
+			int code = 0;
+			while ((code = chunkReader.read()) != -1) {
+				System.out.println("c " + code);
+				int code2 = chunkReader.read();
+				System.out.println("c2 " + code2);
+				int code3 = chunkReader.read();
+				System.out.println("c3 " + code3);
+				int code4 = chunkReader.read();
+				System.out.println("c4 " + code4);
+				int code5 = chunkReader.read();
+				System.out.println("c5 " + code5);
+				int data[] = {code, code2, code3, code4,code5};
 				
 				
-				String[] data = string.split(" ");
+				int x = data[1];
+				int z = data[3];
 				
-				
-				int x = Integer.valueOf(data[1]);
-				int z = Integer.valueOf(data[3]);
-				
-				int endY = Integer.valueOf(data[4]);
-				int startPos = Integer.valueOf(data[2]);
-				if(!data[0].equals("air")) {
+				int endY = data[4];
+				int startPos =data[2];
+				if(data[0] != 0) {
 					
 				for (int y = startPos; y <=startPos+ endY; y++) {
 					
-					blocks[x][y][z] = (Block) Class.forName(data[0]).getConstructors()[0]
+					blocks[x][y][z] = (Block) Class.forName(BlockTypes[data[0]]).getConstructors()[0]
 							.newInstance(x, y, z, this.x, this.z, regionX, regionZ);
 				
 					}}
@@ -180,24 +190,26 @@ public void calculateLighting() {
 			for (int x = 0; x < 16; x++) {
 
 				for (int z = 0; z < 16; z++) {
-					int startY = 0;
-					String lastBlockType = blocks[x][0][z].getClass().getName();
-					String blockType = null;
-					for (int y = 1; y < 256; y++) {
-						
-						if(blocks[x][0][z] == null) {
-							blockType = "air";
-						}else {
-							blockType = blocks[x][y][z].getClass().getName();
-						}
-						if(!blockType.equals(lastBlockType)) {
-							fw.append(blockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
-							startY = y;
-							lastBlockType = blockType;
-						}
-					}
+				
+				int startY = 0;
+				int lastBlockType = blocks[x][0][z].getID();
+				int blockType = 0;
+				for (int y = 1; y < 256; y++) {
 					
-					fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+					if(blocks[x][y][z] != null) {
+						blockType = blocks[x][y][z].getID();
+					}
+					if(blockType != lastBlockType) {
+						//fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+						fw.append(new String(new int[] {lastBlockType, x, startY,z,((y-1)-startY)}, 0, 5));
+						startY = y;
+						lastBlockType = blockType;
+					}
+				}
+				
+				//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+				fw.append(new String(new int[] {blockType, x, startY,z,(255-startY)}, 0, 5));
+			
 				}
 				}
 			

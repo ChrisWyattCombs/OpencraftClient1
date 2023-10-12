@@ -56,5 +56,5 @@ public float getGlobalZ() {
 }
 public abstract void draw();
 
-
+public abstract int getID();
 }

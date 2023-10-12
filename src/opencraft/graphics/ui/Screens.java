@@ -31,6 +31,7 @@ import opencraft.World;
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
+import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelCube;
 import opencraft.physics.physicsUtils;
 
@@ -311,10 +312,10 @@ float bx = 0;
 float by = 0;
 float bz = 0;
 try {
-	Block b = physicsUtils.getBlockLookingAt();
-	bx = b.getGlobalX();
+	Vector3f b = physicsUtils.getBlockPlacePos();
+	bx = b.getX();
 	by = b.getY();
-	bz = b.getGlobalZ();
+	bz = b.getZ();
 }catch(Exception e) {
 	
 }

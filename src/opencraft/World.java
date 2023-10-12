@@ -29,15 +29,17 @@ public class World {
 	public static float x = Player.x;
 	public static float z= -Player.z;
 	
-	public static int renderDistance = 6;
+	public static int renderDistance = 16;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
 	public static int currentRegionIndex = -1;
 	public static boolean loadingChunks = false;
 	public static void loadWorld() {
-		for(int x = -renderDistance; x < renderDistance; x++) {
-			for(int z = -renderDistance; z <renderDistance ; z++) {
+		int chunkX =(int)x >> 4;
+		int chunkZ =(int)z >> 4;
+		for(int x = chunkX-renderDistance; x <  chunkX + renderDistance; x++) {
+			for(int z = chunkZ-renderDistance; z < chunkZ + renderDistance ; z++) {
 				try {
 				
 				loadChunk(x,z);
@@ -45,10 +47,10 @@ public class World {
 					e.printStackTrace();
 					System.exit(0);
 				}
-				worldLoadProgress = (float)(x+renderDistance)/(renderDistance *2) + (float)(z+renderDistance)/((renderDistance *2)*(renderDistance *2));
+				worldLoadProgress = (float)((x-chunkX)+renderDistance)/(renderDistance *2) + (float)((z-chunkZ)+renderDistance)/((renderDistance *2)*(renderDistance *2));
 			}
 		}
-		calculateLighting();
+		//calculateLighting();
 		worldLoadProgress = 1;
 	}
 	
@@ -83,10 +85,10 @@ public class World {
 	}
 	public static void drawWorld() {
 		System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2)));
-		if(Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2))>(16*1/2)) {
-			x = DisplayVariables.camX;
+		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>16) {
+			x = Player.x;
 			System.out.println("works23");
-			z = -DisplayVariables.camZ;
+			z = -Player.z;
 			System.out.println();
 			ArrayList<Vector2i> chunks = new ArrayList<>();
 			int chunkX =(int)x >> 4;
@@ -172,7 +174,7 @@ public class World {
 					}
 					//calculateLighting();
 					for(Vector2i chunkPostion : chunks) {
-						lightChunk(chunkPostion.getX(), chunkPostion.getY());
+						//lightChunk(chunkPostion.getX(), chunkPostion.getY());
 					}
 					if(chunks.size() > 0 && chunksToSetup == null) {
 					World.chunksToSetup = chunks;
@@ -257,7 +259,14 @@ public class World {
 		}
 		return null;
 	}
-
+	public static void setBlock(String blockType, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
+		int chunkX = x >> 4;
+		int chunkZ = z >> 4;
+		int regionX = chunkX >> 4;
+		int reigonZ = chunkZ >> 4;
+		
+		regions[getRegionIndex(regionX, reigonZ)].chunks[chunkX][chunkZ].blocks[x][y][z] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(x,y,z,chunkX,chunkZ,regionX,reigonZ);
+	}
 	public static void setupChunk(int cx, int cz) {
 		int regionX = cx >> 4;
 		int regionZ = cz >> 4;

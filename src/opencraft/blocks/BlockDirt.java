@@ -17,4 +17,10 @@ public class BlockDirt extends Block {
 		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.2f,0,0.2f,0,0.2f,0,0.2f,0,0.2f,0,0.2f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight);
 	}
 
+	@Override
+	public int getID() {
+	
+		return 2;
+	}
+
 }
