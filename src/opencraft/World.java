@@ -29,7 +29,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z= -Player.z;
 	
-	public static int renderDistance = 16;
+	public static int renderDistance = 8;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -50,7 +50,7 @@ public class World {
 				worldLoadProgress = (float)((x-chunkX)+renderDistance)/(renderDistance *2) + (float)((z-chunkZ)+renderDistance)/((renderDistance *2)*(renderDistance *2));
 			}
 		}
-		//calculateLighting();
+		calculateLighting();
 		worldLoadProgress = 1;
 	}
 	
@@ -81,6 +81,7 @@ public class World {
 				}
 			}
 		}
+		
 		chunksToSetup = chunks;
 	}
 	public static void drawWorld() {
@@ -174,7 +175,7 @@ public class World {
 					}
 					//calculateLighting();
 					for(Vector2i chunkPostion : chunks) {
-						//lightChunk(chunkPostion.getX(), chunkPostion.getY());
+						lightChunk(chunkPostion.getX(), chunkPostion.getY());
 					}
 					if(chunks.size() > 0 && chunksToSetup == null) {
 					World.chunksToSetup = chunks;
@@ -264,8 +265,26 @@ public class World {
 		int chunkZ = z >> 4;
 		int regionX = chunkX >> 4;
 		int reigonZ = chunkZ >> 4;
-		
-		regions[getRegionIndex(regionX, reigonZ)].chunks[chunkX][chunkZ].blocks[x][y][z] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(x,y,z,chunkX,chunkZ,regionX,reigonZ);
+		int lcx = chunkX  & 0xF;
+		int lcz = chunkZ  & 0xF;
+		int localX = x  & 0xF;
+		int localZ = z  & 0xF;
+		regions[getRegionIndex(regionX, reigonZ)].chunks[lcx][lcz].blocks[localX][y][localZ] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(localX,y,localZ,lcx,lcz,regionX,reigonZ);
+	
+		for(int ox = chunkX-1; ox < chunkX+1;ox++) {
+			for(int oz = chunkZ-1; oz < chunkZ+1;oz++) {
+				regionX = ox >> 4;
+				 reigonZ = oz >> 4;
+				 int regionIndex = getRegionIndex(regionX, reigonZ);
+				 regions[regionIndex].chunks[ox& 0xF][oz& 0xF].calculateLighting();
+				 regions[regionIndex].chunks[ox& 0xF][oz& 0xF].delete();
+				 if (chunksToSetup == null) {
+					 chunksToSetup = new ArrayList<>();
+					 
+				 }
+				 chunksToSetup.add(new Vector2i(ox,oz));
+			}
+		}
 	}
 	public static void setupChunk(int cx, int cz) {
 		int regionX = cx >> 4;

@@ -263,7 +263,7 @@ public static Screen loadingWorld = new Screen() {
 	
 };
 public static Screen inGame = new Screen() {
-
+	boolean buttonDownLast = false;
 	@Override
 	public void drawScreen() {
 		glDepthMask(true);
@@ -326,6 +326,21 @@ GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 GL11.glBegin(GL11.GL_QUADS);
 
 ModelCube.drawModel(bx, by, bz, new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1);
+
+if(Mouse.isButtonDown(0)) {
+	if(!buttonDownLast)
+	try {
+		World.setBlock("BlockGrass", (int)bx,(int)by,(int)bz);
+	} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+			| SecurityException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	buttonDownLast = true;
+}else {
+	buttonDownLast = false;
+}
+
 GL11.glEnd();
 //GL11.glEnable(GL11.GL_BLEND);
 //GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

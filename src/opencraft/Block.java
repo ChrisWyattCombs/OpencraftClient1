@@ -14,6 +14,7 @@ public float frontLight = 1f;
 public float backLight = 1f;
 public float rightLight = 1f;
 public float leftLight = 1f;
+public boolean visible = false;
 //public float[] nextBlockCoords = new float[12];
 
 public Block(int x, int y, int z, int chunkX, int chunkZ, int regionX, int regionZ) {

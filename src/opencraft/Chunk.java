@@ -154,27 +154,58 @@ public void calculateLighting() {
 		for(int y = 0; y < 256; y++) {
 			for(int localZ = 0; localZ < 16; localZ++) {
 				if(blocks[localX][y][localZ] != null) {
+					Block block1 = null;
+					Block block2 = null;
+					Block block3 = null;
+					Block block4 = null;
+					Block block5 = null;
+					Block block6 = null;
+					try {
+					
+						block1 = World.getBlock((int)blocks[localX][y][localZ].getGlobalX(), y+1, (int)blocks[localX][y][localZ].getGlobalZ());
+						block2 = World.getBlock((int)blocks[localX][y][localZ].getGlobalX(), y-1, (int)blocks[localX][y][localZ].getGlobalZ());
+						block3 = World.getBlock((int)blocks[localX][y][localZ].getGlobalX()+1, y, (int)blocks[localX][y][localZ].getGlobalZ());
+						block4 = World.getBlock((int)blocks[localX][y][localZ].getGlobalX()-1, y, (int)blocks[localX][y][localZ].getGlobalZ());
+						block5 = World.getBlock((int)blocks[localX][y][localZ].getGlobalX(), y, (int)blocks[localX][y][localZ].getGlobalZ()+1);
+						block6 = World.getBlock((int)blocks[localX][y][localZ].getGlobalX(), y, (int)blocks[localX][y][localZ].getGlobalZ()-1);
+					
+						
+						/*
+						block1 = blocks[x+1][y][z];
+						block2 = blocks[x-1][y][z];
+						block3 = blocks[x][y+1][z];
+						block4 = blocks[x][y-1][z];
+						block5 = blocks[x][y][z+1];
+						block6 = blocks[x][y][z-1];
+					*/
+					}catch(Exception e) {
+						
+					}
+					if(block1 == null || block2 == null || block3 == null || block4 == null || block5 == null || block6 == null) {
+						
 				int x = (int) blocks[localX][y][localZ].getGlobalX();
-				int z = (int) blocks[localX][y][localZ].getGlobalZ();
+				int z = -((int) blocks[localX][y][localZ].getGlobalZ());
 				
-				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,100- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,100- (int)y)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,100- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,100- (int)y)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,100- (int)y)!=null ) {
-					 blocks[localX][y][localZ].topLight = 0.1f;
+				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,256)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,256)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,256)!=null ) {
+					System.out.println("works");
+					
+					 blocks[localX][y][localZ].topLight = 0.3f;
 				}
-				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0,(int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y-1, z, 1, 0, 0,(int)y)!=null && physicsUtils.getNextBlockInDirection(x, y-1, z, -1, 0, 0,(int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, 1,(int)y)!=null&&physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1,(int)y)!=null ) {
-					 blocks[localX][y][localZ].bottomLight = 0.1f;
+				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0,(int)256)!=null &&physicsUtils.getNextBlockInDirection(x, y-1, z, 1, 0, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y-1, z, -1, 0, 0,256)!=null &&physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, 1,(int)256)!=null&&physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1,256)!=null ) {
+					 blocks[localX][y][localZ].bottomLight = 0.3f;
 				}
-				if(physicsUtils.getNextBlockInDirection(x,y,z, 1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,0,1,100)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,0,-1,100) !=null) {
-					 blocks[localX][y][localZ].rightLight = 0.1f;
+				if(physicsUtils.getNextBlockInDirection(x,y,z, 1,0,0,256)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,1,0,256)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,-1,0,256) !=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,0,1,256)!=null && physicsUtils.getNextBlockInDirection(x+1,y,z, 0,0,-1,256) !=null) {
+					 blocks[localX][y][localZ].rightLight = 0.3f;
 				}
-		if(physicsUtils.getNextBlockInDirection(x,y,z, -1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,0,1,100)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,0,-1,100) !=null) {
-			 blocks[localX][y][localZ].leftLight = 0.1f;
+		if(physicsUtils.getNextBlockInDirection(x,y,z, -1,0,0,256)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,1,0,256)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,-1,0,256) !=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,0,1,256)!=null && physicsUtils.getNextBlockInDirection(x-1,y,z, 0,0,-1,256) !=null) {
+			 blocks[localX][y][localZ].leftLight = 0.3f;
 				}
-		if(physicsUtils.getNextBlockInDirection(x,y,z, 0,0,-1,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, -1,0,0,100) !=null) {
-			 blocks[localX][y][localZ].frontLight = 0.1f;
+		if(physicsUtils.getNextBlockInDirection(x,y,z, 0,0,1,256)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 0,1,0,256)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 0,-1,0,256) !=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 1,0,0,256)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, -1,0,0,256) !=null) {
+			 blocks[localX][y][localZ].frontLight = 0.3f;
 		}
-		if(physicsUtils.getNextBlockInDirection(x,y,z, 0,0,1,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 0,1,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 0,-1,0,100) !=null && physicsUtils.getNextBlockInDirection(x,y,z+1, 1,0,0,100)!=null && physicsUtils.getNextBlockInDirection(x,y,z+1, -1,0,0,100) !=null) {
-			 blocks[localX][y][localZ].backLight = 0.1f;
-		}
+		if(physicsUtils.getNextBlockInDirection(x,y,z, 0,0,-1,256)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 0,1,0,256)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 0,-1,0,256) !=null && physicsUtils.getNextBlockInDirection(x,y,z-1, 1,0,0,256)!=null && physicsUtils.getNextBlockInDirection(x,y,z-1, -1,0,0,256) !=null) {
+			 blocks[localX][y][localZ].backLight = 0.3f;
+		}}
 				}
 			}
 		}
@@ -263,6 +294,7 @@ public void calculateLighting() {
 					}
 					if(block1 == null || block2 == null || block3 == null || block4 == null || block5 == null || block6 == null) {
 						blocks[x][y][z].draw();
+						
 					}
 				}
 			}

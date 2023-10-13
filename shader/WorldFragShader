@@ -26,12 +26,14 @@ uniform vec3 viewPos;
 	float spec = pow(max(dot(viewDir, halfwayDir), 0.0), 32*0.01);
 	float sm = 1;
 	vec3 normal = normalCoord;
-	vec3 brightness = (diff+spec*0.5)* vec3(light.r,light.g,light.b);
-	if(brightness.r < 0.1){
-	brightness.r = 0.1;
-	brightness.b = 0.1;
-	brightness.g = 0.1;
+	float brightness = (diff+spec*0.5);
+	if(brightness < 0.1){
+	brightness = 0.1;
+	
 	}
- 	vec3 outputColor = vec3(color.r,color.g,color.b)*brightness;
+	if(brightness > 0.8){
+		brightness = 0.8;
+	}
+ 	vec4 outputColor = color*brightness*light;
 	gl_FragColor = vec4(outputColor.r,outputColor.g,outputColor.b,color.a);
  }

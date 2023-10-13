@@ -71,21 +71,67 @@ public class Player {
 		
 		
 		//Block block2 = physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1, 2, 0.001f);
-	
-			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.1f);
-			if(downblock  != null) {	
-				if(y < downblock.getY() +2.5) {
+		Block block1 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.25f, 0, -1, 0, 2, 0.1f);
+		Block block3 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+		Block block5 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z+0.25f, 0, -1, 0, 2, 0.1f);
+		Block block6 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z+0.25f, 0, -1, 0, 2, 0.1f);
+		Block block7 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+		Block block8 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+			
+			if(block1  != null) {	
+				if(y < block1.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
-			downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.1f);
-			
-			if(downblock  != null) {
-				if(y < downblock.getY() +2.5) {
+			if(block2  != null) {	
+				if(y < block2.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
 				}
+			}
+			if(block3  != null) {	
+				if(y < block3.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+				}
+			}
+			if(block4  != null) {	
+				if(y < block4.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+				}
+			}
+			if(block5  != null) {	
+				if(y < block5.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+				}
+			}
+			if(block6  != null) {	
+				if(y < block6.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+				}
+			}
+			if(block7  != null) {	
+				if(y < block7.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+				}
+			}
+			if(block8  != null) {	
+				if(y < block8.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+				}
+			}
+			
+			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.1f);
+			if(downblock  != null) {
+				
 				if(y < downblock.getY() +3) {
 					y = downblock.getY() +3;
 					velocityY = 0;
@@ -103,6 +149,10 @@ public class Player {
 							grounded = false;
 						}
 	}
+	public static void checkForActions() {
+		
+	}
+	
 	public static void setCamToPlayer() {
 		DisplayVariables.camX = x;
 		DisplayVariables.camY = y;
