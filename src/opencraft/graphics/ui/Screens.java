@@ -33,6 +33,7 @@ import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelCube;
+import opencraft.graphics.models.ModelPlayer;
 import opencraft.physics.physicsUtils;
 
 public class Screens {
@@ -77,6 +78,7 @@ public static Screen worlds = new Screen() {
 			
 			new Thread() {
 				public void run() {
+					World.worldLoadProgress = 0;
 					World.loadWorld();
 					
 				}
@@ -308,33 +310,30 @@ FloatBuffer z1 = BufferUtils.createFloatBuffer(1);
 
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 
-float bx = 0;
-float by = 0;
-float bz = 0;
-try {
-	Vector3f b = physicsUtils.getBlockPlacePos();
-	bx = b.getX();
-	by = b.getY();
-	bz = b.getZ();
-}catch(Exception e) {
-	
-}
+
+Vector3f b = physicsUtils.getBlockPlacePos();
+
+
 DisplayUtills.worldShader.unbind();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 //GL11.glDisable(GL11.GL_BLEND);
+ModelPlayer.drawModel(Player.x, Player.y-1, -Player.z,-Player.yaw,0,0,Player.pitch,0,-25,0,-25,0,25,0,-25,false);
 GL11.glBegin(GL11.GL_QUADS);
 
-ModelCube.drawModel(bx, by, bz, new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1);
-
-if(Mouse.isButtonDown(0)) {
-	if(!buttonDownLast)
+if(b != null) {
+ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
+}
+if(Mouse.isButtonDown(0)&&b != null) {
+	if(!buttonDownLast) {
 	try {
-		World.setBlock("BlockGrass", (int)bx,(int)by,(int)bz);
+		
+		World.setBlock("BlockGrass", (int)b.getX(),(int)b.getY(), (int)b.getZ());
 	} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 			| SecurityException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	}
 	}
 	buttonDownLast = true;
 }else {
@@ -365,16 +364,28 @@ DisplayUtills.font.drawText("Standing on Block: "+ x+" "+y+" "+z, -0.0165f, 0.00
 
 float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 float nx = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
-		float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
-DisplayUtills.font.drawText("looking at Block: "+bx+" "+" "+by+" "+bz, -0.0165f, 0.0060f, 0.00002f);
+float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
+//DisplayUtills.font.drawText("looking at Block: "+b.getX()+" "+" "+b.getY()+" "+bz, -0.0165f, 0.0060f, 0.00002f);
 DisplayUtills.font.drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(1)+" "+(int)pos.get(2), -0.0165f, 0.0050f, 0.00002f);
 
 DisplayUtills.font.drawText("Position: "+DisplayVariables.camX+" "+(DisplayVariables.camY-2)+" "+DisplayVariables.camZ, -0.0165f, 0.0040f, 0.00002f);
+Player.drawPlayerHUD();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
 DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
 Player.updatePostitionAndRotation();
 Player.setCamToPlayer();
+if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
+	try {
+		World.saveAndUnloadAllLoadedChunks();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	currentScreen = mainMenu;
+	DisplayVariables.pressedEsc = true;
+}
 if(DisplayVariables.fps > DisplayVariables.fpsRecord) {
 	DisplayVariables.fpsRecord = (float) DisplayVariables.fps;
 }

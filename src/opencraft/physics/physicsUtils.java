@@ -82,7 +82,7 @@ public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float s
 		}
 		count++;
 	}
-	return new Vector3f(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
+	return null;
 }
 public static Block getBlockLookingAt() {
 	float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
@@ -94,6 +94,6 @@ public static Vector3f getBlockPlacePos() {
 	float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 			float nx = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 					float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
-	return getLastPosBeforeNextBlockInDirection( DisplayVariables.camX,DisplayVariables.camY,DisplayVariables.camZ,nx,ny,nz,5,0.001f);
+	return getLastPosBeforeNextBlockInDirection( DisplayVariables.camX,DisplayVariables.camY,DisplayVariables.camZ,nx,ny,nz,10,0.001f);
 }
 }

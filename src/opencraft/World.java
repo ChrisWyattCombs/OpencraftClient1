@@ -17,7 +17,7 @@ import opencraft.physics.physicsUtils;
 
 
 public class World {
-	public static int[] chunkDrawIDs = new int[257];
+	//public static int[] chunkDrawIDs = new int[257];
 	public static Texture blockTextures;
 	public static int realRegionListLength = 0;
 	public static Region[] regions = new Region[256];
@@ -29,7 +29,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z= -Player.z;
 	
-	public static int renderDistance = 8;
+	public static int renderDistance = 16;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -43,6 +43,7 @@ public class World {
 				try {
 				
 				loadChunk(x,z);
+				
 				}catch (Exception e) {
 					e.printStackTrace();
 					System.exit(0);
@@ -345,7 +346,7 @@ public class World {
 	public static void calculateLighting() {
 		for(int i = 0; i <World.realRegionListLength; i++) {
 			
-			
+			if(World.regions[i] != null) {
 			for(int cx = 0; cx<16; cx++) {
 				for(int cz = 0; cz<16; cz++) {
 					if(World.regions[i].chunks[cx][cz] != null) {
@@ -354,6 +355,7 @@ public class World {
 					}
 				}
 			}
+		}
 		}
 	}
 	public static void lightChunk(int cx, int cz) {
@@ -372,6 +374,21 @@ public class World {
 			
 		}		
 	}
-	
+	public static void saveAndUnloadAllLoadedChunks() throws IOException {
+		for(int i = 0; i <World.realRegionListLength; i++) {
+			for(int cx = 0; cx<16; cx++) {
+				for(int cz = 0; cz<16; cz++) {
+					if(World.regions[i].chunks[cx][cz] != null) {
+						World.regions[i].chunks[cx][cz].save();
+						World.regions[i].chunks[cx][cz].delete();
+						World.regions[i].chunks[cx][cz] = null;
+					}
+					
+	}
+			}
+			World.regions[i] = null;
+			
+		}
+		realRegionListLength = 0;
 }
-
+}

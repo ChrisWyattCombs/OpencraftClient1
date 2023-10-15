@@ -4,7 +4,9 @@ import java.awt.RenderingHints.Key;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
+import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
 import opencraft.physics.physicsUtils;
 
@@ -20,7 +22,7 @@ public class Player {
 	public static float leftVelocity = 0;
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
-	
+	public static int hotBarIndex = 0;
 	public static void updatePostitionAndRotation() {
 		
 		yaw+= Mouse.getDX()/4f;
@@ -37,7 +39,7 @@ public class Player {
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			if(backwardVelocity == 0) {
 				if(forwardVelocity < 0.01f) {
-					forwardVelocity+=0.0005f*DisplayVariables.deltaTime;
+					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}
 				
 			}else {
@@ -46,7 +48,7 @@ public class Player {
 		
 		}else {
 			if(forwardVelocity > 0) {
-				forwardVelocity-=0.001f*DisplayVariables.deltaTime;
+				forwardVelocity-=0.0001f*DisplayVariables.deltaTime;
 			}
 			if(forwardVelocity < 0) {
 				forwardVelocity = 0;
@@ -152,7 +154,38 @@ public class Player {
 	public static void checkForActions() {
 		
 	}
+	public static void drawPlayerHUD() {
+		float x = -0.008f;
+	int scroll = Mouse.getDWheel();
+	if(scroll> 0) {
+	hotBarIndex -= 1;
 	
+	}else if(scroll < 0) {
+		hotBarIndex += 1;
+		
+		}
+	
+	if(hotBarIndex > 8) {
+		hotBarIndex = 0;
+	}else if(hotBarIndex < 0) {
+		hotBarIndex = 8;
+	}
+	for(int i = 0; i < 9; i++) {
+		if(hotBarIndex == i) {
+			GL11.glColor3f(0, 0, 0);
+		}
+		drawHotbarSquare(x, -0.008f);
+		x+=0.016f/9;
+		GL11.glColor3f(1, 1, 1);
+	}
+	
+	}
+public static void drawHotbarSquare(float x, float y) {
+	DisplayUtills.drawSqaure(0.1f, 0.01f, x, y+(0.005f *0.1f), -0.02f);
+	DisplayUtills.drawSqaure( 0.01f, 0.11f, x+(0.005f *0.1f), y, -0.02f);
+	DisplayUtills.drawSqaure( 0.01f, 0.11f, x-(0.005f *0.1f), y, -0.02f);
+	DisplayUtills.drawSqaure(0.1f, 0.01f, x, y-(0.005f *0.1f), -0.02f);
+	}
 	public static void setCamToPlayer() {
 		DisplayVariables.camX = x;
 		DisplayVariables.camY = y;

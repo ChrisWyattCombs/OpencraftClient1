@@ -222,27 +222,29 @@ public void calculateLighting() {
 
 				for (int z = 0; z < 16; z++) {
 				
-				int startY = 0;
-				int lastBlockType = blocks[x][0][z].getID();
-				int blockType = 0;
-				for (int y = 1; y < 256; y++) {
+					int startY = 0;
+					int lastBlockType = blocks[x][0][z].getID();
+					int blockType = 0;
+					for (int y = 1; y < 256; y++) {
+						
+						if(blocks[x][y][z] != null) {
+							blockType = blocks[x][y][z].getID();
+						}else {
+							blockType = 0;
+						}
+						if(blockType != lastBlockType) {
+							//fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+							fw.append(new String(new int[] {lastBlockType, x, startY,z,((y-1)-startY)}, 0, 5));
+							startY = y;
+							lastBlockType = blockType;
+						}
+					}
 					
-					if(blocks[x][y][z] != null) {
-						blockType = blocks[x][y][z].getID();
-					}
-					if(blockType != lastBlockType) {
-						//fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
-						fw.append(new String(new int[] {lastBlockType, x, startY,z,((y-1)-startY)}, 0, 5));
-						startY = y;
-						lastBlockType = blockType;
-					}
+					//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+					fw.append(new String(new int[] {blockType, x, startY,z,(255-startY)}, 0, 5));
 				}
-				
-				//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
-				fw.append(new String(new int[] {blockType, x, startY,z,(255-startY)}, 0, 5));
-			
-				}
-				}
+			}
+			fw.close();
 			
 	}
 	public void setup() {
