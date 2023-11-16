@@ -19,6 +19,7 @@ public class Player {
 	public static float pitch = 0;
 	public static float forwardVelocity = 0;
 	public static float backwardVelocity = 0;
+
 	public static float leftVelocity = 0;
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
@@ -56,11 +57,11 @@ public class Player {
 		}
 		
 		if(!grounded && velocityY > -0.12f) {
-			velocityY -= 0.00004f*DisplayVariables.deltaTime;
+			velocityY -= 0.00003f*DisplayVariables.deltaTime;
 		}
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && grounded){
-			velocityY = 0.016f;
+			velocityY = 0.010f;
 			
 		}
 		float lastX =x;
@@ -141,7 +142,7 @@ public class Player {
 				}
 				if(y == downblock.getY() +3) {
 					
-				
+				     
 					grounded = true;
 				}else {
 					grounded = false;
@@ -150,9 +151,15 @@ public class Player {
 						}else {
 							grounded = false;
 						}
+			Block upblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0, 2, 0.1f);
+			if(upblock != null) {
+			 if(y > upblock.getY() - 0.3) {
+				 y = upblock.getY() - 0.4f;
+				 velocityY = -velocityY;
+			 }
+			}
 	}
-	public static void checkForActions() {
-		
+	public static void checkForActions() {  		
 	}
 	public static void drawPlayerHUD() {
 		float x = -0.008f;
