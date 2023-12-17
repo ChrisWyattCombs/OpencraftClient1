@@ -22,7 +22,8 @@ public class TextField extends UIComponent {
 		this.width = width;
 		this.maxCharacterrs = maxCharacterrs;
 		id = lastID+1;
-		lastID++;
+		lastID++;                            
+		
 	}
 
 	@Override

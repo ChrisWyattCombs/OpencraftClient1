@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glDepthMask;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.FloatBuffer;
@@ -24,12 +25,15 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.glu.GLU;
 
+import com.google.common.io.Files;
+
 import opencraft.Block;
 import opencraft.Chunk;
 import opencraft.Player;
 import opencraft.World;
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
+import opencraft.graphics.ShaderProgram;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelCube;
@@ -66,16 +70,18 @@ public static Screen mainMenu = new Screen() {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
         	DisplayVariables.close = true;
+        	
         }
 		
 	}
 };
-public static Screen worlds = new Screen() {
+public static Screen worlds = new Screen() { 
+	
 	Button createButton = new Button("Create new world",0,-0.0055f,0.3f,0.1f,-0.0015f,-0.0001f,0.000006f) {
-		
+    
 		@Override
 		public void action() {
-			
+			/*
 			new Thread() {
 				public void run() {
 					World.worldLoadProgress = 0;
@@ -83,16 +89,53 @@ public static Screen worlds = new Screen() {
 					
 				}
 			}.start();
-		
+		*/
 			
 			//currentScreen = createWorld;
-			currentScreen = loadingWorld;
+			currentScreen = createWorld;
 		}
 		
 	};
 	
+	ArrayList<Button> worldButtons = new ArrayList<>();
+	boolean loaded = false;
 	@Override
 	public void drawScreen() {
+	if(!loaded) {
+		File WorldDir = new File("C:\\Opencraft\\worlds\\");
+		String[] worlds = WorldDir.list();
+		float yOffset = 0.003f;
+		for(String world : worlds) {
+			
+			Button worldButton = new Button(world,0,yOffset,0.3f,0.1f,-0.0005f,-0.0001f,0.000006f) {
+				
+				@Override
+				public void action() {
+				
+					new Thread() {
+						public void run() {
+							World.worldName = getText();
+							World.worldLoadProgress = 0;
+							World.loadWorld();
+							
+							
+						}
+					}.start();
+				
+					
+			
+				currentScreen = loadingWorld;
+					//currentScreen = worlds;
+					
+				}
+			};
+			worldButtons.add(worldButton);
+			yOffset+=-0.002f;
+		}
+		loaded = true;
+	}
+	
+	
 glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
 		
 		glLoadIdentity();
@@ -111,6 +154,9 @@ glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//playButton.drawButton();
 	 //drawOuutline();
 	 createButton.drawAndUpdate();
+	 for(Button worldButton : worldButtons) {
+			worldButton.drawAndUpdate();
+		}
 		Cursor.updateAndDrawMouse();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
@@ -124,10 +170,34 @@ glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 };
 public static Screen createWorld = new Screen() {
 	TextField worldName = new TextField("", 0, 0, 0.3f,12);
+	TextField worldSeed = new TextField("", 0, -0.001f, 0.3f,12);
+	Button createButton = new Button("Create",0,-0.002f,0.3f,0.1f,-0.0005f,-0.0001f,0.000006f) {
+		
+		@Override
+		public void action() {
+			
+			new Thread() {
+				
+				public void run() {
+					World.worldName = worldName.text;
+					World.worldLoadProgress = 0;
+					World.loadWorld();
+					
+				}
+			}.start();
+		
+			
+		currentScreen = loadingWorld;
+			//currentScreen = createWorld;
+			
+		}
+	};
 	@Override
 	public void drawScreen() {
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
 		worldName.drawAndUpdate();
+		worldSeed.drawAndUpdate();
+		createButton.drawAndUpdate();
 		Cursor.updateAndDrawMouse();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
@@ -265,7 +335,8 @@ public static Screen loadingWorld = new Screen() {
 	
 };
 public static Screen inGame = new Screen() {
-	boolean buttonDownLast = false;
+	boolean RbuttonDownLast = false;
+	boolean LbuttonDownLast = false;
 	@Override
 	public void drawScreen() {
 		glDepthMask(true);
@@ -293,6 +364,7 @@ for(float f : position) {
 positionBuffer.flip();
 GL11.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, positionBuffer);
 World.drawWorld();
+
 FloatBuffer model = BufferUtils.createFloatBuffer(16);
 FloatBuffer projection = BufferUtils.createFloatBuffer(16);
 IntBuffer viewport = BufferUtils.createIntBuffer(16);
@@ -315,6 +387,9 @@ Vector3f b = physicsUtils.getBlockPlacePos();
 
 
 DisplayUtills.worldShader.unbind();
+DisplayUtills.shader.bind();
+World.drawAndUpdateItems();
+DisplayUtills.shader.unbind();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 //GL11.glDisable(GL11.GL_BLEND);
@@ -324,22 +399,33 @@ GL11.glBegin(GL11.GL_QUADS);
 if(b != null) {
 ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
 }
-if(Mouse.isButtonDown(0)&&b != null) {
-	if(!buttonDownLast) {
-	try {
-		
-		World.setBlock("BlockGrass", (int)b.getX(),(int)b.getY(), (int)b.getZ());
-	} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-			| SecurityException | ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+if(Mouse.isButtonDown(1)) {
+	if(!RbuttonDownLast) {
+	if(Player.hotbar[Player.hotBarIndex] != null) {
+	Player.hotbar[Player.hotBarIndex].rightClickAction();
+	}else {
+		Player.rightHandAction();
+		}
 	}
-	}
-	buttonDownLast = true;
+	RbuttonDownLast = true;
 }else {
-	buttonDownLast = false;
+	RbuttonDownLast = false;
 }
-
+if(b != null) {
+ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
+}
+if(Mouse.isButtonDown(0)) {
+	if(!LbuttonDownLast) {
+	if(Player.hotbar[Player.hotBarIndex] != null) {
+	Player.hotbar[Player.hotBarIndex].leftClickAction();
+	}else {
+		Player.leftHandAction();
+		}
+	}
+	LbuttonDownLast = true;
+}else {
+	LbuttonDownLast = false;
+}
 GL11.glEnd();
 //GL11.glEnable(GL11.GL_BLEND);
 //GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -368,8 +454,12 @@ float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
 //DisplayUtills.font.drawText("looking at Block: "+b.getX()+" "+" "+b.getY()+" "+bz, -0.0165f, 0.0060f, 0.00002f);
 DisplayUtills.font.drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(1)+" "+(int)pos.get(2), -0.0165f, 0.0050f, 0.00002f);
 
-DisplayUtills.font.drawText("Position: "+DisplayVariables.camX+" "+(DisplayVariables.camY-2)+" "+DisplayVariables.camZ, -0.0165f, 0.0040f, 0.00002f);
+DisplayUtills.font.drawText("Position: "+Player.x+" "+Player.y+" "+Player.z, -0.0165f, 0.0040f, 0.00002f);
+//DisplayUtills.shader.bind();
+GL11.glEnable(GL11.GL_TEXTURE_2D);
 Player.drawPlayerHUD();
+GL11.glDisable(GL11.GL_TEXTURE_2D);
+//DisplayUtills.shader.unbind();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
 DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);

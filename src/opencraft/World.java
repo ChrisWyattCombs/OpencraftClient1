@@ -13,11 +13,19 @@ import org.newdawn.slick.util.ResourceLoader;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
+import opencraft.items.itemGrass;
 import opencraft.physics.physicsUtils;
 
 
 public class World {
 	//public static int[] chunkDrawIDs = new int[257];
+	public static ArrayList<Item> items = new ArrayList<>();
+	static {
+		Item grass =new itemGrass();
+		grass.y = 200;
+		items.add(grass);
+		
+	}
 	public static Texture blockTextures;
 	public static int realRegionListLength = 0;
 	public static Region[] regions = new Region[256];
@@ -27,9 +35,9 @@ public class World {
 	public static int lastRegionX = 0;
 	public static int lastRegionZ = 0;
 	public static float x = Player.x;
-	public static float z= -Player.z;
-	
-	public static int renderDistance = 8;
+	public static float z = -Player.z;
+	public static String worldName = "";
+	public static int renderDistance = 6;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -86,6 +94,7 @@ public class World {
 		chunksToSetup = chunks;
 	}
 	public static void drawWorld() {
+		
 		System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2)));
 		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>16) {
 			x = Player.x;
@@ -270,8 +279,11 @@ public class World {
 		int lcz = chunkZ  & 0xF;
 		int localX = x  & 0xF;
 		int localZ = z  & 0xF;
+		if(!blockType.equals("air")) {
 		regions[getRegionIndex(regionX, reigonZ)].chunks[lcx][lcz].blocks[localX][y][localZ] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(localX,y,localZ,lcx,lcz,regionX,reigonZ);
-	
+		}else {
+		regions[getRegionIndex(regionX, reigonZ)].chunks[lcx][lcz].blocks[localX][y][localZ] = null;
+		}
 		for(int ox = chunkX-1; ox < chunkX+1;ox++) {
 			for(int oz = chunkZ-1; oz < chunkZ+1;oz++) {
 				regionX = ox >> 4;
@@ -391,4 +403,12 @@ public class World {
 		}
 		realRegionListLength = 0;
 }
+	public static void drawAndUpdateItems() {
+		for(int i = 0; i < items.size();i++){
+			Item item = items.get(i);
+			item.updatePosition();
+		
+			item.drawIcon(item.x, item.y, item.z, 0.4f);
+		}
+	}
 }

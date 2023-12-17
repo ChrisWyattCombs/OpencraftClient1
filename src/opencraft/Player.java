@@ -1,6 +1,7 @@
 package opencraft;
 
 import java.awt.RenderingHints.Key;
+import java.lang.reflect.InvocationTargetException;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -8,12 +9,20 @@ import org.lwjgl.opengl.GL11;
 
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
+import opencraft.graphics.Vector3f;
+import opencraft.graphics.models.ModelPlayer;
+import opencraft.items.ItemDirt;
+import opencraft.items.ItemStone;
+import opencraft.items.itemGrass;
 import opencraft.physics.physicsUtils;
 
 public class Player {
-	public static float x = -265;
-	public static float y = 150;
-	public static float z = -725;
+	public static boolean playHandSwingAnimation = false;
+	private static int handXrotation = 0;
+	private static float handXrotationChnage = 0.25f;
+	public static float x =0;
+	public static float y = 100;
+	public static float z = 0;
 	public static float velocityY = 0;
 	public static float yaw = 0;
 	public static float pitch = 0;
@@ -24,6 +33,8 @@ public class Player {
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
 	public static int hotBarIndex = 0;
+	public static Item[] hotbar = {new itemGrass(),new ItemDirt(),new ItemStone(),new itemGrass(),null,null,null,null,null};
+	public static itemGrass test = new itemGrass();
 	public static void updatePostitionAndRotation() {
 		
 		yaw+= Mouse.getDX()/4f;
@@ -36,8 +47,9 @@ public class Player {
 		}
 	
 	
-		
+		boolean keyBeingHeld1 = false;
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
+			keyBeingHeld1 = true;
 			if(backwardVelocity == 0) {
 				if(forwardVelocity < 0.01f) {
 					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
@@ -55,7 +67,65 @@ public class Player {
 				forwardVelocity = 0;
 			}
 		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_S) && !keyBeingHeld1) {
+			keyBeingHeld1 = true;
+			if(forwardVelocity == 0) {
+				if(backwardVelocity < 0.01f) {
+					backwardVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}
+				
+			}else {
+				forwardVelocity -= 0.0005f*DisplayVariables.deltaTime;
+			}
 		
+		}else {
+			if(backwardVelocity > 0) {
+				backwardVelocity-=0.0001f*DisplayVariables.deltaTime;
+			}
+			if(backwardVelocity < 0) {
+				backwardVelocity = 0;
+			}
+		}
+		boolean keyBeingHeld = false;
+		if(Keyboard.isKeyDown(Keyboard.KEY_D) && !keyBeingHeld) {
+			keyBeingHeld = true;
+			if(leftVelocity == 0) {
+				if(rightVelocity < 0.01f) {
+					rightVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}
+				
+			}else {
+				leftVelocity -= 0.0005f*DisplayVariables.deltaTime;
+			}
+		
+		}else {
+			if(rightVelocity > 0) {
+				rightVelocity-=0.0001f*DisplayVariables.deltaTime;
+			}
+			if(rightVelocity < 0) {
+				rightVelocity = 0;
+			}
+		}
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_A) && !keyBeingHeld) {
+			keyBeingHeld = true;
+			if(rightVelocity == 0) {
+				if(leftVelocity < 0.01f) {
+					leftVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}
+				
+			}else {
+				rightVelocity -= 0.0005f*DisplayVariables.deltaTime;
+			}
+		
+		}else {
+			if(leftVelocity > 0) {
+				leftVelocity-=0.0001f*DisplayVariables.deltaTime;
+			}
+			if(leftVelocity < 0) {
+				leftVelocity = 0;
+			}
+		}
 		if(!grounded && velocityY > -0.12f) {
 			velocityY -= 0.00003f*DisplayVariables.deltaTime;
 		}
@@ -66,8 +136,8 @@ public class Player {
 		}
 		float lastX =x;
 		float lastZ =z;
-		x += (forwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
-		z+=(forwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
+		x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
+		z+=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		
 		y+=velocityY * DisplayVariables.deltaTime;
 		//z+=(rightVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
@@ -162,7 +232,27 @@ public class Player {
 	public static void checkForActions() {  		
 	}
 	public static void drawPlayerHUD() {
-		float x = -0.008f;
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0.4f, -0.3f, -0.5f);
+		GL11.glRotatef(180.0f+handXrotation , 0, 1, 0);
+		GL11.glRotatef(-90, 1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		ModelPlayer.drawArm(0, 0, 0);
+		GL11.glEnd();
+		GL11.glPopMatrix();
+		if(playHandSwingAnimation) {
+			handXrotation += handXrotationChnage*DisplayVariables.deltaTime;
+			if(handXrotation > 25) {
+				handXrotation = 25;
+				handXrotationChnage*=-1;
+			}
+			else if(handXrotation < 0) {
+				handXrotationChnage*=-1;
+				handXrotation=0;
+				playHandSwingAnimation = false;
+			}
+		}
+		float x = -0.005f;
 	int scroll = Mouse.getDWheel();
 	if(scroll> 0) {
 	hotBarIndex -= 1;
@@ -179,14 +269,44 @@ public class Player {
 	}
 	for(int i = 0; i < 9; i++) {
 		if(hotBarIndex == i) {
+			if(hotbar[i] != null) {
+			hotbar[i].drawIcon(0.35f, -0.13f, -1f,0.1f);
+			}
 			GL11.glColor3f(0, 0, 0);
 		}
 		drawHotbarSquare(x, -0.008f);
-		x+=0.016f/9;
+		if(hotbar[i] != null) {
+			hotbar[i].drawIcon(x, -0.008f,-0.02f,0.0004f);
+			
+		}
+		DisplayUtills.font.drawText("0", x,-0.008f,0.00001f );
+		x+=0.01f/9;
 		GL11.glColor3f(1, 1, 1);
 	}
 	
 	}
+public static void leftHandAction() {
+	if(!Player.playHandSwingAnimation) {
+		Player.playHandSwingAnimation = true;
+	Block b = physicsUtils.getBlockLookingAt();
+	if(b != null) {
+	try {
+		
+		World.setBlock("air", (int)b.getGlobalX(),(int)b.getY(), (int)b.getGlobalZ());
+	} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+			| SecurityException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+	}
+
+
+}
+public static void rightHandAction() {
+	
+}
 public static void drawHotbarSquare(float x, float y) {
 	DisplayUtills.drawSqaure(0.1f, 0.01f, x, y+(0.005f *0.1f), -0.02f);
 	DisplayUtills.drawSqaure( 0.01f, 0.11f, x+(0.005f *0.1f), y, -0.02f);

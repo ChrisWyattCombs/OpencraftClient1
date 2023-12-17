@@ -43,5 +43,8 @@ public void drawAndUpdate() {
 		}
 	}
 }
+public String getText() {
+	return text;
+}
 public abstract void action();
 }

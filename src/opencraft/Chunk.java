@@ -61,8 +61,9 @@ public class Chunk {
 
 	public void load() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-
-		File chunkFile = new File("C:\\Opencraft\\worlds\\Test\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
+		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
+		File chunkDir = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks");
+		chunkDir.mkdirs();
 		blocks = new Block[16][256][16];
 		if (!chunkFile.exists()) {
 			try {
@@ -154,6 +155,7 @@ public void calculateLighting() {
 		for(int y = 0; y < 256; y++) {
 			for(int localZ = 0; localZ < 16; localZ++) {
 				if(blocks[localX][y][localZ] != null) {
+					if(blocks[localX][y][localZ].visible) {
 					Block block1 = null;
 					Block block2 = null;
 					Block block3 = null;
@@ -207,12 +209,13 @@ public void calculateLighting() {
 			 blocks[localX][y][localZ].backLight = 0.3f;
 		}}
 				}
+				}
 			}
 		}
 	}
 }
 	public void save() throws IOException {
-		File chunkFile = new File("C:\\Opencraft\\worlds\\Test\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
+		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 		
 		
 			FileWriter fw = new FileWriter(chunkFile);
@@ -223,7 +226,12 @@ public void calculateLighting() {
 				for (int z = 0; z < 16; z++) {
 				
 					int startY = 0;
-					int lastBlockType = blocks[x][0][z].getID();
+					int lastBlockType;
+					if(blocks[x][0][z] ==  null) {
+					 lastBlockType = 0;
+					}else {
+					lastBlockType = blocks[x][0][z].getID();
+					}
 					int blockType = 0;
 					for (int y = 1; y < 256; y++) {
 						
@@ -296,6 +304,7 @@ public void calculateLighting() {
 					}
 					if(block1 == null || block2 == null || block3 == null || block4 == null || block5 == null || block6 == null) {
 						blocks[x][y][z].draw();
+						blocks[x][y][z].visible = true;
 						
 					}
 				}
