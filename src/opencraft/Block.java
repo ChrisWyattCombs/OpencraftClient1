@@ -14,6 +14,7 @@ public float frontLight = 1f;
 public float backLight = 1f;
 public float rightLight = 1f;
 public float leftLight = 1f;
+public float height = 1f;
 public boolean visible = false;
 //public float[] nextBlockCoords = new float[12];
 
@@ -55,7 +56,13 @@ public float getGlobalX() {
 public float getGlobalZ() {
 	return z+((chunkZ+(regionZ*16))*16);
 }
-public abstract void draw();
+public abstract void draw(boolean top,boolean bottom,boolean front,boolean back,boolean right, boolean left);
 
 public abstract int getID();
+
+public abstract boolean isFluid();
+
+public abstract Item getDrop();
+
+
 }

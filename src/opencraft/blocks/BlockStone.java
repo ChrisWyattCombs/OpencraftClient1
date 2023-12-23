@@ -1,7 +1,10 @@
 package opencraft.blocks;
 
 import opencraft.Block;
+import opencraft.Item;
 import opencraft.graphics.models.ModelCube;
+import opencraft.items.ItemStone;
+import opencraft.items.itemGrass;
 
 public class BlockStone extends Block {
 
@@ -13,12 +16,28 @@ public class BlockStone extends Block {
 	}
 
 	@Override
-	public void draw() {
-		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight);
+	public void draw(boolean top,boolean bottom,boolean front,boolean back,boolean right, boolean left) {
+		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,1f,top,bottom,front,back,right,left);
 	}
 	public int getID() {
 		
 		return 3;
 	}
+
+	@Override
+	public Item getDrop() {
+		ItemStone drop = new ItemStone();
+		drop.x = getGlobalX();
+		drop.y = getY() + 3f;
+		drop.z = -getGlobalZ();
+		return  drop;
+	}
+
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 
 }

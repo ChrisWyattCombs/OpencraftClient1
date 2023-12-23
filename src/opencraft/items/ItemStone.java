@@ -20,7 +20,7 @@ public class ItemStone extends Item{
 		//glScalef(0.4f, 0.5f, 0.5f);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, World.blockTextures.getTextureID());
 		glBegin(GL_QUADS);
-		ModelCube.drawModel(x, y, z,new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},1f,1f,1f,1f,1f,1f,1f,size);
+		ModelCube.drawModel(x, y, -z,new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},1f,1f,1f,1f,1f,1f,1f,size);
 		glEnd();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		glPopMatrix();
@@ -33,6 +33,7 @@ public class ItemStone extends Item{
 		try {
 			
 			World.setBlock("BlockStone", (int)b.getX(),(int)b.getY(), (int)b.getZ());
+			stack--;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| SecurityException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +51,13 @@ public class ItemStone extends Item{
 	@Override
 	public int getMaxStack() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
+	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 3;
 	}
 
 }

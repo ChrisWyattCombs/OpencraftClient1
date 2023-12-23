@@ -1,0 +1,2133 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc34217f68, pid=20620, tid=23560
+#
+# JRE version: Java(TM) SE Runtime Environment (18.0.2+9) (build 18.0.2+9-61)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (18.0.2+9-61, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# Problematic frame:
+# C  [nvoglv64.dll+0x1507f68]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:55470 -Djava.library.path=C:\Users\garag\Documents\GitHub\OpencraftClient1\natives -javaagent:C:\Users\garag\eclipse\java-2022-12\eclipse\configuration\org.eclipse.osgi\227\0\.cp\lib\javaagent-shaded.jar -Dfile.encoding=UTF-8 opencraft.Main
+
+Host: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz, 12 cores, 31G,  Windows 11 , 64 bit Build 22000 (10.0.22000.1516)
+Time: Mon Dec 18 22:04:07 2023 Pacific Standard Time elapsed time: 6.180745 seconds (0d 0h 0m 6s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001c171d6b800):  JavaThread "main" [_thread_in_native, id=23560, stack(0x000000663c700000,0x000000663c800000)]
+
+Stack: [0x000000663c700000,0x000000663c800000],  sp=0x000000663c7ff020,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [nvoglv64.dll+0x1507f68]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 1024  org.lwjgl.opengl.GL11.nglVertex3f(FFFJ)V (0 bytes) @ 0x000001c107b23679 [0x000001c107b23620+0x0000000000000059]
+J 1083 c2 org.lwjgl.opengl.GL11.glVertex3f(FFF)V (24 bytes) @ 0x000001c107b2959c [0x000001c107b29520+0x000000000000007c]
+j  opencraft.graphics.models.ModelCube.drawModelWithVerticalSize(FFF[FFFFFFFFF)V+42
+j  opencraft.blocks.BlockWater.draw()V+107
+J 1488 c2 opencraft.Chunk.setup()V (401 bytes) @ 0x000001c107bb4254 [0x000001c107bb40a0+0x00000000000001b4]
+j  opencraft.World.setupChunk(II)V+49
+j  opencraft.World.drawWorld()V+462
+j  opencraft.graphics.ui.Screens$5.drawScreen()V+233
+J 1149 c1 opencraft.graphics.DisplayUtills.renderNextFrame()V (7 bytes) @ 0x000001c100792234 [0x000001c100792140+0x00000000000000f4]
+j  opencraft.Main.runOpencraft(Ljava/lang/String;)V+43
+j  opencraft.Main.main([Ljava/lang/String;)V+2
+v  ~StubRoutines::call_stub
+
+siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), writing address 0x000001c12d209004
+
+
+Register to memory mapping:
+
+RIP=0x00007ffc34217f68 nvoglv64.dll
+RAX=0x0 is NULL
+RBX=0x000001c127df0000 points into unknown readable memory: 0x000001c123b5e400 | 00 e4 b5 23 c1 01 00 00
+RCX=0x0 is NULL
+RDX=0x000001c12d208ff8 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+RSP=0x000000663c7ff020 is pointing into the stack for thread: 0x000001c171d6b800
+RBP=0x000000663c7ff0a0 is pointing into the stack for thread: 0x000001c171d6b800
+RSI=0x0000000000000008 is an unknown value
+RDI=0x0000000000000002 is an unknown value
+R8 =0x000001c127eb8b38 points into unknown readable memory: 0x3f6666663dcccccd | cd cc cc 3d 66 66 66 3f
+R9 =0x0000000000000002 is an unknown value
+R10=0x0000000000000100 is an unknown value
+R11=0x0000000000000008 is an unknown value
+R12=0x000001c127ea2040 points into unknown readable memory: 0x3f800000c1700000 | 00 00 70 c1 00 00 80 3f
+R13=0x0000000000073800 is an unknown value
+R14=0x000000000000010d is an unknown value
+R15=0x000000000000083f is an unknown value
+
+
+Registers:
+RAX=0x0000000000000000, RBX=0x000001c127df0000, RCX=0x0000000000000000, RDX=0x000001c12d208ff8
+RSP=0x000000663c7ff020, RBP=0x000000663c7ff0a0, RSI=0x0000000000000008, RDI=0x0000000000000002
+R8 =0x000001c127eb8b38, R9 =0x0000000000000002, R10=0x0000000000000100, R11=0x0000000000000008
+R12=0x000001c127ea2040, R13=0x0000000000073800, R14=0x000000000000010d, R15=0x000000000000083f
+RIP=0x00007ffc34217f68, EFLAGS=0x0000000000010246
+
+Top of Stack: (sp=0x000000663c7ff020)
+0x000000663c7ff020:   000001c100000082 000000663c7ff000
+0x000000663c7ff030:   000000000000000c 000001c123c6b390
+0x000000663c7ff040:   0000000000008000 0000000000000000
+0x000000663c7ff050:   0000000000000000 0000000000000000
+0x000000663c7ff060:   0000000000000000 0000000000000000
+0x000000663c7ff070:   0000000200003303 0000000000000000
+0x000000663c7ff080:   0000000000000000 00007ffc00000006
+0x000000663c7ff090:   000000663c7ff150 000000663c7ff1c0
+0x000000663c7ff0a0:   000001c171d6b800 000001c127df0000
+0x000000663c7ff0b0:   000000663c7ff160 00007ffc342187ad
+0x000000663c7ff0c0:   00007ffcc24f4eb0 000001c11f5b51b8
+0x000000663c7ff0d0:   0000000000000000 000001c100770e8c
+0x000000663c7ff0e0:   000001c11f52a1a8 000001c107b23735
+0x000000663c7ff0f0:   000001c171d6b800 000001c107b2332f
+0x000000663c7ff100:   000001c11f5e12d0 000000663c7ff150
+0x000000663c7ff110:   00000000c0400000 00007ffcc24fb7e0 
+
+Instructions: (pc=0x00007ffc34217f68)
+0x00007ffc34217e68:   8b 02 45 85 c0 74 78 43 8d 04 00 41 8b c8 d1 e9
+0x00007ffc34217e78:   33 c8 43 8d 04 00 81 e1 55 55 55 55 33 c8 44 0b
+0x00007ffc34217e88:   c1 41 8b c8 c1 e9 02 42 8d 04 85 00 00 00 00 33
+0x00007ffc34217e98:   c8 42 8d 04 85 00 00 00 00 81 e1 33 33 33 33 33
+0x00007ffc34217ea8:   c8 44 0b c1 41 8b c9 41 8b c0 41 81 e0 21 84 ff
+0x00007ffc34217eb8:   ff 25 00 00 21 84 69 d0 11 11 00 00 41 69 c0 11
+0x00007ffc34217ec8:   11 00 00 48 c1 ea 0c 81 e2 00 00 0f 00 25 00 f0
+0x00007ffc34217ed8:   00 00 48 0b d0 48 c1 ea 0c 48 d3 e2 4c 0b f2 41
+0x00007ffc34217ee8:   83 c1 08 49 83 c2 04 41 83 f9 30 0f 82 6e ff ff
+0x00007ffc34217ef8:   ff 8b 83 98 93 09 00 4d 0b f3 85 c0 0f 84 23 01
+0x00007ffc34217f08:   00 00 48 8b 93 78 93 09 00 4d 8b c4 0f 8e 13 01
+0x00007ffc34217f18:   00 00 66 0f 1f 44 00 00 4d 0f bc de 4d 8b d6 4d
+0x00007ffc34217f28:   85 f6 0f 84 ea 00 00 00 41 8b c3 41 8b cb 48 c1
+0x00007ffc34217f38:   e8 03 83 e1 07 c1 e1 02 41 8b f3 44 8b 4c 85 d0
+0x00007ffc34217f48:   8b bc 83 80 93 09 00 41 d3 e9 41 83 e1 0f d3 ef
+0x00007ffc34217f58:   83 e7 0f 0f 84 a0 00 00 00 45 85 c9 74 42 33 c0
+0x00007ffc34217f68:   c7 42 0c 00 00 80 3f 48 89 02 89 42 08 41 8b c1
+0x00007ffc34217f78:   83 e8 01 74 24 83 e8 01 74 18 83 e8 01 74 0c 83
+0x00007ffc34217f88:   f8 01 75 75 41 8b 40 0c 89 42 0c 41 8b 40 08 89
+0x00007ffc34217f98:   42 08 41 8b 40 04 89 42 04 41 8b 00 89 02 eb 59
+0x00007ffc34217fa8:   41 8d 43 e0 83 f8 09 77 21 48 8d 0c 85 7c 31 01
+0x00007ffc34217fb8:   00 8b 04 8b 89 02 8b 44 8b 04 89 42 04 8b 44 8b
+0x00007ffc34217fc8:   08 89 42 08 8b 44 8b 0c eb 2c 4a 8d 0c 9d 00 00
+0x00007ffc34217fd8:   00 00 8b 84 8b e8 d8 04 00 89 02 8b 84 8b ec d8
+0x00007ffc34217fe8:   04 00 89 42 04 8b 84 8b f0 d8 04 00 89 42 08 8b
+0x00007ffc34217ff8:   84 8b f4 d8 04 00 89 42 0c 49 0f bb f2 4d 0f bc
+0x00007ffc34218008:   da 4f 8d 04 88 48 8d 14 ba 4d 85 d2 0f 85 16 ff
+0x00007ffc34218018:   ff ff 41 ff c7 44 3b bb 98 93 09 00 0f 8c f6 fe
+0x00007ffc34218028:   ff ff 45 33 ff 83 bb fc ef 07 00 02 0f 85 36 01
+0x00007ffc34218038:   00 00 f6 83 70 93 09 00 08 0f 84 29 01 00 00 8b
+0x00007ffc34218048:   83 f8 8e 09 00 4f 8d 0c ac ff c0 0f af 83 c8 93
+0x00007ffc34218058:   09 00 4d 0f bc de 48 63 c8 48 8b 83 78 93 09 00 
+
+
+Stack slot to memory mapping:
+stack at sp + 0 slots: 0x000001c100000082 is at begin+2 in a stub
+ICache::flush_icache_stub [0x000001c100000080, 0x000001c10000009d] (29 bytes)
+stack at sp + 1 slots: 0x000000663c7ff000 is pointing into the stack for thread: 0x000001c171d6b800
+stack at sp + 2 slots: 0x000000000000000c is an unknown value
+stack at sp + 3 slots: 0x000001c123c6b390 points into unknown readable memory: 0x0000000001000000 | 00 00 00 01 00 00 00 00
+stack at sp + 4 slots: 0x0000000000008000 is an unknown value
+stack at sp + 5 slots: 0x0 is NULL
+stack at sp + 6 slots: 0x0 is NULL
+stack at sp + 7 slots: 0x0 is NULL
+
+
+Compiled method (n/a)    6291 1024     n 0       org.lwjgl.opengl.GL11::nglVertex3f (native)
+ total in heap  [0x000001c107b23490,0x000001c107b23870] = 992
+ relocation     [0x000001c107b235e8,0x000001c107b23618] = 48
+ main code      [0x000001c107b23620,0x000001c107b23868] = 584
+ oops           [0x000001c107b23868,0x000001c107b23870] = 8
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001c11f52a238} 'nglVertex3f' '(FFFJ)V' in 'org/lwjgl/opengl/GL11'
+  # parm0:    xmm0      = float
+  # parm1:    xmm1      = float
+  # parm2:    xmm2      = float
+  # parm3:    rdx:rdx   = long
+  #           [sp+0x80]  (sp of caller)
+  0x000001c107b23620: 448b 5208 | 49bb 0000 | 0000 0800 | 0000 4d03 | d349 3bc2 | 0f84 0600 
+
+  0x000001c107b23638: ;   {runtime_call ic_miss_stub}
+  0x000001c107b23638: 0000 e941 | 9452 f890 
+[Verified Entry Point]
+  0x000001c107b23640: 8984 2400 | 90ff ff55 | 488b ec48 | 83ec 7048 | 8954 2428 | c5fa 1154 | 2420 c5f9 | 28d9 c5f9 
+  0x000001c107b23660: ;   {oop(a 'java/lang/Class'{0x000000060415d2a0} = 'org/lwjgl/opengl/GL11')}
+  0x000001c107b23660: 28d0 49be | a0d2 1504 | 0600 0000 | 4c89 7424 | 604c 8d74 | 2460 498b | d6c5 f877 
+
+  0x000001c107b2367c: ;   {internal_word}
+  0x000001c107b2367c: 49ba 7936 | b207 c101 | 0000 4d89 | 9778 0200 | 0049 89a7 | 7002 0000 
+
+  0x000001c107b23694: ;   {external_word}
+  0x000001c107b23694: 49ba 9d3c | 0fa4 fc7f | 0000 4180 | 3a00 0f84 | 6e00 0000 | 5248 83ec | 10c5 fb11 | 1424 4883 
+  0x000001c107b236b4: ec10 c5fb 
+
+  0x000001c107b236b8: ;   {metadata({method} {0x000001c11f52a238} 'nglVertex3f' '(FFFJ)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001c107b236b8: 111c 2448 | ba30 a252 | 1fc1 0100 | 0049 8bcf | 4883 ec20 | f7c4 0f00 | 0000 0f84 | 1a00 0000 
+  0x000001c107b236d8: 4883 ec08 
+
+  0x000001c107b236dc: ;   {runtime_call}
+  0x000001c107b236dc: 49ba 90d4 | cba3 fc7f | 0000 41ff | d248 83c4 | 08e9 0d00 
+
+  0x000001c107b236f0: ;   {runtime_call}
+  0x000001c107b236f0: 0000 49ba | 90d4 cba3 | fc7f 0000 | 41ff d248 | 83c4 20c5 | fb10 1c24 | 4883 c410 | c5fb 1014 
+  0x000001c107b23710: 2448 83c4 | 105a 498d | 8f90 0200 | 0041 c787 | 3003 0000 | 0400 0000 
+
+  0x000001c107b23728: ;   {runtime_call}
+  0x000001c107b23728: 49ba 70c3 | 0080 0100 | 0000 41ff | d2c5 f877 | 41c7 8730 | 0300 0005 | 0000 00f0 | 8344 24c0 
+  0x000001c107b23748: 0049 3baf | 3803 0000 | 0f87 1100 | 0000 4181 | bf20 0300 | 0000 0000 | 000f 8424 | 0000 00c5 
+  0x000001c107b23768: f877 498b | cf4c 8be4 | 4883 ec20 | 4883 e4f0 
+
+  0x000001c107b23778: ;   {runtime_call}
+  0x000001c107b23778: 49ba 5016 | d6a3 fc7f | 0000 41ff | d249 8be4 | 4d33 e441 | c787 3003 | 0000 0800 | 0000 4181 
+  0x000001c107b23798: bfa0 0300 | 0002 0000 | 000f 849b 
+
+  0x000001c107b237a4: ;   {external_word}
+  0x000001c107b237a4: 0000 0049 | ba9d 3c0f | a4fc 7f00 | 0041 803a | 000f 8448 
+
+  0x000001c107b237b8: ;   {metadata({method} {0x000001c11f52a238} 'nglVertex3f' '(FFFJ)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001c107b237b8: 0000 0048 | ba30 a252 | 1fc1 0100 | 0049 8bcf | 4883 ec20 | f7c4 0f00 | 0000 0f84 | 1a00 0000 
+  0x000001c107b237d8: 4883 ec08 
+
+  0x000001c107b237dc: ;   {runtime_call}
+  0x000001c107b237dc: 49ba 90d4 | cba3 fc7f | 0000 41ff | d248 83c4 | 08e9 0d00 
+
+  0x000001c107b237f0: ;   {runtime_call}
+  0x000001c107b237f0: 0000 49ba | 90d4 cba3 | fc7f 0000 | 41ff d248 | 83c4 2049 | c787 7002 | 0000 0000 | 0000 49c7 
+  0x000001c107b23810: 8778 0200 | 0000 0000 | 00c5 f877 | 498b 8f00 | 0300 00c7 | 8100 0100 | 0000 0000 | 00c9 4981 
+  0x000001c107b23830: 7f08 0000 | 0000 0f85 | 0100 0000 
+
+  0x000001c107b2383c: ;   {runtime_call StubRoutines (1)}
+  0x000001c107b2383c: c3e9 bed6 | 4df8 c5f8 | 774c 8be4 | 4883 ec20 | 4883 e4f0 
+
+  0x000001c107b23850: ;   {runtime_call}
+  0x000001c107b23850: 49ba 5004 | cca3 fc7f | 0000 41ff | d249 8be4 | 4d33 e4e9 | 3fff ffff 
+[/MachCode]
+
+
+Compiled method (c2)    6296 1083       4       org.lwjgl.opengl.GL11::glVertex3f (24 bytes)
+ total in heap  [0x000001c107b29390,0x000001c107b29808] = 1144
+ relocation     [0x000001c107b294e8,0x000001c107b29510] = 40
+ main code      [0x000001c107b29520,0x000001c107b29680] = 352
+ stub code      [0x000001c107b29680,0x000001c107b296a8] = 40
+ oops           [0x000001c107b296a8,0x000001c107b296b0] = 8
+ metadata       [0x000001c107b296b0,0x000001c107b296d0] = 32
+ scopes data    [0x000001c107b296d0,0x000001c107b29760] = 144
+ scopes pcs     [0x000001c107b29760,0x000001c107b297d0] = 112
+ dependencies   [0x000001c107b297d0,0x000001c107b297e0] = 16
+ handler table  [0x000001c107b297e0,0x000001c107b297f8] = 24
+ nul chk table  [0x000001c107b297f8,0x000001c107b29808] = 16
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Verified Entry Point]
+  # {method} {0x000001c11f52a1b0} 'glVertex3f' '(FFF)V' in 'org/lwjgl/opengl/GL11'
+  # parm0:    xmm0      = float
+  # parm1:    xmm1      = float
+  # parm2:    xmm2      = float
+  #           [sp+0x40]  (sp of caller)
+  0x000001c107b29520: 8984 2400 | 90ff ff55 | 4883 ec30 
+
+  0x000001c107b2952c: ;   {oop(a 'java/lang/Class'{0x000000060415db60} = 'org/lwjgl/opengl/GLContext')}
+  0x000001c107b2952c: 49ba 60db | 1504 0600 | 0000 458b | 5274 660f | 1f44 0000 
+
+  0x000001c107b29540: ; implicit exception: dispatches to 0x000001c107b2963d
+  0x000001c107b29540: 478b 44d4 | 0c4d 8bd8 | 49c1 e303 | 4d8b 8f68 | 0200 0049 | 8b29 4c3b | dd75 5447 | 8b5c d410 
+  0x000001c107b29560: 4585 db0f | 846b 0000 | 004f 8b84 | dce0 1e00 | 004d 85c0 | 0f84 7a00 | 0000 4b8d | 2cdc c5fa 
+  0x000001c107b29580: 1104 24c5 | fa11 4c24 | 04c5 fa11 | 5424 0849 | 8bd0 4c89 
+
+  0x000001c107b29594: ;   {static_call}
+  0x000001c107b29594: 4424 10e8 
+
+  0x000001c107b29598: ; ImmutableOopMap {rbp=Oop }
+                      ;*invokestatic nglVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@20 (line 2734)
+  0x000001c107b29598: a4a0 ffff | 4883 c430 
+
+  0x000001c107b295a0: ;   {poll_return}
+  0x000001c107b295a0: 5d49 3ba7 | 3803 0000 | 0f87 aa00 | 0000 c3ba | 45ff ffff | c5fa 1104 | 24c5 fa11 | 4c24 04c5 
+  0x000001c107b295c0: fa11 5424 | 0844 8954 | 240c 4489 
+
+  0x000001c107b295cc: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107b295cc: 4424 10e8 
+
+  0x000001c107b295d0: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=NarrowOop }
+                      ;*if_acmpne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@11 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@0 (line 2731)
+  0x000001c107b295d0: 2c8d 52f8 | ba45 ffff | ffc5 f97e | c5c5 fa11 | 0c24 c5fa | 1154 2404 | 4489 5c24 
+
+  0x000001c107b295ec: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107b295ec: 0c66 90e8 
+
+  0x000001c107b295f0: ; ImmutableOopMap {[12]=NarrowOop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilities@5 (line 123)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@0 (line 2731)
+  0x000001c107b295f0: 0c8d 52f8 | 4533 d24d | 3bc2 bdff | ffff ff7c | 0840 0f95 | c540 0fb6 | edba 45ff | ffff c5fa 
+  0x000001c107b29610: 1104 24c5 | fa11 4c24 | 04c5 fa11 | 5424 0844 | 895c 240c | 4c89 4424 
+
+  0x000001c107b29628: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107b29628: 1866 90e8 
+
+  0x000001c107b2962c: ; ImmutableOopMap {[12]=NarrowOop }
+                      ;*ifne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.BufferChecks::checkFunctionAddress@9 (line 57)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@12 (line 2733)
+  0x000001c107b2962c: d08c 52f8 | 488b d048 | 83c4 305d 
+
+  0x000001c107b29638: ;   {runtime_call _rethrow_Java}
+  0x000001c107b29638: e9c3 8c5e | f8ba f6ff | ffff c5f9 | 7ec5 c5fa | 110c 24c5 | fa11 5424 
+
+  0x000001c107b29650: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107b29650: 0466 90e8 
+
+  0x000001c107b29654: ; ImmutableOopMap {}
+                      ;*getfield owner {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@5 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@0 (line 2731)
+  0x000001c107b29654: a88c 52f8 
+
+  0x000001c107b29658: ;   {internal_word}
+  0x000001c107b29658: 49ba a195 | b207 c101 | 0000 4d89 | 9750 0300 
+
+  0x000001c107b29668: ;   {runtime_call SafepointBlob}
+  0x000001c107b29668: 00e9 929d | 52f8 f4f4 | f4f4 f4f4 | f4f4 f4f4 | f4f4 f4f4 | f4f4 f4f4 
+[Stub Code]
+  0x000001c107b29680: ;   {no_reloc}
+  0x000001c107b29680: 48bb 0000 | 0000 0000 
+
+  0x000001c107b29688: ;   {runtime_call}
+  0x000001c107b29688: 0000 e9fb 
+
+  0x000001c107b2968c: ;   {runtime_call ExceptionBlob}
+  0x000001c107b2968c: ffff ffe9 | ece2 5df8 
+[Deopt Handler Code]
+  0x000001c107b29694: e800 0000 | 0048 832c 
+
+  0x000001c107b2969c: ;   {runtime_call DeoptimizationBlob}
+  0x000001c107b2969c: 2405 e9fd | 8f52 f8f4 | f4f4 f4f4 
+[/MachCode]
+
+
+Compiled method (c2)    6299 1488   !   4       opencraft.Chunk::setup (401 bytes)
+ total in heap  [0x000001c107bb3d90,0x000001c107bb6b08] = 11640
+ relocation     [0x000001c107bb3ee8,0x000001c107bb4088] = 416
+ main code      [0x000001c107bb40a0,0x000001c107bb55e0] = 5440
+ stub code      [0x000001c107bb55e0,0x000001c107bb5708] = 296
+ oops           [0x000001c107bb5708,0x000001c107bb5710] = 8
+ metadata       [0x000001c107bb5710,0x000001c107bb5770] = 96
+ scopes data    [0x000001c107bb5770,0x000001c107bb6298] = 2856
+ scopes pcs     [0x000001c107bb6298,0x000001c107bb6818] = 1408
+ dependencies   [0x000001c107bb6818,0x000001c107bb6838] = 32
+ handler table  [0x000001c107bb6838,0x000001c107bb6a00] = 456
+ nul chk table  [0x000001c107bb6a00,0x000001c107bb6b08] = 264
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001c11f5c4860} 'setup' '()V' in 'opencraft/Chunk'
+  #           [sp+0x80]  (sp of caller)
+  0x000001c107bb40a0: 448b 5208 | 49bb 0000 | 0000 0800 | 0000 4d03 | d349 3bc2 
+
+  0x000001c107bb40b4: ;   {runtime_call ic_miss_stub}
+  0x000001c107bb40b4: 0f85 c689 | 49f8 6690 | 0f1f 4000 
+[Verified Entry Point]
+  0x000001c107bb40c0: 8984 2400 | 90ff ff55 | 4883 ec70 | 4889 1424 | 8b52 1c4d | 8b97 6802 | 0000 4d8b | 124c 8954 
+  0x000001c107bb40e0: 2418 83fa | ff0f 84ec | 0800 0041 | b801 0000 
+
+  0x000001c107bb40f0: ;   {static_call}
+  0x000001c107bb40f0: 0066 90e8 
+
+  0x000001c107bb40f4: ; ImmutableOopMap {[0]=Oop [24]=Oop }
+                      ;*invokestatic glDeleteLists {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@24 (line 263)
+  0x000001c107bb40f4: 8892 49f8 | 4c8b 1424 | 458b 521c | 4489 5424 
+
+  0x000001c107bb4104: ;   {static_call}
+  0x000001c107bb4104: 0866 90e8 
+
+  0x000001c107bb4108: ; ImmutableOopMap {[0]=Oop [24]=Oop }
+                      ;*invokestatic getCapabilities {reexecute=0 rethrow=0 return_oop=1}
+                      ; - org.lwjgl.opengl.GL11::glNewList@0 (line 2322)
+                      ; - opencraft.Chunk::setup@34 (line 265)
+  0x000001c107bb4108: f41f f7ff | 4889 4424 | 1048 85c0 | 0f84 660d | 0000 488b | a8a8 1d00 | 0048 8bd5 
+
+  0x000001c107bb4124: ;   {static_call}
+  0x000001c107bb4124: 6666 90e8 
+
+  0x000001c107bb4128: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop }
+                      ;*invokestatic checkFunctionAddress {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glNewList@10 (line 2324)
+                      ; - opencraft.Chunk::setup@34 (line 265)
+  0x000001c107bb4128: 5465 f7ff | 41b8 0013 | 0000 8b54 | 2408 4c8b 
+
+  0x000001c107bb4138: ;   {static_call}
+  0x000001c107bb4138: cd66 90e8 
+
+  0x000001c107bb413c: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop }
+                      ;*invokestatic nglNewList {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glNewList@16 (line 2325)
+                      ; - opencraft.Chunk::setup@34 (line 265)
+  0x000001c107bb413c: cd14 0000 
+
+  0x000001c107bb4140: ;   {oop(a 'java/lang/Class'{0x000000060415db60} = 'org/lwjgl/opengl/GLContext')}
+  0x000001c107bb4140: 49ba 60db | 1504 0600 | 0000 458b | 5a74 438b | 6cdc 0c4c | 8bd5 49c1 | e203 4c8b | 4424 1890 
+  0x000001c107bb4160: 4d3b d00f | 853f 0d00 | 0047 8b5c | dc10 4585 | db0f 8441 | 0d00 004f | 8b84 dc48 | 1900 0090 
+  0x000001c107bb4180: 4d85 c00f | 8443 0d00 | 004b 8d2c | dcba 0700 | 0000 4c89 
+
+  0x000001c107bb4194: ;   {static_call}
+  0x000001c107bb4194: 4424 08e8 
+
+  0x000001c107bb4198: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop }
+                      ;*invokestatic nglBegin {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glBegin@15 (line 684)
+                      ; - opencraft.Chunk::setup@39 (line 267)
+  0x000001c107bb4198: a409 f7ff | 4533 c090 | eb11 41ff | c041 83f8 | 100f 8d76 | 0700 004c | 891c 2445 | 33c9 e93b 
+  0x000001c107bb41b8: 0100 0048 | 8be8 4533 | d24c 894c | 2420 4889 | 4c24 304c | 8954 2450 | 4889 7c24 | 384c 8944 
+  0x000001c107bb41d8: 2428 4c8b | 1424 458b | 5220 478b | 5cd4 0c44 | 8b4c 2440 | 453b cb0f | 836f 0b00 | 0049 c1e2 
+  0x000001c107bb41f8: 0347 8b54 | 8a10 6690 
+
+  0x000001c107bb4200: ; implicit exception: dispatches to 0x000001c107bb52b4
+  0x000001c107bb4200: 478b 5cd4 | 0c44 8b4c | 2444 453b | cb0f 8375 | 0b00 0049 | c1e2 0347 | 8b54 8a10 | 0f1f 4000 
+  0x000001c107bb4220: ; implicit exception: dispatches to 0x000001c107bb52dc
+  0x000001c107bb4220: 478b 44d4 | 0c44 8b4c | 2448 453b | c80f 8389 | 0b00 0049 | c1e2 0347 | 8b54 8a10 | 498b d248 
+  0x000001c107bb4240: c1e2 0366 | 9048 b8ff | ffff ffff 
+
+  0x000001c107bb424c: ;   {virtual_call}
+  0x000001c107bb424c: ffff ffe8 
+
+  0x000001c107bb4250: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [80]=Oop }
+                      ;*invokevirtual draw {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@349 (line 306)
+  0x000001c107bb4250: 24f2 55f8 | 4c8b 1424 | 458b 5a20 | 0f1f 4000 
+
+  0x000001c107bb4260: ; implicit exception: dispatches to 0x000001c107bb5308
+  0x000001c107bb4260: 478b 54dc | 0c44 8b4c | 2440 453b | ca0f 837d | 0b00 004f | 8d14 dc47 | 8b5c 8a10 | 0f1f 4000 
+  0x000001c107bb4280: ; implicit exception: dispatches to 0x000001c107bb5330
+  0x000001c107bb4280: 478b 44dc | 0c44 8b4c | 2444 453b | c80f 8381 | 0b00 004f | 8d14 dc47 | 8b5c 8a10 | 0f1f 4000 
+  0x000001c107bb42a0: ; implicit exception: dispatches to 0x000001c107bb5358
+  0x000001c107bb42a0: 478b 54dc | 0c44 8b4c | 2448 453b | ca0f 8395 | 0b00 004f | 8d14 dc47 | 8b5c 8a10 | 0f1f 4000 
+  0x000001c107bb42c0: ; implicit exception: dispatches to 0x000001c107bb5380
+  0x000001c107bb42c0: 43c6 44dc | 4401 4c8b | 1c24 448b | 4424 4044 | 8b4c 2444 | 8b74 2408 | 8b5c 240c | 448b 5424 
+  0x000001c107bb42e0: 48eb 3d81 | fb00 0100 | 000f 8db3 | feff ff4c | 891c 2444 | 8bcb 418b | f1ff ce41 | 8bd9 ffc3 
+  0x000001c107bb4300: 4533 d2eb | 284c 8b1c | 2444 8b44 | 2440 448b | 4c24 448b | 7424 088b | 5c24 0c44 | 8b54 2448 
+  0x000001c107bb4320: 41ff c241 | 83fa 107d | ba4c 891c | 244c 8b1c | 2441 8b4b | 2041 8b54 | cc0c 660f | 1f44 0000 
+  0x000001c107bb4340: 443b c20f | 83dc 0600 | 0048 c1e1 | 0342 8b7c | 8110 418b | 4cfc 0c44 | 3bc9 660f | 1f44 0000 
+  0x000001c107bb4360: 0f83 e206 | 0000 498d | 0cfc 428b | 4c89 1041 | 8b54 cc0c | 443b d20f | 83eb 0600 | 0048 c1e1 
+  0x000001c107bb4380: 0342 8b4c | 9110 85c9 | 7496 4489 | 5424 4889 | 5c24 0c89 | 7424 0844 | 894c 2444 | 4489 4424 
+  0x000001c107bb43a0: 4045 8b5c | cc24 458b | 54cc 2041 | c1e3 0445 | 035c cc1c | 41c1 e204 | 4503 54cc | 1841 c1e3 
+  0x000001c107bb43c0: 0445 035c | cc14 41c1 | e204 4503 | 54cc 0cc4 | c172 2acb | c4c1 7a2a | c2c5 7a2c | c941 81f9 
+  0x000001c107bb43e0: 0000 0080 | 7510 4883 | ec08 c5fa 
+
+  0x000001c107bb43ec: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb43ec: 110c 24e8 | ffcc 44f8 | 4159 c5fa | 2cd0 81fa | 0000 0080 | 750f 4883 | ec08 c5fa 
+
+  0x000001c107bb4408: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb4408: 1104 24e8 | e3cc 44f8 | 5a44 8bc3 
+
+  0x000001c107bb4414: ;   {static_call}
+  0x000001c107bb4414: 6666 90e8 
+
+  0x000001c107bb4418: ; ImmutableOopMap {[0]=Oop [24]=Oop }
+                      ;*invokestatic getBlock {reexecute=0 rethrow=0 return_oop=1}
+                      ; - opencraft.Chunk::setup@119 (line 286)
+  0x000001c107bb4418: c4a0 ffff | 4889 4424 | 104c 8b0c | 2445 8b59 | 2043 8b4c | dc0c 448b | 4424 4044 | 3bc1 0f83 
+  0x000001c107bb4438: 4c06 0000 | 4f8d 14dc | 478b 5482 | 1043 8b4c | d40c 448b | 5c24 4444 | 3bd9 0f83 | 4806 0000 
+  0x000001c107bb4458: 49c1 e203 | 478b 549a | 1043 8b7c | d40c 8b4c | 2448 3bcf | 0f83 4606 | 0000 49c1 | e203 418b 
+  0x000001c107bb4478: 5c8a 100f | 1f44 0000 
+
+  0x000001c107bb4480: ; implicit exception: dispatches to 0x000001c107bb5020
+  0x000001c107bb4480: 458b 54dc | 2045 8b5c | dc24 41c1 | e204 4503 | 54dc 1841 | c1e3 0445 | 035c dc1c | 41c1 e204 
+  0x000001c107bb44a0: 4503 54dc | 0c41 c1e3 | 0445 035c | dc14 c4c1 | 722a cac4 | c17a 2ac3 | c5fa 2cd1 | 81fa 0000 
+  0x000001c107bb44c0: 0080 750f | 4883 ec08 | c5fa 110c 
+
+  0x000001c107bb44cc: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb44cc: 24e8 21cc | 44f8 5ac5 | 7a2c c841 | 81f9 0000 | 0080 7510 | 4883 ec08 | c5fa 1104 
+
+  0x000001c107bb44e8: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb44e8: 24e8 05cc | 44f8 4159 | 448b 4424 
+
+  0x000001c107bb44f4: ;   {static_call}
+  0x000001c107bb44f4: 0866 90e8 
+
+  0x000001c107bb44f8: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop }
+                      ;*invokestatic getBlock {reexecute=0 rethrow=0 return_oop=1}
+                      ; - opencraft.Chunk::setup@155 (line 287)
+  0x000001c107bb44f8: e49f ffff | 4889 4424 | 204c 8b04 | 2441 8b48 | 2045 8b5c | cc0c 448b | 4c24 4045 | 3bcb 0f83 
+  0x000001c107bb4518: b405 0000 | 4d8d 14cc | 478b 548a | 1043 8b54 | d40c 8b4c | 2444 3bca | 0f83 b605 | 0000 49c1 
+  0x000001c107bb4538: e203 418b | 5c8a 1090 
+
+  0x000001c107bb4540: ; implicit exception: dispatches to 0x000001c107bb5060
+  0x000001c107bb4540: 458b 54dc | 0c44 8b5c | 2448 453b | da0f 83b5 | 0500 004d | 8d14 dc43 | 8b5c 9a10 | 0f1f 4000 
+  0x000001c107bb4560: ; implicit exception: dispatches to 0x000001c107bb5078
+  0x000001c107bb4560: 458b 54dc | 2045 8b5c | dc24 41c1 | e204 4503 | 54dc 1841 | c1e3 0445 | 035c dc1c | 41c1 e204 
+  0x000001c107bb4580: 4503 54dc | 0c41 c1e3 | 0445 035c | dc14 c4c1 | 722a cac4 | c17a 2ac3 | c5fa 2cd1 | 81fa 0000 
+  0x000001c107bb45a0: 0080 750f | 4883 ec08 | c5fa 110c 
+
+  0x000001c107bb45ac: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb45ac: 24e8 41cb | 44f8 5ac5 | 7a2c c841 | 81f9 0000 | 0080 7510 | 4883 ec08 | c5fa 1104 
+
+  0x000001c107bb45c8: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb45c8: 24e8 25cb | 44f8 4159 | ffc2 448b 
+
+  0x000001c107bb45d4: ;   {static_call}
+  0x000001c107bb45d4: c166 90e8 
+
+  0x000001c107bb45d8: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop [32]=Oop }
+                      ;*invokestatic getBlock {reexecute=0 rethrow=0 return_oop=1}
+                      ; - opencraft.Chunk::setup@191 (line 288)
+  0x000001c107bb45d8: 049f ffff | 4889 4424 | 284c 8b04 | 2441 8b58 | 2045 8b54 | dc0c 448b | 4c24 4045 | 3bca 0f83 
+  0x000001c107bb45f8: 2805 0000 | 4d8d 14dc | 438b 5c8a | 1045 8b54 | dc0c 448b | 5c24 4445 | 3bda 0f83 | 3405 0000 
+  0x000001c107bb4618: 4d8d 14dc | 438b 7c9a | 1045 8b54 | fc0c 8b5c | 2448 413b | da0f 8341 | 0500 004d | 8d14 fc41 
+  0x000001c107bb4638: 8b4c 9a10 | 0f1f 4000 
+
+  0x000001c107bb4640: ; implicit exception: dispatches to 0x000001c107bb50f8
+  0x000001c107bb4640: 458b 54cc | 2045 8b5c | cc24 41c1 | e204 4503 | 54cc 1841 | c1e3 0445 | 035c cc1c | 41c1 e204 
+  0x000001c107bb4660: 4503 54cc | 0c41 c1e3 | 0445 035c | cc14 c4c1 | 7a2a c2c4 | c16a 2ad3 | c5fa 2cd0 | 81fa 0000 
+  0x000001c107bb4680: 0080 750f | 4883 ec08 | c5fa 1104 
+
+  0x000001c107bb468c: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb468c: 24e8 61ca | 44f8 5ac5 | 7a2c ca41 | 81f9 0000 | 0080 7510 | 4883 ec08 | c5fa 1114 
+
+  0x000001c107bb46a8: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb46a8: 24e8 45ca | 44f8 4159 | ffca 448b 
+
+  0x000001c107bb46b4: ;   {static_call}
+  0x000001c107bb46b4: 4424 44e8 
+
+  0x000001c107bb46b8: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop }
+                      ;*invokestatic getBlock {reexecute=0 rethrow=0 return_oop=1}
+                      ; - opencraft.Chunk::setup@227 (line 289)
+  0x000001c107bb46b8: 249e ffff | 4889 4424 | 304c 8b1c | 2445 8b4b | 2047 8b54 | cc0c 8b4c | 2440 413b | ca0f 83c1 
+  0x000001c107bb46d8: 0400 004f | 8d14 cc45 | 8b4c 8a10 
+
+  0x000001c107bb46e4: ; implicit exception: dispatches to 0x000001c107bb513c
+  0x000001c107bb46e4: 478b 54cc | 0c44 8b44 | 2444 453b | c20f 83d5 | 0400 004f | 8d14 cc43 | 8b7c 8210 
+
+  0x000001c107bb4700: ; implicit exception: dispatches to 0x000001c107bb5168
+  0x000001c107bb4700: 458b 54fc | 0c44 8b4c | 2448 453b | ca0f 83ed | 0400 004d | 8d14 fc43 | 8b5c 8a10 | 0f1f 4000 
+  0x000001c107bb4720: ; implicit exception: dispatches to 0x000001c107bb5194
+  0x000001c107bb4720: 458b 54dc | 2045 8b5c | dc24 41c1 | e204 4503 | 54dc 1841 | c1e3 0445 | 035c dc1c | 41c1 e204 
+  0x000001c107bb4740: 4503 54dc | 0c41 c1e3 | 0445 035c | dc14 c4c1 | 722a cac4 | c17a 2ac3 | c5fa 2cd1 | 81fa 0000 
+  0x000001c107bb4760: 0080 750f | 4883 ec08 | c5fa 110c 
+
+  0x000001c107bb476c: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb476c: 24e8 81c9 | 44f8 5ac5 | 7a2c c841 | 81f9 0000 | 0080 7510 | 4883 ec08 | c5fa 1104 
+
+  0x000001c107bb4788: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb4788: 24e8 65c9 | 44f8 4159 
+
+  0x000001c107bb4790: ;   {static_call}
+  0x000001c107bb4790: 41ff c1e8 
+
+  0x000001c107bb4794: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
+                      ;*invokestatic getBlock {reexecute=0 rethrow=0 return_oop=1}
+                      ; - opencraft.Chunk::setup@263 (line 290)
+  0x000001c107bb4794: 489d ffff | 4889 4424 | 384c 8b04 | 2441 8b58 | 2045 8b54 | dc0c 448b | 4c24 4045 | 3bca 0f83 
+  0x000001c107bb47b4: 7804 0000 | 4d8d 14dc | 438b 4c8a | 1045 8b54 | cc0c 448b | 5c24 4445 | 3bda 0f83 | 9804 0000 
+  0x000001c107bb47d4: 4d8d 14cc | 438b 7c9a | 1066 6690 
+
+  0x000001c107bb47e0: ; implicit exception: dispatches to 0x000001c107bb5228
+  0x000001c107bb47e0: 458b 54fc | 0c8b 5c24 | 4841 3bda | 0f83 b604 | 0000 4d8d | 14fc 418b | 4c9a 100f | 1f44 0000 
+  0x000001c107bb4800: ; implicit exception: dispatches to 0x000001c107bb5260
+  0x000001c107bb4800: 458b 54cc | 2045 8b5c | cc24 41c1 | e204 4503 | 54cc 1841 | c1e3 0445 | 035c cc1c | 41c1 e204 
+  0x000001c107bb4820: 4503 54cc | 0c41 c1e3 | 0445 035c | cc14 c4c1 | 7a2a c2c4 | c16a 2ad3 | c5fa 2cd0 | 81fa 0000 
+  0x000001c107bb4840: 0080 750f | 4883 ec08 | c5fa 1104 
+
+  0x000001c107bb484c: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb484c: 24e8 a1c8 | 44f8 5ac5 | 7a2c ca41 | 81f9 0000 | 0080 7510 | 4883 ec08 | c5fa 1114 
+
+  0x000001c107bb4868: ;   {runtime_call StubRoutines (1)}
+  0x000001c107bb4868: 24e8 85c8 | 44f8 4159 | 41ff c944 | 8b44 2444 
+
+  0x000001c107bb4878: ;   {static_call}
+  0x000001c107bb4878: 6666 90e8 
+
+  0x000001c107bb487c: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop }
+                      ;*invokestatic getBlock {reexecute=0 rethrow=0 return_oop=1}
+                      ; - opencraft.Chunk::setup@299 (line 291)
+  0x000001c107bb487c: 609c ffff | 4c8b 4424 | 284c 8b4c | 2410 488b | 4c24 2048 | 8b5c 2430 | 488b 7c24 | 384d 85c9 
+  0x000001c107bb489c: 0f1f 4000 | 0f84 6200 | 0000 4885 | c90f 843f | 0000 004d | 85c0 0f84 | 2c04 0000 | 4885 db0f 
+  0x000001c107bb48bc: 1f44 0000 | 0f84 f5f8 | ffff 4885 | ff0f 8455 | 0400 0048 | 85c0 0f85 | 2dfa ffff | 33ed 4c89 
+  0x000001c107bb48dc: 4c24 2048 | 894c 2430 | 4889 5c24 | 50e9 e2f8 | ffff 488b | e845 33d2 | 4c89 4c24 | 204c 8954 
+  0x000001c107bb48fc: 2430 4889 | 5c24 50e9 | c8f8 ffff | 488b e845 | 33d2 4c89 | 5424 2048 | 894c 2430 | 4889 5c24 
+  0x000001c107bb491c: 5066 6690 | e9ab f8ff 
+
+  0x000001c107bb4924: ;   {oop(a 'java/lang/Class'{0x000000060415db60} = 'org/lwjgl/opengl/GLContext')}
+  0x000001c107bb4924: ff49 b960 | db15 0406 | 0000 0041 | 8b71 7441 | 8b6c f40c | 4c8b cd49 | c1e1 0348 | 8b4c 2418 
+  0x000001c107bb4944: 4c3b c90f | 85ab 0500 | 0041 8b4c | f410 85c9 | 0f84 be05 | 0000 4d8b | 8ccc 5019 | 0000 4d85 
+  0x000001c107bb4964: c90f 84cd | 0500 0044 | 8954 2410 | 895c 240c | 4489 4424 | 084c 891c | 2449 8d2c | cc49 8bd1 
+  0x000001c107bb4984: 4c89 4c24 
+
+  0x000001c107bb4988: ;   {static_call}
+  0x000001c107bb4988: 1866 90e8 
+
+  0x000001c107bb498c: ; ImmutableOopMap {rbp=Oop [0]=Oop }
+                      ;*invokestatic nglEnd {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glEnd@14 (line 693)
+                      ; - opencraft.Chunk::setup@394 (line 314)
+  0x000001c107bb498c: b005 f7ff 
+
+  0x000001c107bb4990: ;   {static_call}
+  0x000001c107bb4990: 6666 90e8 
+
+  0x000001c107bb4994: ; ImmutableOopMap {[0]=Oop }
+                      ;*invokestatic getCapabilities {reexecute=0 rethrow=0 return_oop=1}
+                      ; - org.lwjgl.opengl.GL11::glEndList@0 (line 2330)
+                      ; - opencraft.Chunk::setup@397 (line 315)
+  0x000001c107bb4994: 6817 f7ff | 4885 c00f | 1f44 0000 | 0f84 ea04 | 0000 4889 | 4424 1848 | 8ba8 b01d | 0000 488b 
+  0x000001c107bb49b4: ;   {static_call}
+  0x000001c107bb49b4: d566 90e8 
+
+  0x000001c107bb49b8: ; ImmutableOopMap {[0]=Oop [24]=Oop }
+                      ;*invokestatic checkFunctionAddress {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glEndList@10 (line 2332)
+                      ; - opencraft.Chunk::setup@397 (line 315)
+  0x000001c107bb49b8: c45c f7ff 
+
+  0x000001c107bb49bc: ;   {static_call}
+  0x000001c107bb49bc: 488b d5e8 
+
+  0x000001c107bb49c0: ; ImmutableOopMap {[0]=Oop [24]=Oop }
+                      ;*invokestatic nglEndList {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glEndList@14 (line 2333)
+                      ; - opencraft.Chunk::setup@397 (line 315)
+  0x000001c107bb49c0: ee0c 0000 | 4883 c470 
+
+  0x000001c107bb49c8: ;   {poll_return}
+  0x000001c107bb49c8: 5d49 3ba7 | 3803 0000 | 0f87 ee0b | 0000 c348 
+
+  0x000001c107bb49d8: ;   {static_call}
+  0x000001c107bb49d8: 8b2c 24e8 
+
+  0x000001c107bb49dc: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop }
+                      ;*invokestatic getCapabilities {reexecute=0 rethrow=0 return_oop=1}
+                      ; - org.lwjgl.opengl.GL11::glGenLists@0 (line 1412)
+                      ; - opencraft.Chunk::setup@10 (line 261)
+  0x000001c107bb49dc: 2017 f7ff | 4889 4424 | 1048 85c0 | 0f84 8605 | 0000 488b | a848 1b00 | 0048 8bd5 
+
+  0x000001c107bb49f8: ;   {static_call}
+  0x000001c107bb49f8: 6666 90e8 
+
+  0x000001c107bb49fc: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop }
+                      ;*invokestatic checkFunctionAddress {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glGenLists@10 (line 1414)
+                      ; - opencraft.Chunk::setup@10 (line 261)
+  0x000001c107bb49fc: 805c f7ff | ba01 0000 | 004c 8bc5 
+
+  0x000001c107bb4a08: ;   {static_call}
+  0x000001c107bb4a08: 6666 90e8 
+
+  0x000001c107bb4a0c: ; ImmutableOopMap {[0]=Oop [16]=Oop [24]=Oop }
+                      ;*invokestatic nglGenLists {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glGenLists@15 (line 1415)
+                      ; - opencraft.Chunk::setup@10 (line 261)
+  0x000001c107bb4a0c: cf0c 0000 | 4c8b 1424 | 4189 421c | 8944 2408 | 0f1f 4000 | e9e0 f6ff | ffba e4ff | ffff 488b 
+  0x000001c107bb4a2c: 2c24 4489 | 4c24 0444 | 8954 2408 | 894c 240c | 4489 4424 
+
+  0x000001c107bb4a40: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4a40: 1066 90e8 
+
+  0x000001c107bb4a44: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@62 (line 277)
+  0x000001c107bb4a44: b8d8 49f8 | bae4 ffff | ff48 8b2c | 2444 8904 | 2444 8954 | 2408 897c | 240c 4489 
+
+  0x000001c107bb4a60: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4a60: 4c24 10e8 
+
+  0x000001c107bb4a64: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@64 (line 277)
+  0x000001c107bb4a64: 98d8 49f8 | bae4 ffff | ff48 8b2c | 2444 8904 | 2444 894c | 2404 894c | 240c 4489 
+
+  0x000001c107bb4a80: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4a80: 5424 10e8 
+
+  0x000001c107bb4a84: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@66 (line 277)
+  0x000001c107bb4a84: 78d8 49f8 | bae4 ffff | ff48 8b2c | 2444 895c | 240c 4489 
+
+  0x000001c107bb4a98: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4a98: 4424 18e8 
+
+  0x000001c107bb4a9c: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@129 (line 287)
+  0x000001c107bb4a9c: 60d8 49f8 | bae4 ffff | ff48 8b2c | 2444 8954 | 240c 4489 
+
+  0x000001c107bb4ab0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ab0: 5c24 18e8 
+
+  0x000001c107bb4ab4: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@131 (line 287)
+  0x000001c107bb4ab4: 48d8 49f8 | bae4 ffff | ff48 8b2c | 2444 8954 | 240c 894c 
+
+  0x000001c107bb4ac8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ac8: 2418 90e8 
+
+  0x000001c107bb4acc: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@133 (line 287)
+  0x000001c107bb4acc: 30d8 49f8 | bae4 ffff | ff48 8b2c | 2448 8944 | 2418 894c | 240c 4489 
+
+  0x000001c107bb4ae4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ae4: 4c24 20e8 
+
+  0x000001c107bb4ae8: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@165 (line 288)
+  0x000001c107bb4ae8: 14d8 49f8 | bae4 ffff | ff48 8b2c | 2448 8944 | 2418 4489 | 5424 0c89 
+
+  0x000001c107bb4b00: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4b00: 4c24 20e8 
+
+  0x000001c107bb4b04: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@167 (line 288)
+  0x000001c107bb4b04: f8d7 49f8 | bae4 ffff | ff48 8b2c | 2448 8944 | 2418 895c | 240c 4489 
+
+  0x000001c107bb4b1c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4b1c: 5c24 20e8 
+
+  0x000001c107bb4b20: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@169 (line 288)
+  0x000001c107bb4b20: dcd7 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 1848 | 8944 2420 | 895c 240c 
+  0x000001c107bb4b40: 4489 4c24 
+
+  0x000001c107bb4b44: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4b44: 2866 90e8 
+
+  0x000001c107bb4b48: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@201 (line 289)
+  0x000001c107bb4b48: b4d7 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 1848 | 8944 2420 | 895c 240c 
+  0x000001c107bb4b68: 4489 5c24 
+
+  0x000001c107bb4b6c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4b6c: 2866 90e8 
+
+  0x000001c107bb4b70: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@203 (line 289)
+  0x000001c107bb4b70: 8cd7 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 1848 | 8944 2420 | 897c 240c 
+  0x000001c107bb4b90: 895c 2428 
+
+  0x000001c107bb4b94: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4b94: 6666 90e8 
+
+  0x000001c107bb4b98: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@205 (line 289)
+  0x000001c107bb4b98: 64d7 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb4bb8: 2048 8944 | 2428 4489 | 4c24 0c89 
+
+  0x000001c107bb4bc4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4bc4: 4c24 30e8 
+
+  0x000001c107bb4bc8: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@237 (line 290)
+  0x000001c107bb4bc8: 34d7 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb4be8: 2048 8944 | 2428 4489 | 4c24 0c44 | 8944 2430 
+
+  0x000001c107bb4bf8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4bf8: 6666 90e8 
+
+  0x000001c107bb4bfc: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@239 (line 290)
+  0x000001c107bb4bfc: 00d7 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb4c1c: 2048 8944 | 2428 897c | 240c 4489 
+
+  0x000001c107bb4c28: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4c28: 4c24 30e8 
+
+  0x000001c107bb4c2c: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@241 (line 290)
+  0x000001c107bb4c2c: d0d6 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb4c4c: 204c 8b54 | 2430 4c89 | 5424 2848 | 8944 2430 | 895c 240c | 4489 4c24 
+
+  0x000001c107bb4c64: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4c64: 3866 90e8 
+
+  0x000001c107bb4c68: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@273 (line 291)
+  0x000001c107bb4c68: 94d6 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb4c88: 204c 8b54 | 2430 4c89 | 5424 2848 | 8944 2430 | 894c 240c | 4489 5c24 
+
+  0x000001c107bb4ca0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ca0: 3866 90e8 
+
+  0x000001c107bb4ca4: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@275 (line 291)
+  0x000001c107bb4ca4: 58d6 49f8 | bae4 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb4cc4: 204c 8b54 | 2430 4c89 | 5424 2848 | 8944 2430 | 897c 240c | 895c 2438 
+
+  0x000001c107bb4cdc: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4cdc: 6666 90e8 
+
+  0x000001c107bb4ce0: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@277 (line 291)
+  0x000001c107bb4ce0: 1cd6 49f8 | ba45 ffff | ff48 8b2c | 2444 8b54 | 2440 4489 | 1424 448b | 5424 4444 | 8954 2404 
+  0x000001c107bb4d00: 4c89 4c24 | 1048 894c | 2418 4889 | 5c24 2848 | 897c 2430 | 4889 4424 | 384c 8944 
+
+  0x000001c107bb4d1c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4d1c: 2440 90e8 
+
+  0x000001c107bb4d20: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop }
+                      ;*ifnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) opencraft.Chunk::setup@321 (line 305)
+  0x000001c107bb4d20: dcd5 49f8 | ba45 ffff | ff48 8b2c | 2444 8b54 | 2440 4489 | 1424 448b | 5c24 4444 | 895c 2404 
+  0x000001c107bb4d40: 4c89 4c24 | 1048 894c | 2418 4c89 | 4424 2048 | 895c 2428 | 4889 4424 | 3848 897c 
+
+  0x000001c107bb4d5c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4d5c: 2440 90e8 
+
+  0x000001c107bb4d60: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [64]=Oop }
+                      ;*ifnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) opencraft.Chunk::setup@331 (line 305)
+  0x000001c107bb4d60: 9cd5 49f8 | bae4 ffff | ff48 ff74 | 2420 488f | 4424 1848 | ff74 2430 | 488f 4424 | 2044 8954 
+  0x000001c107bb4d80: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4d80: 2414 90e8 
+
+  0x000001c107bb4d84: ; ImmutableOopMap {rbp=Oop [0]=Oop [20]=NarrowOop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@344 (line 306)
+  0x000001c107bb4d84: 78d5 49f8 | bae4 ffff | ff44 8b5c | 2440 4489 | 5c24 0848 | ff74 2420 | 488f 4424 | 1848 ff74 
+  0x000001c107bb4da4: 2430 488f | 4424 2044 | 8954 2414 | 4489 4c24 
+
+  0x000001c107bb4db4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4db4: 4066 90e8 
+
+  0x000001c107bb4db8: ; ImmutableOopMap {rbp=Oop [0]=Oop [20]=NarrowOop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@346 (line 306)
+  0x000001c107bb4db8: 44d5 49f8 | bae4 ffff | ff44 8b5c | 2440 4489 | 5c24 0848 | ff74 2420 | 488f 4424 | 1848 ff74 
+  0x000001c107bb4dd8: 2430 488f | 4424 2044 | 8954 2414 | 4489 4c24 
+
+  0x000001c107bb4de8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4de8: 4066 90e8 
+
+  0x000001c107bb4dec: ; ImmutableOopMap {rbp=Oop [0]=Oop [20]=NarrowOop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@348 (line 306)
+  0x000001c107bb4dec: 10d5 49f8 | bae4 ffff | ff48 ff74 | 2420 488f | 4424 1848 | ff74 2430 | 488f 4424 | 2044 895c 
+  0x000001c107bb4e0c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4e0c: 2414 90e8 
+
+  0x000001c107bb4e10: ; ImmutableOopMap {rbp=Oop [0]=Oop [20]=NarrowOop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@357 (line 307)
+  0x000001c107bb4e10: ecd4 49f8 | bae4 ffff | ff44 8b54 | 2440 4489 | 5424 0848 | ff74 2420 | 488f 4424 | 1848 ff74 
+  0x000001c107bb4e30: 2430 488f | 4424 2044 | 895c 2414 | 4489 4c24 
+
+  0x000001c107bb4e40: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4e40: 4066 90e8 
+
+  0x000001c107bb4e44: ; ImmutableOopMap {rbp=Oop [0]=Oop [20]=NarrowOop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@359 (line 307)
+  0x000001c107bb4e44: b8d4 49f8 | bae4 ffff | ff44 8b54 | 2440 4489 | 5424 0845 | 8bd1 48ff | 7424 2048 | 8f44 2418 
+  0x000001c107bb4e64: 48ff 7424 | 3048 8f44 | 2420 4489 | 5c24 1444 | 8954 2440 
+
+  0x000001c107bb4e78: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4e78: 6666 90e8 
+
+  0x000001c107bb4e7c: ; ImmutableOopMap {rbp=Oop [0]=Oop [20]=NarrowOop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@361 (line 307)
+  0x000001c107bb4e7c: 80d4 49f8 | baf6 ffff | ff48 8b2c 
+
+  0x000001c107bb4e88: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4e88: 2466 90e8 
+
+  0x000001c107bb4e8c: ; ImmutableOopMap {rbp=Oop }
+                      ;*getfield glNewList {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GL11::glNewList@5 (line 2323)
+                      ; - opencraft.Chunk::setup@34 (line 265)
+  0x000001c107bb4e8c: 70d4 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2408 4489 
+
+  0x000001c107bb4ea0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ea0: 1c24 90e8 
+
+  0x000001c107bb4ea4: ; ImmutableOopMap {rbp=Oop }
+                      ;*getfield glEndList {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GL11::glEndList@5 (line 2331)
+                      ; - opencraft.Chunk::setup@397 (line 315)
+  0x000001c107bb4ea4: 58d4 49f8 | ba45 ffff | ff44 895c 
+
+  0x000001c107bb4eb0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4eb0: 2408 90e8 
+
+  0x000001c107bb4eb4: ; ImmutableOopMap {rbp=NarrowOop [0]=Oop [8]=NarrowOop [24]=Oop }
+                      ;*if_acmpne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@11 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glBegin@0 (line 680)
+                      ; - opencraft.Chunk::setup@39 (line 267)
+  0x000001c107bb4eb4: 48d4 49f8 | ba45 ffff | ff48 8b2c | 2444 895c 
+
+  0x000001c107bb4ec4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ec4: 2404 90e8 
+
+  0x000001c107bb4ec8: ; ImmutableOopMap {rbp=Oop [4]=NarrowOop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilities@5 (line 123)
+                      ; - org.lwjgl.opengl.GL11::glBegin@0 (line 680)
+                      ; - opencraft.Chunk::setup@39 (line 267)
+  0x000001c107bb4ec8: 34d4 49f8 | 4533 d24d | 3bc2 bdff | ffff ff7c | 0840 0f95 | c540 0fb6 | edba 45ff | ffff 4489 
+  0x000001c107bb4ee8: 5c24 084c | 8944 2418 
+
+  0x000001c107bb4ef0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4ef0: 6666 90e8 
+
+  0x000001c107bb4ef4: ; ImmutableOopMap {[0]=Oop [8]=NarrowOop }
+                      ;*ifne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.BufferChecks::checkFunctionAddress@9 (line 57)
+                      ; - org.lwjgl.opengl.GL11::glBegin@10 (line 682)
+                      ; - opencraft.Chunk::setup@39 (line 267)
+  0x000001c107bb4ef4: 08d4 49f8 | ba45 ffff | ff4c 891c | 2444 8944 | 2408 895c | 240c 4489 | 5424 1089 
+
+  0x000001c107bb4f10: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4f10: 7424 14e8 
+
+  0x000001c107bb4f14: ; ImmutableOopMap {rbp=NarrowOop [0]=Oop [20]=NarrowOop [24]=Oop }
+                      ;*if_acmpne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@11 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glEnd@0 (line 689)
+                      ; - opencraft.Chunk::setup@394 (line 314)
+  0x000001c107bb4f14: e8d3 49f8 | ba45 ffff | ff49 8beb | 4489 0424 | 895c 2404 | 4489 5424 | 0889 4c24 
+
+  0x000001c107bb4f30: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4f30: 1066 90e8 
+
+  0x000001c107bb4f34: ; ImmutableOopMap {rbp=Oop [16]=NarrowOop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilities@5 (line 123)
+                      ; - org.lwjgl.opengl.GL11::glEnd@0 (line 689)
+                      ; - opencraft.Chunk::setup@394 (line 314)
+  0x000001c107bb4f34: c8d3 49f8 | 33ff 4c3b | cfbd ffff | ffff 7c08 | 400f 95c5 | 400f b6ed | ba45 ffff | ff4c 891c 
+  0x000001c107bb4f54: 2444 8944 | 2408 895c | 240c 4489 | 5424 1089 | 4c24 144c | 894c 2420 
+
+  0x000001c107bb4f6c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4f6c: 6666 90e8 
+
+  0x000001c107bb4f70: ; ImmutableOopMap {[0]=Oop [20]=NarrowOop }
+                      ;*ifne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.BufferChecks::checkFunctionAddress@9 (line 57)
+                      ; - org.lwjgl.opengl.GL11::glEnd@10 (line 691)
+                      ; - opencraft.Chunk::setup@394 (line 314)
+  0x000001c107bb4f70: 8cd3 49f8 | baf6 ffff 
+
+  0x000001c107bb4f78: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4f78: ff66 90e8 
+
+  0x000001c107bb4f7c: ; ImmutableOopMap {rbp=Oop }
+                      ;*getfield glGenLists {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GL11::glGenLists@5 (line 1413)
+                      ; - opencraft.Chunk::setup@10 (line 261)
+  0x000001c107bb4f7c: 80d3 49f8 | baf6 ffff | ff48 8b2c | 2444 894c | 2404 4489 | 5424 0844 | 8944 240c 
+
+  0x000001c107bb4f98: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4f98: 6666 90e8 
+
+  0x000001c107bb4f9c: ; ImmutableOopMap {rbp=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@62 (line 277)
+  0x000001c107bb4f9c: 60d3 49f8 | baf6 ffff | ff48 8b2c | 2444 8904 | 2444 8954 | 2408 4489 
+
+  0x000001c107bb4fb4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4fb4: 4c24 0ce8 
+
+  0x000001c107bb4fb8: ; ImmutableOopMap {rbp=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@64 (line 277)
+  0x000001c107bb4fb8: 44d3 49f8 | baf6 ffff | ff48 8b2c | 2444 8904 | 2444 894c | 2404 4489 
+
+  0x000001c107bb4fd0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4fd0: 5424 0ce8 
+
+  0x000001c107bb4fd4: ; ImmutableOopMap {rbp=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@66 (line 277)
+  0x000001c107bb4fd4: 28d3 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2440 4489 
+
+  0x000001c107bb4fe8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb4fe8: 1424 90e8 
+
+  0x000001c107bb4fec: ; ImmutableOopMap {rbp=Oop [16]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@129 (line 287)
+  0x000001c107bb4fec: 10d3 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2444 4489 
+
+  0x000001c107bb5000: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5000: 5c24 0ce8 
+
+  0x000001c107bb5004: ; ImmutableOopMap {rbp=Oop [16]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@131 (line 287)
+  0x000001c107bb5004: f8d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2448 4489 
+
+  0x000001c107bb5018: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5018: 5424 08e8 
+
+  0x000001c107bb501c: ; ImmutableOopMap {rbp=Oop [16]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@133 (line 287)
+  0x000001c107bb501c: e0d2 49f8 | baf6 ffff | ff48 8b2c 
+
+  0x000001c107bb5028: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5028: 2466 90e8 
+
+  0x000001c107bb502c: ; ImmutableOopMap {rbp=Oop [16]=Oop }
+                      ;*invokevirtual getGlobalX {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@134 (line 287)
+  0x000001c107bb502c: d0d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2440 4489 
+
+  0x000001c107bb5040: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5040: 1424 90e8 
+
+  0x000001c107bb5044: ; ImmutableOopMap {rbp=Oop [16]=Oop [32]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@165 (line 288)
+  0x000001c107bb5044: b8d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2444 4489 
+
+  0x000001c107bb5058: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5058: 5c24 0ce8 
+
+  0x000001c107bb505c: ; ImmutableOopMap {rbp=Oop [16]=Oop [32]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@167 (line 288)
+  0x000001c107bb505c: a0d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2448 4489 
+
+  0x000001c107bb5070: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5070: 5424 08e8 
+
+  0x000001c107bb5074: ; ImmutableOopMap {rbp=Oop [16]=Oop [32]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@169 (line 288)
+  0x000001c107bb5074: 88d2 49f8 | baf6 ffff | ff48 8b2c 
+
+  0x000001c107bb5080: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5080: 2466 90e8 
+
+  0x000001c107bb5084: ; ImmutableOopMap {rbp=Oop [16]=Oop [32]=Oop }
+                      ;*invokevirtual getGlobalX {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@170 (line 288)
+  0x000001c107bb5084: 78d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2440 4489 | 1424 4c8b | 5424 204c | 8954 2418 
+  0x000001c107bb50a4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb50a4: 6666 90e8 
+
+  0x000001c107bb50a8: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [40]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@201 (line 289)
+  0x000001c107bb50a8: 54d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2444 4c8b | 5424 204c | 8954 2418 | 4489 5c24 
+  0x000001c107bb50c8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb50c8: 0c66 90e8 
+
+  0x000001c107bb50cc: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [40]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@203 (line 289)
+  0x000001c107bb50cc: 30d2 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2448 4c8b | 5424 204c | 8954 2418 | 458b d344 
+  0x000001c107bb50ec: 8954 240c 
+
+  0x000001c107bb50f0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb50f0: 6666 90e8 
+
+  0x000001c107bb50f4: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [40]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@205 (line 289)
+  0x000001c107bb50f4: 08d2 49f8 | baf6 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 
+
+  0x000001c107bb5108: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5108: 5424 18e8 
+
+  0x000001c107bb510c: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [40]=Oop }
+                      ;*invokevirtual getGlobalX {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@206 (line 289)
+  0x000001c107bb510c: f0d1 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2440 4489 | 1c24 4c8b | 5424 204c | 8954 2418 
+  0x000001c107bb512c: 4c8b 5424 | 284c 8954 
+
+  0x000001c107bb5134: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5134: 2420 90e8 
+
+  0x000001c107bb5138: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [48]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@237 (line 290)
+  0x000001c107bb5138: c4d1 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2444 4489 | 5424 044c | 8b54 2420 | 4c89 5424 
+  0x000001c107bb5158: 184c 8b54 | 2428 4c89 
+
+  0x000001c107bb5160: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5160: 5424 20e8 
+
+  0x000001c107bb5164: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [48]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@239 (line 290)
+  0x000001c107bb5164: 98d1 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2448 4489 | 5424 084c | 8b54 2420 | 4c89 5424 
+  0x000001c107bb5184: 184c 8b54 | 2428 4c89 
+
+  0x000001c107bb518c: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb518c: 5424 20e8 
+
+  0x000001c107bb5190: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [48]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@241 (line 290)
+  0x000001c107bb5190: 6cd1 49f8 | baf6 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb51b0: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb51b0: 2066 90e8 
+
+  0x000001c107bb51b4: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [48]=Oop }
+                      ;*invokevirtual getGlobalX {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@242 (line 290)
+  0x000001c107bb51b4: 48d1 49f8 | baf6 ffff | ff48 8b2c | 2444 8b5c | 2440 4489 | 1c24 4c8b | 5424 204c | 8954 2418 
+  0x000001c107bb51d4: 4c8b 5424 | 284c 8954 | 2420 4c8b | 5424 304c | 8954 2428 
+
+  0x000001c107bb51e8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb51e8: 6666 90e8 
+
+  0x000001c107bb51ec: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@273 (line 291)
+  0x000001c107bb51ec: 10d1 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2444 4489 | 5424 044c | 8b54 2420 | 4c89 5424 
+  0x000001c107bb520c: 184c 8b54 | 2428 4c89 | 5424 204c | 8b54 2430 | 4c89 5424 
+
+  0x000001c107bb5220: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5220: 2866 90e8 
+
+  0x000001c107bb5224: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@275 (line 291)
+  0x000001c107bb5224: d8d0 49f8 | baf6 ffff | ff48 8b2c | 2444 8b54 | 2448 4489 | 5424 084c | 8b54 2420 | 4c89 5424 
+  0x000001c107bb5244: 184c 8b54 | 2428 4c89 | 5424 204c | 8b54 2430 | 4c89 5424 
+
+  0x000001c107bb5258: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5258: 2866 90e8 
+
+  0x000001c107bb525c: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@277 (line 291)
+  0x000001c107bb525c: a0d0 49f8 | baf6 ffff | ff48 8b2c | 244c 8b54 | 2420 4c89 | 5424 184c | 8b54 2428 | 4c89 5424 
+  0x000001c107bb527c: 204c 8b54 | 2430 4c89 
+
+  0x000001c107bb5284: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5284: 5424 28e8 
+
+  0x000001c107bb5288: ; ImmutableOopMap {rbp=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop }
+                      ;*invokevirtual getGlobalX {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@278 (line 291)
+  0x000001c107bb5288: 74d0 49f8 | baf6 ffff | ff44 8b5c | 2440 4489 | 5c24 0848 | ff74 2420 | 488f 4424 | 1848 ff74 
+  0x000001c107bb52a8: 2430 488f 
+
+  0x000001c107bb52ac: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb52ac: 4424 20e8 
+
+  0x000001c107bb52b0: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@344 (line 306)
+  0x000001c107bb52b0: 4cd0 49f8 | baf6 ffff | ff44 8b54 | 2444 48ff | 7424 2048 | 8f44 2418 | 48ff 7424 | 3048 8f44 
+  0x000001c107bb52d0: 2420 4489 
+
+  0x000001c107bb52d4: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb52d4: 5424 14e8 
+
+  0x000001c107bb52d8: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@346 (line 306)
+  0x000001c107bb52d8: 24d0 49f8 | baf6 ffff | ff44 8b5c | 2448 48ff | 7424 2048 | 8f44 2418 | 48ff 7424 | 3048 8f44 
+  0x000001c107bb52f8: 2420 458b | d344 8954 
+
+  0x000001c107bb5300: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5300: 2414 90e8 
+
+  0x000001c107bb5304: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@348 (line 306)
+  0x000001c107bb5304: f8cf 49f8 | baf6 ffff | ff44 8b5c | 2440 4489 | 5c24 0848 | ff74 2420 | 488f 4424 | 1848 ff74 
+  0x000001c107bb5324: 2430 488f 
+
+  0x000001c107bb5328: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5328: 4424 20e8 
+
+  0x000001c107bb532c: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@357 (line 307)
+  0x000001c107bb532c: d0cf 49f8 | baf6 ffff | ff44 8b54 | 2444 48ff | 7424 2048 | 8f44 2418 | 48ff 7424 | 3048 8f44 
+  0x000001c107bb534c: 2420 4489 
+
+  0x000001c107bb5350: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5350: 5424 14e8 
+
+  0x000001c107bb5354: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@359 (line 307)
+  0x000001c107bb5354: a8cf 49f8 | baf6 ffff | ff44 8b5c | 2448 48ff | 7424 2048 | 8f44 2418 | 48ff 7424 | 3048 8f44 
+  0x000001c107bb5374: 2420 4489 
+
+  0x000001c107bb5378: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5378: 5c24 14e8 
+
+  0x000001c107bb537c: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.Chunk::setup@361 (line 307)
+  0x000001c107bb537c: 80cf 49f8 | baf6 ffff | ff48 ff74 | 2420 488f | 4424 1848 | ff74 2430 | 488f 4424 
+
+  0x000001c107bb5398: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb5398: 2066 90e8 
+
+  0x000001c107bb539c: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop [40]=Oop [56]=Oop [80]=Oop }
+                      ;*putfield visible {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) opencraft.Chunk::setup@363 (line 307)
+  0x000001c107bb539c: 60cf 49f8 | baf6 ffff | ff48 8b2c 
+
+  0x000001c107bb53a8: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb53a8: 2466 90e8 
+
+  0x000001c107bb53ac: ; ImmutableOopMap {rbp=Oop }
+                      ;*getfield owner {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@5 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glBegin@0 (line 680)
+                      ; - opencraft.Chunk::setup@39 (line 267)
+  0x000001c107bb53ac: 50cf 49f8 | eb02 eb00 | 488b d0e9 | dc01 0000 | 488b d090 | e9d3 0100 | 0048 8bd0 | e9cb 0100 
+  0x000001c107bb53cc: 0048 8bd0 | e9c3 0100 | 00eb 02eb | 0048 8bd0 | 0f1f 4000 | e9b3 0100 | 00eb 02eb | 0048 8bd0 
+  0x000001c107bb53ec: e9a7 0100 | 0048 8bd0 | e99f 0100 | 0048 8bd0 | 0f1f 4000 | e993 0100 | 0048 8bd0 | e98b 0100 
+  0x000001c107bb540c: 0048 8bd0 | e983 0100 | 0048 8bd0 | e97b 0100 | 0044 8b50 | 0849 bb00 | 0000 0008 | 0000 004d 
+  0x000001c107bb542c: 03da 4d8b 
+
+  0x000001c107bb5430: ;   {metadata('java/lang/Exception')}
+  0x000001c107bb5430: 5340 49bb | 20bf 0700 | 0800 0000 | 0f1f 4000 | 4d3b d375 | b44c 8b54 | 2438 4c8b | 5c24 304c 
+  0x000001c107bb5450: 8b44 2428 | 488b 4c24 | 204c 8b4c | 2410 498b | db49 8bfa | e925 0100 | 0044 8b58 | 0849 ba00 
+  0x000001c107bb5470: 0000 0008 | 0000 004d | 03d3 4d8b 
+
+  0x000001c107bb547c: ;   {metadata('java/lang/Exception')}
+  0x000001c107bb547c: 5240 49bb | 20bf 0700 | 0800 0000 | 4d3b d30f | 8574 ffff | ff4c 8b54 | 2430 4c8b | 5c24 2848 
+  0x000001c107bb549c: 8b4c 2420 | 4c8b 4c24 | 104d 8bc3 | 498b dae9 | dc00 0000 | 448b 5808 | 49ba 0000 | 0000 0800 
+  0x000001c107bb54bc: 0000 4d03 | d34d 8b52 
+
+  0x000001c107bb54c4: ;   {metadata('java/lang/Exception')}
+  0x000001c107bb54c4: 4049 bb20 | bf07 0008 | 0000 004d | 3bd3 0f85 | bd00 0000 | 4533 c9eb | 3444 8b50 | 0849 bb00 
+  0x000001c107bb54e4: 0000 0008 | 0000 004d | 03da 4d8b 
+
+  0x000001c107bb54f0: ;   {metadata('java/lang/Exception')}
+  0x000001c107bb54f0: 5340 49bb | 20bf 0700 | 0800 0000 | 0f1f 4000 | 4d3b d30f | 850c ffff | ff4c 8b54 | 2410 4d8b 
+  0x000001c107bb5510: ca45 33c0 | 33c9 e96f | 0000 0044 | 8b58 0849 | ba00 0000 | 0008 0000 | 004d 03d3 | 4d8b 5240 
+  0x000001c107bb5530: ;   {metadata('java/lang/Exception')}
+  0x000001c107bb5530: 49bb 20bf | 0700 0800 | 0000 660f | 1f44 0000 | 4d3b d30f | 85c4 feff | ff45 33c0 | eb2c 448b 
+  0x000001c107bb5550: 5008 49bb | 0000 0000 | 0800 0000 | 4d03 da4d 
+
+  0x000001c107bb5560: ;   {metadata('java/lang/Exception')}
+  0x000001c107bb5560: 8b53 4049 | bb20 bf07 | 0008 0000 | 004d 3bd3 | 7530 4c8b | 5424 284d | 8bc2 4c8b | 5424 204c 
+  0x000001c107bb5580: 8b5c 2410 | 4d8b cb49 | 8bca 33db | 33ff 33c0 | e904 f3ff | ff48 8bd0 | 4883 c470 
+
+  0x000001c107bb559c: ;   {runtime_call _rethrow_Java}
+  0x000001c107bb559c: 5de9 5ecd | 55f8 488b | d0eb f1ba | f6ff ffff | 498b eb44 | 8904 2489 | 5c24 0444 | 8954 2408 
+  0x000001c107bb55bc: ;   {runtime_call UncommonTrapBlob}
+  0x000001c107bb55bc: 6666 90e8 
+
+  0x000001c107bb55c0: ; ImmutableOopMap {rbp=Oop }
+                      ;*getfield owner {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@5 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glEnd@0 (line 689)
+                      ; - opencraft.Chunk::setup@394 (line 314)
+  0x000001c107bb55c0: 3ccd 49f8 
+
+  0x000001c107bb55c4: ;   {internal_word}
+  0x000001c107bb55c4: 49ba c949 | bb07 c101 | 0000 4d89 | 9750 0300 
+
+  0x000001c107bb55d4: ;   {runtime_call SafepointBlob}
+  0x000001c107bb55d4: 00e9 26de | 49f8 f4f4 | f4f4 f4f4 
+[Stub Code]
+  0x000001c107bb55e0: ;   {no_reloc}
+  0x000001c107bb55e0: 48bb 0000 | 0000 0000 
+
+  0x000001c107bb55e8: ;   {runtime_call}
+  0x000001c107bb55e8: 0000 e9fb 
+
+  0x000001c107bb55ec: ;   {static_stub}
+  0x000001c107bb55ec: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001c107bb55f8: ;   {runtime_call}
+  0x000001c107bb55f8: 00e9 fbff 
+
+  0x000001c107bb55fc: ;   {static_stub}
+  0x000001c107bb55fc: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001c107bb5608: ;   {runtime_call}
+  0x000001c107bb5608: e9fb ffff 
+
+  0x000001c107bb560c: ;   {static_stub}
+  0x000001c107bb560c: ff48 bbe8 | 5b52 1fc1 
+
+  0x000001c107bb5614: ;   {runtime_call I2C/C2I adapters}
+  0x000001c107bb5614: 0100 00e9 | c477 57f8 
+
+  0x000001c107bb561c: ;   {static_stub}
+  0x000001c107bb561c: 48bb 0000 | 0000 0000 
+
+  0x000001c107bb5624: ;   {runtime_call}
+  0x000001c107bb5624: 0000 e9fb 
+
+  0x000001c107bb5628: ;   {static_stub}
+  0x000001c107bb5628: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001c107bb5634: ;   {runtime_call}
+  0x000001c107bb5634: 00e9 fbff 
+
+  0x000001c107bb5638: ;   {static_stub}
+  0x000001c107bb5638: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001c107bb5644: ;   {runtime_call}
+  0x000001c107bb5644: e9fb ffff 
+
+  0x000001c107bb5648: ;   {static_stub}
+  0x000001c107bb5648: ff48 bb00 | 0000 0000 
+
+  0x000001c107bb5650: ;   {runtime_call}
+  0x000001c107bb5650: 0000 00e9 | fbff ffff 
+
+  0x000001c107bb5658: ;   {static_stub}
+  0x000001c107bb5658: 48bb 0000 | 0000 0000 
+
+  0x000001c107bb5660: ;   {runtime_call}
+  0x000001c107bb5660: 0000 e9fb 
+
+  0x000001c107bb5664: ;   {static_stub}
+  0x000001c107bb5664: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001c107bb5670: ;   {runtime_call}
+  0x000001c107bb5670: 00e9 fbff 
+
+  0x000001c107bb5674: ;   {static_stub}
+  0x000001c107bb5674: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001c107bb5680: ;   {runtime_call}
+  0x000001c107bb5680: e9fb ffff 
+
+  0x000001c107bb5684: ;   {static_stub}
+  0x000001c107bb5684: ff48 bb00 | 0000 0000 
+
+  0x000001c107bb568c: ;   {runtime_call}
+  0x000001c107bb568c: 0000 00e9 | fbff ffff 
+
+  0x000001c107bb5694: ;   {static_stub}
+  0x000001c107bb5694: 48bb 0000 | 0000 0000 
+
+  0x000001c107bb569c: ;   {runtime_call}
+  0x000001c107bb569c: 0000 e9fb 
+
+  0x000001c107bb56a0: ;   {static_stub}
+  0x000001c107bb56a0: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001c107bb56ac: ;   {runtime_call}
+  0x000001c107bb56ac: 00e9 fbff 
+
+  0x000001c107bb56b0: ;   {static_stub}
+  0x000001c107bb56b0: ffff 48bb | 405d 521f | c101 0000 
+
+  0x000001c107bb56bc: ;   {runtime_call I2C/C2I adapters}
+  0x000001c107bb56bc: e918 8748 
+
+  0x000001c107bb56c0: ;   {static_stub}
+  0x000001c107bb56c0: f848 bb00 | 0000 0000 
+
+  0x000001c107bb56c8: ;   {runtime_call}
+  0x000001c107bb56c8: 0000 00e9 | fbff ffff 
+
+  0x000001c107bb56d0: ;   {static_stub}
+  0x000001c107bb56d0: 48bb 0000 | 0000 0000 
+
+  0x000001c107bb56d8: ;   {runtime_call}
+  0x000001c107bb56d8: 0000 e9fb 
+
+  0x000001c107bb56dc: ;   {static_stub}
+  0x000001c107bb56dc: ffff ff48 | bb30 c84f | 1fc1 0100 
+
+  0x000001c107bb56e8: ;   {runtime_call I2C/C2I adapters}
+  0x000001c107bb56e8: 00e9 ee06 
+
+  0x000001c107bb56ec: ;   {runtime_call ExceptionBlob}
+  0x000001c107bb56ec: 49f8 e98d | 2255 f8e8 | 0000 0000 | 4883 2c24 
+
+  0x000001c107bb56fc: ;   {runtime_call DeoptimizationBlob}
+  0x000001c107bb56fc: 05e9 9ecf | 49f8 f4f4 | f4f4 f4f4 
+[/MachCode]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001c12ab7a450, length=15, elements={
+0x000001c171d6b800, 0x000001c17cd43c70, 0x000001c17cd44610, 0x000001c17cd5d470,
+0x000001c17cd5de10, 0x000001c17cd5e7b0, 0x000001c17cd67160, 0x000001c17cd6b5d0,
+0x000001c17cd6bfb0, 0x000001c17cd6d080, 0x000001c17cd2a700, 0x000001c123122e50,
+0x000001c12316d610, 0x000001c12316e0f0, 0x000001c1233a0060
+}
+
+Java Threads: ( => current thread )
+=>0x000001c171d6b800 JavaThread "main" [_thread_in_native, id=23560, stack(0x000000663c700000,0x000000663c800000)]
+  0x000001c17cd43c70 JavaThread "Reference Handler" daemon [_thread_blocked, id=30940, stack(0x000000663ce00000,0x000000663cf00000)]
+  0x000001c17cd44610 JavaThread "Finalizer" daemon [_thread_blocked, id=19848, stack(0x000000663cf00000,0x000000663d000000)]
+  0x000001c17cd5d470 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=28740, stack(0x000000663d000000,0x000000663d100000)]
+  0x000001c17cd5de10 JavaThread "Attach Listener" daemon [_thread_blocked, id=29700, stack(0x000000663d100000,0x000000663d200000)]
+  0x000001c17cd5e7b0 JavaThread "Service Thread" daemon [_thread_blocked, id=26208, stack(0x000000663d200000,0x000000663d300000)]
+  0x000001c17cd67160 JavaThread "Monitor Deflation Thread" daemon [_thread_blocked, id=13388, stack(0x000000663d300000,0x000000663d400000)]
+  0x000001c17cd6b5d0 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=35012, stack(0x000000663d400000,0x000000663d500000)]
+  0x000001c17cd6bfb0 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=34736, stack(0x000000663d500000,0x000000663d600000)]
+  0x000001c17cd6d080 JavaThread "Sweeper thread" daemon [_thread_blocked, id=35060, stack(0x000000663d600000,0x000000663d700000)]
+  0x000001c17cd2a700 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=34200, stack(0x000000663d700000,0x000000663d800000)]
+  0x000001c123122e50 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_blocked, id=34480, stack(0x000000663d800000,0x000000663d900000)]
+  0x000001c12316d610 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=9056, stack(0x000000663d900000,0x000000663da00000)]
+  0x000001c12316e0f0 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=33344, stack(0x000000663da00000,0x000000663db00000)]
+  0x000001c1233a0060 JavaThread "Notification Thread" daemon [_thread_blocked, id=8428, stack(0x000000663db00000,0x000000663dc00000)]
+
+Other Threads:
+  0x000001c17cbaf450 VMThread "VM Thread" [stack: 0x000000663cd00000,0x000000663ce00000] [id=31756]
+  0x000001c171d6c870 WatcherThread "VM Periodic Task Thread" [stack: 0x000000663dc00000,0x000000663dd00000] [id=23536]
+  0x000001c171e17d80 WorkerThread "GC Thread#0" [stack: 0x000000663c800000,0x000000663c900000] [id=31664]
+  0x000001c12aa21870 WorkerThread "GC Thread#1" [stack: 0x000000663ea20000,0x000000663eb20000] [id=32864]
+  0x000001c12aa22ad0 WorkerThread "GC Thread#2" [stack: 0x000000663eb20000,0x000000663ec20000] [id=2932]
+  0x000001c12aa23a90 WorkerThread "GC Thread#3" [stack: 0x000000663ec20000,0x000000663ed20000] [id=21928]
+  0x000001c12aa1fe30 WorkerThread "GC Thread#4" [stack: 0x000000663ed20000,0x000000663ee20000] [id=23228]
+  0x000001c12aa21b10 WorkerThread "GC Thread#5" [stack: 0x000000663ee20000,0x000000663ef20000] [id=11036]
+  0x000001c12aa20610 WorkerThread "GC Thread#6" [stack: 0x000000663ef20000,0x000000663f020000] [id=2356]
+  0x000001c12aa23010 WorkerThread "GC Thread#7" [stack: 0x000000663f020000,0x000000663f120000] [id=30120]
+  0x000001c12aa21090 WorkerThread "GC Thread#8" [stack: 0x000000663f120000,0x000000663f220000] [id=32128]
+  0x000001c12aa20df0 WorkerThread "GC Thread#9" [stack: 0x000000663f220000,0x000000663f320000] [id=30772]
+  0x000001c171e2a3c0 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000663c900000,0x000000663ca00000] [id=11208]
+  0x000001c171e2adb0 WorkerThread "G1 Conc#0" [stack: 0x000000663ca00000,0x000000663cb00000] [id=8896]
+  0x000001c17cbf7f90 ConcurrentGCThread "G1 Refine#0" [stack: 0x000000663cb00000,0x000000663cc00000] [id=34644]
+  0x000001c17cbf9660 ConcurrentGCThread "G1 Service" [stack: 0x000000663cc00000,0x000000663cd00000] [id=33032]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000604000000, size: 8128 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000800000000-0x0000000800ba0000-0x0000000800ba0000), size 12189696, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Compressed class space mapped at: 0x0000000800c00000-0x0000000840c00000, reserved size: 1073741824
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 32 size 80 Howl #buckets 8 coarsen threshold 7372 Howl Bitmap #cards 1024 size 144 coarsen threshold 921 Card regions per heap region 1 cards per card region 8192
+ CPUs: 12 total, 12 available
+ Memory: 32511M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 4M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 508M
+ Heap Max Capacity: 8128M
+ Pre-touch: Disabled
+ Parallel Workers: 10
+ Concurrent Workers: 3
+ Concurrent Refinement Workers: 10
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 626688K, used 311296K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 38 young (155648K), 5 survivors (20480K)
+ Metaspace       used 5914K, committed 6080K, reserved 1114112K
+  class space    used 432K, committed 512K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x0000000604000000, 0x0000000604400000, 0x0000000604400000|100%| O|  |TAMS 0x0000000604000000, 0x0000000604000000| Untracked 
+|   1|0x0000000604400000, 0x0000000604800000, 0x0000000604800000|100%| O|  |TAMS 0x0000000604400000, 0x0000000604400000| Untracked 
+|   2|0x0000000604800000, 0x0000000604c00000, 0x0000000604c00000|100%| O|  |TAMS 0x0000000604800000, 0x0000000604800000| Untracked 
+|   3|0x0000000604c00000, 0x0000000605000000, 0x0000000605000000|100%| O|  |TAMS 0x0000000604c00000, 0x0000000604c00000| Untracked 
+|   4|0x0000000605000000, 0x0000000605400000, 0x0000000605400000|100%| O|  |TAMS 0x0000000605000000, 0x0000000605000000| Untracked 
+|   5|0x0000000605400000, 0x0000000605800000, 0x0000000605800000|100%| O|  |TAMS 0x0000000605400000, 0x0000000605400000| Untracked 
+|   6|0x0000000605800000, 0x0000000605c00000, 0x0000000605c00000|100%| O|  |TAMS 0x0000000605800000, 0x0000000605800000| Untracked 
+|   7|0x0000000605c00000, 0x0000000606000000, 0x0000000606000000|100%| O|  |TAMS 0x0000000605c00000, 0x0000000605c00000| Untracked 
+|   8|0x0000000606000000, 0x0000000606400000, 0x0000000606400000|100%| O|  |TAMS 0x0000000606000000, 0x0000000606000000| Untracked 
+|   9|0x0000000606400000, 0x0000000606800000, 0x0000000606800000|100%| O|  |TAMS 0x0000000606400000, 0x0000000606400000| Untracked 
+|  10|0x0000000606800000, 0x0000000606c00000, 0x0000000606c00000|100%| O|  |TAMS 0x0000000606800000, 0x0000000606800000| Untracked 
+|  11|0x0000000606c00000, 0x0000000607000000, 0x0000000607000000|100%| O|  |TAMS 0x0000000606c00000, 0x0000000606c00000| Untracked 
+|  12|0x0000000607000000, 0x0000000607400000, 0x0000000607400000|100%| O|  |TAMS 0x0000000607000000, 0x0000000607000000| Untracked 
+|  13|0x0000000607400000, 0x0000000607800000, 0x0000000607800000|100%| O|  |TAMS 0x0000000607400000, 0x0000000607400000| Untracked 
+|  14|0x0000000607800000, 0x0000000607c00000, 0x0000000607c00000|100%| O|  |TAMS 0x0000000607800000, 0x0000000607800000| Untracked 
+|  15|0x0000000607c00000, 0x0000000608000000, 0x0000000608000000|100%| O|  |TAMS 0x0000000607c00000, 0x0000000607c00000| Untracked 
+|  16|0x0000000608000000, 0x0000000608400000, 0x0000000608400000|100%| O|  |TAMS 0x0000000608000000, 0x0000000608000000| Untracked 
+|  17|0x0000000608400000, 0x0000000608800000, 0x0000000608800000|100%| O|  |TAMS 0x0000000608400000, 0x0000000608400000| Untracked 
+|  18|0x0000000608800000, 0x0000000608c00000, 0x0000000608c00000|100%| O|  |TAMS 0x0000000608800000, 0x0000000608800000| Untracked 
+|  19|0x0000000608c00000, 0x0000000609000000, 0x0000000609000000|100%| O|  |TAMS 0x0000000608c00000, 0x0000000608c00000| Untracked 
+|  20|0x0000000609000000, 0x0000000609400000, 0x0000000609400000|100%| O|  |TAMS 0x0000000609000000, 0x0000000609000000| Untracked 
+|  21|0x0000000609400000, 0x0000000609800000, 0x0000000609800000|100%| O|  |TAMS 0x0000000609400000, 0x0000000609400000| Untracked 
+|  22|0x0000000609800000, 0x0000000609c00000, 0x0000000609c00000|100%| O|  |TAMS 0x0000000609800000, 0x0000000609800000| Untracked 
+|  23|0x0000000609c00000, 0x000000060a000000, 0x000000060a000000|100%| O|  |TAMS 0x0000000609c00000, 0x0000000609c00000| Untracked 
+|  24|0x000000060a000000, 0x000000060a400000, 0x000000060a400000|100%| O|  |TAMS 0x000000060a000000, 0x000000060a000000| Untracked 
+|  25|0x000000060a400000, 0x000000060a800000, 0x000000060a800000|100%| O|  |TAMS 0x000000060a400000, 0x000000060a400000| Untracked 
+|  26|0x000000060a800000, 0x000000060ac00000, 0x000000060ac00000|100%| O|  |TAMS 0x000000060a800000, 0x000000060a800000| Untracked 
+|  27|0x000000060ac00000, 0x000000060b000000, 0x000000060b000000|100%| O|  |TAMS 0x000000060ac00000, 0x000000060ac00000| Untracked 
+|  28|0x000000060b000000, 0x000000060b400000, 0x000000060b400000|100%| O|  |TAMS 0x000000060b000000, 0x000000060b000000| Untracked 
+|  29|0x000000060b400000, 0x000000060b800000, 0x000000060b800000|100%| O|  |TAMS 0x000000060b400000, 0x000000060b400000| Untracked 
+|  30|0x000000060b800000, 0x000000060bc00000, 0x000000060bc00000|100%| O|  |TAMS 0x000000060b800000, 0x000000060b800000| Untracked 
+|  31|0x000000060bc00000, 0x000000060c000000, 0x000000060c000000|100%| O|  |TAMS 0x000000060bc00000, 0x000000060bc00000| Untracked 
+|  32|0x000000060c000000, 0x000000060c400000, 0x000000060c400000|100%| O|  |TAMS 0x000000060c000000, 0x000000060c000000| Untracked 
+|  33|0x000000060c400000, 0x000000060c800000, 0x000000060c800000|100%| O|  |TAMS 0x000000060c400000, 0x000000060c400000| Untracked 
+|  34|0x000000060c800000, 0x000000060cc00000, 0x000000060cc00000|100%| O|  |TAMS 0x000000060c800000, 0x000000060c800000| Untracked 
+|  35|0x000000060cc00000, 0x000000060d000000, 0x000000060d000000|100%| O|  |TAMS 0x000000060cc00000, 0x000000060cc00000| Untracked 
+|  36|0x000000060d000000, 0x000000060d400000, 0x000000060d400000|100%| O|  |TAMS 0x000000060d000000, 0x000000060d000000| Untracked 
+|  37|0x000000060d400000, 0x000000060d800000, 0x000000060d800000|100%| O|  |TAMS 0x000000060d400000, 0x000000060d400000| Untracked 
+|  38|0x000000060d800000, 0x000000060dc00000, 0x000000060dc00000|100%| O|  |TAMS 0x000000060d800000, 0x000000060d800000| Untracked 
+|  39|0x000000060dc00000, 0x000000060dc00000, 0x000000060e000000|  0%| F|  |TAMS 0x000000060dc00000, 0x000000060dc00000| Untracked 
+|  40|0x000000060e000000, 0x000000060e000000, 0x000000060e400000|  0%| F|  |TAMS 0x000000060e000000, 0x000000060e000000| Untracked 
+|  41|0x000000060e400000, 0x000000060e400000, 0x000000060e800000|  0%| F|  |TAMS 0x000000060e400000, 0x000000060e400000| Untracked 
+|  42|0x000000060e800000, 0x000000060e800000, 0x000000060ec00000|  0%| F|  |TAMS 0x000000060e800000, 0x000000060e800000| Untracked 
+|  43|0x000000060ec00000, 0x000000060ec00000, 0x000000060f000000|  0%| F|  |TAMS 0x000000060ec00000, 0x000000060ec00000| Untracked 
+|  44|0x000000060f000000, 0x000000060f000000, 0x000000060f400000|  0%| F|  |TAMS 0x000000060f000000, 0x000000060f000000| Untracked 
+|  45|0x000000060f400000, 0x000000060f400000, 0x000000060f800000|  0%| F|  |TAMS 0x000000060f400000, 0x000000060f400000| Untracked 
+|  46|0x000000060f800000, 0x000000060f800000, 0x000000060fc00000|  0%| F|  |TAMS 0x000000060f800000, 0x000000060f800000| Untracked 
+|  47|0x000000060fc00000, 0x000000060fc00000, 0x0000000610000000|  0%| F|  |TAMS 0x000000060fc00000, 0x000000060fc00000| Untracked 
+|  48|0x0000000610000000, 0x0000000610000000, 0x0000000610400000|  0%| F|  |TAMS 0x0000000610000000, 0x0000000610000000| Untracked 
+|  49|0x0000000610400000, 0x0000000610400000, 0x0000000610800000|  0%| F|  |TAMS 0x0000000610400000, 0x0000000610400000| Untracked 
+|  50|0x0000000610800000, 0x0000000610800000, 0x0000000610c00000|  0%| F|  |TAMS 0x0000000610800000, 0x0000000610800000| Untracked 
+|  51|0x0000000610c00000, 0x0000000610c00000, 0x0000000611000000|  0%| F|  |TAMS 0x0000000610c00000, 0x0000000610c00000| Untracked 
+|  52|0x0000000611000000, 0x0000000611000000, 0x0000000611400000|  0%| F|  |TAMS 0x0000000611000000, 0x0000000611000000| Untracked 
+|  53|0x0000000611400000, 0x0000000611400000, 0x0000000611800000|  0%| F|  |TAMS 0x0000000611400000, 0x0000000611400000| Untracked 
+|  54|0x0000000611800000, 0x0000000611800000, 0x0000000611c00000|  0%| F|  |TAMS 0x0000000611800000, 0x0000000611800000| Untracked 
+|  55|0x0000000611c00000, 0x0000000611c00000, 0x0000000612000000|  0%| F|  |TAMS 0x0000000611c00000, 0x0000000611c00000| Untracked 
+|  56|0x0000000612000000, 0x0000000612000000, 0x0000000612400000|  0%| F|  |TAMS 0x0000000612000000, 0x0000000612000000| Untracked 
+|  57|0x0000000612400000, 0x0000000612400000, 0x0000000612800000|  0%| F|  |TAMS 0x0000000612400000, 0x0000000612400000| Untracked 
+|  58|0x0000000612800000, 0x0000000612800000, 0x0000000612c00000|  0%| F|  |TAMS 0x0000000612800000, 0x0000000612800000| Untracked 
+|  59|0x0000000612c00000, 0x0000000612c00000, 0x0000000613000000|  0%| F|  |TAMS 0x0000000612c00000, 0x0000000612c00000| Untracked 
+|  60|0x0000000613000000, 0x0000000613000000, 0x0000000613400000|  0%| F|  |TAMS 0x0000000613000000, 0x0000000613000000| Untracked 
+|  61|0x0000000613400000, 0x0000000613400000, 0x0000000613800000|  0%| F|  |TAMS 0x0000000613400000, 0x0000000613400000| Untracked 
+|  62|0x0000000613800000, 0x0000000613800000, 0x0000000613c00000|  0%| F|  |TAMS 0x0000000613800000, 0x0000000613800000| Untracked 
+|  63|0x0000000613c00000, 0x0000000613c00000, 0x0000000614000000|  0%| F|  |TAMS 0x0000000613c00000, 0x0000000613c00000| Untracked 
+|  64|0x0000000614000000, 0x0000000614000000, 0x0000000614400000|  0%| F|  |TAMS 0x0000000614000000, 0x0000000614000000| Untracked 
+|  65|0x0000000614400000, 0x0000000614400000, 0x0000000614800000|  0%| F|  |TAMS 0x0000000614400000, 0x0000000614400000| Untracked 
+|  66|0x0000000614800000, 0x0000000614800000, 0x0000000614c00000|  0%| F|  |TAMS 0x0000000614800000, 0x0000000614800000| Untracked 
+|  67|0x0000000614c00000, 0x0000000614c00000, 0x0000000615000000|  0%| F|  |TAMS 0x0000000614c00000, 0x0000000614c00000| Untracked 
+|  68|0x0000000615000000, 0x0000000615000000, 0x0000000615400000|  0%| F|  |TAMS 0x0000000615000000, 0x0000000615000000| Untracked 
+|  69|0x0000000615400000, 0x0000000615400000, 0x0000000615800000|  0%| F|  |TAMS 0x0000000615400000, 0x0000000615400000| Untracked 
+|  70|0x0000000615800000, 0x0000000615800000, 0x0000000615c00000|  0%| F|  |TAMS 0x0000000615800000, 0x0000000615800000| Untracked 
+|  71|0x0000000615c00000, 0x0000000615c00000, 0x0000000616000000|  0%| F|  |TAMS 0x0000000615c00000, 0x0000000615c00000| Untracked 
+|  72|0x0000000616000000, 0x0000000616000000, 0x0000000616400000|  0%| F|  |TAMS 0x0000000616000000, 0x0000000616000000| Untracked 
+|  73|0x0000000616400000, 0x0000000616400000, 0x0000000616800000|  0%| F|  |TAMS 0x0000000616400000, 0x0000000616400000| Untracked 
+|  74|0x0000000616800000, 0x0000000616800000, 0x0000000616c00000|  0%| F|  |TAMS 0x0000000616800000, 0x0000000616800000| Untracked 
+|  75|0x0000000616c00000, 0x0000000616c00000, 0x0000000617000000|  0%| F|  |TAMS 0x0000000616c00000, 0x0000000616c00000| Untracked 
+|  76|0x0000000617000000, 0x0000000617000000, 0x0000000617400000|  0%| F|  |TAMS 0x0000000617000000, 0x0000000617000000| Untracked 
+|  77|0x0000000617400000, 0x0000000617400000, 0x0000000617800000|  0%| F|  |TAMS 0x0000000617400000, 0x0000000617400000| Untracked 
+|  78|0x0000000617800000, 0x0000000617800000, 0x0000000617c00000|  0%| F|  |TAMS 0x0000000617800000, 0x0000000617800000| Untracked 
+|  79|0x0000000617c00000, 0x0000000617c00000, 0x0000000618000000|  0%| F|  |TAMS 0x0000000617c00000, 0x0000000617c00000| Untracked 
+|  80|0x0000000618000000, 0x0000000618000000, 0x0000000618400000|  0%| F|  |TAMS 0x0000000618000000, 0x0000000618000000| Untracked 
+|  81|0x0000000618400000, 0x0000000618400000, 0x0000000618800000|  0%| F|  |TAMS 0x0000000618400000, 0x0000000618400000| Untracked 
+|  82|0x0000000618800000, 0x0000000618800000, 0x0000000618c00000|  0%| F|  |TAMS 0x0000000618800000, 0x0000000618800000| Untracked 
+|  83|0x0000000618c00000, 0x0000000618c00000, 0x0000000619000000|  0%| F|  |TAMS 0x0000000618c00000, 0x0000000618c00000| Untracked 
+|  84|0x0000000619000000, 0x0000000619000000, 0x0000000619400000|  0%| F|  |TAMS 0x0000000619000000, 0x0000000619000000| Untracked 
+|  85|0x0000000619400000, 0x0000000619400000, 0x0000000619800000|  0%| F|  |TAMS 0x0000000619400000, 0x0000000619400000| Untracked 
+|  86|0x0000000619800000, 0x0000000619800000, 0x0000000619c00000|  0%| F|  |TAMS 0x0000000619800000, 0x0000000619800000| Untracked 
+|  87|0x0000000619c00000, 0x0000000619c00000, 0x000000061a000000|  0%| F|  |TAMS 0x0000000619c00000, 0x0000000619c00000| Untracked 
+|  88|0x000000061a000000, 0x000000061a000000, 0x000000061a400000|  0%| F|  |TAMS 0x000000061a000000, 0x000000061a000000| Untracked 
+|  89|0x000000061a400000, 0x000000061a400000, 0x000000061a800000|  0%| F|  |TAMS 0x000000061a400000, 0x000000061a400000| Untracked 
+|  90|0x000000061a800000, 0x000000061a800000, 0x000000061ac00000|  0%| F|  |TAMS 0x000000061a800000, 0x000000061a800000| Untracked 
+|  91|0x000000061ac00000, 0x000000061ac00000, 0x000000061b000000|  0%| F|  |TAMS 0x000000061ac00000, 0x000000061ac00000| Untracked 
+|  92|0x000000061b000000, 0x000000061b000000, 0x000000061b400000|  0%| F|  |TAMS 0x000000061b000000, 0x000000061b000000| Untracked 
+|  93|0x000000061b400000, 0x000000061b400000, 0x000000061b800000|  0%| F|  |TAMS 0x000000061b400000, 0x000000061b400000| Untracked 
+|  94|0x000000061b800000, 0x000000061b800000, 0x000000061bc00000|  0%| F|  |TAMS 0x000000061b800000, 0x000000061b800000| Untracked 
+|  95|0x000000061bc00000, 0x000000061bc00000, 0x000000061c000000|  0%| F|  |TAMS 0x000000061bc00000, 0x000000061bc00000| Untracked 
+|  96|0x000000061c000000, 0x000000061c000000, 0x000000061c400000|  0%| F|  |TAMS 0x000000061c000000, 0x000000061c000000| Untracked 
+|  97|0x000000061c400000, 0x000000061c400000, 0x000000061c800000|  0%| F|  |TAMS 0x000000061c400000, 0x000000061c400000| Untracked 
+|  98|0x000000061c800000, 0x000000061c800000, 0x000000061cc00000|  0%| F|  |TAMS 0x000000061c800000, 0x000000061c800000| Untracked 
+|  99|0x000000061cc00000, 0x000000061cc00000, 0x000000061d000000|  0%| F|  |TAMS 0x000000061cc00000, 0x000000061cc00000| Untracked 
+| 100|0x000000061d000000, 0x000000061d000000, 0x000000061d400000|  0%| F|  |TAMS 0x000000061d000000, 0x000000061d000000| Untracked 
+| 101|0x000000061d400000, 0x000000061d400000, 0x000000061d800000|  0%| F|  |TAMS 0x000000061d400000, 0x000000061d400000| Untracked 
+| 102|0x000000061d800000, 0x000000061d800000, 0x000000061dc00000|  0%| F|  |TAMS 0x000000061d800000, 0x000000061d800000| Untracked 
+| 103|0x000000061dc00000, 0x000000061dc00000, 0x000000061e000000|  0%| F|  |TAMS 0x000000061dc00000, 0x000000061dc00000| Untracked 
+| 104|0x000000061e000000, 0x000000061e000000, 0x000000061e400000|  0%| F|  |TAMS 0x000000061e000000, 0x000000061e000000| Untracked 
+| 105|0x000000061e400000, 0x000000061e400000, 0x000000061e800000|  0%| F|  |TAMS 0x000000061e400000, 0x000000061e400000| Untracked 
+| 106|0x000000061e800000, 0x000000061e800000, 0x000000061ec00000|  0%| F|  |TAMS 0x000000061e800000, 0x000000061e800000| Untracked 
+| 107|0x000000061ec00000, 0x000000061ec00000, 0x000000061f000000|  0%| F|  |TAMS 0x000000061ec00000, 0x000000061ec00000| Untracked 
+| 108|0x000000061f000000, 0x000000061f400000, 0x000000061f400000|100%| S|CS|TAMS 0x000000061f000000, 0x000000061f000000| Complete 
+| 109|0x000000061f400000, 0x000000061f800000, 0x000000061f800000|100%| S|CS|TAMS 0x000000061f400000, 0x000000061f400000| Complete 
+| 110|0x000000061f800000, 0x000000061fc00000, 0x000000061fc00000|100%| S|CS|TAMS 0x000000061f800000, 0x000000061f800000| Complete 
+| 111|0x000000061fc00000, 0x0000000620000000, 0x0000000620000000|100%| S|CS|TAMS 0x000000061fc00000, 0x000000061fc00000| Complete 
+| 112|0x0000000620000000, 0x0000000620400000, 0x0000000620400000|100%| S|CS|TAMS 0x0000000620000000, 0x0000000620000000| Complete 
+| 113|0x0000000620400000, 0x0000000620400000, 0x0000000620800000|  0%| F|  |TAMS 0x0000000620400000, 0x0000000620400000| Untracked 
+| 114|0x0000000620800000, 0x0000000620800000, 0x0000000620c00000|  0%| F|  |TAMS 0x0000000620800000, 0x0000000620800000| Untracked 
+| 115|0x0000000620c00000, 0x0000000620c00000, 0x0000000621000000|  0%| F|  |TAMS 0x0000000620c00000, 0x0000000620c00000| Untracked 
+| 116|0x0000000621000000, 0x0000000621000000, 0x0000000621400000|  0%| F|  |TAMS 0x0000000621000000, 0x0000000621000000| Untracked 
+| 117|0x0000000621400000, 0x0000000621400000, 0x0000000621800000|  0%| F|  |TAMS 0x0000000621400000, 0x0000000621400000| Untracked 
+| 118|0x0000000621800000, 0x0000000621800000, 0x0000000621c00000|  0%| F|  |TAMS 0x0000000621800000, 0x0000000621800000| Untracked 
+| 119|0x0000000621c00000, 0x0000000621c00000, 0x0000000622000000|  0%| F|  |TAMS 0x0000000621c00000, 0x0000000621c00000| Untracked 
+| 120|0x0000000622000000, 0x000000062207fd70, 0x0000000622400000| 12%| E|  |TAMS 0x0000000622000000, 0x0000000622000000| Complete 
+| 121|0x0000000622400000, 0x0000000622800000, 0x0000000622800000|100%| E|CS|TAMS 0x0000000622400000, 0x0000000622400000| Complete 
+| 122|0x0000000622800000, 0x0000000622c00000, 0x0000000622c00000|100%| E|CS|TAMS 0x0000000622800000, 0x0000000622800000| Complete 
+| 123|0x0000000622c00000, 0x0000000623000000, 0x0000000623000000|100%| E|CS|TAMS 0x0000000622c00000, 0x0000000622c00000| Complete 
+| 124|0x0000000623000000, 0x0000000623400000, 0x0000000623400000|100%| E|CS|TAMS 0x0000000623000000, 0x0000000623000000| Complete 
+| 125|0x0000000623400000, 0x0000000623800000, 0x0000000623800000|100%| E|CS|TAMS 0x0000000623400000, 0x0000000623400000| Complete 
+| 126|0x0000000623800000, 0x0000000623c00000, 0x0000000623c00000|100%| E|CS|TAMS 0x0000000623800000, 0x0000000623800000| Complete 
+| 127|0x0000000623c00000, 0x0000000624000000, 0x0000000624000000|100%| E|CS|TAMS 0x0000000623c00000, 0x0000000623c00000| Complete 
+| 128|0x0000000624000000, 0x0000000624400000, 0x0000000624400000|100%| E|CS|TAMS 0x0000000624000000, 0x0000000624000000| Complete 
+| 129|0x0000000624400000, 0x0000000624800000, 0x0000000624800000|100%| E|CS|TAMS 0x0000000624400000, 0x0000000624400000| Complete 
+| 130|0x0000000624800000, 0x0000000624c00000, 0x0000000624c00000|100%| E|CS|TAMS 0x0000000624800000, 0x0000000624800000| Complete 
+| 131|0x0000000624c00000, 0x0000000625000000, 0x0000000625000000|100%| E|CS|TAMS 0x0000000624c00000, 0x0000000624c00000| Complete 
+| 132|0x0000000625000000, 0x0000000625400000, 0x0000000625400000|100%| E|CS|TAMS 0x0000000625000000, 0x0000000625000000| Complete 
+| 133|0x0000000625400000, 0x0000000625800000, 0x0000000625800000|100%| E|CS|TAMS 0x0000000625400000, 0x0000000625400000| Complete 
+| 134|0x0000000625800000, 0x0000000625c00000, 0x0000000625c00000|100%| E|CS|TAMS 0x0000000625800000, 0x0000000625800000| Complete 
+| 135|0x0000000625c00000, 0x0000000626000000, 0x0000000626000000|100%| E|CS|TAMS 0x0000000625c00000, 0x0000000625c00000| Complete 
+| 136|0x0000000626000000, 0x0000000626400000, 0x0000000626400000|100%| E|CS|TAMS 0x0000000626000000, 0x0000000626000000| Complete 
+| 137|0x0000000626400000, 0x0000000626800000, 0x0000000626800000|100%| E|CS|TAMS 0x0000000626400000, 0x0000000626400000| Complete 
+| 138|0x0000000626800000, 0x0000000626c00000, 0x0000000626c00000|100%| E|CS|TAMS 0x0000000626800000, 0x0000000626800000| Complete 
+| 139|0x0000000626c00000, 0x0000000627000000, 0x0000000627000000|100%| E|CS|TAMS 0x0000000626c00000, 0x0000000626c00000| Complete 
+| 140|0x0000000627000000, 0x0000000627400000, 0x0000000627400000|100%| E|CS|TAMS 0x0000000627000000, 0x0000000627000000| Complete 
+| 141|0x0000000627400000, 0x0000000627800000, 0x0000000627800000|100%| E|CS|TAMS 0x0000000627400000, 0x0000000627400000| Complete 
+| 142|0x0000000627800000, 0x0000000627c00000, 0x0000000627c00000|100%| E|CS|TAMS 0x0000000627800000, 0x0000000627800000| Complete 
+| 143|0x0000000627c00000, 0x0000000628000000, 0x0000000628000000|100%| E|CS|TAMS 0x0000000627c00000, 0x0000000627c00000| Complete 
+| 144|0x0000000628000000, 0x0000000628400000, 0x0000000628400000|100%| E|CS|TAMS 0x0000000628000000, 0x0000000628000000| Complete 
+| 145|0x0000000628400000, 0x0000000628800000, 0x0000000628800000|100%| E|CS|TAMS 0x0000000628400000, 0x0000000628400000| Complete 
+| 146|0x0000000628800000, 0x0000000628c00000, 0x0000000628c00000|100%| E|CS|TAMS 0x0000000628800000, 0x0000000628800000| Complete 
+| 147|0x0000000628c00000, 0x0000000629000000, 0x0000000629000000|100%| E|CS|TAMS 0x0000000628c00000, 0x0000000628c00000| Complete 
+| 148|0x0000000629000000, 0x0000000629400000, 0x0000000629400000|100%| E|CS|TAMS 0x0000000629000000, 0x0000000629000000| Complete 
+| 149|0x0000000629400000, 0x0000000629800000, 0x0000000629800000|100%| E|CS|TAMS 0x0000000629400000, 0x0000000629400000| Complete 
+| 150|0x0000000629800000, 0x0000000629c00000, 0x0000000629c00000|100%| E|CS|TAMS 0x0000000629800000, 0x0000000629800000| Complete 
+| 151|0x0000000629c00000, 0x000000062a000000, 0x000000062a000000|100%| E|CS|TAMS 0x0000000629c00000, 0x0000000629c00000| Complete 
+| 152|0x000000062a000000, 0x000000062a400000, 0x000000062a400000|100%| E|CS|TAMS 0x000000062a000000, 0x000000062a000000| Complete 
+
+Card table byte_map: [0x000001c17abe0000,0x000001c17bbc0000] _byte_map_base: 0x000001c177bc0000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x000001c171e19390, (CMBitMap*) 0x000001c171e193d0
+ Prev Bits: [0x000001c10f000000, 0x000001c116f00000)
+ Next Bits: [0x000001c116f00000, 0x000001c11ee00000)
+
+Polling page: 0x000001c16fcc0000
+
+Metaspace:
+
+Usage:
+  Non-class:      5.35 MB used.
+      Class:    432.58 KB used.
+       Both:      5.78 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,       5.44 MB (  8%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,     512.00 KB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,       5.94 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  2.11 MB
+       Class:  3.47 MB
+        Both:  5.58 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 68.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 93.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 151.
+num_chunk_merges: 0.
+num_chunk_splits: 104.
+num_chunks_enlarged: 79.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=1012Kb max_used=1012Kb free=118987Kb
+ bounds [0x000001c107ad0000, 0x000001c107d40000, 0x000001c10f000000]
+CodeHeap 'profiled nmethods': size=120000Kb used=2906Kb max_used=2906Kb free=117093Kb
+ bounds [0x000001c1005a0000, 0x000001c100880000, 0x000001c107ad0000]
+CodeHeap 'non-nmethods': size=5760Kb used=1329Kb max_used=1399Kb free=4430Kb
+ bounds [0x000001c100000000, 0x000001c100270000, 0x000001c1005a0000]
+ total_blobs=2091 nmethods=1520 adapters=484
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 5.969 Thread 0x000001c17cd6bfb0 1511       1       org.lwjgl.opengl.WindowsMouse::getBlankCursor (5 bytes)
+Event: 5.969 Thread 0x000001c17cd6bfb0 nmethod 1511 0x000001c107bca790 code [0x000001c107bca920, 0x000001c107bca9f8]
+Event: 5.970 Thread 0x000001c17cd6bfb0 1512       3       org.lwjgl.opengl.WindowsDisplay$Rect::copyFromBuffer (37 bytes)
+Event: 5.970 Thread 0x000001c17cd6bfb0 nmethod 1512 0x000001c100874d90 code [0x000001c100874f60, 0x000001c100875398]
+Event: 6.017 Thread 0x000001c17cd6bfb0 1513       3       org.lwjgl.BufferChecks::checkBufferSize (20 bytes)
+Event: 6.018 Thread 0x000001c17cd6bfb0 nmethod 1513 0x000001c100875510 code [0x000001c1008756c0, 0x000001c1008758e8]
+Event: 6.030 Thread 0x000001c17cd6bfb0 1514       3       opencraft.Region::draw (51 bytes)
+Event: 6.030 Thread 0x000001c17cd6bfb0 nmethod 1514 0x000001c100875a10 code [0x000001c100875be0, 0x000001c100875fe8]
+Event: 6.067 Thread 0x000001c17cd6bfb0 1515       3       opencraft.Player::drawHotbarSquare (63 bytes)
+Event: 6.067 Thread 0x000001c17cd6bfb0 nmethod 1515 0x000001c100876210 code [0x000001c100876480, 0x000001c1008766d8]
+Event: 6.115 Thread 0x000001c17cd6b5d0 1516   !   4       java.nio.DirectFloatBufferU::put (37 bytes)
+Event: 6.115 Thread 0x000001c17cd6b5d0 nmethod 1516 0x000001c107bcaa90 code [0x000001c107bcac00, 0x000001c107bcad18]
+Event: 6.115 Thread 0x000001c17cd6b5d0 1517       4       opencraft.graphics.DisplayUtills::drawSqaure (105 bytes)
+Event: 6.121 Thread 0x000001c17cd6b5d0 nmethod 1517 0x000001c107bcae90 code [0x000001c107bcb120, 0x000001c107bcbfb0]
+Event: 6.126 Thread 0x000001c17cd6bfb0 1518       1       java.nio.DirectFloatBufferU::isDirect (2 bytes)
+Event: 6.126 Thread 0x000001c17cd6bfb0 nmethod 1518 0x000001c107bccb10 code [0x000001c107bccca0, 0x000001c107bccd78]
+Event: 6.128 Thread 0x000001c17cd6b5d0 1519       4       org.lwjgl.opengl.GL20::glUseProgram (19 bytes)
+Event: 6.129 Thread 0x000001c17cd6b5d0 nmethod 1519 0x000001c107bcce10 code [0x000001c107bccfa0, 0x000001c107bcd0e8]
+Event: 6.163 Thread 0x000001c17cd6bfb0 1520       3       java.nio.FloatBuffer::position (8 bytes)
+Event: 6.164 Thread 0x000001c17cd6bfb0 nmethod 1520 0x000001c100876810 code [0x000001c1008769a0, 0x000001c100876ae8]
+
+GC Heap History (16 events):
+Event: 2.133 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total 520192K, used 24576K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 6 young (24576K), 0 survivors (0K)
+ Metaspace       used 5748K, committed 5952K, reserved 1114112K
+  class space    used 426K, committed 512K, reserved 1048576K
+}
+Event: 2.138 GC heap after
+{Heap after GC invocations=1 (full 0):
+ garbage-first heap   total 520192K, used 4638K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 1 young (4096K), 1 survivors (4096K)
+ Metaspace       used 5748K, committed 5952K, reserved 1114112K
+  class space    used 426K, committed 512K, reserved 1048576K
+}
+Event: 2.358 GC heap before
+{Heap before GC invocations=1 (full 0):
+ garbage-first heap   total 520192K, used 29214K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 7 young (28672K), 1 survivors (4096K)
+ Metaspace       used 5770K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 2.362 GC heap after
+{Heap after GC invocations=2 (full 0):
+ garbage-first heap   total 520192K, used 11490K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 1 young (4096K), 1 survivors (4096K)
+ Metaspace       used 5770K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 2.591 GC heap before
+{Heap before GC invocations=2 (full 0):
+ garbage-first heap   total 520192K, used 52450K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 11 young (45056K), 1 survivors (4096K)
+ Metaspace       used 5782K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 2.597 GC heap after
+{Heap after GC invocations=3 (full 0):
+ garbage-first heap   total 520192K, used 23590K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 2 young (8192K), 2 survivors (8192K)
+ Metaspace       used 5782K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 2.905 GC heap before
+{Heap before GC invocations=3 (full 0):
+ garbage-first heap   total 520192K, used 80934K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 16 young (65536K), 2 survivors (8192K)
+ Metaspace       used 5783K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 2.913 GC heap after
+{Heap after GC invocations=4 (full 0):
+ garbage-first heap   total 520192K, used 40774K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 2 young (8192K), 2 survivors (8192K)
+ Metaspace       used 5783K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 3.286 GC heap before
+{Heap before GC invocations=4 (full 0):
+ garbage-first heap   total 520192K, used 114502K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 20 young (81920K), 2 survivors (8192K)
+ Metaspace       used 5784K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 3.295 GC heap after
+{Heap after GC invocations=5 (full 0):
+ garbage-first heap   total 520192K, used 63122K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 3 young (12288K), 3 survivors (12288K)
+ Metaspace       used 5784K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 3.681 GC heap before
+{Heap before GC invocations=5 (full 0):
+ garbage-first heap   total 520192K, used 165522K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 28 young (114688K), 3 survivors (12288K)
+ Metaspace       used 5784K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 3.693 GC heap after
+{Heap after GC invocations=6 (full 0):
+ garbage-first heap   total 626688K, used 96529K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 4 young (16384K), 4 survivors (16384K)
+ Metaspace       used 5784K, committed 5952K, reserved 1114112K
+  class space    used 427K, committed 512K, reserved 1048576K
+}
+Event: 4.257 GC heap before
+{Heap before GC invocations=6 (full 0):
+ garbage-first heap   total 626688K, used 211217K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 32 young (131072K), 4 survivors (16384K)
+ Metaspace       used 5795K, committed 5952K, reserved 1114112K
+  class space    used 428K, committed 512K, reserved 1048576K
+}
+Event: 4.272 GC heap after
+{Heap after GC invocations=7 (full 0):
+ garbage-first heap   total 626688K, used 133051K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 4 young (16384K), 4 survivors (16384K)
+ Metaspace       used 5795K, committed 5952K, reserved 1114112K
+  class space    used 428K, committed 512K, reserved 1048576K
+}
+Event: 4.830 GC heap before
+{Heap before GC invocations=7 (full 0):
+ garbage-first heap   total 626688K, used 280507K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 40 young (163840K), 4 survivors (16384K)
+ Metaspace       used 5795K, committed 5952K, reserved 1114112K
+  class space    used 428K, committed 512K, reserved 1048576K
+}
+Event: 4.845 GC heap after
+{Heap after GC invocations=8 (full 0):
+ garbage-first heap   total 626688K, used 180224K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 5 young (20480K), 5 survivors (20480K)
+ Metaspace       used 5795K, committed 5952K, reserved 1114112K
+  class space    used 428K, committed 512K, reserved 1048576K
+}
+
+Deoptimization events (20 events):
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: trap_request=0xffffffe7 fr.pc=0x000001c107baf430 relative=0x0000000000000f50
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: reason=range_check action=none pc=0x000001c107baf430 method=opencraft.World.getBlock(III)Lopencraft/Block; @ 72 c2
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT PACKING pc=0x000001c107baf430 sp=0x000000663c7ff270
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT UNPACKING pc=0x000001c1000523a3 sp=0x000000663c7ff1f8 mode 2
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: trap_request=0xffffffe7 fr.pc=0x000001c107baf430 relative=0x0000000000000f50
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: reason=range_check action=none pc=0x000001c107baf430 method=opencraft.World.getBlock(III)Lopencraft/Block; @ 72 c2
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT PACKING pc=0x000001c107baf430 sp=0x000000663c7ff270
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT UNPACKING pc=0x000001c1000523a3 sp=0x000000663c7ff1f8 mode 2
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: trap_request=0xffffffe7 fr.pc=0x000001c107baf430 relative=0x0000000000000f50
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: reason=range_check action=none pc=0x000001c107baf430 method=opencraft.World.getBlock(III)Lopencraft/Block; @ 72 c2
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT PACKING pc=0x000001c107baf430 sp=0x000000663c7ff270
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT UNPACKING pc=0x000001c1000523a3 sp=0x000000663c7ff1f8 mode 2
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: trap_request=0xffffffe7 fr.pc=0x000001c107baf430 relative=0x0000000000000f50
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: reason=range_check action=none pc=0x000001c107baf430 method=opencraft.World.getBlock(III)Lopencraft/Block; @ 72 c2
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT PACKING pc=0x000001c107baf430 sp=0x000000663c7ff270
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT UNPACKING pc=0x000001c1000523a3 sp=0x000000663c7ff1f8 mode 2
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: trap_request=0xffffffe7 fr.pc=0x000001c107baf430 relative=0x0000000000000f50
+Event: 6.170 Thread 0x000001c171d6b800 Uncommon trap: reason=range_check action=none pc=0x000001c107baf430 method=opencraft.World.getBlock(III)Lopencraft/Block; @ 72 c2
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT PACKING pc=0x000001c107baf430 sp=0x000000663c7ff270
+Event: 6.170 Thread 0x000001c171d6b800 DEOPT UNPACKING pc=0x000001c1000523a3 sp=0x000000663c7ff1f8 mode 2
+
+Classes loaded (20 events):
+Event: 0.684 Loading class java/lang/SecurityException
+Event: 0.684 Loading class java/lang/SecurityException done
+Event: 2.075 Loading class java/io/FileReader
+Event: 2.076 Loading class java/io/InputStreamReader
+Event: 2.076 Loading class java/io/InputStreamReader done
+Event: 2.076 Loading class java/io/FileReader done
+Event: 2.078 Loading class java/io/BufferedReader
+Event: 2.078 Loading class java/io/BufferedReader done
+Event: 2.080 Loading class sun/invoke/util/ValueConversions$1
+Event: 2.081 Loading class sun/invoke/util/ValueConversions$1 done
+Event: 2.081 Loading class java/lang/invoke/BoundMethodHandle$Species_LI
+Event: 2.081 Loading class java/lang/invoke/BoundMethodHandle$Species_LI done
+Event: 2.093 Loading class java/lang/invoke/MethodHandle$1
+Event: 2.093 Loading class java/lang/invoke/MethodHandle$1 done
+Event: 5.344 Loading class jdk/internal/math/FDBigInteger
+Event: 5.344 Loading class jdk/internal/math/FDBigInteger done
+Event: 5.345 Loading class java/lang/ArrayIndexOutOfBoundsException
+Event: 5.345 Loading class java/lang/ArrayIndexOutOfBoundsException done
+Event: 5.431 Loading class java/lang/StrictMath
+Event: 5.431 Loading class java/lang/StrictMath done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206da60}: Index -1 out of bounds for length 256> (0x000000062206da60) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206ddc0}: Index -1 out of bounds for length 256> (0x000000062206ddc0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206e120}: Index -1 out of bounds for length 256> (0x000000062206e120) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206e480}: Index -1 out of bounds for length 256> (0x000000062206e480) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206ebe0}: Index -1 out of bounds for length 256> (0x000000062206ebe0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206ef40}: Index -1 out of bounds for length 256> (0x000000062206ef40) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206f2a0}: Index -1 out of bounds for length 256> (0x000000062206f2a0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206f600}: Index -1 out of bounds for length 256> (0x000000062206f600) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206f960}: Index -1 out of bounds for length 256> (0x000000062206f960) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062206fcc0}: Index -1 out of bounds for length 256> (0x000000062206fcc0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622070020}: Index -1 out of bounds for length 256> (0x0000000622070020) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622070380}: Index -1 out of bounds for length 256> (0x0000000622070380) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x00000006220706e0}: Index -1 out of bounds for length 256> (0x00000006220706e0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622070a40}: Index -1 out of bounds for length 256> (0x0000000622070a40) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622070da0}: Index -1 out of bounds for length 256> (0x0000000622070da0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622071100}: Index -1 out of bounds for length 256> (0x0000000622071100) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622071460}: Index -1 out of bounds for length 256> (0x0000000622071460) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x00000006220717c0}: Index -1 out of bounds for length 256> (0x00000006220717c0) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622071b20}: Index -1 out of bounds for length 256> (0x0000000622071b20) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+Event: 6.170 Thread 0x000001c171d6b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000622071e80}: Index -1 out of bounds for length 256> (0x0000000622071e80) 
+thrown [s\open\src\hotspot\share\interpreter\interpreterRuntime.cpp, line 431]
+
+VM Operations (20 events):
+Event: 2.086 Executing VM operation: HandshakeAllThreads
+Event: 2.086 Executing VM operation: HandshakeAllThreads done
+Event: 2.133 Executing VM operation: G1CollectForAllocation
+Event: 2.138 Executing VM operation: G1CollectForAllocation done
+Event: 2.358 Executing VM operation: G1CollectForAllocation
+Event: 2.363 Executing VM operation: G1CollectForAllocation done
+Event: 2.591 Executing VM operation: G1CollectForAllocation
+Event: 2.597 Executing VM operation: G1CollectForAllocation done
+Event: 2.905 Executing VM operation: G1CollectForAllocation
+Event: 2.913 Executing VM operation: G1CollectForAllocation done
+Event: 3.286 Executing VM operation: G1CollectForAllocation
+Event: 3.295 Executing VM operation: G1CollectForAllocation done
+Event: 3.681 Executing VM operation: G1CollectForAllocation
+Event: 3.693 Executing VM operation: G1CollectForAllocation done
+Event: 4.257 Executing VM operation: G1CollectForAllocation
+Event: 4.272 Executing VM operation: G1CollectForAllocation done
+Event: 4.829 Executing VM operation: G1CollectForAllocation
+Event: 4.845 Executing VM operation: G1CollectForAllocation done
+Event: 5.852 Executing VM operation: Cleanup
+Event: 5.852 Executing VM operation: Cleanup done
+
+Events (20 events):
+Event: 0.107 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\instrument.dll
+Event: 0.110 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\net.dll
+Event: 0.111 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\nio.dll
+Event: 0.113 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\zip.dll
+Event: 0.165 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\jimage.dll
+Event: 0.210 Thread 0x000001c1233a0060 Thread added: 0x000001c1233a0060
+Event: 0.214 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\verify.dll
+Event: 0.238 Thread 0x000001c1238a5ec0 Thread added: 0x000001c1238a5ec0
+Event: 0.255 Loaded shared library C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\lwjgl64.dll
+Event: 0.602 Thread 0x000001c1238a5ec0 Thread exited: 0x000001c1238a5ec0
+Event: 0.645 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\awt.dll
+Event: 0.663 Loaded shared library C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\freetype-jni-64.dll
+Event: 2.074 Thread 0x000001c12aa26810 Thread added: 0x000001c12aa26810
+Event: 2.101 Thread 0x000001c12aa74a50 Thread added: 0x000001c12aa74a50
+Event: 2.143 Thread 0x000001c123efed20 Thread added: 0x000001c123efed20
+Event: 2.936 Thread 0x000001c123efed20 Thread exited: 0x000001c123efed20
+Event: 3.619 Thread 0x000001c12aa74a50 Thread exited: 0x000001c12aa74a50
+Event: 5.341 Thread 0x000001c12aa26810 Thread exited: 0x000001c12aa26810
+Event: 5.729 Thread 0x000001c1238f65a0 Thread added: 0x000001c1238f65a0
+Event: 5.856 Thread 0x000001c1238f65a0 Thread exited: 0x000001c1238f65a0
+
+
+Dynamic libraries:
+0x00007ff7f1b40000 - 0x00007ff7f1b50000 	C:\Program Files\Java\jdk-18.0.2\bin\javaw.exe
+0x00007ffd0ea40000 - 0x00007ffd0ec49000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffd0cef0000 - 0x00007ffd0cfae000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffd0c510000 - 0x00007ffd0c88c000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffd0c330000 - 0x00007ffd0c441000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffcb92b0000 - 0x00007ffcb92c8000 	C:\Program Files\Java\jdk-18.0.2\bin\jli.dll
+0x00007ffca5cd0000 - 0x00007ffca5cea000 	C:\Program Files\Java\jdk-18.0.2\bin\VCRUNTIME140.dll
+0x00007ffd0dcf0000 - 0x00007ffd0dd9e000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffd0d810000 - 0x00007ffd0d8b3000 	C:\Windows\System32\msvcrt.dll
+0x00007ffd0d9a0000 - 0x00007ffd0da3e000 	C:\Windows\System32\sechost.dll
+0x00007ffd0cfb0000 - 0x00007ffd0d0d0000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffd0d0d0000 - 0x00007ffd0d27d000 	C:\Windows\System32\USER32.dll
+0x00007ffcf6700000 - 0x00007ffcf69a5000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467\COMCTL32.dll
+0x00007ffd0c890000 - 0x00007ffd0c8b6000 	C:\Windows\System32\win32u.dll
+0x00007ffd0db10000 - 0x00007ffd0db39000 	C:\Windows\System32\GDI32.dll
+0x00007ffd0c100000 - 0x00007ffd0c218000 	C:\Windows\System32\gdi32full.dll
+0x00007ffd0c290000 - 0x00007ffd0c32d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffd04b60000 - 0x00007ffd04b6a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffd0dad0000 - 0x00007ffd0db01000 	C:\Windows\System32\IMM32.DLL
+0x00007ffcb92a0000 - 0x00007ffcb92ac000 	C:\Program Files\Java\jdk-18.0.2\bin\vcruntime140_1.dll
+0x00007ffca5c40000 - 0x00007ffca5ccd000 	C:\Program Files\Java\jdk-18.0.2\bin\msvcp140.dll
+0x00007ffca35c0000 - 0x00007ffca41d1000 	C:\Program Files\Java\jdk-18.0.2\bin\server\jvm.dll
+0x00007ffd0e5f0000 - 0x00007ffd0e5f8000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffd04ba0000 - 0x00007ffd04bd3000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffca5c30000 - 0x00007ffca5c39000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffd0e580000 - 0x00007ffd0e5ef000 	C:\Windows\System32\WS2_32.dll
+0x00007ffd0af70000 - 0x00007ffd0af88000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffca5c20000 - 0x00007ffca5c2a000 	C:\Program Files\Java\jdk-18.0.2\bin\jimage.dll
+0x00007ffd09260000 - 0x00007ffd09481000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffcfff30000 - 0x00007ffcfff61000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffd0c080000 - 0x00007ffd0c0ff000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffcf2510000 - 0x00007ffcf254b000 	C:\Program Files\Java\jdk-18.0.2\bin\jdwp.dll
+0x00007ffd08dc0000 - 0x00007ffd08dce000 	C:\Program Files\Java\jdk-18.0.2\bin\instrument.dll
+0x00007ffca5bf0000 - 0x00007ffca5c15000 	C:\Program Files\Java\jdk-18.0.2\bin\java.dll
+0x00007ffca5b10000 - 0x00007ffca5be6000 	C:\Program Files\Java\jdk-18.0.2\bin\jsvml.dll
+0x00007ffd0ddb0000 - 0x00007ffd0e575000 	C:\Windows\System32\SHELL32.dll
+0x00007ffd09fe0000 - 0x00007ffd0a845000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ffd0c8c0000 - 0x00007ffd0cc36000 	C:\Windows\System32\combase.dll
+0x00007ffd09e70000 - 0x00007ffd09fd6000 	C:\Windows\SYSTEM32\wintypes.dll
+0x00007ffd0d2a0000 - 0x00007ffd0d38a000 	C:\Windows\System32\SHCORE.dll
+0x00007ffd0e720000 - 0x00007ffd0e77d000 	C:\Windows\System32\shlwapi.dll
+0x00007ffd0be40000 - 0x00007ffd0be61000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007ffd08d60000 - 0x00007ffd08d6c000 	C:\Program Files\Java\jdk-18.0.2\bin\dt_socket.dll
+0x00007ffd0ab30000 - 0x00007ffd0ab5d000 	C:\Windows\SYSTEM32\IPHLPAPI.DLL
+0x00007ffd0b410000 - 0x00007ffd0b477000 	C:\Windows\system32\mswsock.dll
+0x00007ffd0ab60000 - 0x00007ffd0ac48000 	C:\Windows\SYSTEM32\DNSAPI.dll
+0x00007ffd0dbc0000 - 0x00007ffd0dbc9000 	C:\Windows\System32\NSI.dll
+0x00007ffd04680000 - 0x00007ffd0468a000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffd046b0000 - 0x00007ffd04731000 	C:\Windows\System32\fwpuclnt.dll
+0x00007ffca3460000 - 0x00007ffca3478000 	C:\Program Files\Java\jdk-18.0.2\bin\zip.dll
+0x00007ffca5990000 - 0x00007ffca59a3000 	C:\Program Files\Java\jdk-18.0.2\bin\net.dll
+0x00007ffd068d0000 - 0x00007ffd069e2000 	C:\Windows\SYSTEM32\WINHTTP.dll
+0x00007ffca5970000 - 0x00007ffca5986000 	C:\Program Files\Java\jdk-18.0.2\bin\nio.dll
+0x00007ffca4e40000 - 0x00007ffca4e50000 	C:\Program Files\Java\jdk-18.0.2\bin\verify.dll
+0x0000000180000000 - 0x0000000180053000 	C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\lwjgl64.dll
+0x00007ffcc24d0000 - 0x00007ffcc25d1000 	C:\Windows\SYSTEM32\OPENGL32.dll
+0x00007ffcc24a0000 - 0x00007ffcc24cd000 	C:\Windows\SYSTEM32\GLU32.dll
+0x00007ffd097d0000 - 0x00007ffd09808000 	C:\Windows\SYSTEM32\dxcore.dll
+0x00007ffd05e40000 - 0x00007ffd05ef8000 	C:\Windows\SYSTEM32\mscms.dll
+0x00007ffd0bb20000 - 0x00007ffd0bb6c000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x00007ffd0b7e0000 - 0x00007ffd0b807000 	C:\Windows\SYSTEM32\bcrypt.dll
+0x00007ffd0dc40000 - 0x00007ffd0dcef000 	C:\Windows\System32\clbcatq.dll
+0x00007ffcff5d0000 - 0x00007ffcff61a000 	C:\Windows\System32\Windows.Internal.Graphics.Display.DisplayColorManagement.dll
+0x00007ffd0d8c0000 - 0x00007ffd0d996000 	C:\Windows\System32\OLEAUT32.dll
+0x00007ffd09560000 - 0x00007ffd0960c000 	C:\Windows\system32\uxtheme.dll
+0x00007ffd0e600000 - 0x00007ffd0e71d000 	C:\Windows\System32\MSCTF.dll
+0x00007ffd04220000 - 0x00007ffd04264000 	C:\Windows\SYSTEM32\directxdatabasehelper.dll
+0x00007ffd0af90000 - 0x00007ffd0afc4000 	C:\Windows\SYSTEM32\ntmarta.dll
+0x00007ffd05a40000 - 0x00007ffd05b74000 	C:\Windows\System32\AppXDeploymentClient.dll
+0x00007ffd05580000 - 0x00007ffd0576f000 	C:\Windows\SYSTEM32\urlmon.dll
+0x00007ffd05250000 - 0x00007ffd05503000 	C:\Windows\System32\iertutil.dll
+0x00007ffd05550000 - 0x00007ffd05578000 	C:\Windows\System32\srvcli.dll
+0x00007ffd0aa60000 - 0x00007ffd0aa6c000 	C:\Windows\System32\netutils.dll
+0x00007ffc32d10000 - 0x00007ffc36644000 	C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909\nvoglv64.dll
+0x00007ffd0d3a0000 - 0x00007ffd0d80c000 	C:\Windows\System32\SETUPAPI.dll
+0x00007ffd0e780000 - 0x00007ffd0e91a000 	C:\Windows\System32\ole32.dll
+0x00007ffd05130000 - 0x00007ffd05144000 	C:\Windows\SYSTEM32\WTSAPI32.dll
+0x00007ffd0b6b0000 - 0x00007ffd0b6c2000 	C:\Windows\SYSTEM32\msasn1.dll
+0x00007ffd045e0000 - 0x00007ffd04611000 	C:\Windows\SYSTEM32\cryptnet.dll
+0x00007ffd0bf10000 - 0x00007ffd0c072000 	C:\Windows\System32\CRYPT32.dll
+0x00007ffd04490000 - 0x00007ffd045d9000 	C:\Windows\SYSTEM32\drvstore.dll
+0x00007ffd0baf0000 - 0x00007ffd0bb1c000 	C:\Windows\SYSTEM32\devobj.dll
+0x00007ffd0b720000 - 0x00007ffd0b761000 	C:\Windows\SYSTEM32\wldp.dll
+0x00007ffd0b650000 - 0x00007ffd0b65c000 	C:\Windows\SYSTEM32\cryptbase.dll
+0x00007ffd0c220000 - 0x00007ffd0c288000 	C:\Windows\System32\WINTRUST.dll
+0x00007ffd09840000 - 0x00007ffd0986f000 	C:\Windows\SYSTEM32\dwmapi.dll
+0x00007ffcf7a90000 - 0x00007ffcf7bbd000 	C:\Windows\SYSTEM32\textinputframework.dll
+0x00007ffd08e20000 - 0x00007ffd08f51000 	C:\Windows\SYSTEM32\CoreMessaging.dll
+0x00007ffd00f40000 - 0x00007ffd012ad000 	C:\Windows\SYSTEM32\CoreUIComponents.dll
+0x00007ffc8e970000 - 0x00007ffc8e9b4000 	C:\Windows\SYSTEM32\icm32.dll
+0x00007ffd0bde0000 - 0x00007ffd0be2d000 	C:\Windows\SYSTEM32\powrprof.dll
+0x00007ffd0bdc0000 - 0x00007ffd0bdd3000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffd0bba0000 - 0x00007ffd0bc04000 	C:\Windows\SYSTEM32\WINSTA.dll
+0x00007ffd09680000 - 0x00007ffd09773000 	C:\Windows\system32\dxgi.dll
+0x00007ffd00680000 - 0x00007ffd00900000 	C:\Windows\system32\d3d11.dll
+0x00007ffcc09f0000 - 0x00007ffcc0aae000 	C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909\nvldumdx.dll
+0x00007ffd0d280000 - 0x00007ffd0d29f000 	C:\Windows\System32\imagehlp.dll
+0x00007ffd0b660000 - 0x00007ffd0b678000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x00007ffd0aed0000 - 0x00007ffd0af05000 	C:\Windows\system32\rsaenh.dll
+0x00007ffcbd0f0000 - 0x00007ffcc077a000 	C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909\nvwgf2umx.dll
+0x00007ffcf9960000 - 0x00007ffcfa0d2000 	C:\Windows\SYSTEM32\nvapi64.dll
+0x00007ffcfce70000 - 0x00007ffcfe052000 	C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2\igd10iumd64.dll
+0x00007ffd0b7b0000 - 0x00007ffd0b7d8000 	C:\Windows\SYSTEM32\ncrypt.dll
+0x00007ffd09110000 - 0x00007ffd091a1000 	C:\Windows\SYSTEM32\apphelp.dll
+0x00007ffd0b770000 - 0x00007ffd0b7a7000 	C:\Windows\SYSTEM32\NTASN1.dll
+0x00007ffcfea70000 - 0x00007ffcfeda6000 	C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2\igdgmm64.dll
+0x00007ffcfa0e0000 - 0x00007ffcfce6f000 	C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2\igc64.dll
+0x00007ffd012b0000 - 0x00007ffd014c9000 	C:\Windows\SYSTEM32\dcomp.dll
+0x00007ffcf2330000 - 0x00007ffcf24bf000 	C:\Program Files\Java\jdk-18.0.2\bin\awt.dll
+0x00007ffcee0a0000 - 0x00007ffcee1ee000 	C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\freetype-jni-64.dll
+0x00007ffcf1dd0000 - 0x00007ffcf1dfb000 	C:\Windows\SYSTEM32\VCRUNTIME140D.dll
+0x00007ffcec100000 - 0x00007ffcec2c7000 	C:\Windows\SYSTEM32\ucrtbased.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-18.0.2\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467;C:\Program Files\Java\jdk-18.0.2\bin\server;C:\Users\garag\Documents\GitHub\OpencraftClient1\natives;C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909;C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2
+
+VM Arguments:
+jvm_args: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:55470 -Djava.library.path=C:\Users\garag\Documents\GitHub\OpencraftClient1\natives -javaagent:C:\Users\garag\eclipse\java-2022-12\eclipse\configuration\org.eclipse.osgi\227\0\.cp\lib\javaagent-shaded.jar -Dfile.encoding=UTF-8 
+java_command: opencraft.Main
+java_class_path (initial): C:\Users\garag\Documents\GitHub\OpencraftClient1\bin;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\AppleJavaExtensions.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\asm-debug-all.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\jinput.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\laf-plugin-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\laf-widget-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\log4j-api-2.0-beta9.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl_test.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl_util_applet.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl_util.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl-debug.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lzma.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\substance-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\trident-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\slick-util.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\TWL-LWJGL2.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\freetype-jni.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\guava-32.1.2-jre.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 4194304                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 532676608                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 8522825728                                {product} {ergonomic}
+   size_t MaxNewSize                               = 5112856576                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 4194304                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool ShowCodeDetailsInExceptionMessages       = true                                   {manageable} {command line}
+   size_t SoftMaxHeapSize                          = 8522825728                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+PATH=D:\usr\local\cell\host-win32\spu\bin;D:\usr\local\cell\host-win32\ppu\bin;D:\usr\local\cell\host-win32\sn\bin;D:\usr\local\cell\host-win32\bin;D:\usr\local\cell\host-win32\Cg\bin;C:\Program Files (x86)\SN Systems\PS3\bin;C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\WorldPainter;C:\Program Files\nodejs\;C:\Program Files\NASM;C:\Program Files\Git\cmd;C:\Program Files\Git LFS;C:\Program Files\Lip;C:\Users\garag\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\garag\AppData\Local\Programs\Python\Python311\;C:\Users\garag\AppData\Local\Microsoft\WindowsApps;C:\Users\garag\AppData\Local\atom\bin;C:\Users\garag\.dotnet\tools;C:\Users\garag\AppData\Roaming\npm;C:\Users\garag\AppData\Local\Programs\EmEditor;C:\Users\garag\AppData\Local\GitHubDesktop\bin;C:\ProgramData\garag\GitHubDesktop\bin
+USERNAME=garag
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22000 (10.0.22000.1516)
+OS uptime: 2 days 2:24 hours
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 165 stepping 2 microcode 0xf8, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt
+
+Memory: 4k page, system-wide physical 32511M (10963M free)
+TotalPageFile size 33870M (AvailPageFile size 2876M)
+current process WorkingSet (physical memory assigned to process): 590M, peak: 592M
+current process commit charge ("private bytes"): 983M, peak: 983M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (18.0.2+9-61) for windows-amd64 JRE (18.0.2+9-61), built on Jun  7 2022 13:09:01 by "mach5one" with MS VC++ 16.8 / 16.9 (VS2019)
+
+END.

@@ -20,18 +20,20 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 	//System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
-	while(b == null && count < range) {
+	while(count < range) {
 		x+=directionX;
 		y+=directionY;
 		z+=-directionZ;
 				//System.out.println(x+" "+y+" "+z);
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
-		if(b != null) {
+		if(b != null ) {
+			if(!b.isFluid()) {
 			return b;
+			}
 		}
 		count++;
 	}
-	return b;
+	return null;
 }
 public static Block getNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range,float step) {
 	float x = startX;
@@ -40,7 +42,7 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 	//System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
-	while(b == null && count < range/step ) {
+	while( count < range/step ) {
 		x+=directionX*step;
 		y+=directionY*step;
 		z+=-directionZ*step;
@@ -49,14 +51,16 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 		//
 		if(b != null) {
-			
+			if(!b.isFluid()) {
 			System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
 			return b;
+			}
 		}
 		count++;
 	}
-	return b;
+	return null;
 }
+
 public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range,float step) {
 	float x = startX;
 	float y =  startY;
@@ -64,7 +68,7 @@ public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float s
 	//System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
-	while(b == null && count < range/step ) {
+	while( count < range/step ) {
 		float lastX = x;
 		float lastY = y;
 		float lastZ = z;
@@ -76,10 +80,11 @@ public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float s
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 		//
 		if(b != null) {
-			
+			if(!b.isFluid()) {
 			System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
 			return new Vector3f(convertFloatCoordToBlockCoord(lastX), convertFloatCoordToBlockCoord(lastY), convertFloatCoordToBlockCoord(lastZ));
-		}
+			}
+			}
 		count++;
 	}
 	return null;

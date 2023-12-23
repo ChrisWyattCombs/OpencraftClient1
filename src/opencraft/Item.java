@@ -7,7 +7,7 @@ public abstract class Item {
 
 	
 	
-	public int stack = 0;
+	public int stack = 1;
 	
 	public float x = 0, y = 0, z = 0;
 	public float vx = 0, vy = 0, vz = 0;
@@ -19,6 +19,8 @@ public abstract class Item {
 	public abstract void leftClickAction();
 	
 	public abstract int getMaxStack();
+	
+	public abstract int getID();
 
 	public void updatePosition() {
 		if(!grounded && vy > -0.12f) {
@@ -40,49 +42,49 @@ public abstract class Item {
 		Block block8 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
 			
 			if(block1  != null) {	
-				if(y < block1.getY() +0.8f) {
+				if(y < block1.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block2  != null) {	
-				if(y < block2.getY() +0.8f) {
+				if(y < block2.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block3  != null) {	
-				if(y < block3.getY() +0.8f) {
+				if(y < block3.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block4  != null) {	
-				if(y < block4.getY() +0.8f) {
+				if(y < block4.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block5  != null) {	
-				if(y < block5.getY() +0.8f) {
+				if(y < block5.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block6  != null) {	
-				if(y < block6.getY() +0.8f) {
+				if(y < block6.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block7  != null) {	
-				if(y < block7.getY() +0.8f) {
+				if(y < block7.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
 			}
 			if(block8  != null) {	
-				if(y < block8.getY() +0.8f) {
+				if(y < block8.getY() +1.2f) {
 					x = lastX;
 					z = lastZ;
 				}
@@ -112,14 +114,17 @@ public abstract class Item {
 						}
 			Block upblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0, 2, 0.1f);
 			if(upblock != null) {
-			 if(y > upblock.getY() - 0.4f) {
-				 y = upblock.getY() - 0.3f;
+			 if(y > upblock.getY() - 1.2f) {
+				 y = upblock.getY() - 1.2f;
 				 vy = -vy;
 			 }
 			}
-			if(Math.sqrt(Math.pow(x-Player.x, 2)+Math.pow(y-Player.y, 2)+Math.pow(z-Player.z, 2)) < 2f) {
+			if(Math.sqrt(Math.pow(x-Player.x, 2)+Math.pow(y-Player.y, 2)+Math.pow(z-Player.z, 2)) < 3f) {
+				if(Player.addItemToHotbar(this)) {
 				World.items.remove(this);
 				
+				}
 			}
 	}
+	
 }

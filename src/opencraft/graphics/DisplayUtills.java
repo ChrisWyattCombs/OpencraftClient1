@@ -96,9 +96,12 @@ public static void setupOpenGl() throws Exception {
     //GL11.glEnable(GL11.GL_ALPHA_TEST);
     //glFrontFace(GL_CCW);
     GL11.glShadeModel (GL11.GL_SMOOTH);
-	GL11.glEnable(GL11.GL_BLEND);
-	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-	 fontShader =new ShaderProgram();
+GL11.glEnable(GL11.GL_BLEND);
+  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+  
+	glEnable(GL_ALPHA_TEST);
+	//GL11.glAlphaFunc(GL_GREATER, 0.7f);
+	fontShader =new ShaderProgram();
 	Scanner f = new Scanner(new File("shader/FragShader"));
 	String fc = "";
 	while(f.hasNextLine()) {

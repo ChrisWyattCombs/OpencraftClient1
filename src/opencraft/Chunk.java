@@ -25,7 +25,7 @@ public class Chunk {
 	private int regionZ;
 	private int id = -1;
 	public Block[][][] blocks;
-	public static String[] BlockTypes = {"air","opencraft.blocks.BlockGrass","opencraft.blocks.BlockDirt","opencraft.blocks.BlockStone"};
+	public static String[] BlockTypes = {"air","opencraft.blocks.BlockGrass","opencraft.blocks.BlockDirt","opencraft.blocks.BlockStone","opencraft.blocks.BlockWater"};
 	public Chunk(int x, int z, int regionX, int regionZ) {
 		super();
 		this.x = x;
@@ -303,7 +303,7 @@ public void calculateLighting() {
 						
 					}
 					if(block1 == null || block2 == null || block3 == null || block4 == null || block5 == null || block6 == null) {
-						blocks[x][y][z].draw();
+						blocks[x][y][z].draw(block1 == null,block2 == null,block6 == null,block5 == null,block3 == null,block4 == null);
 						blocks[x][y][z].visible = true;
 						
 					}

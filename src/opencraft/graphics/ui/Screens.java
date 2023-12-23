@@ -363,6 +363,8 @@ for(float f : position) {
 }
 positionBuffer.flip();
 GL11.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, positionBuffer);
+
+
 World.drawWorld();
 
 FloatBuffer model = BufferUtils.createFloatBuffer(16);
@@ -397,6 +399,7 @@ GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 GL11.glBegin(GL11.GL_QUADS);
 
 if(b != null) {
+	
 ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
 }
 if(Mouse.isButtonDown(1)) {
@@ -457,6 +460,12 @@ DisplayUtills.font.drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(
 DisplayUtills.font.drawText("Position: "+Player.x+" "+Player.y+" "+Player.z, -0.0165f, 0.0040f, 0.00002f);
 //DisplayUtills.shader.bind();
 GL11.glEnable(GL11.GL_TEXTURE_2D);
+try {
+	Player.checkForActions();
+} catch (InstantiationException | IllegalAccessException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}
 Player.drawPlayerHUD();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 //DisplayUtills.shader.unbind();
@@ -464,6 +473,7 @@ GL11.glDisable(GL11.GL_TEXTURE_2D);
 DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
 DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
 Player.updatePostitionAndRotation();
+World.checkFluids();
 Player.setCamToPlayer();
 if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {
 	try {

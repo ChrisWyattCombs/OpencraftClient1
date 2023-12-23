@@ -1,7 +1,9 @@
 package opencraft.blocks;
 
 import opencraft.Block;
+import opencraft.Item;
 import opencraft.graphics.models.ModelCube;
+import opencraft.items.itemGrass;
 
 public class BlockGrass extends Block {
 
@@ -13,13 +15,29 @@ public class BlockGrass extends Block {
 	}
 
 	@Override
-	public void draw() {
-		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight);
+	public void draw(boolean top,boolean bottom,boolean front,boolean back,boolean right, boolean left) {
+		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,1,top,bottom,front,back,right,left);
 	}
 
 	@Override
 	public int getID() {
 		return 1;
+	}
+
+	@Override
+	public Item getDrop() {
+		// TODO Auto-generated method stub
+		itemGrass drop = new itemGrass();
+		drop.x = getGlobalX();
+		drop.y = getY() + 3f;
+		drop.z = -getGlobalZ();
+		return  drop;
+	}
+
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

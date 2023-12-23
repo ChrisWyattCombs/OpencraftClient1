@@ -10,6 +10,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
+import opencraft.blocks.BlockWater;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
@@ -37,12 +38,14 @@ public class World {
 	public static float x = Player.x;
 	public static float z = -Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 6;
+	public static int renderDistance = 16;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
 	public static int currentRegionIndex = -1;
 	public static boolean loadingChunks = false;
+	public static long checkFluidTime = 0;
+	public static ArrayList<Vector3f> uncheckedFluids = new ArrayList<>();
 	public static void loadWorld() {
 		int chunkX =(int)x >> 4;
 		int chunkZ =(int)z >> 4;
@@ -96,7 +99,7 @@ public class World {
 	public static void drawWorld() {
 		
 		System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2)));
-		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>16) {
+		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>(16*renderDistance)/2) {
 			x = Player.x;
 			System.out.println("works23");
 			z = -Player.z;
@@ -257,12 +260,15 @@ public class World {
 			//if(localCZ < 0) {
 				//localCZ += 256;
 			//}
+			int lcx = chunkX  & 0xF;
+			int lcz = chunkZ  & 0xF;
 			int localX = x  & 0xF;
 			int localZ = z  & 0xF;
-			
+			//System.out.println("lcx: " + lcx);
+			//System.out.println("lcz " + lcz);
 			
 			try {
-			return regions[getRegionIndex(regionX, regionZ)].chunks[chunkX-(regionX*16)][chunkZ-(regionZ*16)].blocks[localX][y][localZ];
+			return regions[getRegionIndex(regionX, regionZ)].chunks[lcx][lcz].blocks[localX][y][localZ];
 		}catch( Exception e){
 			//e.printStackTrace();
 			//System.out.println("a2");
@@ -289,7 +295,7 @@ public class World {
 				regionX = ox >> 4;
 				 reigonZ = oz >> 4;
 				 int regionIndex = getRegionIndex(regionX, reigonZ);
-				 regions[regionIndex].chunks[ox& 0xF][oz& 0xF].calculateLighting();
+				// regions[regionIndex].chunks[ox& 0xF][oz& 0xF].calculateLighting();
 				 regions[regionIndex].chunks[ox& 0xF][oz& 0xF].delete();
 				 if (chunksToSetup == null) {
 					 chunksToSetup = new ArrayList<>();
@@ -410,5 +416,139 @@ public class World {
 		
 			item.drawIcon(item.x, item.y, item.z, 0.4f);
 		}
+	}
+	public static void checkFluids() {
+		if(System.currentTimeMillis() - checkFluidTime > 2000) {
+			checkFluidTime = System.currentTimeMillis() ;
+		ArrayList<Vector3f> newUncheckedFluids = new ArrayList<>();
+		for(Vector3f postition : uncheckedFluids) {
+			Block fluid = getBlock((int)postition.getX(), (int)postition.getY(), (int)postition.getZ());
+			
+			Block block1 = null;
+			Block block2 = null;
+			Block block3 = null;
+			Block block4 = null;
+			Block block5 = null;
+			Block block6 = null;	
+			
+			block1 = getBlock((int)fluid.getGlobalX()+1, (int)fluid.getY(),(int) fluid.getGlobalZ());
+			block2 = getBlock((int)fluid.getGlobalX()-1, (int)fluid.getY(),(int) fluid.getGlobalZ());
+			block3 = getBlock((int)fluid.getGlobalX(), (int)fluid.getY()-1,(int) fluid.getGlobalZ());
+			block4 = getBlock((int)fluid.getGlobalX(), (int)fluid.getY(),(int) fluid.getGlobalZ()+1);
+			block5 = getBlock((int)fluid.getGlobalX(), (int)fluid.getY(),(int) fluid.getGlobalZ()-1);
+			
+			if(block3 == null) {
+				try {
+					setBlock("BlockWater", (int)fluid.getGlobalX(), (int)fluid.getY()-1, (int)fluid.getGlobalZ());
+					newUncheckedFluids.add(new Vector3f((int)fluid.getGlobalX(), (int)fluid.getY()-1, (int)fluid.getGlobalZ()));
+				}catch (Exception e) {
+					
+					
+					// TODO: handle exception
+				}
+				
+			}else {
+				if(block1 == null) {
+					try {
+						setBlock("BlockWater", (int)fluid.getGlobalX()+1, (int)fluid.getY(), (int)fluid.getGlobalZ());
+						int chunkX = (int)(fluid.getGlobalX()+1) >> 4;
+						int chunkZ = (int)(fluid.getGlobalZ()) >> 4;
+						int regionX = chunkX >> 4;
+						int regionZ = chunkZ >> 4;
+						int regionsIndex = getRegionIndex(regionX,regionZ );
+						int lcx = chunkX  & 0xF;
+						int lcz = chunkZ  & 0xF;
+						int localX =  (int)(fluid.getGlobalX()+1)& 0xF;
+						int localZ = (int)(fluid.getGlobalZ()) & 0xF;
+						regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height=fluid.height - 0.20f;
+						if(regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height <= 0) {
+							regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ]=null;
+						}else {
+						newUncheckedFluids.add(new Vector3f((int)fluid.getGlobalX()+1, (int)fluid.getY(), (int)fluid.getGlobalZ()));
+						}
+					}catch (Exception e) {
+						
+						
+						// TODO: handle exception
+					}
+				}
+				if(block2 == null) {
+					try {
+						setBlock("BlockWater", (int)fluid.getGlobalX()-1, (int)fluid.getY(), (int)fluid.getGlobalZ());
+						int chunkX = (int)(fluid.getGlobalX()-1) >> 4;
+						int chunkZ = (int)(fluid.getGlobalZ()) >> 4;
+						int regionX = chunkX >> 4;
+						int regionZ = chunkZ >> 4;
+						int regionsIndex = getRegionIndex(regionX,regionZ );
+						int lcx = chunkX  & 0xF;
+						int lcz = chunkZ  & 0xF;
+						int localX =  (int)(fluid.getGlobalX()-1)& 0xF;
+						int localZ = (int)(fluid.getGlobalZ()) & 0xF;
+						regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height=fluid.height - 0.20f;
+						if(regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height <= 0) {
+							regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ]=null;
+						}else {
+						newUncheckedFluids.add(new Vector3f((int)fluid.getGlobalX()-1, (int)fluid.getY(), (int)fluid.getGlobalZ()));
+						}
+					}catch (Exception e) {
+						
+						
+						// TODO: handle exception
+					}
+				}
+				if(block4 == null) {
+					try {
+						setBlock("BlockWater", (int)fluid.getGlobalX(), (int)fluid.getY(), (int)fluid.getGlobalZ()+1);
+						int chunkX = (int)(fluid.getGlobalX()) >> 4;
+						int chunkZ = (int)(fluid.getGlobalZ()+1) >> 4;
+						int regionX = chunkX >> 4;
+						int regionZ = chunkZ >> 4;
+						int regionsIndex = getRegionIndex(regionX,regionZ );
+						int lcx = chunkX  & 0xF;
+						int lcz = chunkZ  & 0xF;
+						int localX =  (int)(fluid.getGlobalX())& 0xF;
+						int localZ = (int)(fluid.getGlobalZ()+1) & 0xF;
+						regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height=fluid.height - 0.20f;
+						if(regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height <= 0) {
+							regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ]=null;
+						}else {
+						newUncheckedFluids.add(new Vector3f((int)fluid.getGlobalX(), (int)fluid.getY(), (int)fluid.getGlobalZ()+1));
+						}
+					}catch (Exception e) {
+						
+						
+						// TODO: handle exception
+					}
+				}
+				if(block5 == null) {
+					try {
+						setBlock("BlockWater", (int)fluid.getGlobalX(), (int)fluid.getY(), (int)fluid.getGlobalZ()-1);
+						int chunkX = (int)(fluid.getGlobalX()) >> 4;
+						int chunkZ = (int)(fluid.getGlobalZ()-1) >> 4;
+						int regionX = chunkX >> 4;
+						int regionZ = chunkZ >> 4;
+						int regionsIndex = getRegionIndex(regionX,regionZ );
+						int lcx = chunkX  & 0xF;
+						int lcz = chunkZ  & 0xF;
+						int localX =  (int)(fluid.getGlobalX())& 0xF;
+						int localZ = (int)(fluid.getGlobalZ()-1) & 0xF;
+						regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height=fluid.height - 0.20f;
+						if(regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ].height <= 0) {
+							regions[regionsIndex].chunks[lcx][lcz].blocks[localX][ (int)fluid.getY()][localZ]=null;
+						}else {
+						newUncheckedFluids.add(new Vector3f((int)fluid.getGlobalX(), (int)fluid.getY(), (int)fluid.getGlobalZ()-1));
+						}
+					}catch (Exception e) {
+						
+						
+						// TODO: handle exception
+					}
+				}
+			}
+			
+		}
+		uncheckedFluids.clear();
+		uncheckedFluids.addAll(newUncheckedFluids);
+	}
 	}
 }

@@ -20,7 +20,7 @@ public class itemGrass extends Item{
 		//glScalef(0.4f, 0.5f, 0.5f);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, World.blockTextures.getTextureID());
 		glBegin(GL_QUADS);
-		ModelCube.drawModel(x, y, z,new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},1f,1f,1f,1f,1f,1f,1f,size);
+		ModelCube.drawModel(x, y, -z,new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},1f,1f,1f,1f,1f,1f,1f,size);
 		glEnd();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		glPopMatrix();
@@ -32,14 +32,16 @@ public class itemGrass extends Item{
 		if(b != null) {
 		try {
 			
-			World.setBlock("BlockGrass", (int)b.getX(),(int)b.getY(), (int)b.getZ());
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| SecurityException | ClassNotFoundException e) {
+			World.setBlock("BlockWater", (int)b.getX(),(int)b.getY(), (int)b.getZ());
+			World.uncheckedFluids.add(new Vector3f((int)b.getX(),(int)b.getY(), (int)b.getZ()));
+			//stack--;
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
+		
 	}
 	@Override
 	public void leftClickAction() {
@@ -50,7 +52,13 @@ public class itemGrass extends Item{
 	@Override
 	public int getMaxStack() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 64;
+	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }

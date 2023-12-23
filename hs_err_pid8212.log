@@ -1,0 +1,3268 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffc3b4b7f68, pid=8212, tid=16960
+#
+# JRE version: Java(TM) SE Runtime Environment (18.0.2+9) (build 18.0.2+9-61)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (18.0.2+9-61, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# Problematic frame:
+# C  [nvoglv64.dll+0x1507f68]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.library.path=C:\Users\garag\Documents\GitHub\OpencraftClient1\natives -Dfile.encoding=UTF-8 -XX:+ShowCodeDetailsInExceptionMessages opencraft.Main
+
+Host: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz, 12 cores, 31G,  Windows 11 , 64 bit Build 22000 (10.0.22000.1516)
+Time: Mon Dec 18 22:35:09 2023 Pacific Standard Time elapsed time: 16.741578 seconds (0d 0h 0m 16s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001fb98ce6df0):  JavaThread "main" [_thread_in_native, id=16960, stack(0x000000b03cc00000,0x000000b03cd00000)]
+
+Stack: [0x000000b03cc00000,0x000000b03cd00000],  sp=0x000000b03ccfef60,  free space=1019k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [nvoglv64.dll+0x1507f68]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 608  org.lwjgl.opengl.GL11.nglVertex3f(FFFJ)V (0 bytes) @ 0x000001fba98e48f9 [0x000001fba98e48a0+0x0000000000000059]
+J 651 c2 org.lwjgl.opengl.GL11.glVertex3f(FFF)V (24 bytes) @ 0x000001fba98e8e7c [0x000001fba98e8e20+0x000000000000005c]
+J 1193 c1 opencraft.graphics.models.ModelCube.drawModel(FFF[FFFFFFFF)V (1075 bytes) @ 0x000001fba259abd4 [0x000001fba259aa40+0x0000000000000194]
+j  opencraft.blocks.BlockWater.draw()V+103
+J 1243% c2 opencraft.Chunk.setup()V (401 bytes) @ 0x000001fba99b8648 [0x000001fba99b7f60+0x00000000000006e8]
+j  opencraft.World.setupChunk(II)V+49
+J 1261 c1 opencraft.World.drawWorld()V (525 bytes) @ 0x000001fba25d3644 [0x000001fba25d17a0+0x0000000000001ea4]
+J 1213 c1 opencraft.graphics.ui.Screens$5.drawScreen()V (1124 bytes) @ 0x000001fba25a8f1c [0x000001fba25a80a0+0x0000000000000e7c]
+J 753 c1 opencraft.graphics.DisplayUtills.renderNextFrame()V (7 bytes) @ 0x000001fba24ae7b4 [0x000001fba24ae6c0+0x00000000000000f4]
+j  opencraft.Main.runOpencraft(Ljava/lang/String;)V+43
+j  opencraft.Main.main([Ljava/lang/String;)V+2
+v  ~StubRoutines::call_stub
+
+siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), writing address 0x000001fbd0e18004
+
+
+Register to memory mapping:
+
+RIP=0x00007ffc3b4b7f68 nvoglv64.dll
+RAX=0x0 is NULL
+RBX=0x000001fbcfd90000 points into unknown readable memory: 0x000001fbcbb0c500 | 00 c5 b0 cb fb 01 00 00
+RCX=0x0 is NULL
+RDX=0x000001fbd0e17ff8 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+RSP=0x000000b03ccfef60 is pointing into the stack for thread: 0x000001fb98ce6df0
+RBP=0x000000b03ccfefe0 is pointing into the stack for thread: 0x000001fb98ce6df0
+RSI=0x0000000000000008 is an unknown value
+RDI=0x0000000000000002 is an unknown value
+R8 =0x000001fbcfe5fb38 points into unknown readable memory: 0x3f6666663dcccccd | cd cc cc 3d 66 66 66 3f
+R9 =0x0000000000000002 is an unknown value
+R10=0x0000000000000100 is an unknown value
+R11=0x0000000000000008 is an unknown value
+R12=0x000001fbcfe49040 points into unknown readable memory: 0x3f800000c1700000 | 00 00 70 c1 00 00 80 3f
+R13=0x0000000000048720 is an unknown value
+R14=0x000000000000010d is an unknown value
+R15=0x000000000000083f is an unknown value
+
+
+Registers:
+RAX=0x0000000000000000, RBX=0x000001fbcfd90000, RCX=0x0000000000000000, RDX=0x000001fbd0e17ff8
+RSP=0x000000b03ccfef60, RBP=0x000000b03ccfefe0, RSI=0x0000000000000008, RDI=0x0000000000000002
+R8 =0x000001fbcfe5fb38, R9 =0x0000000000000002, R10=0x0000000000000100, R11=0x0000000000000008
+R12=0x000001fbcfe49040, R13=0x0000000000048720, R14=0x000000000000010d, R15=0x000000000000083f
+RIP=0x00007ffc3b4b7f68, EFLAGS=0x0000000000010246
+
+Top of Stack: (sp=0x000000b03ccfef60)
+0x000000b03ccfef60:   000001fb00000082 000000b03ccfef00
+0x000000b03ccfef70:   000000000000000c 000001fbcfffeb50
+0x000000b03ccfef80:   0000000000008000 0000000000000000
+0x000000b03ccfef90:   0000000000000000 0000000000000000
+0x000000b03ccfefa0:   0000000000000000 0000000000000000
+0x000000b03ccfefb0:   0000000200003303 0000000000000000
+0x000000b03ccfefc0:   0000000000000000 0000000000000000
+0x000000b03ccfefd0:   000000b03ccff090 000000003e800000
+0x000000b03ccfefe0:   000001fb98ce6df0 000001fbcfd90000
+0x000000b03ccfeff0:   000000b03ccff0a0 00007ffc3b4b87ad
+0x000000b03ccff000:   000001fbc7d78000 000000000000000a
+0x000000b03ccff010:   0000000000000000 000001fba98f2e3e
+0x000000b03ccff020:   000001fbc7d6f9b0 000001fba98e49b5
+0x000000b03ccff030:   000001fb98ce3ae0 000001fba98e45af
+0x000000b03ccff040:   000001fb3f800000 00007ffc3e800000
+0x000000b03ccff050:   00007ffcc1000000 00007ffcc24fb7e0 
+
+Instructions: (pc=0x00007ffc3b4b7f68)
+0x00007ffc3b4b7e68:   8b 02 45 85 c0 74 78 43 8d 04 00 41 8b c8 d1 e9
+0x00007ffc3b4b7e78:   33 c8 43 8d 04 00 81 e1 55 55 55 55 33 c8 44 0b
+0x00007ffc3b4b7e88:   c1 41 8b c8 c1 e9 02 42 8d 04 85 00 00 00 00 33
+0x00007ffc3b4b7e98:   c8 42 8d 04 85 00 00 00 00 81 e1 33 33 33 33 33
+0x00007ffc3b4b7ea8:   c8 44 0b c1 41 8b c9 41 8b c0 41 81 e0 21 84 ff
+0x00007ffc3b4b7eb8:   ff 25 00 00 21 84 69 d0 11 11 00 00 41 69 c0 11
+0x00007ffc3b4b7ec8:   11 00 00 48 c1 ea 0c 81 e2 00 00 0f 00 25 00 f0
+0x00007ffc3b4b7ed8:   00 00 48 0b d0 48 c1 ea 0c 48 d3 e2 4c 0b f2 41
+0x00007ffc3b4b7ee8:   83 c1 08 49 83 c2 04 41 83 f9 30 0f 82 6e ff ff
+0x00007ffc3b4b7ef8:   ff 8b 83 98 93 09 00 4d 0b f3 85 c0 0f 84 23 01
+0x00007ffc3b4b7f08:   00 00 48 8b 93 78 93 09 00 4d 8b c4 0f 8e 13 01
+0x00007ffc3b4b7f18:   00 00 66 0f 1f 44 00 00 4d 0f bc de 4d 8b d6 4d
+0x00007ffc3b4b7f28:   85 f6 0f 84 ea 00 00 00 41 8b c3 41 8b cb 48 c1
+0x00007ffc3b4b7f38:   e8 03 83 e1 07 c1 e1 02 41 8b f3 44 8b 4c 85 d0
+0x00007ffc3b4b7f48:   8b bc 83 80 93 09 00 41 d3 e9 41 83 e1 0f d3 ef
+0x00007ffc3b4b7f58:   83 e7 0f 0f 84 a0 00 00 00 45 85 c9 74 42 33 c0
+0x00007ffc3b4b7f68:   c7 42 0c 00 00 80 3f 48 89 02 89 42 08 41 8b c1
+0x00007ffc3b4b7f78:   83 e8 01 74 24 83 e8 01 74 18 83 e8 01 74 0c 83
+0x00007ffc3b4b7f88:   f8 01 75 75 41 8b 40 0c 89 42 0c 41 8b 40 08 89
+0x00007ffc3b4b7f98:   42 08 41 8b 40 04 89 42 04 41 8b 00 89 02 eb 59
+0x00007ffc3b4b7fa8:   41 8d 43 e0 83 f8 09 77 21 48 8d 0c 85 7c 31 01
+0x00007ffc3b4b7fb8:   00 8b 04 8b 89 02 8b 44 8b 04 89 42 04 8b 44 8b
+0x00007ffc3b4b7fc8:   08 89 42 08 8b 44 8b 0c eb 2c 4a 8d 0c 9d 00 00
+0x00007ffc3b4b7fd8:   00 00 8b 84 8b e8 d8 04 00 89 02 8b 84 8b ec d8
+0x00007ffc3b4b7fe8:   04 00 89 42 04 8b 84 8b f0 d8 04 00 89 42 08 8b
+0x00007ffc3b4b7ff8:   84 8b f4 d8 04 00 89 42 0c 49 0f bb f2 4d 0f bc
+0x00007ffc3b4b8008:   da 4f 8d 04 88 48 8d 14 ba 4d 85 d2 0f 85 16 ff
+0x00007ffc3b4b8018:   ff ff 41 ff c7 44 3b bb 98 93 09 00 0f 8c f6 fe
+0x00007ffc3b4b8028:   ff ff 45 33 ff 83 bb fc ef 07 00 02 0f 85 36 01
+0x00007ffc3b4b8038:   00 00 f6 83 70 93 09 00 08 0f 84 29 01 00 00 8b
+0x00007ffc3b4b8048:   83 f8 8e 09 00 4f 8d 0c ac ff c0 0f af 83 c8 93
+0x00007ffc3b4b8058:   09 00 4d 0f bc de 48 63 c8 48 8b 83 78 93 09 00 
+
+
+Stack slot to memory mapping:
+stack at sp + 0 slots: 0x000001fb00000082 is an unknown value
+stack at sp + 1 slots: 0x000000b03ccfef00 is pointing into the stack for thread: 0x000001fb98ce6df0
+stack at sp + 2 slots: 0x000000000000000c is an unknown value
+stack at sp + 3 slots: 0x000001fbcfffeb50 points into unknown readable memory: 0x0000000001000000 | 00 00 00 01 00 00 00 00
+stack at sp + 4 slots: 0x0000000000008000 is an unknown value
+stack at sp + 5 slots: 0x0 is NULL
+stack at sp + 6 slots: 0x0 is NULL
+stack at sp + 7 slots: 0x0 is NULL
+
+
+Compiled method (n/a)   16898  608     n 0       org.lwjgl.opengl.GL11::nglVertex3f (native)
+ total in heap  [0x000001fba98e4710,0x000001fba98e4af0] = 992
+ relocation     [0x000001fba98e4868,0x000001fba98e4898] = 48
+ main code      [0x000001fba98e48a0,0x000001fba98e4ae8] = 584
+ oops           [0x000001fba98e4ae8,0x000001fba98e4af0] = 8
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001fbc7cc8940} 'nglVertex3f' '(FFFJ)V' in 'org/lwjgl/opengl/GL11'
+  # parm0:    xmm0      = float
+  # parm1:    xmm1      = float
+  # parm2:    xmm2      = float
+  # parm3:    rdx:rdx   = long
+  #           [sp+0x80]  (sp of caller)
+  0x000001fba98e48a0: 448b 5208 | 49bb 0000 | 0000 0800 | 0000 4d03 | d349 3bc2 | 0f84 0600 
+
+  0x000001fba98e48b8: ;   {runtime_call ic_miss_stub}
+  0x000001fba98e48b8: 0000 e9c1 | 8155 f890 
+[Verified Entry Point]
+  0x000001fba98e48c0: 8984 2400 | 90ff ff55 | 488b ec48 | 83ec 7048 | 8954 2428 | c5fa 1154 | 2420 c5f9 | 28d9 c5f9 
+  0x000001fba98e48e0: ;   {oop(a 'java/lang/Class'{0x00000006045131c8} = 'org/lwjgl/opengl/GL11')}
+  0x000001fba98e48e0: 28d0 49be | c831 5104 | 0600 0000 | 4c89 7424 | 604c 8d74 | 2460 498b | d6c5 f877 
+
+  0x000001fba98e48fc: ;   {internal_word}
+  0x000001fba98e48fc: 49ba f948 | 8ea9 fb01 | 0000 4d89 | 9778 0200 | 0049 89a7 | 7002 0000 
+
+  0x000001fba98e4914: ;   {external_word}
+  0x000001fba98e4914: 49ba 9d3c | 0fa4 fc7f | 0000 4180 | 3a00 0f84 | 6e00 0000 | 5248 83ec | 10c5 fb11 | 1424 4883 
+  0x000001fba98e4934: ec10 c5fb 
+
+  0x000001fba98e4938: ;   {metadata({method} {0x000001fbc7cc8940} 'nglVertex3f' '(FFFJ)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001fba98e4938: 111c 2448 | ba38 89cc | c7fb 0100 | 0049 8bcf | 4883 ec20 | f7c4 0f00 | 0000 0f84 | 1a00 0000 
+  0x000001fba98e4958: 4883 ec08 
+
+  0x000001fba98e495c: ;   {runtime_call}
+  0x000001fba98e495c: 49ba 90d4 | cba3 fc7f | 0000 41ff | d248 83c4 | 08e9 0d00 
+
+  0x000001fba98e4970: ;   {runtime_call}
+  0x000001fba98e4970: 0000 49ba | 90d4 cba3 | fc7f 0000 | 41ff d248 | 83c4 20c5 | fb10 1c24 | 4883 c410 | c5fb 1014 
+  0x000001fba98e4990: 2448 83c4 | 105a 498d | 8f90 0200 | 0041 c787 | 3003 0000 | 0400 0000 
+
+  0x000001fba98e49a8: ;   {runtime_call}
+  0x000001fba98e49a8: 49ba 70c3 | 0080 0100 | 0000 41ff | d2c5 f877 | 41c7 8730 | 0300 0005 | 0000 00f0 | 8344 24c0 
+  0x000001fba98e49c8: 0049 3baf | 3803 0000 | 0f87 1100 | 0000 4181 | bf20 0300 | 0000 0000 | 000f 8424 | 0000 00c5 
+  0x000001fba98e49e8: f877 498b | cf4c 8be4 | 4883 ec20 | 4883 e4f0 
+
+  0x000001fba98e49f8: ;   {runtime_call}
+  0x000001fba98e49f8: 49ba 5016 | d6a3 fc7f | 0000 41ff | d249 8be4 | 4d33 e441 | c787 3003 | 0000 0800 | 0000 4181 
+  0x000001fba98e4a18: bfa0 0300 | 0002 0000 | 000f 849b 
+
+  0x000001fba98e4a24: ;   {external_word}
+  0x000001fba98e4a24: 0000 0049 | ba9d 3c0f | a4fc 7f00 | 0041 803a | 000f 8448 
+
+  0x000001fba98e4a38: ;   {metadata({method} {0x000001fbc7cc8940} 'nglVertex3f' '(FFFJ)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001fba98e4a38: 0000 0048 | ba38 89cc | c7fb 0100 | 0049 8bcf | 4883 ec20 | f7c4 0f00 | 0000 0f84 | 1a00 0000 
+  0x000001fba98e4a58: 4883 ec08 
+
+  0x000001fba98e4a5c: ;   {runtime_call}
+  0x000001fba98e4a5c: 49ba 90d4 | cba3 fc7f | 0000 41ff | d248 83c4 | 08e9 0d00 
+
+  0x000001fba98e4a70: ;   {runtime_call}
+  0x000001fba98e4a70: 0000 49ba | 90d4 cba3 | fc7f 0000 | 41ff d248 | 83c4 2049 | c787 7002 | 0000 0000 | 0000 49c7 
+  0x000001fba98e4a90: 8778 0200 | 0000 0000 | 00c5 f877 | 498b 8f00 | 0300 00c7 | 8100 0100 | 0000 0000 | 00c9 4981 
+  0x000001fba98e4ab0: 7f08 0000 | 0000 0f85 | 0100 0000 
+
+  0x000001fba98e4abc: ;   {runtime_call StubRoutines (1)}
+  0x000001fba98e4abc: c3e9 3ec4 | 50f8 c5f8 | 774c 8be4 | 4883 ec20 | 4883 e4f0 
+
+  0x000001fba98e4ad0: ;   {runtime_call}
+  0x000001fba98e4ad0: 49ba 5004 | cca3 fc7f | 0000 41ff | d249 8be4 | 4d33 e4e9 | 3fff ffff 
+[/MachCode]
+
+
+Compiled method (c2)   16906  651       4       org.lwjgl.opengl.GL11::glVertex3f (24 bytes)
+ total in heap  [0x000001fba98e8c90,0x000001fba98e90b0] = 1056
+ relocation     [0x000001fba98e8de8,0x000001fba98e8e10] = 40
+ main code      [0x000001fba98e8e20,0x000001fba98e8f40] = 288
+ stub code      [0x000001fba98e8f40,0x000001fba98e8f68] = 40
+ oops           [0x000001fba98e8f68,0x000001fba98e8f70] = 8
+ metadata       [0x000001fba98e8f70,0x000001fba98e8f90] = 32
+ scopes data    [0x000001fba98e8f90,0x000001fba98e9010] = 128
+ scopes pcs     [0x000001fba98e9010,0x000001fba98e9080] = 112
+ dependencies   [0x000001fba98e9080,0x000001fba98e9088] = 8
+ handler table  [0x000001fba98e9088,0x000001fba98e90a0] = 24
+ nul chk table  [0x000001fba98e90a0,0x000001fba98e90b0] = 16
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Verified Entry Point]
+  # {method} {0x000001fbc7cc88b8} 'glVertex3f' '(FFF)V' in 'org/lwjgl/opengl/GL11'
+  # parm0:    xmm0      = float
+  # parm1:    xmm1      = float
+  # parm2:    xmm2      = float
+  #           [sp+0x40]  (sp of caller)
+  0x000001fba98e8e20: 8984 2400 | 90ff ff55 | 4883 ec30 
+
+  0x000001fba98e8e2c: ;   {oop(a 'java/lang/Class'{0x00000006043715c8} = 'org/lwjgl/opengl/GLContext')}
+  0x000001fba98e8e2c: 49ba c815 | 3704 0600 | 0000 458b | 5274 660f | 1f44 0000 
+
+  0x000001fba98e8e40: ; implicit exception: dispatches to 0x000001fba98e8f15
+  0x000001fba98e8e40: 478b 44d4 | 0c4d 8bd8 | 49c1 e303 | 4d8b 8f68 | 0200 0049 | 8b29 4c3b | dd75 3443 | 8b6c d410 
+  0x000001fba98e8e60: 85ed 7450 | 4d8b 9cec | e01e 0000 | 4d85 db74 | 5f49 8bd3 
+
+  0x000001fba98e8e74: ;   {static_call}
+  0x000001fba98e8e74: 6666 90e8 
+
+  0x000001fba98e8e78: ; ImmutableOopMap {}
+                      ;*invokestatic nglVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@20 (line 2734)
+  0x000001fba98e8e78: 44ba ffff | 4883 c430 
+
+  0x000001fba98e8e80: ;   {poll_return}
+  0x000001fba98e8e80: 5d49 3ba7 | 3803 0000 | 0f87 9200 | 0000 c3ba | 45ff ffff | c5fa 1104 | 24c5 fa11 | 4c24 04c5 
+  0x000001fba98e8ea0: fa11 5424 | 0844 8954 | 240c 4489 
+
+  0x000001fba98e8eac: ;   {runtime_call UncommonTrapBlob}
+  0x000001fba98e8eac: 4424 10e8 
+
+  0x000001fba98e8eb0: ; ImmutableOopMap {rbp=Oop [12]=NarrowOop [16]=NarrowOop }
+                      ;*if_acmpne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@11 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@0 (line 2731)
+  0x000001fba98e8eb0: 4c94 55f8 | ba45 ffff | ffc5 fa11 | 0424 c5fa | 114c 2404 | c5fa 1154 
+
+  0x000001fba98e8ec8: ;   {runtime_call UncommonTrapBlob}
+  0x000001fba98e8ec8: 2408 90e8 
+
+  0x000001fba98e8ecc: ; ImmutableOopMap {rbp=NarrowOop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilities@5 (line 123)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@0 (line 2731)
+  0x000001fba98e8ecc: 3094 55f8 | 4533 d24d | 3bda bdff | ffff ff7c | 0840 0f95 | c540 0fb6 | edba 45ff | ffff c5fa 
+  0x000001fba98e8eec: 1104 24c5 | fa11 4c24 | 04c5 fa11 | 5424 084c | 895c 2410 
+
+  0x000001fba98e8f00: ;   {runtime_call UncommonTrapBlob}
+  0x000001fba98e8f00: 6666 90e8 
+
+  0x000001fba98e8f04: ; ImmutableOopMap {}
+                      ;*ifne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.BufferChecks::checkFunctionAddress@9 (line 57)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@12 (line 2733)
+  0x000001fba98e8f04: f893 55f8 | 488b d048 | 83c4 305d 
+
+  0x000001fba98e8f10: ;   {runtime_call _rethrow_Java}
+  0x000001fba98e8f10: e9eb 7360 | f8ba f6ff 
+
+  0x000001fba98e8f18: ;   {runtime_call UncommonTrapBlob}
+  0x000001fba98e8f18: ffff 90e8 
+
+  0x000001fba98e8f1c: ; ImmutableOopMap {}
+                      ;*getfield owner {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.opengl.GLContext::getCapabilitiesImpl@5 (line 132)
+                      ; - org.lwjgl.opengl.GLContext::getCapabilities@0 (line 122)
+                      ; - org.lwjgl.opengl.GL11::glVertex3f@0 (line 2731)
+  0x000001fba98e8f1c: e093 55f8 
+
+  0x000001fba98e8f20: ;   {internal_word}
+  0x000001fba98e8f20: 49ba 818e | 8ea9 fb01 | 0000 4d89 | 9750 0300 
+
+  0x000001fba98e8f30: ;   {runtime_call SafepointBlob}
+  0x000001fba98e8f30: 00e9 caa4 | 55f8 f4f4 | f4f4 f4f4 | f4f4 f4f4 
+[Stub Code]
+  0x000001fba98e8f40: ;   {no_reloc}
+  0x000001fba98e8f40: 48bb 0000 | 0000 0000 
+
+  0x000001fba98e8f48: ;   {runtime_call}
+  0x000001fba98e8f48: 0000 e9fb 
+
+  0x000001fba98e8f4c: ;   {runtime_call ExceptionBlob}
+  0x000001fba98e8f4c: ffff ffe9 | accd 5ff8 
+[Deopt Handler Code]
+  0x000001fba98e8f54: e800 0000 | 0048 832c 
+
+  0x000001fba98e8f5c: ;   {runtime_call DeoptimizationBlob}
+  0x000001fba98e8f5c: 2405 e93d | 9755 f8f4 | f4f4 f4f4 
+[/MachCode]
+
+
+Compiled method (c1)   16910 1193       3       opencraft.graphics.models.ModelCube::drawModel (1075 bytes)
+ total in heap  [0x000001fba259a010,0x000001fba259d2a0] = 12944
+ relocation     [0x000001fba259a168,0x000001fba259a8d0] = 1896
+ constants      [0x000001fba259a8e0,0x000001fba259aa40] = 352
+ main code      [0x000001fba259aa40,0x000001fba259c0c0] = 5760
+ stub code      [0x000001fba259c0c0,0x000001fba259c6f8] = 1592
+ oops           [0x000001fba259c6f8,0x000001fba259c700] = 8
+ metadata       [0x000001fba259c700,0x000001fba259c708] = 8
+ scopes data    [0x000001fba259c708,0x000001fba259cb70] = 1128
+ scopes pcs     [0x000001fba259cb70,0x000001fba259d280] = 1808
+ dependencies   [0x000001fba259d280,0x000001fba259d288] = 8
+ nul chk table  [0x000001fba259d288,0x000001fba259d2a0] = 24
+
+
+[Constant Pool]
+             Address          hex4                    hex8      
+  0x000001fba259a8e0:   0x3f800000      0x000000003f800000      
+  0x000001fba259a8e4:   0x00000000                              
+  0x000001fba259a8e8:   0x00000000      0x3f80000000000000      
+  0x000001fba259a8ec:   0x3f800000                              
+  0x000001fba259a8f0:   0x3f800000      0x3f8000003f800000      
+  0x000001fba259a8f4:   0x3f800000                              
+  0x000001fba259a8f8:   0x3f800000      0x3f8000003f800000      
+  0x000001fba259a8fc:   0x3f800000                              
+  0x000001fba259a900:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a904:   0x3f800000                              
+  0x000001fba259a908:   0x00000000      0x3f80000000000000      
+  0x000001fba259a90c:   0x3f800000                              
+  0x000001fba259a910:   0x3dcccccd      0x3dcccccd3dcccccd      
+  0x000001fba259a914:   0x3dcccccd                              
+  0x000001fba259a918:   0x3f800000      0x000000003f800000      
+  0x000001fba259a91c:   0x00000000                              
+  0x000001fba259a920:   0x3f800000      0x000000003f800000      
+  0x000001fba259a924:   0x00000000                              
+  0x000001fba259a928:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a92c:   0x3f800000                              
+  0x000001fba259a930:   0xbf800000      0x3f800000bf800000      
+  0x000001fba259a934:   0x3f800000                              
+  0x000001fba259a938:   0x00000000      0xbf80000000000000      
+  0x000001fba259a93c:   0xbf800000                              
+  0x000001fba259a940:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a944:   0x3f800000                              
+  0x000001fba259a948:   0xbf800000      0x3dcccccdbf800000      
+  0x000001fba259a94c:   0x3dcccccd                              
+  0x000001fba259a950:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a954:   0x3f800000                              
+  0x000001fba259a958:   0xbf800000      0x3dcccccdbf800000      
+  0x000001fba259a95c:   0x3dcccccd                              
+  0x000001fba259a960:   0x3f800000      0xbf8000003f800000      
+  0x000001fba259a964:   0xbf800000                              
+  0x000001fba259a968:   0x3f800000      0xbf8000003f800000      
+  0x000001fba259a96c:   0xbf800000                              
+  0x000001fba259a970:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a974:   0x3f800000                              
+  0x000001fba259a978:   0xbf800000      0x3dcccccdbf800000      
+  0x000001fba259a97c:   0x3dcccccd                              
+  0x000001fba259a980:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a984:   0x3f800000                              
+  0x000001fba259a988:   0xbf800000      0x3dcccccdbf800000      
+  0x000001fba259a98c:   0x3dcccccd                              
+  0x000001fba259a990:   0x3f800000      0x3f8000003f800000      
+  0x000001fba259a994:   0x3f800000                              
+  0x000001fba259a998:   0x3f800000      0x3f8000003f800000      
+  0x000001fba259a99c:   0x3f800000                              
+  0x000001fba259a9a0:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a9a4:   0x3f800000                              
+  0x000001fba259a9a8:   0x3f800000      0x3dcccccd3f800000      
+  0x000001fba259a9ac:   0x3dcccccd                              
+  0x000001fba259a9b0:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a9b4:   0x3f800000                              
+  0x000001fba259a9b8:   0x3f800000      0x3dcccccd3f800000      
+  0x000001fba259a9bc:   0x3dcccccd                              
+  0x000001fba259a9c0:   0x3f800000      0x3f8000003f800000      
+  0x000001fba259a9c4:   0x3f800000                              
+  0x000001fba259a9c8:   0x3f800000      0x3f8000003f800000      
+  0x000001fba259a9cc:   0x3f800000                              
+  0x000001fba259a9d0:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a9d4:   0x3f800000                              
+  0x000001fba259a9d8:   0x3f800000      0x3dcccccd3f800000      
+  0x000001fba259a9dc:   0x3dcccccd                              
+  0x000001fba259a9e0:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259a9e4:   0x3f800000                              
+  0x000001fba259a9e8:   0x3f800000      0x3dcccccd3f800000      
+  0x000001fba259a9ec:   0x3dcccccd                              
+  0x000001fba259a9f0:   0x3f800000      0xbf8000003f800000      
+  0x000001fba259a9f4:   0xbf800000                              
+  0x000001fba259a9f8:   0x3f800000      0xbf8000003f800000      
+  0x000001fba259a9fc:   0xbf800000                              
+  0x000001fba259aa00:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259aa04:   0x3f800000                              
+  0x000001fba259aa08:   0xbf800000      0x3dcccccdbf800000      
+  0x000001fba259aa0c:   0x3dcccccd                              
+  0x000001fba259aa10:   0x3dcccccd      0x3f8000003dcccccd      
+  0x000001fba259aa14:   0x3f800000                              
+  0x000001fba259aa18:   0xbf800000      0x3dcccccdbf800000      
+  0x000001fba259aa1c:   0x3dcccccd                              
+  0x000001fba259aa20:   0x3f800000      0xf4f4f4f43f800000      
+  0x000001fba259aa24:   0xf4f4f4f4                              
+  0x000001fba259aa28:   0xf4f4f4f4      0xf4f4f4f4f4f4f4f4      
+  0x000001fba259aa2c:   0xf4f4f4f4                              
+  0x000001fba259aa30:   0xf4f4f4f4      0xf4f4f4f4f4f4f4f4      
+  0x000001fba259aa34:   0xf4f4f4f4                              
+  0x000001fba259aa38:   0xf4f4f4f4      0xf4f4f4f4f4f4f4f4      
+  0x000001fba259aa3c:   0xf4f4f4f4                              
+
+[MachCode]
+[Verified Entry Point]
+  # {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube'
+  # parm0:    xmm0      = float
+  # parm1:    xmm1      = float
+  # parm2:    xmm2      = float
+  # parm3:    rdx:rdx   = '[F'
+  # parm4:    xmm3      = float
+  # parm5:    xmm4      = float
+  # parm6:    xmm5      = float
+  # parm7:    xmm6      = float
+  # parm8:    xmm7      = float
+  # parm9:    [sp+0x90]   = float  (sp of caller)
+  # parm10:   [sp+0x98]   = float
+  0x000001fba259aa40: ;   {no_reloc}
+  0x000001fba259aa40: 8984 2400 | 90ff ff55 | 4881 ec80 | 0000 0048 | 8954 2430 
+
+  0x000001fba259aa54: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259aa54: 48be 0080 | d7c7 fb01 | 0000 8bbe | cc00 0000 | 83c7 0289 | becc 0000 | 0081 e7fe | 0700 0083 
+  0x000001fba259aa74: ff00 0f84 | f614 0000 | c5fa 117c | 2454 c5fa | 1174 2450 | c5fa 116c | 244c c5fa | 1164 2448 
+  0x000001fba259aa94: c5fa 1154 | 2440 c5fa | 114c 243c | c5fa 1144 | 2438 c5fa | 10a4 2498 
+
+  0x000001fba259aaac: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259aaac: 0000 0048 | be00 80d7 | c7fb 0100 | 0048 8386 | 1001 0000 | 01c5 f828 | c3c5 f828 | cbc5 f828 
+  0x000001fba259aacc: d3c5 fa11 | 5c24 44c5 
+
+  0x000001fba259aad4: ;   {static_call}
+  0x000001fba259aad4: f828 dce8 
+
+  0x000001fba259aad8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@8 (line 114)
+  0x000001fba259aad8: c420 4007 
+
+  0x000001fba259aadc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259aadc: 48be 0080 | d7c7 fb01 | 0000 4883 | 8620 0100 | 0001 c5f8 
+
+  0x000001fba259aaf0: ;   {section_word}
+  0x000001fba259aaf0: 57c0 c5fa | 100d e6fd | ffff c5e8 
+
+  0x000001fba259aafc: ;   {static_call}
+  0x000001fba259aafc: 57d2 90e8 
+
+  0x000001fba259ab00: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@14 (line 114)
+  0x000001fba259ab00: 9caa 3b07 | 488b 5424 | 3081 7a0c | 0000 0000 | 0f86 8714 | 0000 c5fa | 1042 1081 | 7a0c 0100 
+  0x000001fba259ab20: 0000 0f86 | 8714 0000 | c5fa 104a 
+
+  0x000001fba259ab2c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ab2c: 1448 be00 | 80d7 c7fb | 0100 0048 | 8386 3001 
+
+  0x000001fba259ab3c: ;   {section_word}
+  0x000001fba259ab3c: 0000 01c5 | fa58 059d 
+
+  0x000001fba259ab44: ;   {section_word}
+  0x000001fba259ab44: fdff ffc5 | f258 0d99 
+
+  0x000001fba259ab4c: ;   {section_word}
+  0x000001fba259ab4c: fdff ffc5 | fa10 1595 | fdff ffc5 | ea5c d1c5 
+
+  0x000001fba259ab5c: ;   {static_call}
+  0x000001fba259ab5c: f828 cae8 
+
+  0x000001fba259ab60: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@29 (line 114)
+  0x000001fba259ab60: 3cd6 3407 
+
+  0x000001fba259ab64: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ab64: 48be 0080 | d7c7 fb01 | 0000 4883 | 8640 0100 | 0001 c5fa | 1044 2438 
+
+  0x000001fba259ab7c: ;   {section_word}
+  0x000001fba259ab7c: c5fa 5805 | 6cfd ffff | c5fa 104c 
+
+  0x000001fba259ab88: ;   {section_word}
+  0x000001fba259ab88: 243c c5f2 | 580d 62fd | ffff c5fa | 1054 2440 
+
+  0x000001fba259ab98: ;   {section_word}
+  0x000001fba259ab98: c5ea 5815 | 58fd ffff | c5f8 28d8 | c5f8 28c3 | c5f8 28e1 | c5f8 28cc | c5f8 28ea | c5f8 28d5 
+  0x000001fba259abb8: c5fa 115c | 2460 c5fa | 116c 245c | c5fa 1164 | 2458 0f1f 
+
+  0x000001fba259abcc: ;   {static_call}
+  0x000001fba259abcc: 4400 00e8 
+
+  0x000001fba259abd0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@41 (line 114)
+  0x000001fba259abd0: 4ce2 3407 
+
+  0x000001fba259abd4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259abd4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8650 0100 | 0001 c5fa | 1044 2444 | c5fa 104c | 2444 c5fa 
+  0x000001fba259abf4: 1054 2444 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259ac04: ;   {static_call}
+  0x000001fba259ac04: 4400 00e8 
+
+  0x000001fba259ac08: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@52 (line 117)
+  0x000001fba259ac08: 941f 4007 
+
+  0x000001fba259ac0c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ac0c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8660 0100 | 0001 c5f8 
+
+  0x000001fba259ac20: ;   {section_word}
+  0x000001fba259ac20: 57c0 c5fa | 100d d2fc | ffff c5e8 
+
+  0x000001fba259ac2c: ;   {static_call}
+  0x000001fba259ac2c: 57d2 90e8 
+
+  0x000001fba259ac30: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@58 (line 117)
+  0x000001fba259ac30: 6ca9 3b07 | 488b 5424 | 30c5 fa10 | 4210 c5fa 
+
+  0x000001fba259ac40: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ac40: 104a 1448 | be00 80d7 | c7fb 0100 | 0048 8386 | 7001 0000 
+
+  0x000001fba259ac54: ;   {section_word}
+  0x000001fba259ac54: 01c5 fa58 | 05a3 fcff 
+
+  0x000001fba259ac5c: ;   {section_word}
+  0x000001fba259ac5c: ffc5 fa10 | 159f fcff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259ac6c: ;   {static_call}
+  0x000001fba259ac6c: ca66 90e8 
+
+  0x000001fba259ac70: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@72 (line 117)
+  0x000001fba259ac70: 2cd5 3407 
+
+  0x000001fba259ac74: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ac74: 48be 0080 | d7c7 fb01 | 0000 4883 | 8680 0100 | 0001 c5fa | 1044 2438 
+
+  0x000001fba259ac8c: ;   {section_word}
+  0x000001fba259ac8c: c5fa 5805 | 74fc ffff | c5f8 28d8 | c5f8 28c3 | c5fa 104c | 2458 c5fa | 1054 245c | c5fa 115c 
+  0x000001fba259acac: ;   {static_call}
+  0x000001fba259acac: 2464 90e8 
+
+  0x000001fba259acb0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@84 (line 117)
+  0x000001fba259acb0: 6ce1 3407 
+
+  0x000001fba259acb4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259acb4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8690 0100 | 0001 c5fa | 1044 2444 | c5fa 104c | 2444 c5fa 
+  0x000001fba259acd4: 1054 2444 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259ace4: ;   {static_call}
+  0x000001fba259ace4: 4400 00e8 
+
+  0x000001fba259ace8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@95 (line 120)
+  0x000001fba259ace8: b41e 4007 
+
+  0x000001fba259acec: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259acec: 48be 0080 | d7c7 fb01 | 0000 4883 | 86a0 0100 | 0001 c5f8 
+
+  0x000001fba259ad00: ;   {section_word}
+  0x000001fba259ad00: 57c0 c5fa | 100d 02fc | ffff c5e8 
+
+  0x000001fba259ad0c: ;   {static_call}
+  0x000001fba259ad0c: 57d2 90e8 
+
+  0x000001fba259ad10: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@101 (line 120)
+  0x000001fba259ad10: 8ca8 3b07 | 488b 5424 | 30c5 fa10 | 4210 c5fa 
+
+  0x000001fba259ad20: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ad20: 104a 1448 | be00 80d7 | c7fb 0100 | 0048 8386 | b001 0000 
+
+  0x000001fba259ad34: ;   {section_word}
+  0x000001fba259ad34: 01c5 fa58 | 05d3 fbff 
+
+  0x000001fba259ad3c: ;   {section_word}
+  0x000001fba259ad3c: ffc5 f258 | 0dcf fbff 
+
+  0x000001fba259ad44: ;   {section_word}
+  0x000001fba259ad44: ffc5 fa10 | 15cb fbff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259ad54: ;   {static_call}
+  0x000001fba259ad54: ca66 90e8 
+
+  0x000001fba259ad58: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@118 (line 120)
+  0x000001fba259ad58: 44d4 3407 
+
+  0x000001fba259ad5c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ad5c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86c0 0100 | 0001 c5fa | 1054 2440 
+
+  0x000001fba259ad74: ;   {section_word}
+  0x000001fba259ad74: c5ea 5815 | a0fb ffff | c5fa 1044 | 2464 c5fa | 104c 2458 | c5f8 28da | c5f8 28d3 | c5fa 115c 
+  0x000001fba259ad94: ;   {static_call}
+  0x000001fba259ad94: 2468 90e8 
+
+  0x000001fba259ad98: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@130 (line 120)
+  0x000001fba259ad98: 84e0 3407 
+
+  0x000001fba259ad9c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ad9c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86d0 0100 | 0001 c5fa | 1044 2444 | c5fa 104c | 2444 c5fa 
+  0x000001fba259adbc: 1054 2444 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259adcc: ;   {static_call}
+  0x000001fba259adcc: 4400 00e8 
+
+  0x000001fba259add0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@141 (line 123)
+  0x000001fba259add0: cc1d 4007 
+
+  0x000001fba259add4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259add4: 48be 0080 | d7c7 fb01 | 0000 4883 | 86e0 0100 | 0001 c5f8 
+
+  0x000001fba259ade8: ;   {section_word}
+  0x000001fba259ade8: 57c0 c5fa | 100d 2efb | ffff c5e8 
+
+  0x000001fba259adf4: ;   {static_call}
+  0x000001fba259adf4: 57d2 90e8 
+
+  0x000001fba259adf8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@147 (line 123)
+  0x000001fba259adf8: a4a7 3b07 | 488b 5424 | 30c5 fa10 | 4210 c5fa 
+
+  0x000001fba259ae08: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ae08: 104a 1448 | be00 80d7 | c7fb 0100 | 0048 8386 | f001 0000 
+
+  0x000001fba259ae1c: ;   {section_word}
+  0x000001fba259ae1c: 01c5 fa58 | 05ff faff 
+
+  0x000001fba259ae24: ;   {section_word}
+  0x000001fba259ae24: ffc5 f258 | 0dfb faff 
+
+  0x000001fba259ae2c: ;   {section_word}
+  0x000001fba259ae2c: ffc5 fa10 | 15f7 faff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259ae3c: ;   {static_call}
+  0x000001fba259ae3c: ca66 90e8 
+
+  0x000001fba259ae40: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@163 (line 123)
+  0x000001fba259ae40: 5cd3 3407 
+
+  0x000001fba259ae44: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ae44: 48be 0080 | d7c7 fb01 | 0000 4883 | 8600 0200 | 0001 c5fa | 1044 2460 | c5fa 104c | 2458 c5fa 
+  0x000001fba259ae64: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259ae6c: ;   {static_call}
+  0x000001fba259ae6c: 0000 00e8 
+
+  0x000001fba259ae70: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@175 (line 123)
+  0x000001fba259ae70: acdf 3407 
+
+  0x000001fba259ae74: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ae74: 48be 0080 | d7c7 fb01 | 0000 4883 | 8610 0200 | 0001 c5fa | 1044 2448 | c5fa 104c | 2448 c5fa 
+  0x000001fba259ae94: 1054 2448 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259aea4: ;   {static_call}
+  0x000001fba259aea4: 4400 00e8 
+
+  0x000001fba259aea8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@186 (line 131)
+  0x000001fba259aea8: f41c 4007 
+
+  0x000001fba259aeac: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259aeac: 48be 0080 | d7c7 fb01 | 0000 4883 | 8620 0200 | 0001 c5f8 
+
+  0x000001fba259aec0: ;   {section_word}
+  0x000001fba259aec0: 57c0 c5fa | 100d 66fa | ffff c5e8 
+
+  0x000001fba259aecc: ;   {static_call}
+  0x000001fba259aecc: 57d2 90e8 
+
+  0x000001fba259aed0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@193 (line 131)
+  0x000001fba259aed0: cca6 3b07 | 488b 5424 | 3081 7a0c | 0200 0000 | 0f86 db10 | 0000 c5fa | 1042 1881 | 7a0c 0300 
+  0x000001fba259aef0: 0000 0f86 | db10 0000 | c5fa 104a 
+
+  0x000001fba259aefc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259aefc: 1c48 be00 | 80d7 c7fb | 0100 0048 | 8386 3002 
+
+  0x000001fba259af0c: ;   {section_word}
+  0x000001fba259af0c: 0000 01c5 | fa10 151d | faff ffc5 | ea5c d1c5 
+
+  0x000001fba259af1c: ;   {static_call}
+  0x000001fba259af1c: f828 cae8 
+
+  0x000001fba259af20: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@204 (line 131)
+  0x000001fba259af20: 7cd2 3407 
+
+  0x000001fba259af24: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259af24: 48be 0080 | d7c7 fb01 | 0000 4883 | 8640 0200 | 0001 c5fa | 104c 243c 
+
+  0x000001fba259af3c: ;   {section_word}
+  0x000001fba259af3c: c5f2 580d | f4f9 ffff | c5fa 1044 | 2460 c5f8 | 28d9 c5f8 | 28cb c5fa | 1054 245c | c5fa 115c 
+  0x000001fba259af5c: ;   {static_call}
+  0x000001fba259af5c: 246c 90e8 
+
+  0x000001fba259af60: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@216 (line 131)
+  0x000001fba259af60: bcde 3407 
+
+  0x000001fba259af64: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259af64: 48be 0080 | d7c7 fb01 | 0000 4883 | 8650 0200 | 0001 c5fa | 1044 2448 | c5fa 104c | 2448 c5fa 
+  0x000001fba259af84: 1054 2448 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259af94: ;   {static_call}
+  0x000001fba259af94: 4400 00e8 
+
+  0x000001fba259af98: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@227 (line 134)
+  0x000001fba259af98: 041c 4007 
+
+  0x000001fba259af9c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259af9c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8660 0200 | 0001 c5f8 
+
+  0x000001fba259afb0: ;   {section_word}
+  0x000001fba259afb0: 57c0 c5fa | 100d 82f9 | ffff c5e8 
+
+  0x000001fba259afbc: ;   {static_call}
+  0x000001fba259afbc: 57d2 90e8 
+
+  0x000001fba259afc0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@234 (line 134)
+  0x000001fba259afc0: dca5 3b07 | 488b 5424 | 30c5 fa10 | 4218 c5fa 
+
+  0x000001fba259afd0: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259afd0: 104a 1c48 | be00 80d7 | c7fb 0100 | 0048 8386 | 7002 0000 
+
+  0x000001fba259afe4: ;   {section_word}
+  0x000001fba259afe4: 01c5 fa58 | 0553 f9ff 
+
+  0x000001fba259afec: ;   {section_word}
+  0x000001fba259afec: ffc5 fa10 | 154f f9ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259affc: ;   {static_call}
+  0x000001fba259affc: ca66 90e8 
+
+  0x000001fba259b000: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@248 (line 134)
+  0x000001fba259b000: 9cd1 3407 
+
+  0x000001fba259b004: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b004: 48be 0080 | d7c7 fb01 | 0000 4883 | 8680 0200 | 0001 c5fa | 1044 2464 | c5fa 104c | 246c c5fa 
+  0x000001fba259b024: 1054 245c | 0f1f 8000 
+
+  0x000001fba259b02c: ;   {static_call}
+  0x000001fba259b02c: 0000 00e8 
+
+  0x000001fba259b030: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@260 (line 134)
+  0x000001fba259b030: ecdd 3407 
+
+  0x000001fba259b034: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b034: 48be 0080 | d7c7 fb01 | 0000 4883 | 8690 0200 | 0001 c5fa | 1044 2448 | c5fa 104c | 2448 c5fa 
+  0x000001fba259b054: 1054 2448 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b064: ;   {static_call}
+  0x000001fba259b064: 4400 00e8 
+
+  0x000001fba259b068: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@271 (line 137)
+  0x000001fba259b068: 341b 4007 
+
+  0x000001fba259b06c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b06c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86a0 0200 | 0001 c5f8 
+
+  0x000001fba259b080: ;   {section_word}
+  0x000001fba259b080: 57c0 c5fa | 100d bef8 | ffff c5e8 
+
+  0x000001fba259b08c: ;   {static_call}
+  0x000001fba259b08c: 57d2 90e8 
+
+  0x000001fba259b090: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@278 (line 137)
+  0x000001fba259b090: 0ca5 3b07 | 488b 5424 | 30c5 fa10 | 4218 c5fa 
+
+  0x000001fba259b0a0: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b0a0: 104a 1c48 | be00 80d7 | c7fb 0100 | 0048 8386 | b002 0000 
+
+  0x000001fba259b0b4: ;   {section_word}
+  0x000001fba259b0b4: 01c5 fa58 | 058f f8ff 
+
+  0x000001fba259b0bc: ;   {section_word}
+  0x000001fba259b0bc: ffc5 f258 | 0d8b f8ff 
+
+  0x000001fba259b0c4: ;   {section_word}
+  0x000001fba259b0c4: ffc5 fa10 | 1587 f8ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b0d4: ;   {static_call}
+  0x000001fba259b0d4: ca66 90e8 
+
+  0x000001fba259b0d8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@295 (line 137)
+  0x000001fba259b0d8: c4d0 3407 
+
+  0x000001fba259b0dc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b0dc: 48be 0080 | d7c7 fb01 | 0000 4883 | 86c0 0200 | 0001 c5fa | 1044 2464 | c5fa 104c | 246c c5fa 
+  0x000001fba259b0fc: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b104: ;   {static_call}
+  0x000001fba259b104: 0000 00e8 
+
+  0x000001fba259b108: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@307 (line 137)
+  0x000001fba259b108: 14dd 3407 
+
+  0x000001fba259b10c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b10c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86d0 0200 | 0001 c5fa | 1044 2448 | c5fa 104c | 2448 c5fa 
+  0x000001fba259b12c: 1054 2448 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b13c: ;   {static_call}
+  0x000001fba259b13c: 4400 00e8 
+
+  0x000001fba259b140: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@318 (line 140)
+  0x000001fba259b140: 5c1a 4007 
+
+  0x000001fba259b144: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b144: 48be 0080 | d7c7 fb01 | 0000 4883 | 86e0 0200 | 0001 c5f8 
+
+  0x000001fba259b158: ;   {section_word}
+  0x000001fba259b158: 57c0 c5fa | 100d f6f7 | ffff c5e8 
+
+  0x000001fba259b164: ;   {static_call}
+  0x000001fba259b164: 57d2 90e8 
+
+  0x000001fba259b168: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@325 (line 140)
+  0x000001fba259b168: 34a4 3b07 | 488b 5424 | 30c5 fa10 | 4218 c5fa 
+
+  0x000001fba259b178: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b178: 104a 1c48 | be00 80d7 | c7fb 0100 | 0048 8386 | f002 0000 
+
+  0x000001fba259b18c: ;   {section_word}
+  0x000001fba259b18c: 01c5 f258 | 0dc7 f7ff 
+
+  0x000001fba259b194: ;   {section_word}
+  0x000001fba259b194: ffc5 fa10 | 15c3 f7ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b1a4: ;   {static_call}
+  0x000001fba259b1a4: ca66 90e8 
+
+  0x000001fba259b1a8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@339 (line 140)
+  0x000001fba259b1a8: f4cf 3407 
+
+  0x000001fba259b1ac: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b1ac: 48be 0080 | d7c7 fb01 | 0000 4883 | 8600 0300 | 0001 c5fa | 1044 2460 | c5fa 104c | 246c c5fa 
+  0x000001fba259b1cc: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b1d4: ;   {static_call}
+  0x000001fba259b1d4: 0000 00e8 
+
+  0x000001fba259b1d8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@351 (line 140)
+  0x000001fba259b1d8: 44dc 3407 
+
+  0x000001fba259b1dc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b1dc: 48be 0080 | d7c7 fb01 | 0000 4883 | 8610 0300 | 0001 c5fa | 1044 244c | c5fa 104c | 244c c5fa 
+  0x000001fba259b1fc: 1054 244c | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b20c: ;   {static_call}
+  0x000001fba259b20c: 4400 00e8 
+
+  0x000001fba259b210: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@362 (line 145)
+  0x000001fba259b210: 8c19 4007 
+
+  0x000001fba259b214: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b214: 48be 0080 | d7c7 fb01 | 0000 4883 | 8620 0300 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b22c: ;   {section_word}
+  0x000001fba259b22c: 57c9 c5fa | 1015 2ef7 
+
+  0x000001fba259b234: ;   {static_call}
+  0x000001fba259b234: ffff 90e8 
+
+  0x000001fba259b238: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@369 (line 145)
+  0x000001fba259b238: 64a3 3b07 | 488b 5424 | 3081 7a0c | 0400 0000 | 0f86 970d | 0000 c5fa | 1042 2081 | 7a0c 0500 
+  0x000001fba259b258: 0000 0f86 | 970d 0000 | c5fa 104a 
+
+  0x000001fba259b264: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b264: 2448 be00 | 80d7 c7fb | 0100 0048 | 8386 3003 
+
+  0x000001fba259b274: ;   {section_word}
+  0x000001fba259b274: 0000 01c5 | fa10 15e9 | f6ff ffc5 | ea5c d1c5 
+
+  0x000001fba259b284: ;   {static_call}
+  0x000001fba259b284: f828 cae8 
+
+  0x000001fba259b288: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@380 (line 145)
+  0x000001fba259b288: 14cf 3407 
+
+  0x000001fba259b28c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b28c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8640 0300 | 0001 c5fa | 1044 2464 | c5fa 104c | 246c c5fa 
+  0x000001fba259b2ac: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b2b4: ;   {static_call}
+  0x000001fba259b2b4: 0000 00e8 
+
+  0x000001fba259b2b8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@392 (line 145)
+  0x000001fba259b2b8: 64db 3407 
+
+  0x000001fba259b2bc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b2bc: 48be 0080 | d7c7 fb01 | 0000 4883 | 8650 0300 | 0001 c5fa | 1044 244c | c5fa 104c | 244c c5fa 
+  0x000001fba259b2dc: 1054 244c | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b2ec: ;   {static_call}
+  0x000001fba259b2ec: 4400 00e8 
+
+  0x000001fba259b2f0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@403 (line 148)
+  0x000001fba259b2f0: ac18 4007 
+
+  0x000001fba259b2f4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b2f4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8660 0300 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b30c: ;   {section_word}
+  0x000001fba259b30c: 57c9 c5fa | 1015 56f6 
+
+  0x000001fba259b314: ;   {static_call}
+  0x000001fba259b314: ffff 90e8 
+
+  0x000001fba259b318: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@410 (line 148)
+  0x000001fba259b318: 84a2 3b07 | 488b 5424 | 30c5 fa10 | 4220 c5fa 
+
+  0x000001fba259b328: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b328: 104a 2448 | be00 80d7 | c7fb 0100 | 0048 8386 | 7003 0000 
+
+  0x000001fba259b33c: ;   {section_word}
+  0x000001fba259b33c: 01c5 fa58 | 052b f6ff 
+
+  0x000001fba259b344: ;   {section_word}
+  0x000001fba259b344: ffc5 fa10 | 1527 f6ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b354: ;   {static_call}
+  0x000001fba259b354: ca66 90e8 
+
+  0x000001fba259b358: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@424 (line 148)
+  0x000001fba259b358: 44ce 3407 
+
+  0x000001fba259b35c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b35c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8680 0300 | 0001 c5fa | 1044 2460 | c5fa 104c | 246c c5fa 
+  0x000001fba259b37c: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b384: ;   {static_call}
+  0x000001fba259b384: 0000 00e8 
+
+  0x000001fba259b388: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@436 (line 148)
+  0x000001fba259b388: 94da 3407 
+
+  0x000001fba259b38c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b38c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8690 0300 | 0001 c5fa | 1044 244c | c5fa 104c | 244c c5fa 
+  0x000001fba259b3ac: 1054 244c | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b3bc: ;   {static_call}
+  0x000001fba259b3bc: 4400 00e8 
+
+  0x000001fba259b3c0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@447 (line 151)
+  0x000001fba259b3c0: dc17 4007 
+
+  0x000001fba259b3c4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b3c4: 48be 0080 | d7c7 fb01 | 0000 4883 | 86a0 0300 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b3dc: ;   {section_word}
+  0x000001fba259b3dc: 57c9 c5fa | 1015 92f5 
+
+  0x000001fba259b3e4: ;   {static_call}
+  0x000001fba259b3e4: ffff 90e8 
+
+  0x000001fba259b3e8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@454 (line 151)
+  0x000001fba259b3e8: b4a1 3b07 | 488b 5424 | 30c5 fa10 | 4220 c5fa 
+
+  0x000001fba259b3f8: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b3f8: 104a 2448 | be00 80d7 | c7fb 0100 | 0048 8386 | b003 0000 
+
+  0x000001fba259b40c: ;   {section_word}
+  0x000001fba259b40c: 01c5 fa58 | 0567 f5ff 
+
+  0x000001fba259b414: ;   {section_word}
+  0x000001fba259b414: ffc5 f258 | 0d63 f5ff 
+
+  0x000001fba259b41c: ;   {section_word}
+  0x000001fba259b41c: ffc5 fa10 | 155f f5ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b42c: ;   {static_call}
+  0x000001fba259b42c: ca66 90e8 
+
+  0x000001fba259b430: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@471 (line 151)
+  0x000001fba259b430: 6ccd 3407 
+
+  0x000001fba259b434: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b434: 48be 0080 | d7c7 fb01 | 0000 4883 | 86c0 0300 | 0001 c5fa | 1044 2460 | c5fa 104c | 2458 c5fa 
+  0x000001fba259b454: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b45c: ;   {static_call}
+  0x000001fba259b45c: 0000 00e8 
+
+  0x000001fba259b460: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@483 (line 151)
+  0x000001fba259b460: bcd9 3407 
+
+  0x000001fba259b464: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b464: 48be 0080 | d7c7 fb01 | 0000 4883 | 86d0 0300 | 0001 c5fa | 1044 244c | c5fa 104c | 244c c5fa 
+  0x000001fba259b484: 1054 244c | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b494: ;   {static_call}
+  0x000001fba259b494: 4400 00e8 
+
+  0x000001fba259b498: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@494 (line 154)
+  0x000001fba259b498: 0417 4007 
+
+  0x000001fba259b49c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b49c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86e0 0300 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b4b4: ;   {section_word}
+  0x000001fba259b4b4: 57c9 c5fa | 1015 caf4 
+
+  0x000001fba259b4bc: ;   {static_call}
+  0x000001fba259b4bc: ffff 90e8 
+
+  0x000001fba259b4c0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@501 (line 154)
+  0x000001fba259b4c0: dca0 3b07 | 488b 5424 | 30c5 fa10 | 4220 c5fa 
+
+  0x000001fba259b4d0: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b4d0: 104a 2448 | be00 80d7 | c7fb 0100 | 0048 8386 | f003 0000 
+
+  0x000001fba259b4e4: ;   {section_word}
+  0x000001fba259b4e4: 01c5 f258 | 0d9f f4ff 
+
+  0x000001fba259b4ec: ;   {section_word}
+  0x000001fba259b4ec: ffc5 fa10 | 159b f4ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b4fc: ;   {static_call}
+  0x000001fba259b4fc: ca66 90e8 
+
+  0x000001fba259b500: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@515 (line 154)
+  0x000001fba259b500: 9ccc 3407 
+
+  0x000001fba259b504: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b504: 48be 0080 | d7c7 fb01 | 0000 4883 | 8600 0400 | 0001 c5fa | 1044 2464 | c5fa 104c | 2458 c5fa 
+  0x000001fba259b524: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b52c: ;   {static_call}
+  0x000001fba259b52c: 0000 00e8 
+
+  0x000001fba259b530: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@527 (line 154)
+  0x000001fba259b530: ecd8 3407 
+
+  0x000001fba259b534: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b534: 48be 0080 | d7c7 fb01 | 0000 4883 | 8610 0400 | 0001 c5fa | 1044 2450 | c5fa 104c | 2450 c5fa 
+  0x000001fba259b554: 1054 2450 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b564: ;   {static_call}
+  0x000001fba259b564: 4400 00e8 
+
+  0x000001fba259b568: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@538 (line 159)
+  0x000001fba259b568: 3416 4007 
+
+  0x000001fba259b56c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b56c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8620 0400 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b584: ;   {section_word}
+  0x000001fba259b584: 57c9 c5fa | 1015 06f4 
+
+  0x000001fba259b58c: ;   {static_call}
+  0x000001fba259b58c: ffff 90e8 
+
+  0x000001fba259b590: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@544 (line 159)
+  0x000001fba259b590: 0ca0 3b07 | 488b 5424 | 3081 7a0c | 0600 0000 | 0f86 630a | 0000 c5fa | 1042 2881 | 7a0c 0700 
+  0x000001fba259b5b0: 0000 0f86 | 630a 0000 | c5fa 104a 
+
+  0x000001fba259b5bc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b5bc: 2c48 be00 | 80d7 c7fb | 0100 0048 | 8386 3004 
+
+  0x000001fba259b5cc: ;   {section_word}
+  0x000001fba259b5cc: 0000 01c5 | fa10 15c1 | f3ff ffc5 | ea5c d1c5 
+
+  0x000001fba259b5dc: ;   {static_call}
+  0x000001fba259b5dc: f828 cae8 
+
+  0x000001fba259b5e0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@557 (line 159)
+  0x000001fba259b5e0: bccb 3407 
+
+  0x000001fba259b5e4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b5e4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8640 0400 | 0001 c5fa | 1044 2464 | c5fa 104c | 246c c5fa 
+  0x000001fba259b604: 1054 245c | 0f1f 8000 
+
+  0x000001fba259b60c: ;   {static_call}
+  0x000001fba259b60c: 0000 00e8 
+
+  0x000001fba259b610: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@569 (line 159)
+  0x000001fba259b610: 0cd8 3407 
+
+  0x000001fba259b614: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b614: 48be 0080 | d7c7 fb01 | 0000 4883 | 8650 0400 | 0001 c5fa | 1044 2450 | c5fa 104c | 2450 c5fa 
+  0x000001fba259b634: 1054 2450 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b644: ;   {static_call}
+  0x000001fba259b644: 4400 00e8 
+
+  0x000001fba259b648: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@580 (line 162)
+  0x000001fba259b648: 5415 4007 
+
+  0x000001fba259b64c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b64c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8660 0400 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b664: ;   {section_word}
+  0x000001fba259b664: 57c9 c5fa | 1015 2ef3 
+
+  0x000001fba259b66c: ;   {static_call}
+  0x000001fba259b66c: ffff 90e8 
+
+  0x000001fba259b670: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@586 (line 162)
+  0x000001fba259b670: 2c9f 3b07 | 488b 5424 | 30c5 fa10 | 4228 c5fa 
+
+  0x000001fba259b680: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b680: 104a 2c48 | be00 80d7 | c7fb 0100 | 0048 8386 | 7004 0000 
+
+  0x000001fba259b694: ;   {section_word}
+  0x000001fba259b694: 01c5 fa58 | 0503 f3ff 
+
+  0x000001fba259b69c: ;   {section_word}
+  0x000001fba259b69c: ffc5 fa10 | 15ff f2ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b6ac: ;   {static_call}
+  0x000001fba259b6ac: ca66 90e8 
+
+  0x000001fba259b6b0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@602 (line 162)
+  0x000001fba259b6b0: ecca 3407 
+
+  0x000001fba259b6b4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b6b4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8680 0400 | 0001 c5fa | 1044 2460 | c5fa 104c | 246c c5fa 
+  0x000001fba259b6d4: 1054 245c | 0f1f 8000 
+
+  0x000001fba259b6dc: ;   {static_call}
+  0x000001fba259b6dc: 0000 00e8 
+
+  0x000001fba259b6e0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@614 (line 162)
+  0x000001fba259b6e0: 3cd7 3407 
+
+  0x000001fba259b6e4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b6e4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8690 0400 | 0001 c5fa | 1044 2450 | c5fa 104c | 2450 c5fa 
+  0x000001fba259b704: 1054 2450 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b714: ;   {static_call}
+  0x000001fba259b714: 4400 00e8 
+
+  0x000001fba259b718: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@625 (line 165)
+  0x000001fba259b718: 8414 4007 
+
+  0x000001fba259b71c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b71c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86a0 0400 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b734: ;   {section_word}
+  0x000001fba259b734: 57c9 c5fa | 1015 6af2 
+
+  0x000001fba259b73c: ;   {static_call}
+  0x000001fba259b73c: ffff 90e8 
+
+  0x000001fba259b740: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@631 (line 165)
+  0x000001fba259b740: 5c9e 3b07 | 488b 5424 | 30c5 fa10 | 4228 c5fa 
+
+  0x000001fba259b750: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b750: 104a 2c48 | be00 80d7 | c7fb 0100 | 0048 8386 | b004 0000 
+
+  0x000001fba259b764: ;   {section_word}
+  0x000001fba259b764: 01c5 fa58 | 053f f2ff 
+
+  0x000001fba259b76c: ;   {section_word}
+  0x000001fba259b76c: ffc5 f258 | 0d3b f2ff 
+
+  0x000001fba259b774: ;   {section_word}
+  0x000001fba259b774: ffc5 fa10 | 1537 f2ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b784: ;   {static_call}
+  0x000001fba259b784: ca66 90e8 
+
+  0x000001fba259b788: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@650 (line 165)
+  0x000001fba259b788: 14ca 3407 
+
+  0x000001fba259b78c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b78c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86c0 0400 | 0001 c5fa | 1044 2460 | c5fa 104c | 2458 c5fa 
+  0x000001fba259b7ac: 1054 245c | 0f1f 8000 
+
+  0x000001fba259b7b4: ;   {static_call}
+  0x000001fba259b7b4: 0000 00e8 
+
+  0x000001fba259b7b8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@662 (line 165)
+  0x000001fba259b7b8: 64d6 3407 
+
+  0x000001fba259b7bc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b7bc: 48be 0080 | d7c7 fb01 | 0000 4883 | 86d0 0400 | 0001 c5fa | 1044 2450 | c5fa 104c | 2450 c5fa 
+  0x000001fba259b7dc: 1054 2450 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b7ec: ;   {static_call}
+  0x000001fba259b7ec: 4400 00e8 
+
+  0x000001fba259b7f0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@673 (line 168)
+  0x000001fba259b7f0: ac13 4007 
+
+  0x000001fba259b7f4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b7f4: 48be 0080 | d7c7 fb01 | 0000 4883 | 86e0 0400 | 0001 c5f8 | 57c0 c5f0 
+
+  0x000001fba259b80c: ;   {section_word}
+  0x000001fba259b80c: 57c9 c5fa | 1015 a2f1 
+
+  0x000001fba259b814: ;   {static_call}
+  0x000001fba259b814: ffff 90e8 
+
+  0x000001fba259b818: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@679 (line 168)
+  0x000001fba259b818: 849d 3b07 | 488b 5424 | 30c5 fa10 | 4228 c5fa 
+
+  0x000001fba259b828: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b828: 104a 2c48 | be00 80d7 | c7fb 0100 | 0048 8386 | f004 0000 
+
+  0x000001fba259b83c: ;   {section_word}
+  0x000001fba259b83c: 01c5 f258 | 0d77 f1ff 
+
+  0x000001fba259b844: ;   {section_word}
+  0x000001fba259b844: ffc5 fa10 | 1573 f1ff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259b854: ;   {static_call}
+  0x000001fba259b854: ca66 90e8 
+
+  0x000001fba259b858: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@695 (line 168)
+  0x000001fba259b858: 44c9 3407 
+
+  0x000001fba259b85c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b85c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8600 0500 | 0001 c5fa | 1044 2464 | c5fa 104c | 2458 c5fa 
+  0x000001fba259b87c: 1054 245c | 0f1f 8000 
+
+  0x000001fba259b884: ;   {static_call}
+  0x000001fba259b884: 0000 00e8 
+
+  0x000001fba259b888: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@707 (line 168)
+  0x000001fba259b888: 94d5 3407 
+
+  0x000001fba259b88c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b88c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8610 0500 | 0001 c5fa | 1044 2454 | c5fa 104c | 2454 c5fa 
+  0x000001fba259b8ac: 1054 2454 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b8bc: ;   {static_call}
+  0x000001fba259b8bc: 4400 00e8 
+
+  0x000001fba259b8c0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@718 (line 173)
+  0x000001fba259b8c0: dc12 4007 
+
+  0x000001fba259b8c4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b8c4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8620 0500 
+
+  0x000001fba259b8d4: ;   {section_word}
+  0x000001fba259b8d4: 0001 c5fa | 1005 e6f0 | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259b8e4: ;   {static_call}
+  0x000001fba259b8e4: 57d2 90e8 
+
+  0x000001fba259b8e8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@724 (line 173)
+  0x000001fba259b8e8: b49c 3b07 | 488b 5424 | 3081 7a0c | 0800 0000 | 0f86 2f07 | 0000 c5fa | 1042 3081 | 7a0c 0900 
+  0x000001fba259b908: 0000 0f86 | 2f07 0000 | c5fa 104a 
+
+  0x000001fba259b914: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b914: 3448 be00 | 80d7 c7fb | 0100 0048 | 8386 3005 
+
+  0x000001fba259b924: ;   {section_word}
+  0x000001fba259b924: 0000 01c5 | fa10 1599 | f0ff ffc5 | ea5c d1c5 
+
+  0x000001fba259b934: ;   {static_call}
+  0x000001fba259b934: f828 cae8 
+
+  0x000001fba259b938: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@737 (line 173)
+  0x000001fba259b938: 64c8 3407 
+
+  0x000001fba259b93c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b93c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8640 0500 | 0001 c5fa | 1044 2460 | c5fa 104c | 246c c5fa 
+  0x000001fba259b95c: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259b964: ;   {static_call}
+  0x000001fba259b964: 0000 00e8 
+
+  0x000001fba259b968: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@749 (line 173)
+  0x000001fba259b968: b4d4 3407 
+
+  0x000001fba259b96c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b96c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8650 0500 | 0001 c5fa | 1044 2454 | c5fa 104c | 2454 c5fa 
+  0x000001fba259b98c: 1054 2454 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259b99c: ;   {static_call}
+  0x000001fba259b99c: 4400 00e8 
+
+  0x000001fba259b9a0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@760 (line 176)
+  0x000001fba259b9a0: fc11 4007 
+
+  0x000001fba259b9a4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b9a4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8660 0500 
+
+  0x000001fba259b9b4: ;   {section_word}
+  0x000001fba259b9b4: 0001 c5fa | 1005 0ef0 | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259b9c4: ;   {static_call}
+  0x000001fba259b9c4: 57d2 90e8 
+
+  0x000001fba259b9c8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@766 (line 176)
+  0x000001fba259b9c8: d49b 3b07 | 488b 5424 | 30c5 fa10 | 4230 c5fa 
+
+  0x000001fba259b9d8: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259b9d8: 104a 3448 | be00 80d7 | c7fb 0100 | 0048 8386 | 7005 0000 
+
+  0x000001fba259b9ec: ;   {section_word}
+  0x000001fba259b9ec: 01c5 fa58 | 05db efff 
+
+  0x000001fba259b9f4: ;   {section_word}
+  0x000001fba259b9f4: ffc5 fa10 | 15d7 efff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259ba04: ;   {static_call}
+  0x000001fba259ba04: ca66 90e8 
+
+  0x000001fba259ba08: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@782 (line 176)
+  0x000001fba259ba08: 94c7 3407 
+
+  0x000001fba259ba0c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ba0c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8680 0500 | 0001 c5fa | 1044 2460 | c5fa 104c | 246c c5fa 
+  0x000001fba259ba2c: 1054 245c | 0f1f 8000 
+
+  0x000001fba259ba34: ;   {static_call}
+  0x000001fba259ba34: 0000 00e8 
+
+  0x000001fba259ba38: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@794 (line 176)
+  0x000001fba259ba38: e4d3 3407 
+
+  0x000001fba259ba3c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ba3c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8690 0500 | 0001 c5fa | 1044 2454 | c5fa 104c | 2454 c5fa 
+  0x000001fba259ba5c: 1054 2454 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259ba6c: ;   {static_call}
+  0x000001fba259ba6c: 4400 00e8 
+
+  0x000001fba259ba70: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@805 (line 179)
+  0x000001fba259ba70: 2c11 4007 
+
+  0x000001fba259ba74: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259ba74: 48be 0080 | d7c7 fb01 | 0000 4883 | 86a0 0500 
+
+  0x000001fba259ba84: ;   {section_word}
+  0x000001fba259ba84: 0001 c5fa | 1005 4aef | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259ba94: ;   {static_call}
+  0x000001fba259ba94: 57d2 90e8 
+
+  0x000001fba259ba98: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@811 (line 179)
+  0x000001fba259ba98: 049b 3b07 | 488b 5424 | 30c5 fa10 | 4230 c5fa 
+
+  0x000001fba259baa8: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259baa8: 104a 3448 | be00 80d7 | c7fb 0100 | 0048 8386 | b005 0000 
+
+  0x000001fba259babc: ;   {section_word}
+  0x000001fba259babc: 01c5 fa58 | 0517 efff 
+
+  0x000001fba259bac4: ;   {section_word}
+  0x000001fba259bac4: ffc5 f258 | 0d13 efff 
+
+  0x000001fba259bacc: ;   {section_word}
+  0x000001fba259bacc: ffc5 fa10 | 150f efff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259badc: ;   {static_call}
+  0x000001fba259badc: ca66 90e8 
+
+  0x000001fba259bae0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@830 (line 179)
+  0x000001fba259bae0: bcc6 3407 
+
+  0x000001fba259bae4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bae4: 48be 0080 | d7c7 fb01 | 0000 4883 | 86c0 0500 | 0001 c5fa | 1044 2460 | c5fa 104c | 2458 c5fa 
+  0x000001fba259bb04: 1054 245c | 0f1f 8000 
+
+  0x000001fba259bb0c: ;   {static_call}
+  0x000001fba259bb0c: 0000 00e8 
+
+  0x000001fba259bb10: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@842 (line 179)
+  0x000001fba259bb10: 0cd3 3407 
+
+  0x000001fba259bb14: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bb14: 48be 0080 | d7c7 fb01 | 0000 4883 | 86d0 0500 | 0001 c5fa | 1044 2454 | c5fa 104c | 2454 c5fa 
+  0x000001fba259bb34: 1054 2454 | c5fa 109c | 2498 0000 | 0066 0f1f 
+
+  0x000001fba259bb44: ;   {static_call}
+  0x000001fba259bb44: 4400 00e8 
+
+  0x000001fba259bb48: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@853 (line 182)
+  0x000001fba259bb48: 5410 4007 
+
+  0x000001fba259bb4c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bb4c: 48be 0080 | d7c7 fb01 | 0000 4883 | 86e0 0500 
+
+  0x000001fba259bb5c: ;   {section_word}
+  0x000001fba259bb5c: 0001 c5fa | 1005 82ee | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259bb6c: ;   {static_call}
+  0x000001fba259bb6c: 57d2 90e8 
+
+  0x000001fba259bb70: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@859 (line 182)
+  0x000001fba259bb70: 2c9a 3b07 | 488b 5424 | 30c5 fa10 | 4230 c5fa 
+
+  0x000001fba259bb80: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bb80: 104a 3448 | be00 80d7 | c7fb 0100 | 0048 8386 | f005 0000 
+
+  0x000001fba259bb94: ;   {section_word}
+  0x000001fba259bb94: 01c5 f258 | 0d4f eeff 
+
+  0x000001fba259bb9c: ;   {section_word}
+  0x000001fba259bb9c: ffc5 fa10 | 154b eeff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259bbac: ;   {static_call}
+  0x000001fba259bbac: ca66 90e8 
+
+  0x000001fba259bbb0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@875 (line 182)
+  0x000001fba259bbb0: ecc5 3407 
+
+  0x000001fba259bbb4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bbb4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8600 0600 | 0001 c5fa | 1044 2460 | c5fa 104c | 2458 c5fa 
+  0x000001fba259bbd4: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259bbdc: ;   {static_call}
+  0x000001fba259bbdc: 0000 00e8 
+
+  0x000001fba259bbe0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@887 (line 182)
+  0x000001fba259bbe0: 3cd2 3407 
+
+  0x000001fba259bbe4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bbe4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8610 0600 | 0001 c5fa | 1084 2490 | 0000 00c5 | fa10 8c24 
+  0x000001fba259bc04: 9000 0000 | c5fa 1094 | 2490 0000 | 00c5 fa10 | 9c24 9800 | 0000 0f1f 
+
+  0x000001fba259bc1c: ;   {static_call}
+  0x000001fba259bc1c: 4400 00e8 
+
+  0x000001fba259bc20: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@898 (line 187)
+  0x000001fba259bc20: 7c0f 4007 
+
+  0x000001fba259bc24: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bc24: 48be 0080 | d7c7 fb01 | 0000 4883 | 8620 0600 
+
+  0x000001fba259bc34: ;   {section_word}
+  0x000001fba259bc34: 0001 c5fa | 1005 b6ed | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259bc44: ;   {static_call}
+  0x000001fba259bc44: 57d2 90e8 
+
+  0x000001fba259bc48: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@905 (line 187)
+  0x000001fba259bc48: 5499 3b07 | 488b 5424 | 3081 7a0c | 0a00 0000 | 0f86 f303 | 0000 c5fa | 1042 3881 | 7a0c 0b00 
+  0x000001fba259bc68: 0000 0f86 | f303 0000 | c5fa 104a 
+
+  0x000001fba259bc74: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bc74: 3c48 be00 | 80d7 c7fb | 0100 0048 | 8386 3006 
+
+  0x000001fba259bc84: ;   {section_word}
+  0x000001fba259bc84: 0000 01c5 | fa10 1569 | edff ffc5 | ea5c d1c5 
+
+  0x000001fba259bc94: ;   {static_call}
+  0x000001fba259bc94: f828 cae8 
+
+  0x000001fba259bc98: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@918 (line 187)
+  0x000001fba259bc98: 04c5 3407 
+
+  0x000001fba259bc9c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bc9c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8640 0600 | 0001 c5fa | 1044 2464 | c5fa 104c | 246c c5fa 
+  0x000001fba259bcbc: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259bcc4: ;   {static_call}
+  0x000001fba259bcc4: 0000 00e8 
+
+  0x000001fba259bcc8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@930 (line 187)
+  0x000001fba259bcc8: 54d1 3407 
+
+  0x000001fba259bccc: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bccc: 48be 0080 | d7c7 fb01 | 0000 4883 | 8650 0600 | 0001 c5fa | 1084 2490 | 0000 00c5 | fa10 8c24 
+  0x000001fba259bcec: 9000 0000 | c5fa 1094 | 2490 0000 | 00c5 fa10 | 9c24 9800 | 0000 0f1f 
+
+  0x000001fba259bd04: ;   {static_call}
+  0x000001fba259bd04: 4400 00e8 
+
+  0x000001fba259bd08: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@941 (line 190)
+  0x000001fba259bd08: 940e 4007 
+
+  0x000001fba259bd0c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bd0c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8660 0600 
+
+  0x000001fba259bd1c: ;   {section_word}
+  0x000001fba259bd1c: 0001 c5fa | 1005 d6ec | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259bd2c: ;   {static_call}
+  0x000001fba259bd2c: 57d2 90e8 
+
+  0x000001fba259bd30: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@948 (line 190)
+  0x000001fba259bd30: 6c98 3b07 | 488b 5424 | 30c5 fa10 | 4238 c5fa 
+
+  0x000001fba259bd40: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bd40: 104a 3c48 | be00 80d7 | c7fb 0100 | 0048 8386 | 7006 0000 
+
+  0x000001fba259bd54: ;   {section_word}
+  0x000001fba259bd54: 01c5 fa58 | 05a3 ecff 
+
+  0x000001fba259bd5c: ;   {section_word}
+  0x000001fba259bd5c: ffc5 fa10 | 159f ecff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259bd6c: ;   {static_call}
+  0x000001fba259bd6c: ca66 90e8 
+
+  0x000001fba259bd70: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@964 (line 190)
+  0x000001fba259bd70: 2cc4 3407 
+
+  0x000001fba259bd74: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bd74: 48be 0080 | d7c7 fb01 | 0000 4883 | 8680 0600 | 0001 c5fa | 1044 2464 | c5fa 104c | 246c c5fa 
+  0x000001fba259bd94: 1054 245c | 0f1f 8000 
+
+  0x000001fba259bd9c: ;   {static_call}
+  0x000001fba259bd9c: 0000 00e8 
+
+  0x000001fba259bda0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@976 (line 190)
+  0x000001fba259bda0: 7cd0 3407 
+
+  0x000001fba259bda4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bda4: 48be 0080 | d7c7 fb01 | 0000 4883 | 8690 0600 | 0001 c5fa | 1084 2490 | 0000 00c5 | fa10 8c24 
+  0x000001fba259bdc4: 9000 0000 | c5fa 1094 | 2490 0000 | 00c5 fa10 | 9c24 9800 | 0000 0f1f 
+
+  0x000001fba259bddc: ;   {static_call}
+  0x000001fba259bddc: 4400 00e8 
+
+  0x000001fba259bde0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@987 (line 193)
+  0x000001fba259bde0: bc0d 4007 
+
+  0x000001fba259bde4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bde4: 48be 0080 | d7c7 fb01 | 0000 4883 | 86a0 0600 
+
+  0x000001fba259bdf4: ;   {section_word}
+  0x000001fba259bdf4: 0001 c5fa | 1005 0aec | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259be04: ;   {static_call}
+  0x000001fba259be04: 57d2 90e8 
+
+  0x000001fba259be08: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@994 (line 193)
+  0x000001fba259be08: 9497 3b07 | 488b 5424 | 30c5 fa10 | 4238 c5fa 
+
+  0x000001fba259be18: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259be18: 104a 3c48 | be00 80d7 | c7fb 0100 | 0048 8386 | b006 0000 
+
+  0x000001fba259be2c: ;   {section_word}
+  0x000001fba259be2c: 01c5 fa58 | 05d7 ebff 
+
+  0x000001fba259be34: ;   {section_word}
+  0x000001fba259be34: ffc5 f258 | 0dd3 ebff 
+
+  0x000001fba259be3c: ;   {section_word}
+  0x000001fba259be3c: ffc5 fa10 | 15cf ebff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259be4c: ;   {static_call}
+  0x000001fba259be4c: ca66 90e8 
+
+  0x000001fba259be50: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@1013 (line 193)
+  0x000001fba259be50: 4cc3 3407 
+
+  0x000001fba259be54: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259be54: 48be 0080 | d7c7 fb01 | 0000 4883 | 86c0 0600 | 0001 c5fa | 1044 2464 | c5fa 104c | 2458 c5fa 
+  0x000001fba259be74: 1054 245c | 0f1f 8000 
+
+  0x000001fba259be7c: ;   {static_call}
+  0x000001fba259be7c: 0000 00e8 
+
+  0x000001fba259be80: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@1025 (line 193)
+  0x000001fba259be80: 9ccf 3407 
+
+  0x000001fba259be84: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259be84: 48be 0080 | d7c7 fb01 | 0000 4883 | 86d0 0600 | 0001 c5fa | 1084 2490 | 0000 00c5 | fa10 8c24 
+  0x000001fba259bea4: 9000 0000 | c5fa 1094 | 2490 0000 | 00c5 fa10 | 9c24 9800 | 0000 0f1f 
+
+  0x000001fba259bebc: ;   {static_call}
+  0x000001fba259bebc: 4400 00e8 
+
+  0x000001fba259bec0: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glColor4f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@1036 (line 196)
+  0x000001fba259bec0: dc0c 4007 
+
+  0x000001fba259bec4: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bec4: 48be 0080 | d7c7 fb01 | 0000 4883 | 86e0 0600 
+
+  0x000001fba259bed4: ;   {section_word}
+  0x000001fba259bed4: 0001 c5fa | 1005 3aeb | ffff c5f0 | 57c9 c5e8 
+
+  0x000001fba259bee4: ;   {static_call}
+  0x000001fba259bee4: 57d2 90e8 
+
+  0x000001fba259bee8: ; ImmutableOopMap {[48]=Oop }
+                      ;*invokestatic glNormal3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@1043 (line 196)
+  0x000001fba259bee8: b496 3b07 | 488b 5424 | 30c5 fa10 | 4238 c5fa 
+
+  0x000001fba259bef8: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bef8: 104a 3c48 | be00 80d7 | c7fb 0100 | 0048 8386 | f006 0000 
+
+  0x000001fba259bf0c: ;   {section_word}
+  0x000001fba259bf0c: 01c5 f258 | 0d07 ebff 
+
+  0x000001fba259bf14: ;   {section_word}
+  0x000001fba259bf14: ffc5 fa10 | 1503 ebff | ffc5 ea5c | d1c5 f828 
+
+  0x000001fba259bf24: ;   {static_call}
+  0x000001fba259bf24: ca66 90e8 
+
+  0x000001fba259bf28: ; ImmutableOopMap {}
+                      ;*invokestatic glTexCoord2f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@1059 (line 196)
+  0x000001fba259bf28: 74c2 3407 
+
+  0x000001fba259bf2c: ;   {metadata(method data for {method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bf2c: 48be 0080 | d7c7 fb01 | 0000 4883 | 8600 0700 | 0001 c5fa | 1044 2464 | c5fa 104c | 2458 c5fa 
+  0x000001fba259bf4c: 1054 2468 | 0f1f 8000 
+
+  0x000001fba259bf54: ;   {static_call}
+  0x000001fba259bf54: 0000 00e8 
+
+  0x000001fba259bf58: ; ImmutableOopMap {}
+                      ;*invokestatic glVertex3f {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@1071 (line 196)
+  0x000001fba259bf58: c4ce 3407 | 4881 c480 | 0000 005d 
+
+  0x000001fba259bf64: ;   {poll_return}
+  0x000001fba259bf64: 493b a738 | 0300 000f | 8704 0100 
+
+  0x000001fba259bf70: ;   {metadata({method} {0x000001fbc7d6f9b8} 'drawModel' '(FFF[FFFFFFFF)V' in 'opencraft/graphics/models/ModelCube')}
+  0x000001fba259bf70: 00c3 49ba | b0f9 d6c7 | fb01 0000 | 4c89 5424 | 0848 c704 | 24ff ffff 
+
+  0x000001fba259bf88: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001fba259bf88: ffe8 720f 
+
+  0x000001fba259bf8c: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*synchronization entry
+                      ; - opencraft.graphics.models.ModelCube::drawModel@-1 (line 114)
+  0x000001fba259bf8c: 95ff e9e9 
+
+  0x000001fba259bf90: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001fba259bf90: eaff ffe8 
+
+  0x000001fba259bf94: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@20 (line 114)
+  0x000001fba259bf94: 88af 94ff 
+
+  0x000001fba259bf98: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001fba259bf98: e883 af94 
+
+  0x000001fba259bf9c: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@20 (line 114)
+  0x000001fba259bf9c: ff48 c704 | 2400 0000 | 0048 8954 
+
+  0x000001fba259bfa8: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259bfa8: 2408 e871 
+
+  0x000001fba259bfac: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@20 (line 114)
+  0x000001fba259bfac: a694 ff48 | c704 2401 | 0000 0048 | 8954 2408 
+
+  0x000001fba259bfbc: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259bfbc: e85f a694 
+
+  0x000001fba259bfc0: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@26 (line 114)
+  0x000001fba259bfc0: ff48 c704 | 2402 0000 | 0048 8954 
+
+  0x000001fba259bfcc: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259bfcc: 2408 e84d 
+
+  0x000001fba259bfd0: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@198 (line 131)
+  0x000001fba259bfd0: a694 ff48 | c704 2403 | 0000 0048 | 8954 2408 
+
+  0x000001fba259bfe0: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259bfe0: e83b a694 
+
+  0x000001fba259bfe4: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@202 (line 131)
+  0x000001fba259bfe4: ff48 c704 | 2404 0000 | 0048 8954 
+
+  0x000001fba259bff0: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259bff0: 2408 e829 
+
+  0x000001fba259bff4: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@374 (line 145)
+  0x000001fba259bff4: a694 ff48 | c704 2405 | 0000 0048 | 8954 2408 
+
+  0x000001fba259c004: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c004: e817 a694 
+
+  0x000001fba259c008: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@378 (line 145)
+  0x000001fba259c008: ff48 c704 | 2406 0000 | 0048 8954 
+
+  0x000001fba259c014: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c014: 2408 e805 
+
+  0x000001fba259c018: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@550 (line 159)
+  0x000001fba259c018: a694 ff48 | c704 2407 | 0000 0048 | 8954 2408 
+
+  0x000001fba259c028: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c028: e8f3 a594 
+
+  0x000001fba259c02c: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@555 (line 159)
+  0x000001fba259c02c: ff48 c704 | 2408 0000 | 0048 8954 
+
+  0x000001fba259c038: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c038: 2408 e8e1 
+
+  0x000001fba259c03c: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@730 (line 173)
+  0x000001fba259c03c: a594 ff48 | c704 2409 | 0000 0048 | 8954 2408 
+
+  0x000001fba259c04c: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c04c: e8cf a594 
+
+  0x000001fba259c050: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@735 (line 173)
+  0x000001fba259c050: ff48 c704 | 240a 0000 | 0048 8954 
+
+  0x000001fba259c05c: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c05c: 2408 e8bd 
+
+  0x000001fba259c060: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@911 (line 187)
+  0x000001fba259c060: a594 ff48 | c704 240b | 0000 0048 | 8954 2408 
+
+  0x000001fba259c070: ;   {runtime_call throw_range_check_failed Runtime1 stub}
+  0x000001fba259c070: e8ab a594 
+
+  0x000001fba259c074: ; ImmutableOopMap {rdx=Oop [48]=Oop }
+                      ;*faload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - opencraft.graphics.models.ModelCube::drawModel@916 (line 187)
+                      ;   {internal_word}
+  0x000001fba259c074: ff49 ba64 | bf59 a2fb | 0100 004d | 8997 5003 
+
+  0x000001fba259c084: ;   {runtime_call SafepointBlob}
+  0x000001fba259c084: 0000 e975 | 738a ff90 | 9049 8b87 | c803 0000 | 49c7 87c8 | 0300 0000 | 0000 0049 | c787 d003 
+  0x000001fba259c0a4: 0000 0000 | 0000 4881 | c480 0000 
+
+  0x000001fba259c0b0: ;   {runtime_call unwind_exception Runtime1 stub}
+  0x000001fba259c0b0: 005d e949 | a294 fff4 | f4f4 f4f4 | f4f4 f4f4 
+[Stub Code]
+  0x000001fba259c0c0: ;   {no_reloc}
+  0x000001fba259c0c0: 0f1f 4400 
+
+  0x000001fba259c0c4: ;   {static_stub}
+  0x000001fba259c0c4: 0048 bb00 | 0000 0000 
+
+  0x000001fba259c0cc: ;   {runtime_call}
+  0x000001fba259c0cc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c0d4: ;   {static_stub}
+  0x000001fba259c0d4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c0dc: ;   {runtime_call}
+  0x000001fba259c0dc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c0e4: ;   {static_stub}
+  0x000001fba259c0e4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c0ec: ;   {runtime_call}
+  0x000001fba259c0ec: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c0f4: ;   {static_stub}
+  0x000001fba259c0f4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c0fc: ;   {runtime_call}
+  0x000001fba259c0fc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c104: ;   {static_stub}
+  0x000001fba259c104: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c10c: ;   {runtime_call}
+  0x000001fba259c10c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c114: ;   {static_stub}
+  0x000001fba259c114: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c11c: ;   {runtime_call}
+  0x000001fba259c11c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c124: ;   {static_stub}
+  0x000001fba259c124: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c12c: ;   {runtime_call}
+  0x000001fba259c12c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c134: ;   {static_stub}
+  0x000001fba259c134: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c13c: ;   {runtime_call}
+  0x000001fba259c13c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c144: ;   {static_stub}
+  0x000001fba259c144: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c14c: ;   {runtime_call}
+  0x000001fba259c14c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c154: ;   {static_stub}
+  0x000001fba259c154: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c15c: ;   {runtime_call}
+  0x000001fba259c15c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c164: ;   {static_stub}
+  0x000001fba259c164: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c16c: ;   {runtime_call}
+  0x000001fba259c16c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c174: ;   {static_stub}
+  0x000001fba259c174: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c17c: ;   {runtime_call}
+  0x000001fba259c17c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c184: ;   {static_stub}
+  0x000001fba259c184: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c18c: ;   {runtime_call}
+  0x000001fba259c18c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c194: ;   {static_stub}
+  0x000001fba259c194: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c19c: ;   {runtime_call}
+  0x000001fba259c19c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c1a4: ;   {static_stub}
+  0x000001fba259c1a4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c1ac: ;   {runtime_call}
+  0x000001fba259c1ac: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c1b4: ;   {static_stub}
+  0x000001fba259c1b4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c1bc: ;   {runtime_call}
+  0x000001fba259c1bc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c1c4: ;   {static_stub}
+  0x000001fba259c1c4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c1cc: ;   {runtime_call}
+  0x000001fba259c1cc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c1d4: ;   {static_stub}
+  0x000001fba259c1d4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c1dc: ;   {runtime_call}
+  0x000001fba259c1dc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c1e4: ;   {static_stub}
+  0x000001fba259c1e4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c1ec: ;   {runtime_call}
+  0x000001fba259c1ec: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c1f4: ;   {static_stub}
+  0x000001fba259c1f4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c1fc: ;   {runtime_call}
+  0x000001fba259c1fc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c204: ;   {static_stub}
+  0x000001fba259c204: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c20c: ;   {runtime_call}
+  0x000001fba259c20c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c214: ;   {static_stub}
+  0x000001fba259c214: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c21c: ;   {runtime_call}
+  0x000001fba259c21c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c224: ;   {static_stub}
+  0x000001fba259c224: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c22c: ;   {runtime_call}
+  0x000001fba259c22c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c234: ;   {static_stub}
+  0x000001fba259c234: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c23c: ;   {runtime_call}
+  0x000001fba259c23c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c244: ;   {static_stub}
+  0x000001fba259c244: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c24c: ;   {runtime_call}
+  0x000001fba259c24c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c254: ;   {static_stub}
+  0x000001fba259c254: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c25c: ;   {runtime_call}
+  0x000001fba259c25c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c264: ;   {static_stub}
+  0x000001fba259c264: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c26c: ;   {runtime_call}
+  0x000001fba259c26c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c274: ;   {static_stub}
+  0x000001fba259c274: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c27c: ;   {runtime_call}
+  0x000001fba259c27c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c284: ;   {static_stub}
+  0x000001fba259c284: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c28c: ;   {runtime_call}
+  0x000001fba259c28c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c294: ;   {static_stub}
+  0x000001fba259c294: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c29c: ;   {runtime_call}
+  0x000001fba259c29c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c2a4: ;   {static_stub}
+  0x000001fba259c2a4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c2ac: ;   {runtime_call}
+  0x000001fba259c2ac: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c2b4: ;   {static_stub}
+  0x000001fba259c2b4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c2bc: ;   {runtime_call}
+  0x000001fba259c2bc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c2c4: ;   {static_stub}
+  0x000001fba259c2c4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c2cc: ;   {runtime_call}
+  0x000001fba259c2cc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c2d4: ;   {static_stub}
+  0x000001fba259c2d4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c2dc: ;   {runtime_call}
+  0x000001fba259c2dc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c2e4: ;   {static_stub}
+  0x000001fba259c2e4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c2ec: ;   {runtime_call}
+  0x000001fba259c2ec: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c2f4: ;   {static_stub}
+  0x000001fba259c2f4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c2fc: ;   {runtime_call}
+  0x000001fba259c2fc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c304: ;   {static_stub}
+  0x000001fba259c304: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c30c: ;   {runtime_call}
+  0x000001fba259c30c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c314: ;   {static_stub}
+  0x000001fba259c314: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c31c: ;   {runtime_call}
+  0x000001fba259c31c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c324: ;   {static_stub}
+  0x000001fba259c324: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c32c: ;   {runtime_call}
+  0x000001fba259c32c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c334: ;   {static_stub}
+  0x000001fba259c334: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c33c: ;   {runtime_call}
+  0x000001fba259c33c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c344: ;   {static_stub}
+  0x000001fba259c344: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c34c: ;   {runtime_call}
+  0x000001fba259c34c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c354: ;   {static_stub}
+  0x000001fba259c354: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c35c: ;   {runtime_call}
+  0x000001fba259c35c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c364: ;   {static_stub}
+  0x000001fba259c364: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c36c: ;   {runtime_call}
+  0x000001fba259c36c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c374: ;   {static_stub}
+  0x000001fba259c374: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c37c: ;   {runtime_call}
+  0x000001fba259c37c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c384: ;   {static_stub}
+  0x000001fba259c384: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c38c: ;   {runtime_call}
+  0x000001fba259c38c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c394: ;   {static_stub}
+  0x000001fba259c394: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c39c: ;   {runtime_call}
+  0x000001fba259c39c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c3a4: ;   {static_stub}
+  0x000001fba259c3a4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c3ac: ;   {runtime_call}
+  0x000001fba259c3ac: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c3b4: ;   {static_stub}
+  0x000001fba259c3b4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c3bc: ;   {runtime_call}
+  0x000001fba259c3bc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c3c4: ;   {static_stub}
+  0x000001fba259c3c4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c3cc: ;   {runtime_call}
+  0x000001fba259c3cc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c3d4: ;   {static_stub}
+  0x000001fba259c3d4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c3dc: ;   {runtime_call}
+  0x000001fba259c3dc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c3e4: ;   {static_stub}
+  0x000001fba259c3e4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c3ec: ;   {runtime_call}
+  0x000001fba259c3ec: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c3f4: ;   {static_stub}
+  0x000001fba259c3f4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c3fc: ;   {runtime_call}
+  0x000001fba259c3fc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c404: ;   {static_stub}
+  0x000001fba259c404: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c40c: ;   {runtime_call}
+  0x000001fba259c40c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c414: ;   {static_stub}
+  0x000001fba259c414: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c41c: ;   {runtime_call}
+  0x000001fba259c41c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c424: ;   {static_stub}
+  0x000001fba259c424: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c42c: ;   {runtime_call}
+  0x000001fba259c42c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c434: ;   {static_stub}
+  0x000001fba259c434: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c43c: ;   {runtime_call}
+  0x000001fba259c43c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c444: ;   {static_stub}
+  0x000001fba259c444: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c44c: ;   {runtime_call}
+  0x000001fba259c44c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c454: ;   {static_stub}
+  0x000001fba259c454: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c45c: ;   {runtime_call}
+  0x000001fba259c45c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c464: ;   {static_stub}
+  0x000001fba259c464: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c46c: ;   {runtime_call}
+  0x000001fba259c46c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c474: ;   {static_stub}
+  0x000001fba259c474: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c47c: ;   {runtime_call}
+  0x000001fba259c47c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c484: ;   {static_stub}
+  0x000001fba259c484: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c48c: ;   {runtime_call}
+  0x000001fba259c48c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c494: ;   {static_stub}
+  0x000001fba259c494: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c49c: ;   {runtime_call}
+  0x000001fba259c49c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c4a4: ;   {static_stub}
+  0x000001fba259c4a4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c4ac: ;   {runtime_call}
+  0x000001fba259c4ac: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c4b4: ;   {static_stub}
+  0x000001fba259c4b4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c4bc: ;   {runtime_call}
+  0x000001fba259c4bc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c4c4: ;   {static_stub}
+  0x000001fba259c4c4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c4cc: ;   {runtime_call}
+  0x000001fba259c4cc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c4d4: ;   {static_stub}
+  0x000001fba259c4d4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c4dc: ;   {runtime_call}
+  0x000001fba259c4dc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c4e4: ;   {static_stub}
+  0x000001fba259c4e4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c4ec: ;   {runtime_call}
+  0x000001fba259c4ec: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c4f4: ;   {static_stub}
+  0x000001fba259c4f4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c4fc: ;   {runtime_call}
+  0x000001fba259c4fc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c504: ;   {static_stub}
+  0x000001fba259c504: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c50c: ;   {runtime_call}
+  0x000001fba259c50c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c514: ;   {static_stub}
+  0x000001fba259c514: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c51c: ;   {runtime_call}
+  0x000001fba259c51c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c524: ;   {static_stub}
+  0x000001fba259c524: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c52c: ;   {runtime_call}
+  0x000001fba259c52c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c534: ;   {static_stub}
+  0x000001fba259c534: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c53c: ;   {runtime_call}
+  0x000001fba259c53c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c544: ;   {static_stub}
+  0x000001fba259c544: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c54c: ;   {runtime_call}
+  0x000001fba259c54c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c554: ;   {static_stub}
+  0x000001fba259c554: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c55c: ;   {runtime_call}
+  0x000001fba259c55c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c564: ;   {static_stub}
+  0x000001fba259c564: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c56c: ;   {runtime_call}
+  0x000001fba259c56c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c574: ;   {static_stub}
+  0x000001fba259c574: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c57c: ;   {runtime_call}
+  0x000001fba259c57c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c584: ;   {static_stub}
+  0x000001fba259c584: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c58c: ;   {runtime_call}
+  0x000001fba259c58c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c594: ;   {static_stub}
+  0x000001fba259c594: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c59c: ;   {runtime_call}
+  0x000001fba259c59c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c5a4: ;   {static_stub}
+  0x000001fba259c5a4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c5ac: ;   {runtime_call}
+  0x000001fba259c5ac: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c5b4: ;   {static_stub}
+  0x000001fba259c5b4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c5bc: ;   {runtime_call}
+  0x000001fba259c5bc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c5c4: ;   {static_stub}
+  0x000001fba259c5c4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c5cc: ;   {runtime_call}
+  0x000001fba259c5cc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c5d4: ;   {static_stub}
+  0x000001fba259c5d4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c5dc: ;   {runtime_call}
+  0x000001fba259c5dc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c5e4: ;   {static_stub}
+  0x000001fba259c5e4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c5ec: ;   {runtime_call}
+  0x000001fba259c5ec: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c5f4: ;   {static_stub}
+  0x000001fba259c5f4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c5fc: ;   {runtime_call}
+  0x000001fba259c5fc: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c604: ;   {static_stub}
+  0x000001fba259c604: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c60c: ;   {runtime_call}
+  0x000001fba259c60c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c614: ;   {static_stub}
+  0x000001fba259c614: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c61c: ;   {runtime_call}
+  0x000001fba259c61c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c624: ;   {static_stub}
+  0x000001fba259c624: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c62c: ;   {runtime_call}
+  0x000001fba259c62c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c634: ;   {static_stub}
+  0x000001fba259c634: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c63c: ;   {runtime_call}
+  0x000001fba259c63c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c644: ;   {static_stub}
+  0x000001fba259c644: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c64c: ;   {runtime_call}
+  0x000001fba259c64c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c654: ;   {static_stub}
+  0x000001fba259c654: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c65c: ;   {runtime_call}
+  0x000001fba259c65c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c664: ;   {static_stub}
+  0x000001fba259c664: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c66c: ;   {runtime_call}
+  0x000001fba259c66c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c674: ;   {static_stub}
+  0x000001fba259c674: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c67c: ;   {runtime_call}
+  0x000001fba259c67c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c684: ;   {static_stub}
+  0x000001fba259c684: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c68c: ;   {runtime_call}
+  0x000001fba259c68c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c694: ;   {static_stub}
+  0x000001fba259c694: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c69c: ;   {runtime_call}
+  0x000001fba259c69c: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c6a4: ;   {static_stub}
+  0x000001fba259c6a4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c6ac: ;   {runtime_call}
+  0x000001fba259c6ac: 0000 00e9 | fbff ffff 
+
+  0x000001fba259c6b4: ;   {static_stub}
+  0x000001fba259c6b4: 9048 bb00 | 0000 0000 
+
+  0x000001fba259c6bc: ;   {runtime_call}
+  0x000001fba259c6bc: 0000 00e9 | fbff ffff 
+[Exception Handler]
+  0x000001fba259c6c4: ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x000001fba259c6c4: e837 c694 
+
+  0x000001fba259c6c8: ;   {external_word}
+  0x000001fba259c6c8: ff48 b928 | 3feb a3fc | 7f00 0048 
+
+  0x000001fba259c6d4: ;   {runtime_call}
+  0x000001fba259c6d4: 83e4 f049 | ba80 e1b8 | a3fc 7f00 | 0041 ffd2 
+
+  0x000001fba259c6e4: ;   {section_word}
+  0x000001fba259c6e4: f449 bae5 | c659 a2fb | 0100 0041 
+
+  0x000001fba259c6f0: ;   {runtime_call DeoptimizationBlob}
+  0x000001fba259c6f0: 52e9 aa5f | 8aff f4f4 
+[/MachCode]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001fbd9ff03c0, length=12, elements={
+0x000001fb98ce6df0, 0x000001fbc4a5ec40, 0x000001fbc4a5f1f0, 0x000001fbc4a7eba0,
+0x000001fbc4a7f150, 0x000001fbc4a7fb10, 0x000001fbc4a8c4e0, 0x000001fbc4a911e0,
+0x000001fbc4a916e0, 0x000001fbc4a9dbe0, 0x000001fbcb902a30, 0x000001fbcb907180
+}
+
+Java Threads: ( => current thread )
+=>0x000001fb98ce6df0 JavaThread "main" [_thread_in_native, id=16960, stack(0x000000b03cc00000,0x000000b03cd00000)]
+  0x000001fbc4a5ec40 JavaThread "Reference Handler" daemon [_thread_blocked, id=4280, stack(0x000000b03d300000,0x000000b03d400000)]
+  0x000001fbc4a5f1f0 JavaThread "Finalizer" daemon [_thread_blocked, id=29680, stack(0x000000b03d400000,0x000000b03d500000)]
+  0x000001fbc4a7eba0 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=29180, stack(0x000000b03d500000,0x000000b03d600000)]
+  0x000001fbc4a7f150 JavaThread "Attach Listener" daemon [_thread_blocked, id=3856, stack(0x000000b03d600000,0x000000b03d700000)]
+  0x000001fbc4a7fb10 JavaThread "Service Thread" daemon [_thread_blocked, id=3616, stack(0x000000b03d700000,0x000000b03d800000)]
+  0x000001fbc4a8c4e0 JavaThread "Monitor Deflation Thread" daemon [_thread_blocked, id=23008, stack(0x000000b03d800000,0x000000b03d900000)]
+  0x000001fbc4a911e0 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=5036, stack(0x000000b03d900000,0x000000b03da00000)]
+  0x000001fbc4a916e0 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=22100, stack(0x000000b03da00000,0x000000b03db00000)]
+  0x000001fbc4a9dbe0 JavaThread "Sweeper thread" daemon [_thread_blocked, id=18836, stack(0x000000b03db00000,0x000000b03dc00000)]
+  0x000001fbcb902a30 JavaThread "Notification Thread" daemon [_thread_blocked, id=10448, stack(0x000000b03dc00000,0x000000b03dd00000)]
+  0x000001fbcb907180 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=16304, stack(0x000000b03de00000,0x000000b03df00000)]
+
+Other Threads:
+  0x000001fbc48d7190 VMThread "VM Thread" [stack: 0x000000b03d200000,0x000000b03d300000] [id=4484]
+  0x000001fbcb904f00 WatcherThread "VM Periodic Task Thread" [stack: 0x000000b03dd00000,0x000000b03de00000] [id=23520]
+  0x000001fb98d97fb0 WorkerThread "GC Thread#0" [stack: 0x000000b03cd00000,0x000000b03ce00000] [id=6288]
+  0x000001fbd01c5550 WorkerThread "GC Thread#1" [stack: 0x000000b03ed00000,0x000000b03ee00000] [id=20220]
+  0x000001fbd30c2d70 WorkerThread "GC Thread#2" [stack: 0x000000b03ee00000,0x000000b03ef00000] [id=22792]
+  0x000001fbd30c22f0 WorkerThread "GC Thread#3" [stack: 0x000000b03ef00000,0x000000b03f000000] [id=9124]
+  0x000001fbd30bfe30 WorkerThread "GC Thread#4" [stack: 0x000000b03f000000,0x000000b03f100000] [id=7948]
+  0x000001fbd30bf8f0 WorkerThread "GC Thread#5" [stack: 0x000000b03f100000,0x000000b03f200000] [id=9748]
+  0x000001fbd30c3010 WorkerThread "GC Thread#6" [stack: 0x000000b03f200000,0x000000b03f300000] [id=16148]
+  0x000001fbd30c15d0 WorkerThread "GC Thread#7" [stack: 0x000000b03f300000,0x000000b03f400000] [id=14524]
+  0x000001fbd30c1090 WorkerThread "GC Thread#8" [stack: 0x000000b03f400000,0x000000b03f500000] [id=14624]
+  0x000001fbd30c1330 WorkerThread "GC Thread#9" [stack: 0x000000b03f500000,0x000000b03f600000] [id=3528]
+  0x000001fb98da9350 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000b03ce00000,0x000000b03cf00000] [id=25080]
+  0x000001fb98dac400 WorkerThread "G1 Conc#0" [stack: 0x000000b03cf00000,0x000000b03d000000] [id=35460]
+  0x000001fbc491a180 ConcurrentGCThread "G1 Refine#0" [stack: 0x000000b03d000000,0x000000b03d100000] [id=15616]
+  0x000001fbc491b550 ConcurrentGCThread "G1 Service" [stack: 0x000000b03d100000,0x000000b03d200000] [id=3400]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000604000000, size: 8128 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000800000000-0x0000000800ba0000-0x0000000800ba0000), size 12189696, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Compressed class space mapped at: 0x0000000800c00000-0x0000000840c00000, reserved size: 1073741824
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 32 size 80 Howl #buckets 8 coarsen threshold 7372 Howl Bitmap #cards 1024 size 144 coarsen threshold 921 Card regions per heap region 1 cards per card region 8192
+ CPUs: 12 total, 12 available
+ Memory: 32511M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 4M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 508M
+ Heap Max Capacity: 8128M
+ Pre-touch: Disabled
+ Parallel Workers: 10
+ Concurrent Workers: 3
+ Concurrent Refinement Workers: 10
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 626688K, used 332407K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 43 young (176128K), 6 survivors (24576K)
+ Metaspace       used 3478K, committed 3648K, reserved 1114112K
+  class space    used 211K, committed 256K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x0000000604000000, 0x0000000604400000, 0x0000000604400000|100%| O|  |TAMS 0x0000000604000000, 0x0000000604000000| Untracked 
+|   1|0x0000000604400000, 0x0000000604800000, 0x0000000604800000|100%| O|  |TAMS 0x0000000604400000, 0x0000000604400000| Untracked 
+|   2|0x0000000604800000, 0x0000000604c00000, 0x0000000604c00000|100%| O|  |TAMS 0x0000000604800000, 0x0000000604800000| Untracked 
+|   3|0x0000000604c00000, 0x0000000605000000, 0x0000000605000000|100%| O|  |TAMS 0x0000000604c00000, 0x0000000604c00000| Untracked 
+|   4|0x0000000605000000, 0x0000000605400000, 0x0000000605400000|100%| O|  |TAMS 0x0000000605000000, 0x0000000605000000| Untracked 
+|   5|0x0000000605400000, 0x0000000605800000, 0x0000000605800000|100%| O|  |TAMS 0x0000000605400000, 0x0000000605400000| Untracked 
+|   6|0x0000000605800000, 0x0000000605c00000, 0x0000000605c00000|100%| O|  |TAMS 0x0000000605800000, 0x0000000605800000| Untracked 
+|   7|0x0000000605c00000, 0x0000000606000000, 0x0000000606000000|100%| O|  |TAMS 0x0000000605c00000, 0x0000000605c00000| Untracked 
+|   8|0x0000000606000000, 0x0000000606400000, 0x0000000606400000|100%| O|  |TAMS 0x0000000606000000, 0x0000000606000000| Untracked 
+|   9|0x0000000606400000, 0x0000000606800000, 0x0000000606800000|100%| O|  |TAMS 0x0000000606400000, 0x0000000606400000| Untracked 
+|  10|0x0000000606800000, 0x0000000606c00000, 0x0000000606c00000|100%| O|  |TAMS 0x0000000606800000, 0x0000000606800000| Untracked 
+|  11|0x0000000606c00000, 0x0000000607000000, 0x0000000607000000|100%| O|  |TAMS 0x0000000606c00000, 0x0000000606c00000| Untracked 
+|  12|0x0000000607000000, 0x0000000607400000, 0x0000000607400000|100%| O|  |TAMS 0x0000000607000000, 0x0000000607000000| Untracked 
+|  13|0x0000000607400000, 0x0000000607800000, 0x0000000607800000|100%| O|  |TAMS 0x0000000607400000, 0x0000000607400000| Untracked 
+|  14|0x0000000607800000, 0x0000000607c00000, 0x0000000607c00000|100%| O|  |TAMS 0x0000000607800000, 0x0000000607800000| Untracked 
+|  15|0x0000000607c00000, 0x0000000608000000, 0x0000000608000000|100%| O|  |TAMS 0x0000000607c00000, 0x0000000607c00000| Untracked 
+|  16|0x0000000608000000, 0x0000000608400000, 0x0000000608400000|100%| O|  |TAMS 0x0000000608000000, 0x0000000608000000| Untracked 
+|  17|0x0000000608400000, 0x0000000608800000, 0x0000000608800000|100%| O|  |TAMS 0x0000000608400000, 0x0000000608400000| Untracked 
+|  18|0x0000000608800000, 0x0000000608c00000, 0x0000000608c00000|100%| O|  |TAMS 0x0000000608800000, 0x0000000608800000| Untracked 
+|  19|0x0000000608c00000, 0x0000000609000000, 0x0000000609000000|100%| O|  |TAMS 0x0000000608c00000, 0x0000000608c00000| Untracked 
+|  20|0x0000000609000000, 0x0000000609400000, 0x0000000609400000|100%| O|  |TAMS 0x0000000609000000, 0x0000000609000000| Untracked 
+|  21|0x0000000609400000, 0x0000000609800000, 0x0000000609800000|100%| O|  |TAMS 0x0000000609400000, 0x0000000609400000| Untracked 
+|  22|0x0000000609800000, 0x0000000609c00000, 0x0000000609c00000|100%| O|  |TAMS 0x0000000609800000, 0x0000000609800000| Untracked 
+|  23|0x0000000609c00000, 0x000000060a000000, 0x000000060a000000|100%| O|  |TAMS 0x0000000609c00000, 0x0000000609c00000| Untracked 
+|  24|0x000000060a000000, 0x000000060a400000, 0x000000060a400000|100%| O|  |TAMS 0x000000060a000000, 0x000000060a000000| Untracked 
+|  25|0x000000060a400000, 0x000000060a800000, 0x000000060a800000|100%| O|  |TAMS 0x000000060a400000, 0x000000060a400000| Untracked 
+|  26|0x000000060a800000, 0x000000060ac00000, 0x000000060ac00000|100%| O|  |TAMS 0x000000060a800000, 0x000000060a800000| Untracked 
+|  27|0x000000060ac00000, 0x000000060b000000, 0x000000060b000000|100%| O|  |TAMS 0x000000060ac00000, 0x000000060ac00000| Untracked 
+|  28|0x000000060b000000, 0x000000060b400000, 0x000000060b400000|100%| O|  |TAMS 0x000000060b000000, 0x000000060b000000| Untracked 
+|  29|0x000000060b400000, 0x000000060b800000, 0x000000060b800000|100%| O|  |TAMS 0x000000060b400000, 0x000000060b400000| Untracked 
+|  30|0x000000060b800000, 0x000000060bc00000, 0x000000060bc00000|100%| O|  |TAMS 0x000000060b800000, 0x000000060b800000| Untracked 
+|  31|0x000000060bc00000, 0x000000060c000000, 0x000000060c000000|100%| O|  |TAMS 0x000000060bc00000, 0x000000060bc00000| Untracked 
+|  32|0x000000060c000000, 0x000000060c400000, 0x000000060c400000|100%| O|  |TAMS 0x000000060c000000, 0x000000060c000000| Untracked 
+|  33|0x000000060c400000, 0x000000060c800000, 0x000000060c800000|100%| O|  |TAMS 0x000000060c400000, 0x000000060c400000| Untracked 
+|  34|0x000000060c800000, 0x000000060cc00000, 0x000000060cc00000|100%| O|  |TAMS 0x000000060c800000, 0x000000060c800000| Untracked 
+|  35|0x000000060cc00000, 0x000000060d000000, 0x000000060d000000|100%| O|  |TAMS 0x000000060cc00000, 0x000000060cc00000| Untracked 
+|  36|0x000000060d000000, 0x000000060d400000, 0x000000060d400000|100%| O|  |TAMS 0x000000060d000000, 0x000000060d000000| Untracked 
+|  37|0x000000060d400000, 0x000000060d800000, 0x000000060d800000|100%| O|  |TAMS 0x000000060d400000, 0x000000060d400000| Untracked 
+|  38|0x000000060d800000, 0x000000060dc00000, 0x000000060dc00000|100%| O|  |TAMS 0x000000060d800000, 0x000000060d800000| Untracked 
+|  39|0x000000060dc00000, 0x000000060dc9de00, 0x000000060e000000| 15%| O|  |TAMS 0x000000060dc00000, 0x000000060dc00000| Untracked 
+|  40|0x000000060e000000, 0x000000060e000000, 0x000000060e400000|  0%| F|  |TAMS 0x000000060e000000, 0x000000060e000000| Untracked 
+|  41|0x000000060e400000, 0x000000060e400000, 0x000000060e800000|  0%| F|  |TAMS 0x000000060e400000, 0x000000060e400000| Untracked 
+|  42|0x000000060e800000, 0x000000060e800000, 0x000000060ec00000|  0%| F|  |TAMS 0x000000060e800000, 0x000000060e800000| Untracked 
+|  43|0x000000060ec00000, 0x000000060ec00000, 0x000000060f000000|  0%| F|  |TAMS 0x000000060ec00000, 0x000000060ec00000| Untracked 
+|  44|0x000000060f000000, 0x000000060f000000, 0x000000060f400000|  0%| F|  |TAMS 0x000000060f000000, 0x000000060f000000| Untracked 
+|  45|0x000000060f400000, 0x000000060f400000, 0x000000060f800000|  0%| F|  |TAMS 0x000000060f400000, 0x000000060f400000| Untracked 
+|  46|0x000000060f800000, 0x000000060f800000, 0x000000060fc00000|  0%| F|  |TAMS 0x000000060f800000, 0x000000060f800000| Untracked 
+|  47|0x000000060fc00000, 0x000000060fc00000, 0x0000000610000000|  0%| F|  |TAMS 0x000000060fc00000, 0x000000060fc00000| Untracked 
+|  48|0x0000000610000000, 0x0000000610000000, 0x0000000610400000|  0%| F|  |TAMS 0x0000000610000000, 0x0000000610000000| Untracked 
+|  49|0x0000000610400000, 0x0000000610400000, 0x0000000610800000|  0%| F|  |TAMS 0x0000000610400000, 0x0000000610400000| Untracked 
+|  50|0x0000000610800000, 0x0000000610800000, 0x0000000610c00000|  0%| F|  |TAMS 0x0000000610800000, 0x0000000610800000| Untracked 
+|  51|0x0000000610c00000, 0x0000000610c00000, 0x0000000611000000|  0%| F|  |TAMS 0x0000000610c00000, 0x0000000610c00000| Untracked 
+|  52|0x0000000611000000, 0x0000000611000000, 0x0000000611400000|  0%| F|  |TAMS 0x0000000611000000, 0x0000000611000000| Untracked 
+|  53|0x0000000611400000, 0x0000000611400000, 0x0000000611800000|  0%| F|  |TAMS 0x0000000611400000, 0x0000000611400000| Untracked 
+|  54|0x0000000611800000, 0x0000000611800000, 0x0000000611c00000|  0%| F|  |TAMS 0x0000000611800000, 0x0000000611800000| Untracked 
+|  55|0x0000000611c00000, 0x0000000611c00000, 0x0000000612000000|  0%| F|  |TAMS 0x0000000611c00000, 0x0000000611c00000| Untracked 
+|  56|0x0000000612000000, 0x0000000612000000, 0x0000000612400000|  0%| F|  |TAMS 0x0000000612000000, 0x0000000612000000| Untracked 
+|  57|0x0000000612400000, 0x0000000612400000, 0x0000000612800000|  0%| F|  |TAMS 0x0000000612400000, 0x0000000612400000| Untracked 
+|  58|0x0000000612800000, 0x0000000612800000, 0x0000000612c00000|  0%| F|  |TAMS 0x0000000612800000, 0x0000000612800000| Untracked 
+|  59|0x0000000612c00000, 0x0000000612c00000, 0x0000000613000000|  0%| F|  |TAMS 0x0000000612c00000, 0x0000000612c00000| Untracked 
+|  60|0x0000000613000000, 0x0000000613000000, 0x0000000613400000|  0%| F|  |TAMS 0x0000000613000000, 0x0000000613000000| Untracked 
+|  61|0x0000000613400000, 0x0000000613400000, 0x0000000613800000|  0%| F|  |TAMS 0x0000000613400000, 0x0000000613400000| Untracked 
+|  62|0x0000000613800000, 0x0000000613800000, 0x0000000613c00000|  0%| F|  |TAMS 0x0000000613800000, 0x0000000613800000| Untracked 
+|  63|0x0000000613c00000, 0x0000000613c00000, 0x0000000614000000|  0%| F|  |TAMS 0x0000000613c00000, 0x0000000613c00000| Untracked 
+|  64|0x0000000614000000, 0x0000000614000000, 0x0000000614400000|  0%| F|  |TAMS 0x0000000614000000, 0x0000000614000000| Untracked 
+|  65|0x0000000614400000, 0x0000000614400000, 0x0000000614800000|  0%| F|  |TAMS 0x0000000614400000, 0x0000000614400000| Untracked 
+|  66|0x0000000614800000, 0x0000000614800000, 0x0000000614c00000|  0%| F|  |TAMS 0x0000000614800000, 0x0000000614800000| Untracked 
+|  67|0x0000000614c00000, 0x0000000614c00000, 0x0000000615000000|  0%| F|  |TAMS 0x0000000614c00000, 0x0000000614c00000| Untracked 
+|  68|0x0000000615000000, 0x0000000615000000, 0x0000000615400000|  0%| F|  |TAMS 0x0000000615000000, 0x0000000615000000| Untracked 
+|  69|0x0000000615400000, 0x0000000615400000, 0x0000000615800000|  0%| F|  |TAMS 0x0000000615400000, 0x0000000615400000| Untracked 
+|  70|0x0000000615800000, 0x0000000615800000, 0x0000000615c00000|  0%| F|  |TAMS 0x0000000615800000, 0x0000000615800000| Untracked 
+|  71|0x0000000615c00000, 0x0000000615c00000, 0x0000000616000000|  0%| F|  |TAMS 0x0000000615c00000, 0x0000000615c00000| Untracked 
+|  72|0x0000000616000000, 0x0000000616000000, 0x0000000616400000|  0%| F|  |TAMS 0x0000000616000000, 0x0000000616000000| Untracked 
+|  73|0x0000000616400000, 0x0000000616400000, 0x0000000616800000|  0%| F|  |TAMS 0x0000000616400000, 0x0000000616400000| Untracked 
+|  74|0x0000000616800000, 0x0000000616800000, 0x0000000616c00000|  0%| F|  |TAMS 0x0000000616800000, 0x0000000616800000| Untracked 
+|  75|0x0000000616c00000, 0x0000000616c00000, 0x0000000617000000|  0%| F|  |TAMS 0x0000000616c00000, 0x0000000616c00000| Untracked 
+|  76|0x0000000617000000, 0x0000000617000000, 0x0000000617400000|  0%| F|  |TAMS 0x0000000617000000, 0x0000000617000000| Untracked 
+|  77|0x0000000617400000, 0x0000000617400000, 0x0000000617800000|  0%| F|  |TAMS 0x0000000617400000, 0x0000000617400000| Untracked 
+|  78|0x0000000617800000, 0x0000000617800000, 0x0000000617c00000|  0%| F|  |TAMS 0x0000000617800000, 0x0000000617800000| Untracked 
+|  79|0x0000000617c00000, 0x0000000617c00000, 0x0000000618000000|  0%| F|  |TAMS 0x0000000617c00000, 0x0000000617c00000| Untracked 
+|  80|0x0000000618000000, 0x0000000618000000, 0x0000000618400000|  0%| F|  |TAMS 0x0000000618000000, 0x0000000618000000| Untracked 
+|  81|0x0000000618400000, 0x0000000618400000, 0x0000000618800000|  0%| F|  |TAMS 0x0000000618400000, 0x0000000618400000| Untracked 
+|  82|0x0000000618800000, 0x0000000618800000, 0x0000000618c00000|  0%| F|  |TAMS 0x0000000618800000, 0x0000000618800000| Untracked 
+|  83|0x0000000618c00000, 0x0000000618c00000, 0x0000000619000000|  0%| F|  |TAMS 0x0000000618c00000, 0x0000000618c00000| Untracked 
+|  84|0x0000000619000000, 0x0000000619000000, 0x0000000619400000|  0%| F|  |TAMS 0x0000000619000000, 0x0000000619000000| Untracked 
+|  85|0x0000000619400000, 0x0000000619400000, 0x0000000619800000|  0%| F|  |TAMS 0x0000000619400000, 0x0000000619400000| Untracked 
+|  86|0x0000000619800000, 0x0000000619800000, 0x0000000619c00000|  0%| F|  |TAMS 0x0000000619800000, 0x0000000619800000| Untracked 
+|  87|0x0000000619c00000, 0x0000000619c00000, 0x000000061a000000|  0%| F|  |TAMS 0x0000000619c00000, 0x0000000619c00000| Untracked 
+|  88|0x000000061a000000, 0x000000061a000000, 0x000000061a400000|  0%| F|  |TAMS 0x000000061a000000, 0x000000061a000000| Untracked 
+|  89|0x000000061a400000, 0x000000061a400000, 0x000000061a800000|  0%| F|  |TAMS 0x000000061a400000, 0x000000061a400000| Untracked 
+|  90|0x000000061a800000, 0x000000061a800000, 0x000000061ac00000|  0%| F|  |TAMS 0x000000061a800000, 0x000000061a800000| Untracked 
+|  91|0x000000061ac00000, 0x000000061ac00000, 0x000000061b000000|  0%| F|  |TAMS 0x000000061ac00000, 0x000000061ac00000| Untracked 
+|  92|0x000000061b000000, 0x000000061b000000, 0x000000061b400000|  0%| F|  |TAMS 0x000000061b000000, 0x000000061b000000| Untracked 
+|  93|0x000000061b400000, 0x000000061b400000, 0x000000061b800000|  0%| F|  |TAMS 0x000000061b400000, 0x000000061b400000| Untracked 
+|  94|0x000000061b800000, 0x000000061b800000, 0x000000061bc00000|  0%| F|  |TAMS 0x000000061b800000, 0x000000061b800000| Untracked 
+|  95|0x000000061bc00000, 0x000000061bc00000, 0x000000061c000000|  0%| F|  |TAMS 0x000000061bc00000, 0x000000061bc00000| Untracked 
+|  96|0x000000061c000000, 0x000000061c000000, 0x000000061c400000|  0%| F|  |TAMS 0x000000061c000000, 0x000000061c000000| Untracked 
+|  97|0x000000061c400000, 0x000000061c400000, 0x000000061c800000|  0%| F|  |TAMS 0x000000061c400000, 0x000000061c400000| Untracked 
+|  98|0x000000061c800000, 0x000000061c800000, 0x000000061cc00000|  0%| F|  |TAMS 0x000000061c800000, 0x000000061c800000| Untracked 
+|  99|0x000000061cc00000, 0x000000061cc00000, 0x000000061d000000|  0%| F|  |TAMS 0x000000061cc00000, 0x000000061cc00000| Untracked 
+| 100|0x000000061d000000, 0x000000061d000000, 0x000000061d400000|  0%| F|  |TAMS 0x000000061d000000, 0x000000061d000000| Untracked 
+| 101|0x000000061d400000, 0x000000061d400000, 0x000000061d800000|  0%| F|  |TAMS 0x000000061d400000, 0x000000061d400000| Untracked 
+| 102|0x000000061d800000, 0x000000061d800000, 0x000000061dc00000|  0%| F|  |TAMS 0x000000061d800000, 0x000000061d800000| Untracked 
+| 103|0x000000061dc00000, 0x000000061dc00000, 0x000000061e000000|  0%| F|  |TAMS 0x000000061dc00000, 0x000000061dc00000| Untracked 
+| 104|0x000000061e000000, 0x000000061e000000, 0x000000061e400000|  0%| F|  |TAMS 0x000000061e000000, 0x000000061e000000| Untracked 
+| 105|0x000000061e400000, 0x000000061e400000, 0x000000061e800000|  0%| F|  |TAMS 0x000000061e400000, 0x000000061e400000| Untracked 
+| 106|0x000000061e800000, 0x000000061ec00000, 0x000000061ec00000|100%| S|CS|TAMS 0x000000061e800000, 0x000000061e800000| Complete 
+| 107|0x000000061ec00000, 0x000000061f000000, 0x000000061f000000|100%| S|CS|TAMS 0x000000061ec00000, 0x000000061ec00000| Complete 
+| 108|0x000000061f000000, 0x000000061f400000, 0x000000061f400000|100%| S|CS|TAMS 0x000000061f000000, 0x000000061f000000| Complete 
+| 109|0x000000061f400000, 0x000000061f800000, 0x000000061f800000|100%| S|CS|TAMS 0x000000061f400000, 0x000000061f400000| Complete 
+| 110|0x000000061f800000, 0x000000061fc00000, 0x000000061fc00000|100%| S|CS|TAMS 0x000000061f800000, 0x000000061f800000| Complete 
+| 111|0x000000061fc00000, 0x0000000620000000, 0x0000000620000000|100%| S|CS|TAMS 0x000000061fc00000, 0x000000061fc00000| Complete 
+| 112|0x0000000620000000, 0x0000000620000000, 0x0000000620400000|  0%| F|  |TAMS 0x0000000620000000, 0x0000000620000000| Untracked 
+| 113|0x0000000620400000, 0x0000000620400000, 0x0000000620800000|  0%| F|  |TAMS 0x0000000620400000, 0x0000000620400000| Untracked 
+| 114|0x0000000620800000, 0x0000000620800000, 0x0000000620c00000|  0%| F|  |TAMS 0x0000000620800000, 0x0000000620800000| Untracked 
+| 115|0x0000000620c00000, 0x0000000620c00000, 0x0000000621000000|  0%| F|  |TAMS 0x0000000620c00000, 0x0000000620c00000| Untracked 
+| 116|0x0000000621000000, 0x00000006212f0bd0, 0x0000000621400000| 73%| E|  |TAMS 0x0000000621000000, 0x0000000621000000| Complete 
+| 117|0x0000000621400000, 0x0000000621800000, 0x0000000621800000|100%| E|CS|TAMS 0x0000000621400000, 0x0000000621400000| Complete 
+| 118|0x0000000621800000, 0x0000000621c00000, 0x0000000621c00000|100%| E|CS|TAMS 0x0000000621800000, 0x0000000621800000| Complete 
+| 119|0x0000000621c00000, 0x0000000622000000, 0x0000000622000000|100%| E|CS|TAMS 0x0000000621c00000, 0x0000000621c00000| Complete 
+| 120|0x0000000622000000, 0x0000000622400000, 0x0000000622400000|100%| E|CS|TAMS 0x0000000622000000, 0x0000000622000000| Complete 
+| 121|0x0000000622400000, 0x0000000622800000, 0x0000000622800000|100%| E|CS|TAMS 0x0000000622400000, 0x0000000622400000| Complete 
+| 122|0x0000000622800000, 0x0000000622c00000, 0x0000000622c00000|100%| E|CS|TAMS 0x0000000622800000, 0x0000000622800000| Complete 
+| 123|0x0000000622c00000, 0x0000000623000000, 0x0000000623000000|100%| E|CS|TAMS 0x0000000622c00000, 0x0000000622c00000| Complete 
+| 124|0x0000000623000000, 0x0000000623400000, 0x0000000623400000|100%| E|CS|TAMS 0x0000000623000000, 0x0000000623000000| Complete 
+| 125|0x0000000623400000, 0x0000000623800000, 0x0000000623800000|100%| E|CS|TAMS 0x0000000623400000, 0x0000000623400000| Complete 
+| 126|0x0000000623800000, 0x0000000623c00000, 0x0000000623c00000|100%| E|CS|TAMS 0x0000000623800000, 0x0000000623800000| Complete 
+| 127|0x0000000623c00000, 0x0000000624000000, 0x0000000624000000|100%| E|CS|TAMS 0x0000000623c00000, 0x0000000623c00000| Complete 
+| 128|0x0000000624000000, 0x0000000624400000, 0x0000000624400000|100%| E|CS|TAMS 0x0000000624000000, 0x0000000624000000| Complete 
+| 129|0x0000000624400000, 0x0000000624800000, 0x0000000624800000|100%| E|CS|TAMS 0x0000000624400000, 0x0000000624400000| Complete 
+| 130|0x0000000624800000, 0x0000000624c00000, 0x0000000624c00000|100%| E|CS|TAMS 0x0000000624800000, 0x0000000624800000| Complete 
+| 131|0x0000000624c00000, 0x0000000625000000, 0x0000000625000000|100%| E|CS|TAMS 0x0000000624c00000, 0x0000000624c00000| Complete 
+| 132|0x0000000625000000, 0x0000000625400000, 0x0000000625400000|100%| E|CS|TAMS 0x0000000625000000, 0x0000000625000000| Complete 
+| 133|0x0000000625400000, 0x0000000625800000, 0x0000000625800000|100%| E|CS|TAMS 0x0000000625400000, 0x0000000625400000| Complete 
+| 134|0x0000000625800000, 0x0000000625c00000, 0x0000000625c00000|100%| E|CS|TAMS 0x0000000625800000, 0x0000000625800000| Complete 
+| 135|0x0000000625c00000, 0x0000000626000000, 0x0000000626000000|100%| E|CS|TAMS 0x0000000625c00000, 0x0000000625c00000| Complete 
+| 136|0x0000000626000000, 0x0000000626400000, 0x0000000626400000|100%| E|CS|TAMS 0x0000000626000000, 0x0000000626000000| Complete 
+| 137|0x0000000626400000, 0x0000000626800000, 0x0000000626800000|100%| E|CS|TAMS 0x0000000626400000, 0x0000000626400000| Complete 
+| 138|0x0000000626800000, 0x0000000626c00000, 0x0000000626c00000|100%| E|CS|TAMS 0x0000000626800000, 0x0000000626800000| Complete 
+| 139|0x0000000626c00000, 0x0000000627000000, 0x0000000627000000|100%| E|CS|TAMS 0x0000000626c00000, 0x0000000626c00000| Complete 
+| 140|0x0000000627000000, 0x0000000627400000, 0x0000000627400000|100%| E|CS|TAMS 0x0000000627000000, 0x0000000627000000| Complete 
+| 141|0x0000000627400000, 0x0000000627800000, 0x0000000627800000|100%| E|CS|TAMS 0x0000000627400000, 0x0000000627400000| Complete 
+| 142|0x0000000627800000, 0x0000000627c00000, 0x0000000627c00000|100%| E|CS|TAMS 0x0000000627800000, 0x0000000627800000| Complete 
+| 143|0x0000000627c00000, 0x0000000628000000, 0x0000000628000000|100%| E|CS|TAMS 0x0000000627c00000, 0x0000000627c00000| Complete 
+| 144|0x0000000628000000, 0x0000000628400000, 0x0000000628400000|100%| E|CS|TAMS 0x0000000628000000, 0x0000000628000000| Complete 
+| 145|0x0000000628400000, 0x0000000628800000, 0x0000000628800000|100%| E|CS|TAMS 0x0000000628400000, 0x0000000628400000| Complete 
+| 146|0x0000000628800000, 0x0000000628c00000, 0x0000000628c00000|100%| E|CS|TAMS 0x0000000628800000, 0x0000000628800000| Complete 
+| 147|0x0000000628c00000, 0x0000000629000000, 0x0000000629000000|100%| E|CS|TAMS 0x0000000628c00000, 0x0000000628c00000| Complete 
+| 148|0x0000000629000000, 0x0000000629400000, 0x0000000629400000|100%| E|CS|TAMS 0x0000000629000000, 0x0000000629000000| Complete 
+| 149|0x0000000629400000, 0x0000000629800000, 0x0000000629800000|100%| E|CS|TAMS 0x0000000629400000, 0x0000000629400000| Complete 
+| 150|0x0000000629800000, 0x0000000629c00000, 0x0000000629c00000|100%| E|CS|TAMS 0x0000000629800000, 0x0000000629800000| Complete 
+| 151|0x0000000629c00000, 0x000000062a000000, 0x000000062a000000|100%| E|CS|TAMS 0x0000000629c00000, 0x0000000629c00000| Complete 
+| 152|0x000000062a000000, 0x000000062a400000, 0x000000062a400000|100%| E|CS|TAMS 0x000000062a000000, 0x000000062a000000| Complete 
+
+Card table byte_map: [0x000001fbb2a70000,0x000001fbb3a50000] _byte_map_base: 0x000001fbafa50000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x000001fb98d984b0, (CMBitMap*) 0x000001fb98d984f0
+ Prev Bits: [0x000001fbb4a30000, 0x000001fbbc930000)
+ Next Bits: [0x000001fbbc930000, 0x000001fbc4830000)
+
+Polling page: 0x000001fba1dd0000
+
+Metaspace:
+
+Usage:
+  Non-class:      3.19 MB used.
+      Class:    211.90 KB used.
+       Both:      3.40 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,       3.31 MB (  5%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,     256.00 KB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,       3.56 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  2.48 MB
+       Class:  3.62 MB
+        Both:  6.11 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 48.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 55.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 117.
+num_chunk_merges: 0.
+num_chunk_splits: 76.
+num_chunks_enlarged: 55.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=1226Kb max_used=1226Kb free=118773Kb
+ bounds [0x000001fba98c0000, 0x000001fba9b30000, 0x000001fbb0df0000]
+CodeHeap 'profiled nmethods': size=120000Kb used=2432Kb max_used=2432Kb free=117567Kb
+ bounds [0x000001fba2390000, 0x000001fba2600000, 0x000001fba98c0000]
+CodeHeap 'non-nmethods': size=5760Kb used=1238Kb max_used=1326Kb free=4521Kb
+ bounds [0x000001fba1df0000, 0x000001fba2060000, 0x000001fba2390000]
+ total_blobs=1864 nmethods=1321 adapters=456
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 15.946 Thread 0x000001fbc4a916e0 nmethod 1308 0x000001fba25e1210 code [0x000001fba25e1420, 0x000001fba25e1938]
+Event: 15.946 Thread 0x000001fbc4a916e0 1310       3       org.lwjgl.opengl.WindowsDisplay$Rect::offset (41 bytes)
+Event: 15.946 Thread 0x000001fbc4a916e0 nmethod 1310 0x000001fba25e1b10 code [0x000001fba25e1ca0, 0x000001fba25e1dd8]
+Event: 15.954 Thread 0x000001fbc4a916e0 1313       3       org.lwjgl.opengl.WindowsDisplay::setMousePosition (17 bytes)
+Event: 15.955 Thread 0x000001fbc4a916e0 nmethod 1313 0x000001fba25e1e90 code [0x000001fba25e2020, 0x000001fba25e21d8]
+Event: 15.955 Thread 0x000001fbc4a916e0 1314       3       org.lwjgl.opengl.WindowsMouse::setPosition (11 bytes)
+Event: 15.955 Thread 0x000001fbc4a916e0 nmethod 1314 0x000001fba25e2310 code [0x000001fba25e24a0, 0x000001fba25e25b8]
+Event: 16.032 Thread 0x000001fbc4a916e0 1315       3       org.lwjgl.opengl.WindowsMouse::putMouseEventWithCoords (61 bytes)
+Event: 16.033 Thread 0x000001fbc4a916e0 nmethod 1315 0x000001fba25e2690 code [0x000001fba25e28c0, 0x000001fba25e30a8]
+Event: 16.037 Thread 0x000001fbc4a916e0 1316       3       org.lwjgl.opengl.WindowsDisplay::centerCursor (110 bytes)
+Event: 16.037 Thread 0x000001fbc4a916e0 nmethod 1316 0x000001fba25e3410 code [0x000001fba25e3620, 0x000001fba25e3b88]
+Event: 16.403 Thread 0x000001fbc4a911e0 1317   !   4       org.lwjgl.input.Mouse::getDWheel (23 bytes)
+Event: 16.404 Thread 0x000001fbc4a911e0 nmethod 1317 0x000001fba99e3610 code [0x000001fba99e37a0, 0x000001fba99e3958]
+Event: 16.500 Thread 0x000001fbc4a911e0 1318   !   4       java.nio.DirectFloatBufferU::put (36 bytes)
+Event: 16.502 Thread 0x000001fbc4a911e0 nmethod 1318 0x000001fba99e3a10 code [0x000001fba99e3b80, 0x000001fba99e3c78]
+Event: 16.657 Thread 0x000001fbc4a916e0 1319 % !   3       opencraft.Chunk::calculateLighting @ 15 (1158 bytes)
+Event: 16.660 Thread 0x000001fbc4a916e0 nmethod 1319% 0x000001fba25e3e10 code [0x000001fba25e45a0, 0x000001fba25e8468]
+Event: 16.661 Thread 0x000001fbc4a916e0 1320   !   3       opencraft.Chunk::calculateLighting (1158 bytes)
+Event: 16.663 Thread 0x000001fbc4a916e0 nmethod 1320 0x000001fba25ea110 code [0x000001fba25ea880, 0x000001fba25ee3e8]
+Event: 16.664 Thread 0x000001fbc4a911e0 1321 % !   4       opencraft.Chunk::calculateLighting @ 15 (1158 bytes)
+
+GC Heap History (16 events):
+Event: 3.001 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total 520192K, used 24576K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 6 young (24576K), 0 survivors (0K)
+ Metaspace       used 3215K, committed 3328K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 3.006 GC heap after
+{Heap after GC invocations=1 (full 0):
+ garbage-first heap   total 520192K, used 7463K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 1 young (4096K), 1 survivors (4096K)
+ Metaspace       used 3215K, committed 3328K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 3.218 GC heap before
+{Heap before GC invocations=1 (full 0):
+ garbage-first heap   total 520192K, used 27943K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 6 young (24576K), 1 survivors (4096K)
+ Metaspace       used 3237K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 3.223 GC heap after
+{Heap after GC invocations=2 (full 0):
+ garbage-first heap   total 520192K, used 13540K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 1 young (4096K), 1 survivors (4096K)
+ Metaspace       used 3237K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 3.659 GC heap before
+{Heap before GC invocations=2 (full 0):
+ garbage-first heap   total 520192K, used 58596K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 12 young (49152K), 1 survivors (4096K)
+ Metaspace       used 3244K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 3.667 GC heap after
+{Heap after GC invocations=3 (full 0):
+ garbage-first heap   total 520192K, used 27139K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 2 young (8192K), 2 survivors (8192K)
+ Metaspace       used 3244K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 4.121 GC heap before
+{Heap before GC invocations=3 (full 0):
+ garbage-first heap   total 520192K, used 84483K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 16 young (65536K), 2 survivors (8192K)
+ Metaspace       used 3244K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 4.132 GC heap after
+{Heap after GC invocations=4 (full 0):
+ garbage-first heap   total 520192K, used 45036K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 2 young (8192K), 2 survivors (8192K)
+ Metaspace       used 3244K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 4.603 GC heap before
+{Heap before GC invocations=4 (full 0):
+ garbage-first heap   total 520192K, used 114668K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 19 young (77824K), 2 survivors (8192K)
+ Metaspace       used 3244K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 4.613 GC heap after
+{Heap after GC invocations=5 (full 0):
+ garbage-first heap   total 520192K, used 68217K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 3 young (12288K), 3 survivors (12288K)
+ Metaspace       used 3244K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 5.216 GC heap before
+{Heap before GC invocations=5 (full 0):
+ garbage-first heap   total 520192K, used 162425K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 26 young (106496K), 3 survivors (12288K)
+ Metaspace       used 3246K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 5.231 GC heap after
+{Heap after GC invocations=6 (full 0):
+ garbage-first heap   total 626688K, used 98304K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 4 young (16384K), 4 survivors (16384K)
+ Metaspace       used 3246K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 6.083 GC heap before
+{Heap before GC invocations=6 (full 0):
+ garbage-first heap   total 626688K, used 212992K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 32 young (131072K), 4 survivors (16384K)
+ Metaspace       used 3258K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 6.097 GC heap after
+{Heap after GC invocations=7 (full 0):
+ garbage-first heap   total 626688K, used 135625K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 4 young (16384K), 4 survivors (16384K)
+ Metaspace       used 3258K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 7.972 GC heap before
+{Heap before GC invocations=7 (full 0):
+ garbage-first heap   total 626688K, used 287177K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 41 young (167936K), 4 survivors (16384K)
+ Metaspace       used 3267K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+Event: 7.991 GC heap after
+{Heap after GC invocations=8 (full 0):
+ garbage-first heap   total 626688K, used 184951K [0x0000000604000000, 0x0000000800000000)
+  region size 4096K, 6 young (24576K), 6 survivors (24576K)
+ Metaspace       used 3267K, committed 3392K, reserved 1114112K
+  class space    used 206K, committed 256K, reserved 1048576K
+}
+
+Deoptimization events (20 events):
+Event: 14.425 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba9996194 sp=0x000000b03ccff3a0
+Event: 14.425 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e423a3 sp=0x000000b03ccff340 mode 2
+Event: 16.656 Thread 0x000001fb98ce6df0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001fba99c3d3c relative=0x000000000000575c
+Event: 16.656 Thread 0x000001fb98ce6df0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001fba99c3d3c method=opencraft.Chunk.calculateLighting()V @ 934 c2
+Event: 16.656 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba99c3d3c sp=0x000000b03ccff330
+Event: 16.656 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e423a3 sp=0x000000b03ccff2e8 mode 2
+Event: 16.703 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba25be419 sp=0x000000b03ccff250
+Event: 16.703 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e42b43 sp=0x000000b03ccfe708 mode 0
+Event: 16.711 Thread 0x000001fb98ce6df0 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x000001fba99da8c4 relative=0x0000000000002024
+Event: 16.711 Thread 0x000001fb98ce6df0 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x000001fba99da8c4 method=opencraft.physics.physicsUtils.getLastPosBeforeNextBlockInDirection(FFFFFFIF)Lopencraft/graphics/Vector3f; @ 88 c2
+Event: 16.711 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba99da8c4 sp=0x000000b03ccff3b0
+Event: 16.711 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e423a3 sp=0x000000b03ccff340 mode 2
+Event: 16.716 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba25be419 sp=0x000000b03ccff250
+Event: 16.716 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e42b43 sp=0x000000b03ccfe708 mode 0
+Event: 16.723 Thread 0x000001fb98ce6df0 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x000001fba99da8c4 relative=0x0000000000002024
+Event: 16.723 Thread 0x000001fb98ce6df0 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x000001fba99da8c4 method=opencraft.physics.physicsUtils.getLastPosBeforeNextBlockInDirection(FFFFFFIF)Lopencraft/graphics/Vector3f; @ 88 c2
+Event: 16.723 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba99da8c4 sp=0x000000b03ccff3b0
+Event: 16.723 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e423a3 sp=0x000000b03ccff340 mode 2
+Event: 16.728 Thread 0x000001fb98ce6df0 DEOPT PACKING pc=0x000001fba25be419 sp=0x000000b03ccff250
+Event: 16.728 Thread 0x000001fb98ce6df0 DEOPT UNPACKING pc=0x000001fba1e42b43 sp=0x000000b03ccfe708 mode 0
+
+Classes loaded (20 events):
+Event: 2.681 Loading class java/io/FileReader
+Event: 2.681 Loading class java/io/InputStreamReader
+Event: 2.681 Loading class java/io/InputStreamReader done
+Event: 2.681 Loading class java/io/FileReader done
+Event: 2.683 Loading class java/io/BufferedReader
+Event: 2.683 Loading class java/io/BufferedReader done
+Event: 2.688 Loading class sun/invoke/util/ValueConversions$1
+Event: 2.688 Loading class sun/invoke/util/ValueConversions$1 done
+Event: 2.689 Loading class java/lang/invoke/BoundMethodHandle$Species_LI
+Event: 2.689 Loading class java/lang/invoke/BoundMethodHandle$Species_LI done
+Event: 2.711 Loading class java/lang/invoke/MethodHandle$1
+Event: 2.711 Loading class java/lang/invoke/MethodHandle$1 done
+Event: 8.687 Loading class jdk/internal/math/FDBigInteger
+Event: 8.687 Loading class jdk/internal/math/FDBigInteger done
+Event: 8.687 Loading class java/lang/ArrayIndexOutOfBoundsException
+Event: 8.687 Loading class java/lang/IndexOutOfBoundsException
+Event: 8.687 Loading class java/lang/IndexOutOfBoundsException done
+Event: 8.687 Loading class java/lang/ArrayIndexOutOfBoundsException done
+Event: 8.738 Loading class java/lang/StrictMath
+Event: 8.738 Loading class java/lang/StrictMath done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x0000000621719f78}> (0x0000000621719f78) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171a298}> (0x000000062171a298) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171a5b8}> (0x000000062171a5b8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171a8d8}> (0x000000062171a8d8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171abf8}> (0x000000062171abf8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171af18}> (0x000000062171af18) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171b238}> (0x000000062171b238) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171b558}> (0x000000062171b558) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171b878}> (0x000000062171b878) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171bb98}> (0x000000062171bb98) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171beb8}> (0x000000062171beb8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171c1d8}> (0x000000062171c1d8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171c4f8}> (0x000000062171c4f8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171c818}> (0x000000062171c818) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171cb38}> (0x000000062171cb38) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171ce58}> (0x000000062171ce58) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171d178}> (0x000000062171d178) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171d498}> (0x000000062171d498) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171d7b8}> (0x000000062171d7b8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+Event: 11.849 Thread 0x000001fb98ce6df0 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'{0x000000062171dad8}> (0x000000062171dad8) 
+thrown [s\open\src\hotspot\share\runtime\sharedRuntime.cpp, line 625]
+
+VM Operations (20 events):
+Event: 4.603 Executing VM operation: G1CollectForAllocation
+Event: 4.613 Executing VM operation: G1CollectForAllocation done
+Event: 5.216 Executing VM operation: G1CollectForAllocation
+Event: 5.231 Executing VM operation: G1CollectForAllocation done
+Event: 6.083 Executing VM operation: G1CollectForAllocation
+Event: 6.097 Executing VM operation: G1CollectForAllocation done
+Event: 7.111 Executing VM operation: Cleanup
+Event: 7.112 Executing VM operation: Cleanup done
+Event: 7.972 Executing VM operation: G1CollectForAllocation
+Event: 7.991 Executing VM operation: G1CollectForAllocation done
+Event: 8.996 Executing VM operation: Cleanup
+Event: 8.996 Executing VM operation: Cleanup done
+Event: 10.008 Executing VM operation: Cleanup
+Event: 10.008 Executing VM operation: Cleanup done
+Event: 11.020 Executing VM operation: Cleanup
+Event: 11.020 Executing VM operation: Cleanup done
+Event: 12.028 Executing VM operation: Cleanup
+Event: 12.028 Executing VM operation: Cleanup done
+Event: 16.061 Executing VM operation: Cleanup
+Event: 16.061 Executing VM operation: Cleanup done
+
+Events (20 events):
+Event: 0.089 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\zip.dll
+Event: 0.103 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\verify.dll
+Event: 0.124 Loaded shared library C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\lwjgl64.dll
+Event: 0.483 Thread 0x000001fbd0513010 Thread added: 0x000001fbd0513010
+Event: 0.648 Thread 0x000001fbd0513010 Thread exited: 0x000001fbd0513010
+Event: 0.666 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\jimage.dll
+Event: 0.725 Loaded shared library C:\Program Files\Java\jdk-18.0.2\bin\awt.dll
+Event: 0.756 Loaded shared library C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\freetype-jni-64.dll
+Event: 2.679 Thread 0x000001fbd3083460 Thread added: 0x000001fbd3083460
+Event: 2.771 Thread 0x000001fbd2fe1ad0 Thread added: 0x000001fbd2fe1ad0
+Event: 2.783 Thread 0x000001fbd30106a0 Thread added: 0x000001fbd30106a0
+Event: 3.593 Thread 0x000001fbd30106a0 Thread exited: 0x000001fbd30106a0
+Event: 4.000 Thread 0x000001fbd2fe1ad0 Thread exited: 0x000001fbd2fe1ad0
+Event: 8.680 Thread 0x000001fbd3083460 Thread exited: 0x000001fbd3083460
+Event: 8.800 Thread 0x000001fbd3948a10 Thread added: 0x000001fbd3948a10
+Event: 9.458 Thread 0x000001fbd3948a10 Thread exited: 0x000001fbd3948a10
+Event: 11.835 Thread 0x000001fbddb96090 Thread added: 0x000001fbddb96090
+Event: 11.835 Thread 0x000001fbd9fefd80 Thread added: 0x000001fbd9fefd80
+Event: 12.371 Thread 0x000001fbd9fefd80 Thread exited: 0x000001fbd9fefd80
+Event: 12.825 Thread 0x000001fbddb96090 Thread exited: 0x000001fbddb96090
+
+
+Dynamic libraries:
+0x00007ff7f1b40000 - 0x00007ff7f1b50000 	C:\Program Files\Java\jdk-18.0.2\bin\javaw.exe
+0x00007ffd0ea40000 - 0x00007ffd0ec49000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffd0cef0000 - 0x00007ffd0cfae000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffd0c510000 - 0x00007ffd0c88c000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffd0c330000 - 0x00007ffd0c441000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffcb92b0000 - 0x00007ffcb92c8000 	C:\Program Files\Java\jdk-18.0.2\bin\jli.dll
+0x00007ffca5cd0000 - 0x00007ffca5cea000 	C:\Program Files\Java\jdk-18.0.2\bin\VCRUNTIME140.dll
+0x00007ffd0dcf0000 - 0x00007ffd0dd9e000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffd0d810000 - 0x00007ffd0d8b3000 	C:\Windows\System32\msvcrt.dll
+0x00007ffd0d9a0000 - 0x00007ffd0da3e000 	C:\Windows\System32\sechost.dll
+0x00007ffd0cfb0000 - 0x00007ffd0d0d0000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffd0d0d0000 - 0x00007ffd0d27d000 	C:\Windows\System32\USER32.dll
+0x00007ffd0c890000 - 0x00007ffd0c8b6000 	C:\Windows\System32\win32u.dll
+0x00007ffcf6700000 - 0x00007ffcf69a5000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467\COMCTL32.dll
+0x00007ffd0db10000 - 0x00007ffd0db39000 	C:\Windows\System32\GDI32.dll
+0x00007ffd0c100000 - 0x00007ffd0c218000 	C:\Windows\System32\gdi32full.dll
+0x00007ffd0c290000 - 0x00007ffd0c32d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffd04b60000 - 0x00007ffd04b6a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffd0dad0000 - 0x00007ffd0db01000 	C:\Windows\System32\IMM32.DLL
+0x00007ffcb92a0000 - 0x00007ffcb92ac000 	C:\Program Files\Java\jdk-18.0.2\bin\vcruntime140_1.dll
+0x00007ffca5c40000 - 0x00007ffca5ccd000 	C:\Program Files\Java\jdk-18.0.2\bin\msvcp140.dll
+0x00007ffca35c0000 - 0x00007ffca41d1000 	C:\Program Files\Java\jdk-18.0.2\bin\server\jvm.dll
+0x00007ffd0e5f0000 - 0x00007ffd0e5f8000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffca5c30000 - 0x00007ffca5c39000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffd04ba0000 - 0x00007ffd04bd3000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffd0e580000 - 0x00007ffd0e5ef000 	C:\Windows\System32\WS2_32.dll
+0x00007ffd0af70000 - 0x00007ffd0af88000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffca5c20000 - 0x00007ffca5c2a000 	C:\Program Files\Java\jdk-18.0.2\bin\jimage.dll
+0x00007ffd09260000 - 0x00007ffd09481000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffcfff30000 - 0x00007ffcfff61000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffd0c080000 - 0x00007ffd0c0ff000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffca5bf0000 - 0x00007ffca5c15000 	C:\Program Files\Java\jdk-18.0.2\bin\java.dll
+0x00007ffca5b10000 - 0x00007ffca5be6000 	C:\Program Files\Java\jdk-18.0.2\bin\jsvml.dll
+0x00007ffd0ddb0000 - 0x00007ffd0e575000 	C:\Windows\System32\SHELL32.dll
+0x00007ffd09fe0000 - 0x00007ffd0a845000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ffd0c8c0000 - 0x00007ffd0cc36000 	C:\Windows\System32\combase.dll
+0x00007ffd09e70000 - 0x00007ffd09fd6000 	C:\Windows\SYSTEM32\wintypes.dll
+0x00007ffd0d2a0000 - 0x00007ffd0d38a000 	C:\Windows\System32\SHCORE.dll
+0x00007ffd0e720000 - 0x00007ffd0e77d000 	C:\Windows\System32\shlwapi.dll
+0x00007ffd0be40000 - 0x00007ffd0be61000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007ffca5990000 - 0x00007ffca59a3000 	C:\Program Files\Java\jdk-18.0.2\bin\net.dll
+0x00007ffd068d0000 - 0x00007ffd069e2000 	C:\Windows\SYSTEM32\WINHTTP.dll
+0x00007ffd0b410000 - 0x00007ffd0b477000 	C:\Windows\system32\mswsock.dll
+0x00007ffca5970000 - 0x00007ffca5986000 	C:\Program Files\Java\jdk-18.0.2\bin\nio.dll
+0x00007ffca3460000 - 0x00007ffca3478000 	C:\Program Files\Java\jdk-18.0.2\bin\zip.dll
+0x00007ffca4e40000 - 0x00007ffca4e50000 	C:\Program Files\Java\jdk-18.0.2\bin\verify.dll
+0x0000000180000000 - 0x0000000180053000 	C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\lwjgl64.dll
+0x00007ffcc24d0000 - 0x00007ffcc25d1000 	C:\Windows\SYSTEM32\OPENGL32.dll
+0x00007ffcc24a0000 - 0x00007ffcc24cd000 	C:\Windows\SYSTEM32\GLU32.dll
+0x00007ffd097d0000 - 0x00007ffd09808000 	C:\Windows\SYSTEM32\dxcore.dll
+0x00007ffd05e40000 - 0x00007ffd05ef8000 	C:\Windows\SYSTEM32\mscms.dll
+0x00007ffd0b7e0000 - 0x00007ffd0b807000 	C:\Windows\SYSTEM32\bcrypt.dll
+0x00007ffd0bb20000 - 0x00007ffd0bb6c000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x00007ffd0dc40000 - 0x00007ffd0dcef000 	C:\Windows\System32\clbcatq.dll
+0x00007ffcff5d0000 - 0x00007ffcff61a000 	C:\Windows\System32\Windows.Internal.Graphics.Display.DisplayColorManagement.dll
+0x00007ffd0d8c0000 - 0x00007ffd0d996000 	C:\Windows\System32\OLEAUT32.dll
+0x00007ffd09560000 - 0x00007ffd0960c000 	C:\Windows\system32\uxtheme.dll
+0x00007ffd0e600000 - 0x00007ffd0e71d000 	C:\Windows\System32\MSCTF.dll
+0x00007ffd04220000 - 0x00007ffd04264000 	C:\Windows\SYSTEM32\directxdatabasehelper.dll
+0x00007ffd0af90000 - 0x00007ffd0afc4000 	C:\Windows\SYSTEM32\ntmarta.dll
+0x00007ffd05a40000 - 0x00007ffd05b74000 	C:\Windows\System32\AppXDeploymentClient.dll
+0x00007ffd05580000 - 0x00007ffd0576f000 	C:\Windows\SYSTEM32\urlmon.dll
+0x00007ffd05250000 - 0x00007ffd05503000 	C:\Windows\System32\iertutil.dll
+0x00007ffd0aa60000 - 0x00007ffd0aa6c000 	C:\Windows\System32\netutils.dll
+0x00007ffd05550000 - 0x00007ffd05578000 	C:\Windows\System32\srvcli.dll
+0x00007ffc39fb0000 - 0x00007ffc3d8e4000 	C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909\nvoglv64.dll
+0x00007ffd0d3a0000 - 0x00007ffd0d80c000 	C:\Windows\System32\SETUPAPI.dll
+0x00007ffd0e780000 - 0x00007ffd0e91a000 	C:\Windows\System32\ole32.dll
+0x00007ffd05130000 - 0x00007ffd05144000 	C:\Windows\SYSTEM32\WTSAPI32.dll
+0x00007ffd0b6b0000 - 0x00007ffd0b6c2000 	C:\Windows\SYSTEM32\msasn1.dll
+0x00007ffd045e0000 - 0x00007ffd04611000 	C:\Windows\SYSTEM32\cryptnet.dll
+0x00007ffd0bf10000 - 0x00007ffd0c072000 	C:\Windows\System32\CRYPT32.dll
+0x00007ffd04490000 - 0x00007ffd045d9000 	C:\Windows\SYSTEM32\drvstore.dll
+0x00007ffd0baf0000 - 0x00007ffd0bb1c000 	C:\Windows\SYSTEM32\devobj.dll
+0x00007ffd0b720000 - 0x00007ffd0b761000 	C:\Windows\SYSTEM32\wldp.dll
+0x00007ffd0b650000 - 0x00007ffd0b65c000 	C:\Windows\SYSTEM32\cryptbase.dll
+0x00007ffd0c220000 - 0x00007ffd0c288000 	C:\Windows\System32\WINTRUST.dll
+0x00007ffd09840000 - 0x00007ffd0986f000 	C:\Windows\SYSTEM32\dwmapi.dll
+0x00007ffcf7a90000 - 0x00007ffcf7bbd000 	C:\Windows\SYSTEM32\textinputframework.dll
+0x00007ffd08e20000 - 0x00007ffd08f51000 	C:\Windows\SYSTEM32\CoreMessaging.dll
+0x00007ffd00f40000 - 0x00007ffd012ad000 	C:\Windows\SYSTEM32\CoreUIComponents.dll
+0x00007ffc8e970000 - 0x00007ffc8e9b4000 	C:\Windows\SYSTEM32\icm32.dll
+0x00007ffd0bde0000 - 0x00007ffd0be2d000 	C:\Windows\SYSTEM32\powrprof.dll
+0x00007ffd0bdc0000 - 0x00007ffd0bdd3000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffd0bba0000 - 0x00007ffd0bc04000 	C:\Windows\SYSTEM32\WINSTA.dll
+0x00007ffd09680000 - 0x00007ffd09773000 	C:\Windows\system32\dxgi.dll
+0x00007ffd00680000 - 0x00007ffd00900000 	C:\Windows\system32\d3d11.dll
+0x00007ffcc09f0000 - 0x00007ffcc0aae000 	C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909\nvldumdx.dll
+0x00007ffd0d280000 - 0x00007ffd0d29f000 	C:\Windows\System32\imagehlp.dll
+0x00007ffd0b660000 - 0x00007ffd0b678000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x00007ffd0aed0000 - 0x00007ffd0af05000 	C:\Windows\system32\rsaenh.dll
+0x00007ffcbd0f0000 - 0x00007ffcc077a000 	C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909\nvwgf2umx.dll
+0x00007ffcf9960000 - 0x00007ffcfa0d2000 	C:\Windows\SYSTEM32\nvapi64.dll
+0x00007ffcfce70000 - 0x00007ffcfe052000 	C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2\igd10iumd64.dll
+0x00007ffd0b7b0000 - 0x00007ffd0b7d8000 	C:\Windows\SYSTEM32\ncrypt.dll
+0x00007ffd09110000 - 0x00007ffd091a1000 	C:\Windows\SYSTEM32\apphelp.dll
+0x00007ffd0b770000 - 0x00007ffd0b7a7000 	C:\Windows\SYSTEM32\NTASN1.dll
+0x00007ffcfea70000 - 0x00007ffcfeda6000 	C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2\igdgmm64.dll
+0x00007ffcfa0e0000 - 0x00007ffcfce6f000 	C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2\igc64.dll
+0x00007ffd012b0000 - 0x00007ffd014c9000 	C:\Windows\SYSTEM32\dcomp.dll
+0x00007ffcf5a60000 - 0x00007ffcf5bef000 	C:\Program Files\Java\jdk-18.0.2\bin\awt.dll
+0x00007ffcf5910000 - 0x00007ffcf5a5e000 	C:\Users\garag\Documents\GitHub\OpencraftClient1\natives\freetype-jni-64.dll
+0x00007ffcf5ca0000 - 0x00007ffcf5ccb000 	C:\Windows\SYSTEM32\VCRUNTIME140D.dll
+0x00007ffcf5740000 - 0x00007ffcf5907000 	C:\Windows\SYSTEM32\ucrtbased.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-18.0.2\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22000.120_none_9d947278b86cc467;C:\Program Files\Java\jdk-18.0.2\bin\server;C:\Users\garag\Documents\GitHub\OpencraftClient1\natives;C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_47b4de8ce9fa1909;C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ec48fba0e5cab6d2
+
+VM Arguments:
+jvm_args: -Djava.library.path=C:\Users\garag\Documents\GitHub\OpencraftClient1\natives -Dfile.encoding=UTF-8 -XX:+ShowCodeDetailsInExceptionMessages 
+java_command: opencraft.Main
+java_class_path (initial): C:\Users\garag\Documents\GitHub\OpencraftClient1\bin;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\AppleJavaExtensions.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\asm-debug-all.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\jinput.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\laf-plugin-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\laf-widget-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\log4j-api-2.0-beta9.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl_test.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl_util_applet.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl_util.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lwjgl-debug.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\lzma.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\substance-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\trident-7.2.1.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\slick-util.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\TWL-LWJGL2.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\freetype-jni.jar;C:\Users\garag\Documents\GitHub\OpencraftClient1\libs\guava-32.1.2-jre.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 4194304                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 532676608                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 8522825728                                {product} {ergonomic}
+   size_t MaxNewSize                               = 5112856576                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 4194304                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool ShowCodeDetailsInExceptionMessages       = true                                   {manageable} {command line}
+   size_t SoftMaxHeapSize                          = 8522825728                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+PATH=D:\usr\local\cell\host-win32\spu\bin;D:\usr\local\cell\host-win32\ppu\bin;D:\usr\local\cell\host-win32\sn\bin;D:\usr\local\cell\host-win32\bin;D:\usr\local\cell\host-win32\Cg\bin;C:\Program Files (x86)\SN Systems\PS3\bin;C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\WorldPainter;C:\Program Files\nodejs\;C:\Program Files\NASM;C:\Program Files\Git\cmd;C:\Program Files\Git LFS;C:\Program Files\Lip;C:\Users\garag\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\garag\AppData\Local\Programs\Python\Python311\;C:\Users\garag\AppData\Local\Microsoft\WindowsApps;C:\Users\garag\AppData\Local\atom\bin;C:\Users\garag\.dotnet\tools;C:\Users\garag\AppData\Roaming\npm;C:\Users\garag\AppData\Local\Programs\EmEditor;C:\Users\garag\AppData\Local\GitHubDesktop\bin;C:\ProgramData\garag\GitHubDesktop\bin
+USERNAME=garag
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22000 (10.0.22000.1516)
+OS uptime: 2 days 2:55 hours
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 165 stepping 2 microcode 0xf8, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt
+
+Memory: 4k page, system-wide physical 32511M (11573M free)
+TotalPageFile size 33870M (AvailPageFile size 5135M)
+current process WorkingSet (physical memory assigned to process): 677M, peak: 695M
+current process commit charge ("private bytes"): 1186M, peak: 1205M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (18.0.2+9-61) for windows-amd64 JRE (18.0.2+9-61), built on Jun  7 2022 13:09:01 by "mach5one" with MS VC++ 16.8 / 16.9 (VS2019)
+
+END.

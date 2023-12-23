@@ -19,7 +19,7 @@ import opencraft.physics.physicsUtils;
 public class Player {
 	public static boolean playHandSwingAnimation = false;
 	private static int handXrotation = 0;
-	private static float handXrotationChnage = 0.25f;
+	private static float handXrotationChnage = 0.30f;
 	public static float x =0;
 	public static float y = 100;
 	public static float z = 0;
@@ -32,8 +32,9 @@ public class Player {
 	public static float leftVelocity = 0;
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
+	public static boolean qKeyPressed = false;
 	public static int hotBarIndex = 0;
-	public static Item[] hotbar = {new itemGrass(),new ItemDirt(),new ItemStone(),new itemGrass(),null,null,null,null,null};
+	public static Item[] hotbar = new Item[9];
 	public static itemGrass test = new itemGrass();
 	public static void updatePostitionAndRotation() {
 		
@@ -136,10 +137,12 @@ public class Player {
 		}
 		float lastX =x;
 		float lastZ =z;
+		if(DisplayVariables.fps > 5) {
 		x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		z+=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		
 		y+=velocityY * DisplayVariables.deltaTime;
+		}
 		//z+=(rightVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
 		
 		
@@ -202,7 +205,7 @@ public class Player {
 				}
 			}
 			
-			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.1f);
+			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.01f);
 			if(downblock  != null) {
 				
 				if(y < downblock.getY() +3) {
@@ -221,7 +224,7 @@ public class Player {
 						}else {
 							grounded = false;
 						}
-			Block upblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0, 2, 0.1f);
+			Block upblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0, 2, 0.01f);
 			if(upblock != null) {
 			 if(y > upblock.getY() - 0.3) {
 				 y = upblock.getY() - 0.4f;
@@ -229,7 +232,30 @@ public class Player {
 			 }
 			}
 	}
-	public static void checkForActions() {  		
+	public static void checkForActions() throws InstantiationException, IllegalAccessException {  		
+		if(Keyboard.isKeyDown(Keyboard.KEY_Q)) {
+			if(!qKeyPressed) {
+			if(hotbar[hotBarIndex] != null) {
+				Item item = hotbar[hotBarIndex].getClass().newInstance();
+				item.x = x;
+				item.y = y+4;
+				item.z = z;
+				
+				item.vx = (float)(Math.sin(Math.toRadians(yaw))*0.01f);
+				item.vy = 0.010f;
+				item.vz = (float)(Math.cos(Math.toRadians(yaw))*0.01f);
+				
+				item.stack = 1;
+				World.items.add(item);
+				 
+				
+				hotbar[hotBarIndex].stack--;
+				qKeyPressed=true;
+				}
+			}
+		}else {
+			qKeyPressed = false;
+		}
 	}
 	public static void drawPlayerHUD() {
 		GL11.glPushMatrix();
@@ -240,11 +266,12 @@ public class Player {
 		ModelPlayer.drawArm(0, 0, 0);
 		GL11.glEnd();
 		GL11.glPopMatrix();
+		System.out.println("hrc:"+handXrotationChnage);
 		if(playHandSwingAnimation) {
 			handXrotation += handXrotationChnage*DisplayVariables.deltaTime;
 			if(handXrotation > 25) {
 				handXrotation = 25;
-				handXrotationChnage*=-1;
+				handXrotationChnage*=-1f;
 			}
 			else if(handXrotation < 0) {
 				handXrotationChnage*=-1;
@@ -268,18 +295,27 @@ public class Player {
 		hotBarIndex = 8;
 	}
 	for(int i = 0; i < 9; i++) {
+		if(hotbar[i]!= null) {
+		if(hotbar[i].stack == 0) {
+			hotbar[i] = null;
+		}
+		}
 		if(hotBarIndex == i) {
 			if(hotbar[i] != null) {
-			hotbar[i].drawIcon(0.35f, -0.13f, -1f,0.1f);
+			hotbar[i].drawIcon(0.35f, -0.13f, 1f,0.1f);
 			}
 			GL11.glColor3f(0, 0, 0);
 		}
 		drawHotbarSquare(x, -0.008f);
 		if(hotbar[i] != null) {
-			hotbar[i].drawIcon(x, -0.008f,-0.02f,0.0004f);
+			hotbar[i].drawIcon(x, -0.008f,0.02f,0.0004f);
 			
 		}
-		DisplayUtills.font.drawText("0", x,-0.008f,0.00001f );
+		if(hotbar[i] != null) {
+			DisplayUtills.font.drawText(String.valueOf(hotbar[i].stack), x-0.0004f,-0.0079f,0.0000075f );
+		}else {
+		DisplayUtills.font.drawText("0", x-0.0004f,-0.0079f,0.0000075f  );
+		}
 		x+=0.01f/9;
 		GL11.glColor3f(1, 1, 1);
 	}
@@ -290,9 +326,11 @@ public static void leftHandAction() {
 		Player.playHandSwingAnimation = true;
 	Block b = physicsUtils.getBlockLookingAt();
 	if(b != null) {
+	World.items.add(b.getDrop());
 	try {
 		
 		World.setBlock("air", (int)b.getGlobalX(),(int)b.getY(), (int)b.getGlobalZ());
+	
 	} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 			| SecurityException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -305,6 +343,24 @@ public static void leftHandAction() {
 
 }
 public static void rightHandAction() {
+	
+}
+public static boolean addItemToHotbar(Item item) {
+	for(int i = 0; i < hotbar.length; i++) {
+		if(hotbar[i] != null){
+		if(hotbar[i].getID() == item.getID() && hotbar[i].stack < hotbar[i].getMaxStack()) {
+			hotbar[i].stack++;
+			return true;
+		}
+		}
+	}
+	for(int i = 0; i < hotbar.length; i++) {
+		if(hotbar[i] == null) {
+			hotbar[i] = item;
+			return true;
+		}
+	}
+	return false;
 	
 }
 public static void drawHotbarSquare(float x, float y) {
