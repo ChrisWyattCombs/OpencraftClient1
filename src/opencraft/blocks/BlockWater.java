@@ -14,7 +14,7 @@ public class BlockWater extends Block {
 	@Override
 	public void draw(boolean top,boolean bottom,boolean front,boolean back,boolean right, boolean left) {
 		//glDepthMask(false);
-		ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.5f,0,0.5f,0,0.5f,0,0.5f,0,0.5f,0,0.5f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,1f,top,bottom,front,back,right,left);
+		visible = ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.5f,0,0.5f,0,0.5f,0,0.5f,0,0.5f,0,0.5f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,0.8f,top,bottom,front,back,right,left,height);
 		//glDepthMask(true);
 	}
 

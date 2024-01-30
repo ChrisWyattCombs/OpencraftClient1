@@ -18,11 +18,13 @@ import opencraft.physics.physicsUtils;
 
 public class Player {
 	public static boolean playHandSwingAnimation = false;
-	private static int handXrotation = 0;
+	private static float handXrotation = 0;
 	private static float handXrotationChnage = 0.30f;
 	public static float x =0;
 	public static float y = 100;
 	public static float z = 0;
+	public static float velocityX = 0;
+	public static float velocityZ = 0;
 	public static float velocityY = 0;
 	public static float yaw = 0;
 	public static float pitch = 0;
@@ -54,6 +56,8 @@ public class Player {
 			if(backwardVelocity == 0) {
 				if(forwardVelocity < 0.01f) {
 					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}else {
+					forwardVelocity-=0.0001f*DisplayVariables.deltaTime;
 				}
 				
 			}else {
@@ -73,6 +77,8 @@ public class Player {
 			if(forwardVelocity == 0) {
 				if(backwardVelocity < 0.01f) {
 					backwardVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}else {
+					backwardVelocity-=0.0001f*DisplayVariables.deltaTime;
 				}
 				
 			}else {
@@ -93,6 +99,8 @@ public class Player {
 			if(leftVelocity == 0) {
 				if(rightVelocity < 0.01f) {
 					rightVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}else {
+					rightVelocity-=0.0001f*DisplayVariables.deltaTime;
 				}
 				
 			}else {
@@ -113,6 +121,8 @@ public class Player {
 			if(rightVelocity == 0) {
 				if(leftVelocity < 0.01f) {
 					leftVelocity+=0.00005f*DisplayVariables.deltaTime;
+				}else {
+					leftVelocity-=0.0001f*DisplayVariables.deltaTime;
 				}
 				
 			}else {
@@ -160,48 +170,96 @@ public class Player {
 				if(y < block1.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block2  != null) {	
 				if(y < block2.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block3  != null) {	
 				if(y < block3.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block4  != null) {	
 				if(y < block4.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block5  != null) {	
 				if(y < block5.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block6  != null) {	
 				if(y < block6.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block7  != null) {	
 				if(y < block7.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			if(block8  != null) {	
 				if(y < block8.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					float temp = forwardVelocity;
+					forwardVelocity = backwardVelocity;
+					backwardVelocity = temp;
+					temp = rightVelocity;
+					rightVelocity  = leftVelocity;
+					leftVelocity = temp;
 				}
 			}
 			
@@ -228,7 +286,7 @@ public class Player {
 			if(upblock != null) {
 			 if(y > upblock.getY() - 0.3) {
 				 y = upblock.getY() - 0.4f;
-				 velocityY = -velocityY;
+				 velocityY *=-1;
 			 }
 			}
 	}

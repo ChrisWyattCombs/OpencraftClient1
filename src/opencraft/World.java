@@ -38,7 +38,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z = -Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 16;
+	public static int renderDistance = 8;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -99,7 +99,7 @@ public class World {
 	public static void drawWorld() {
 		
 		System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2)));
-		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>(16*renderDistance)/2) {
+		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>32) {
 			x = Player.x;
 			System.out.println("works23");
 			z = -Player.z;
@@ -218,6 +218,9 @@ public class World {
 		rendering = true;
 		for(int i = 0; i < realRegionListLength; i++) {
 			regions[i].draw();
+			}
+		for(int i = 0; i < realRegionListLength; i++) {
+			regions[i].drawWater();
 			}
 		rendering = false;
 		

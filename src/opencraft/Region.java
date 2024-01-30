@@ -30,5 +30,13 @@ public void draw() {
 	}
 }
 
-
+public void drawWater() {
+	for(int x = 0; x < 16; x++) {
+		for(int z = 0; z < 16; z++) {
+			if(chunks[x][z] != null) {
+				chunks[x][z].drawWater();
+			}
+		}
+	}
+}
 }

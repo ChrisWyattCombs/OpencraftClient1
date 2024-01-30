@@ -32,9 +32,9 @@ public class itemGrass extends Item{
 		if(b != null) {
 		try {
 			
-			World.setBlock("BlockWater", (int)b.getX(),(int)b.getY(), (int)b.getZ());
-			World.uncheckedFluids.add(new Vector3f((int)b.getX(),(int)b.getY(), (int)b.getZ()));
-			//stack--;
+			World.setBlock("BlockGrass", (int)b.getX(),(int)b.getY(), (int)b.getZ());
+			//World.uncheckedFluids.add(new Vector3f((int)b.getX(),(int)b.getY(), (int)b.getZ()));
+			stack--;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
