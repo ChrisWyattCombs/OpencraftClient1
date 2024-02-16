@@ -32,7 +32,7 @@ public class BlockDirt extends Block {
 		ItemDirt drop = new ItemDirt();
 		drop.x = getGlobalX();
 		drop.y = getY() + 3f;
-		drop.z = -getGlobalZ();
+		drop.z = getGlobalZ();
 		return  drop;
 	}
 

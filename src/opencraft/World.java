@@ -27,7 +27,7 @@ public class World {
 		items.add(grass);
 		
 	}
-	public static Texture blockTextures;
+	
 	public static int realRegionListLength = 0;
 	public static Region[] regions = new Region[256];
 	public static double worldLoadProgress = 0;
@@ -36,9 +36,9 @@ public class World {
 	public static int lastRegionX = 0;
 	public static int lastRegionZ = 0;
 	public static float x = Player.x;
-	public static float z = -Player.z;
+	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 8;
+	public static int renderDistance = 16;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -62,7 +62,7 @@ public class World {
 				worldLoadProgress = (float)((x-chunkX)+renderDistance)/(renderDistance *2) + (float)((z-chunkZ)+renderDistance)/((renderDistance *2)*(renderDistance *2));
 			}
 		}
-		calculateLighting();
+		//calculateLighting();
 		worldLoadProgress = 1;
 	}
 	
@@ -70,8 +70,8 @@ public class World {
 		int regionX = cx >> 4;
 		int regionZ = cz >> 4;
 
-		 int x = cx -(regionX * 16);
-		 int z = cz-(regionZ * 16);
+		 int x = cx & 0xF;
+		 int z = cz& 0xF;
 		 try {
 		 return regions[getRegionIndex(regionX, regionZ)].chunks[x][z];
 		 }catch(Exception e) {
@@ -98,11 +98,11 @@ public class World {
 	}
 	public static void drawWorld() {
 		
-		System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(-DisplayVariables.camZ-z, 2)));
-		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(-Player.z-z, 2))>32) {
+		//System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
+		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>64) {
 			x = Player.x;
 			System.out.println("works23");
-			z = -Player.z;
+			z = Player.z;
 			System.out.println();
 			ArrayList<Vector2i> chunks = new ArrayList<>();
 			int chunkX =(int)x >> 4;
@@ -113,7 +113,7 @@ public class World {
 				for(int cx = 0; cx<16; cx++) {
 					for(int cz = 0; cz<16; cz++) {
 						if(World.regions[i].chunks[cx][cz] != null) {
-							if(Math.abs(World.regions[i].chunks[cx][cz].getGlobalX() -chunkX)> renderDistance || Math.abs(World.regions[i].chunks[cx][cz].getGlobalZ() -chunkZ)> renderDistance) {
+							if(Math.abs(World.regions[i].chunks[cx][cz].getGlobalX() -chunkX)> renderDistance || Math.abs(World.regions[i].chunks[cx][cz].getGlobalZ() -chunkZ)> renderDistance*16) {
 								World.regions[i].chunks[cx][cz].delete();
 								World.regions[i].chunks[cx][cz] = null;
 								
@@ -154,30 +154,8 @@ public class World {
 							
 							try {
 								World.loadChunk(cx, cz);
-							} catch (InstantiationException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (IllegalAccessException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (ClassNotFoundException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (IllegalArgumentException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (InvocationTargetException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (NoSuchMethodException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (SecurityException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+							} catch (Exception e) {
+								
 							}
 							chunks.add(new Vector2i(cx, cz));
 							
@@ -188,7 +166,7 @@ public class World {
 					}
 					//calculateLighting();
 					for(Vector2i chunkPostion : chunks) {
-						lightChunk(chunkPostion.getX(), chunkPostion.getY());
+					//lightChunk(chunkPostion.getX(), chunkPostion.getY());
 					}
 					if(chunks.size() > 0 && chunksToSetup == null) {
 					World.chunksToSetup = chunks;
@@ -229,8 +207,8 @@ public class World {
 		int regionX = cx >> 4;
 		int regionZ = cz >> 4;
 
-		 int x = cx -(regionX * 16);
-		 int z = cz-(regionZ * 16);
+		 int x = cx & 0xF;
+		 int z = cz & 0xF;
 		//Region region = null;
 		int regionIndex = getRegionIndex(regionX, regionZ);
 		if(regionIndex == -1) {
@@ -299,7 +277,9 @@ public class World {
 				 reigonZ = oz >> 4;
 				 int regionIndex = getRegionIndex(regionX, reigonZ);
 				// regions[regionIndex].chunks[ox& 0xF][oz& 0xF].calculateLighting();
-				 regions[regionIndex].chunks[ox& 0xF][oz& 0xF].delete();
+				 int oxl = ox& 0xF;
+				 int ozl =oz& 0xF;
+				 regions[regionIndex].chunks[oxl][ozl].delete();
 				 if (chunksToSetup == null) {
 					 chunksToSetup = new ArrayList<>();
 					 
@@ -311,8 +291,8 @@ public class World {
 	public static void setupChunk(int cx, int cz) {
 		int regionX = cx >> 4;
 		int regionZ = cz >> 4;
-		 int x = cx -(regionX * 16);
-		 int z = cz-(regionZ * 16);
+		 int x = cx& 0xF;
+		 int z = cz& 0xF;
 		Region region = null;
 		
 			int regionIndex = getRegionIndex(regionX, regionZ);
@@ -382,8 +362,8 @@ public class World {
 	public static void lightChunk(int cx, int cz) {
 		int regionX = cx >> 4;
 		int regionZ = cz >> 4;
-		 int x = cx -(regionX * 16);
-		 int z = cz-(regionZ * 16);
+		 int x = cx & 0xF;
+		 int z = cz& 0xF;
 		Region region = null;
 		
 			int regionIndex = getRegionIndex(regionX, regionZ);

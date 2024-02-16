@@ -4,6 +4,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import opencraft.graphics.DisplayUtills;
+import opencraft.graphics.ResourceManager;
 
 public abstract class Button extends UIComponent {
 private String text;
@@ -31,7 +32,7 @@ public void drawAndUpdate() {
 	GL11.glColor3f(169f/255f,169f/255f,169f/255f);
 	DisplayUtills.drawSqaure(width, heght,x, y, -0.02f);
 	GL11.glColor3f(0,0,0);
-	DisplayUtills.font.drawText(text, x+reltiveTextX, y+reltiveTextY, textScale);
+	((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(text, x+reltiveTextX, y+reltiveTextY, textScale);
 	GL11.glColor3f(1,1,1);
 	//System.out.println(Mouse.getNativeCursor());
 	if(Cursor.x <= 0.005f * width+x && Cursor.x  >= -0.005f * width+x &&Cursor.y <= 0.005f * heght+y && Cursor.y >= -0.005f * heght+y) {

@@ -118,7 +118,7 @@ public class Chunk {
 							dos.writeInt(startY);
 							dos.writeInt(z);
 							dos.writeInt(((y-1)-startY));
-							dos.writeInt(1);
+							
 							startY = y;
 							lastBlockType = blockType;
 						}
@@ -211,7 +211,7 @@ public void calculateLighting() {
 					if(block1 == null || block2 == null || block3 == null || block4 == null || block5 == null || block6 == null) {
 						
 				int x = (int) blocks[localX][y][localZ].getGlobalX();
-				int z = -((int) blocks[localX][y][localZ].getGlobalZ());
+				int z = ((int) blocks[localX][y][localZ].getGlobalZ());
 				
 				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,256)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,256)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,256)!=null ) {
 					System.out.println("works");
@@ -348,10 +348,43 @@ public void calculateLighting() {
 						
 					}
 					///if(block1 != null || block2 == null)
-					blocks[x][y][z].visible = true;
+					///blocks[x][y][z].visible = true;
 						if(!blocks[x][y][z].isFluid()) {
-					
-								blocks[x][y][z].draw(block1 == null,block2 == null,block6 == null || block6.height < 1f,block5 == null || block5.height < 1f,block3 == null || block3.height < 1f,block4 == null || block4.height < 1f);
+							int localX = x ;
+							int localZ = z;
+							if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y,blocks[x][y][z].getGlobalZ(), 0, 1, 0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 1, 0, 0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), -1, 0, 0,128)!=null &&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, 1,128)!=null&&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, -1,128)!=null ) {
+								
+								
+								 blocks[localX][y][localZ].topLight = 0.3f;
+							}else {
+								blocks[localX][y][localZ].topLight = 1f;
+							}
+							if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y,blocks[x][y][z].getGlobalZ(), 0, -1, 0,(int)128)!=null &&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y-1,blocks[x][y][z].getGlobalZ(), 1, 0, 0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y-1,blocks[x][y][z].getGlobalZ(), -1, 0, 0,128)!=null &&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y-1,blocks[x][y][z].getGlobalZ(), 0, 0, 1,(int)128)!=null&&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y-1,blocks[x][y][z].getGlobalZ(), 0, 0, -1,128)!=null ) {
+								 blocks[localX][y][localZ].bottomLight = 0.3f;
+							}else {
+								blocks[localX][y][localZ].bottomLight = 1f;
+							}
+							if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ(), 1,0,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()+1,y,blocks[x][y][z].getGlobalZ(), 0,1,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()+1,y,blocks[x][y][z].getGlobalZ(), 0,-1,0,128) !=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()+1,y,blocks[x][y][z].getGlobalZ(), 0,0,1,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()+1,y,blocks[x][y][z].getGlobalZ(), 0,0,-1,128) !=null) {
+								 blocks[localX][y][localZ].rightLight = 0.3f;
+							}else {
+								blocks[localX][y][localZ].rightLight = 1f;
+							}
+					if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ(), -1,0,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()-1,y,blocks[x][y][z].getGlobalZ(), 0,1,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()-1,y,blocks[x][y][z].getGlobalZ(), 0,-1,0,128) !=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()-1,y,blocks[x][y][z].getGlobalZ(), 0,0,1,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX()-1,y,blocks[x][y][z].getGlobalZ(), 0,0,-1,128) !=null) {
+						 blocks[localX][y][localZ].leftLight = 0.3f;
+							}else {
+								blocks[localX][y][localZ].leftLight = 1f;
+							}
+					if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ(), 0,0,1,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()+1, 0,1,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()+1, 0,-1,0,128) !=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()+1, 1,0,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()+1, -1,0,0,128) !=null) {
+						 blocks[localX][y][localZ].frontLight = 0.3f;
+					}else {
+						 blocks[localX][y][localZ].frontLight = 1f;
+					}
+					if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ(), 0,0,-1,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()-1, 0,1,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()-1, 0,-1,0,128) !=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()-1, 1,0,0,128)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(),y,blocks[x][y][z].getGlobalZ()-1, -1,0,0,128) !=null) {
+						 blocks[localX][y][localZ].backLight = 0.3f;
+					}else {
+						blocks[localX][y][localZ].backLight = 1f;
+					}
+								blocks[x][y][z].draw(block1 == null || block1.isFluid(),block2 == null|| block2.isFluid(),block6 == null || block6.height < 1f|| block6.isFluid(),block5 == null || block5.height < 1f|| block5.isFluid(),block3 == null || block3.height < 1f|| block3.isFluid(),block4 == null || block4.height < 1f|| block4.isFluid());
 							}else {
 								water.add(blocks[x][y][z]);
 							}
@@ -360,6 +393,7 @@ public void calculateLighting() {
 					
 				}
 			}
+			
 			}
 		}
 		GL11.glEnd();
@@ -373,9 +407,9 @@ public void calculateLighting() {
 			GL11.glNewList(waterID, GL11.GL_COMPILE);
 			GL11.glBegin(GL11.GL_QUADS);
 			for(Block waterBlock : water) {
-				int x = (int) waterBlock.getGlobalX();
+				int x = (int) waterBlock.getX();
 				int y = (int) waterBlock.getY();
-				int z = (int) waterBlock.getGlobalZ();
+				int z = (int) waterBlock.getZ();
 				Block block1 = null;
 				Block block2 = null;
 				Block block3 = null;

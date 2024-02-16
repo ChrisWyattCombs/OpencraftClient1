@@ -30,7 +30,7 @@ public class BlockGrass extends Block {
 		itemGrass drop = new itemGrass();
 		drop.x = getGlobalX();
 		drop.y = getY() + 3f;
-		drop.z = -getGlobalZ();
+		drop.z = getGlobalZ();
 		return  drop;
 	}
 

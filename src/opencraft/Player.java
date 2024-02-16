@@ -9,8 +9,10 @@ import org.lwjgl.opengl.GL11;
 
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
+import opencraft.graphics.ResourceManager;
 import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelPlayer;
+import opencraft.graphics.ui.Font;
 import opencraft.items.ItemDirt;
 import opencraft.items.ItemStone;
 import opencraft.items.itemGrass;
@@ -149,7 +151,7 @@ public class Player {
 		float lastZ =z;
 		if(DisplayVariables.fps > 5) {
 		x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
-		z+=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
+		z-=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		
 		y+=velocityY * DisplayVariables.deltaTime;
 		}
@@ -360,19 +362,19 @@ public class Player {
 		}
 		if(hotBarIndex == i) {
 			if(hotbar[i] != null) {
-			hotbar[i].drawIcon(0.35f, -0.13f, 1f,0.1f);
+			hotbar[i].drawIcon(0.35f, -0.13f, -1f,0.1f);
 			}
 			GL11.glColor3f(0, 0, 0);
 		}
 		drawHotbarSquare(x, -0.008f);
 		if(hotbar[i] != null) {
-			hotbar[i].drawIcon(x, -0.008f,0.02f,0.0004f);
+			hotbar[i].drawIcon(x, -0.008f,-0.02f,0.0004f);
 			
 		}
 		if(hotbar[i] != null) {
-			DisplayUtills.font.drawText(String.valueOf(hotbar[i].stack), x-0.0004f,-0.0079f,0.0000075f );
+			((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(String.valueOf(hotbar[i].stack), x-0.0004f,-0.0079f,0.0000075f );
 		}else {
-		DisplayUtills.font.drawText("0", x-0.0004f,-0.0079f,0.0000075f  );
+		((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("0", x-0.0004f,-0.0079f,0.0000075f  );
 		}
 		x+=0.01f/9;
 		GL11.glColor3f(1, 1, 1);

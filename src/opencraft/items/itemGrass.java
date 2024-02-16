@@ -2,6 +2,8 @@ package opencraft.items;
 
 import opencraft.Item;
 import opencraft.World;
+import opencraft.graphics.ResourceManager;
+import org.newdawn.slick.opengl.Texture;
 import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelCube;
 import opencraft.physics.physicsUtils;
@@ -18,9 +20,9 @@ public class itemGrass extends Item{
 		// TODO Auto-generated method stub
 		glPushMatrix();
 		//glScalef(0.4f, 0.5f, 0.5f);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, World.blockTextures.getTextureID());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:BlockTextures")).getTextureID());
 		glBegin(GL_QUADS);
-		ModelCube.drawModel(x, y, -z,new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},1f,1f,1f,1f,1f,1f,1f,size);
+		ModelCube.drawModel(x, y, z,new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},1f,1f,1f,1f,1f,1f,1f,size);
 		glEnd();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		glPopMatrix();

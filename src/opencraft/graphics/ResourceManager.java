@@ -12,8 +12,8 @@ import org.newdawn.slick.util.ResourceLoader;
 public class ResourceManager {
 private static HashMap<String, Object> resourceToObejct = new HashMap<>();
 
-public static void loadTexture(String path, String resource) throws IOException {
-	resourceToObejct.put(resource, TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(path)));
+public static void addResource(String resource, Object object) throws IOException {
+	resourceToObejct.put(resource, object);
 }
 public static Object getObjectForResource(String resource) {
 	return resourceToObejct.get(resource);

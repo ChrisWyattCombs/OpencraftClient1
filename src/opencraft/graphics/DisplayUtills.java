@@ -38,8 +38,8 @@ import java.util.Scanner;
 
 public class DisplayUtills {
 private static int[] skyboxTextures = new int[6];
-public static opencraft.graphics.ui.Font font;
-private static TrueTypeFont font2;
+
+
 //private static Texture skybox;
 private static HashMap<Character, Vector2f> charToCoord = new HashMap<>(); 
 public static ShaderProgram fontShader;
@@ -95,6 +95,9 @@ public static void setupOpenGl() throws Exception {
     //glClearColor(0, 0,0, 1);
     //GL11.glEnable(GL11.GL_ALPHA_TEST);
     //glFrontFace(GL_CCW);
+  //  glEnable(GL_CULL_FACE); 
+    //glCullFace(GL_FRONT);
+    //GL11.glFrontFace(GL11.GL_CW);  
     GL11.glShadeModel (GL11.GL_SMOOTH);
 GL11.glEnable(GL11.GL_BLEND);
   GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -169,13 +172,13 @@ public static void loadResources() throws IOException {
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	//ResourceManager.loadTexture("Textures/font.png", "fontTexture");
 	//skybox = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/image.png"));
-	String chars = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.!?:;+-_=[]{}\\|\"'<>,@#$%^&*()/";
-	float x = 0;
-	float y = 0;
 	
-	font = new opencraft.graphics.ui.Font("C:\\Opencraft\\assests\\font.ttf");
-	World.blockTextures = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\TexturePack.png"));
-	glBindTexture(GL_TEXTURE_2D, World.blockTextures.getTextureID());
+	
+	opencraft.graphics.ui.Font font = new opencraft.graphics.ui.Font("C:\\Opencraft\\assests\\font.ttf");
+	ResourceManager.addResource("Opencraft:Font", font);
+	Texture blockTextures = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\TexturePack.png"));
+	ResourceManager.addResource("Opencraft:BlockTextures", blockTextures);
+	glBindTexture(GL_TEXTURE_2D, blockTextures.getTextureID());
 	GL30.glGenerateMipmap(GL_TEXTURE_2D);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 4);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
@@ -193,26 +196,26 @@ public static void renderNextFrame() {
 
 public static void DrawLetterQuad(float x, float y, float z, float width, float height) {
 	
-	GL11.glBegin(GL11.GL_QUADS);
+	glBegin(GL11.GL_QUADS);
 	
 	
-	GL11.glVertex3f(x +(width), y+(height), z);
+	glVertex3f(x +(width), y+(height), z);
 	glTexCoord2f(0, 0);
 	
 	
 	
-	GL11.glVertex3f(x,y+(height), z);
+	glVertex3f(x,y+(height), z);
 	glTexCoord2f(0, 1);
 	
 	
 	
-	GL11.glVertex3f(x, y, z);
+	glVertex3f(x, y, z);
 	glTexCoord2f(1, 1);
 	
 	
-	GL11.glVertex3f(x+width, y, z);
+	glVertex3f(x+width, y, z);
 	glTexCoord2f(1, 0);
-	GL11.glEnd();
+	glEnd();
 	
 }
 public static void drawSqaure(float width,float height, float x,float y,float z) {

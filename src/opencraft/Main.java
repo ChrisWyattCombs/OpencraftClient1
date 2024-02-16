@@ -14,11 +14,11 @@ import org.lwjgl.input.Mouse;
 public class Main {
 	
 	public static void main(String[] args) throws Exception {
-		runOpencraft("Alpha1");
+		runOpencraft("Alpha");
 
 	}
 	public static void runOpencraft(String version) throws Exception {
-		DisplayUtills.createWindow("opencraft "+version, 1920, 1080, false);
+		DisplayUtills.createWindow("opencraft "+version, 1920, 1080, true);
 		DisplayUtills.setupOpenGl();
 	DisplayUtills.loadResources();
 		

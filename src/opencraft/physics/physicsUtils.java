@@ -16,14 +16,14 @@ public static int convertFloatCoordToBlockCoord(float c) {
 public static Block getNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range) {
 	float x = startX;
 	float y =  startY;
-	float z = -startZ;
+	float z = startZ;
 	//System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
 	while(count < range) {
 		x+=directionX;
 		y+=directionY;
-		z+=-directionZ;
+		z+=directionZ;
 				//System.out.println(x+" "+y+" "+z);
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 		if(b != null ) {
@@ -38,7 +38,7 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 public static Block getNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range,float step) {
 	float x = startX;
 	float y =  startY;
-	float z = -startZ;
+	float z = startZ;
 	//System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
@@ -64,7 +64,7 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range,float step) {
 	float x = startX;
 	float y =  startY;
-	float z = -startZ;
+	float z = startZ;
 	//System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
