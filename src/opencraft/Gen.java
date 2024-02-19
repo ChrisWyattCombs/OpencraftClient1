@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Gen {
 
-  	public static float AMPLITUDE = 20f;
-    public static int OCTAVES = 7;
-    public static float ROUGHNESS = 0.5f;
+  	public float AMPLITUDE = 25f;
+    public int OCTAVES = 8;
+    public float ROUGHNESS = 0.5f;
  
     private Random random = new Random();
     private int seed;
@@ -44,7 +44,7 @@ public class Gen {
         
     }
      
-    private float getInterpolatedNoise(float x, float z){
+    public float getInterpolatedNoise(float x, float z){
         int intX = (int) x;
         int intZ = (int) z;
         float fracX = x - intX;

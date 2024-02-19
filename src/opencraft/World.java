@@ -14,7 +14,7 @@ import opencraft.blocks.BlockWater;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
-import opencraft.items.itemGrass;
+import opencraft.items.ItemGrass;
 import opencraft.physics.physicsUtils;
 
 
@@ -22,7 +22,7 @@ public class World {
 	//public static int[] chunkDrawIDs = new int[257];
 	public static ArrayList<Item> items = new ArrayList<>();
 	static {
-		Item grass =new itemGrass();
+		Item grass =new ItemGrass();
 		grass.y = 200;
 		items.add(grass);
 		
@@ -38,7 +38,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 16;
+	public static int renderDistance = 8;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -99,7 +99,7 @@ public class World {
 	public static void drawWorld() {
 		
 		//System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
-		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>64) {
+		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>(renderDistance*16)/3) {
 			x = Player.x;
 			System.out.println("works23");
 			z = Player.z;
@@ -150,7 +150,7 @@ public class World {
 					for(int cx = (int)chunkX -renderDistance;cx <(int)chunkX+renderDistance;cx++) {
 						
 						for(int cz = (int)chunkZ -renderDistance; cz <(int)chunkZ+renderDistance;cz++) {
-						if(World.getChunk(cx, cz) == null) {
+						if(World.getChunk(cx, cz) == null || !World.getChunk(cx, cz).fullyLoaded) {
 							
 							try {
 								World.loadChunk(cx, cz);
@@ -257,6 +257,7 @@ public class World {
 		}
 		return null;
 	}
+	
 	public static void setBlock(String blockType, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
 		int chunkX = x >> 4;
 		int chunkZ = z >> 4;
@@ -266,26 +267,182 @@ public class World {
 		int lcz = chunkZ  & 0xF;
 		int localX = x  & 0xF;
 		int localZ = z  & 0xF;
-		if(!blockType.equals("air")) {
-		regions[getRegionIndex(regionX, reigonZ)].chunks[lcx][lcz].blocks[localX][y][localZ] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(localX,y,localZ,lcx,lcz,regionX,reigonZ);
-		}else {
-		regions[getRegionIndex(regionX, reigonZ)].chunks[lcx][lcz].blocks[localX][y][localZ] = null;
+		int regionIndex = getRegionIndex(regionX, reigonZ);
+		if(regionIndex == -1) {
+			regionIndex = realRegionListLength;
+			regions[realRegionListLength] = new Region(regionX, reigonZ, new Chunk[16][16]);
+			realRegionListLength++;
 		}
+		if(regions[regionIndex].chunks[lcx][lcz]==null) {
+			regions[regionIndex].chunks[lcx][lcz] = new Chunk(lcx, lcz, regionX, reigonZ);
+			
+		}
+		
+		if(!blockType.equals("air")) {
+		regions[regionIndex].chunks[lcx][lcz].blocks[localX][y][localZ] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(localX,y,localZ,lcx,lcz,regionX,reigonZ);
+		}else {
+		regions[regionIndex].chunks[lcx][lcz].blocks[localX][y][localZ] = null;
+		
+		Block block1 = getBlock(x+1, y,z);
+		if(block1 != null) {
+		if( block1.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block1.getGlobalX(), block1.getY(), block1.getGlobalZ()));
+		}
+		}
+		
+		Block block2 = getBlock(x-1, y,z);
+		if(block2 != null) {
+		if( block2.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block2.getGlobalX(), block2.getY(), block2.getGlobalZ()));
+		}
+		}
+		
+		Block block3 = getBlock(x, y+1,z);
+		if(block3 != null) {
+		if( block3.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block3.getGlobalX(), block3.getY(), block3.getGlobalZ()));
+		}
+		}
+		
+		Block block4 = getBlock(x, y-1,z);
+		if(block4 != null) {
+		if( block4.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block4.getGlobalX(), block4.getY(), block4.getGlobalZ()));
+		}
+		}
+		
+		Block block5 = getBlock(x, y,z+1);
+		if(block5 != null) {
+		if( block5.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block5.getGlobalX(), block5.getY(), block5.getGlobalZ()));
+		}
+		}
+		
+		Block block6 = getBlock(x, y,z-1);
+		if(block6 != null) {
+		if( block6.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block6.getGlobalX(), block6.getY(), block6.getGlobalZ()));
+		}
+		}
+		}
+		
 		for(int ox = chunkX-1; ox < chunkX+1;ox++) {
 			for(int oz = chunkZ-1; oz < chunkZ+1;oz++) {
 				regionX = ox >> 4;
 				 reigonZ = oz >> 4;
-				 int regionIndex = getRegionIndex(regionX, reigonZ);
+				 regionIndex = getRegionIndex(regionX, reigonZ);
 				// regions[regionIndex].chunks[ox& 0xF][oz& 0xF].calculateLighting();
 				 int oxl = ox& 0xF;
 				 int ozl =oz& 0xF;
-				 regions[regionIndex].chunks[oxl][ozl].delete();
+				 if(regionIndex != -1) {
+					 if(regions[regionIndex].chunks != null) {
+						 if(regions[regionIndex].chunks[oxl][ozl] != null){
+						 regions[regionIndex].chunks[oxl][ozl].delete();
+					 }
+					 }
+				 }
+				
 				 if (chunksToSetup == null) {
 					 chunksToSetup = new ArrayList<>();
 					 
 				 }
 				 chunksToSetup.add(new Vector2i(ox,oz));
 			}
+		}
+		
+	}
+	public static void setBlock(String blockType, int x, int y, int z,boolean reloadChunks) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
+		int chunkX = x >> 4;
+		int chunkZ = z >> 4;
+		int regionX = chunkX >> 4;
+		int reigonZ = chunkZ >> 4;
+		int lcx = chunkX  & 0xF;
+		int lcz = chunkZ  & 0xF;
+		int localX = x  & 0xF;
+		int localZ = z  & 0xF;
+		int regionIndex = getRegionIndex(regionX, reigonZ);
+		if(regionIndex == -1) {
+			regionIndex = realRegionListLength;
+			regions[realRegionListLength] = new Region(regionX, reigonZ, new Chunk[16][16]);
+			realRegionListLength++;
+		}
+		if(regions[regionIndex].chunks[lcx][lcz]==null) {
+			regions[regionIndex].chunks[lcx][lcz] = new Chunk(lcx, lcz, regionX, reigonZ);
+			
+		}
+		
+		if(!blockType.equals("air")) {
+		regions[regionIndex].chunks[lcx][lcz].blocks[localX][y][localZ] = (Block) Class.forName("opencraft.blocks."+blockType).getConstructors()[0].newInstance(localX,y,localZ,lcx,lcz,regionX,reigonZ);
+		}else {
+		regions[regionIndex].chunks[lcx][lcz].blocks[localX][y][localZ] = null;
+		if(reloadChunks) {
+		Block block1 = getBlock(x+1, y,z);
+		if(block1 != null) {
+		if( block1.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block1.getGlobalX(), block1.getY(), block1.getGlobalZ()));
+		}
+		}
+		
+		Block block2 = getBlock(x-1, y,z);
+		if(block2 != null) {
+		if( block2.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block2.getGlobalX(), block2.getY(), block2.getGlobalZ()));
+		}
+		}
+		
+		Block block3 = getBlock(x, y+1,z);
+		if(block3 != null) {
+		if( block3.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block3.getGlobalX(), block3.getY(), block3.getGlobalZ()));
+		}
+		}
+		
+		Block block4 = getBlock(x, y-1,z);
+		if(block4 != null) {
+		if( block4.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block4.getGlobalX(), block4.getY(), block4.getGlobalZ()));
+		}
+		}
+		
+		Block block5 = getBlock(x, y,z+1);
+		if(block5 != null) {
+		if( block5.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block5.getGlobalX(), block5.getY(), block5.getGlobalZ()));
+		}
+		}
+		
+		Block block6 = getBlock(x, y,z-1);
+		if(block6 != null) {
+		if( block6.isFluid()) {
+			uncheckedFluids.add(new Vector3f(block6.getGlobalX(), block6.getY(), block6.getGlobalZ()));
+		}
+		}
+		
+		
+		for(int ox = chunkX-1; ox < chunkX+1;ox++) {
+			for(int oz = chunkZ-1; oz < chunkZ+1;oz++) {
+				regionX = ox >> 4;
+				 reigonZ = oz >> 4;
+				 regionIndex = getRegionIndex(regionX, reigonZ);
+				// regions[regionIndex].chunks[ox& 0xF][oz& 0xF].calculateLighting();
+				 int oxl = ox& 0xF;
+				 int ozl =oz& 0xF;
+				 if(regionIndex != -1) {
+					 if(regions[regionIndex].chunks != null) {
+						 if(regions[regionIndex].chunks[oxl][ozl] != null){
+						 regions[regionIndex].chunks[oxl][ozl].delete();
+					 }
+					 }
+				 }
+				
+				 if (chunksToSetup == null) {
+					 chunksToSetup = new ArrayList<>();
+					 
+				 }
+				 chunksToSetup.add(new Vector2i(ox,oz));
+			}
+		}
+		}
 		}
 	}
 	public static void setupChunk(int cx, int cz) {

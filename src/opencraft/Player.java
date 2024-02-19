@@ -1,5 +1,7 @@
 package opencraft;
 
+import static org.lwjgl.opengl.GL11.glDepthMask;
+
 import java.awt.RenderingHints.Key;
 import java.lang.reflect.InvocationTargetException;
 
@@ -12,10 +14,13 @@ import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.ResourceManager;
 import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelPlayer;
+import opencraft.graphics.ui.Cursor;
 import opencraft.graphics.ui.Font;
+import opencraft.graphics.ui.GameScreen;
+import opencraft.graphics.ui.GameScreens;
 import opencraft.items.ItemDirt;
 import opencraft.items.ItemStone;
-import opencraft.items.itemGrass;
+import opencraft.items.ItemGrass;
 import opencraft.physics.physicsUtils;
 
 public class Player {
@@ -23,7 +28,7 @@ public class Player {
 	private static float handXrotation = 0;
 	private static float handXrotationChnage = 0.30f;
 	public static float x =0;
-	public static float y = 100;
+	public static float y = 500;
 	public static float z = 0;
 	public static float velocityX = 0;
 	public static float velocityZ = 0;
@@ -32,16 +37,19 @@ public class Player {
 	public static float pitch = 0;
 	public static float forwardVelocity = 0;
 	public static float backwardVelocity = 0;
-
+	public static GameScreen currentGameScreen = GameScreens.inventory;
 	public static float leftVelocity = 0;
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
 	public static boolean qKeyPressed = false;
+	static float flySpeedMultiplyer = 3;
 	public static int hotBarIndex = 0;
 	public static Item[] hotbar = new Item[9];
-	public static itemGrass test = new itemGrass();
+	public static Item[][] Inventory = new Item[9][3];
+	public static ItemGrass test = new ItemGrass();
+	public static boolean ekeyHeld = false;
 	public static void updatePostitionAndRotation() {
-		
+		if(currentGameScreen == null) {
 		yaw+= Mouse.getDX()/4f;
 		pitch += Mouse.getDY()/4f;
 		if(pitch > 90) {
@@ -50,13 +58,13 @@ public class Player {
 		if(pitch < -90) {
 			pitch = -90;
 		}
-	
+		}
 	
 		boolean keyBeingHeld1 = false;
-		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_W) && currentGameScreen == null) {
 			keyBeingHeld1 = true;
 			if(backwardVelocity == 0) {
-				if(forwardVelocity < 0.01f) {
+				if(forwardVelocity < 0.01f*flySpeedMultiplyer ) {
 					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					forwardVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -74,10 +82,10 @@ public class Player {
 				forwardVelocity = 0;
 			}
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_S) && !keyBeingHeld1) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_S) && !keyBeingHeld1 && currentGameScreen == null) {
 			keyBeingHeld1 = true;
 			if(forwardVelocity == 0) {
-				if(backwardVelocity < 0.01f) {
+				if(backwardVelocity < 0.01f*flySpeedMultiplyer ) {
 					backwardVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					backwardVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -96,10 +104,10 @@ public class Player {
 			}
 		}
 		boolean keyBeingHeld = false;
-		if(Keyboard.isKeyDown(Keyboard.KEY_D) && !keyBeingHeld) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_D) && !keyBeingHeld&& currentGameScreen == null) {
 			keyBeingHeld = true;
 			if(leftVelocity == 0) {
-				if(rightVelocity < 0.01f) {
+				if(rightVelocity < 0.01f*flySpeedMultiplyer ) {
 					rightVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					rightVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -118,10 +126,10 @@ public class Player {
 			}
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_A) && !keyBeingHeld) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_A) && !keyBeingHeld&&currentGameScreen == null) {
 			keyBeingHeld = true;
 			if(rightVelocity == 0) {
-				if(leftVelocity < 0.01f) {
+				if(leftVelocity < 0.01f*flySpeedMultiplyer) {
 					leftVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					leftVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -140,13 +148,20 @@ public class Player {
 			}
 		}
 		if(!grounded && velocityY > -0.12f) {
-			velocityY -= 0.00003f*DisplayVariables.deltaTime;
+			//velocityY -= 0.00003f*DisplayVariables.deltaTime;
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && grounded){
-			velocityY = 0.010f;
+		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !keyBeingHeld&&currentGameScreen == null){
+			velocityY = 0.03f;
 			
 		}
+		else if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && !keyBeingHeld&&currentGameScreen == null){
+			velocityY = -0.03f;
+			
+		}else {
+			velocityY = 0.0f;
+		}
+		
 		float lastX =x;
 		float lastZ =z;
 		if(DisplayVariables.fps > 5) {
@@ -318,6 +333,9 @@ public class Player {
 		}
 	}
 	public static void drawPlayerHUD() {
+		if(!Keyboard.isKeyDown(Keyboard.KEY_E)) {
+			ekeyHeld = false;
+		}
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.4f, -0.3f, -0.5f);
 		GL11.glRotatef(180.0f+handXrotation , 0, 1, 0);
@@ -326,7 +344,7 @@ public class Player {
 		ModelPlayer.drawArm(0, 0, 0);
 		GL11.glEnd();
 		GL11.glPopMatrix();
-		System.out.println("hrc:"+handXrotationChnage);
+		//System.out.println("hrc:"+handXrotationChnage);
 		if(playHandSwingAnimation) {
 			handXrotation += handXrotationChnage*DisplayVariables.deltaTime;
 			if(handXrotation > 25) {
@@ -341,10 +359,10 @@ public class Player {
 		}
 		float x = -0.005f;
 	int scroll = Mouse.getDWheel();
-	if(scroll> 0) {
+	if(scroll> 0 && currentGameScreen == null) {
 	hotBarIndex -= 1;
 	
-	}else if(scroll < 0) {
+	}else if(scroll < 0 && currentGameScreen == null) {
 		hotBarIndex += 1;
 		
 		}
@@ -380,9 +398,23 @@ public class Player {
 		GL11.glColor3f(1, 1, 1);
 	}
 	
+	if(Player.currentGameScreen != null) {
+		glDepthMask(false);
+		currentGameScreen.drawScreen();
+		Cursor.updateAndDrawMouse();
+		glDepthMask(true);
+		}else {
+			DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
+			DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
+			if(Keyboard.isKeyDown(Keyboard.KEY_E)&&!Player.ekeyHeld) {
+				Player.currentGameScreen = GameScreens.inventory;
+				ekeyHeld = true;
+			}
+		}
+
 	}
 public static void leftHandAction() {
-	if(!Player.playHandSwingAnimation) {
+	if(!Player.playHandSwingAnimation && currentGameScreen == null) {
 		Player.playHandSwingAnimation = true;
 	Block b = physicsUtils.getBlockLookingAt();
 	if(b != null) {
@@ -405,7 +437,7 @@ public static void leftHandAction() {
 public static void rightHandAction() {
 	
 }
-public static boolean addItemToHotbar(Item item) {
+public static boolean addItemToInventory(Item item) {
 	for(int i = 0; i < hotbar.length; i++) {
 		if(hotbar[i] != null){
 		if(hotbar[i].getID() == item.getID() && hotbar[i].stack < hotbar[i].getMaxStack()) {
@@ -414,12 +446,32 @@ public static boolean addItemToHotbar(Item item) {
 		}
 		}
 	}
+	
+	for(int x = 0; x < 9; x++) {
+		for(int y = 0; y < 3; y++) {
+			if(Inventory[x][y] != null){
+				if(Inventory[x][y].getID() == item.getID() && Inventory[x][y].stack < Inventory[x][y].getMaxStack()) {
+					Inventory[x][y].stack++;
+					return true;
+				}
+				}
+		}
+	}
 	for(int i = 0; i < hotbar.length; i++) {
 		if(hotbar[i] == null) {
 			hotbar[i] = item;
 			return true;
 		}
 	}
+	for(int x = 0; x < 9; x++) {
+		for(int y = 0; x < 3; y++) {
+			if(Inventory[x][y] == null) {
+				Inventory[x][y] = item;
+				return true;
+			}
+		}
+	
+		}
 	return false;
 	
 }

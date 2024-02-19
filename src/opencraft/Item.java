@@ -120,7 +120,7 @@ public abstract class Item {
 			 }
 			}
 			if(Math.sqrt(Math.pow(x-Player.x, 2)+Math.pow(y-Player.y, 2)+Math.pow(z-Player.z, 2)) < 3f) {
-				if(Player.addItemToHotbar(this)) {
+				if(Player.addItemToInventory(this)) {
 				World.items.remove(this);
 				
 				}

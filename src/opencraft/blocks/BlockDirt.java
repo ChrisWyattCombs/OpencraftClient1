@@ -4,7 +4,7 @@ import opencraft.Block;
 import opencraft.Item;
 import opencraft.graphics.models.ModelCube;
 import opencraft.items.ItemDirt;
-import opencraft.items.itemGrass;
+import opencraft.items.ItemGrass;
 
 public class BlockDirt extends Block {
 

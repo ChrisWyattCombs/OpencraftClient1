@@ -5,23 +5,23 @@ import opencraft.Item;
 import opencraft.graphics.models.ModelCube;
 import opencraft.items.ItemGrass;
 
-public class BlockGrass extends Block {
+public class BlockLeaf extends Block {
 
 	
 	
-	public BlockGrass(int x, int y, int z, int chunkX, int chunkZ, int regionX, int regionZ) {
+	public BlockLeaf(int x, int y, int z, int chunkX, int chunkZ, int regionX, int regionZ) {
 		super(x, y, z, chunkX, chunkZ, regionX, regionZ);
 		
 	}
 
 	@Override
 	public void draw(boolean top,boolean bottom,boolean front,boolean back,boolean right, boolean left) {
-		visible = ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,1,top,bottom,front,back,right,left);
+		visible = ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.6f,0,0.6f,0,0.6f,0,0.6f,0,0.6f,0,0.6f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,1,top,bottom,front,back,right,left);
 	}
 
 	@Override
 	public int getID() {
-		return 1;
+		return 5;
 	}
 
 	@Override

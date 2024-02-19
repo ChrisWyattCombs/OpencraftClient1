@@ -33,6 +33,7 @@ import com.google.common.io.Files;
 
 import opencraft.Block;
 import opencraft.Chunk;
+import opencraft.NormalWorldGenerator;
 import opencraft.Player;
 import opencraft.World;
 import opencraft.graphics.DisplayUtills;
@@ -449,11 +450,11 @@ GL11.glColor3f(1, 1, 1);
 
 
 //glDepthMask(false);
-((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Fps: "+String.valueOf(Math.round(DisplayVariables.fps)), -0.0165f, 0.0080f, 0.00002f);
+//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Noise: "+NormalWorldGenerator.g.getInterpolatedNoise(Player.x, Player.z), -0.0165f, 0.0080f, 0.00002f);
 int x = physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camX);
 int y =  physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camY-2);
 int z = physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camZ);
-((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Standing on Block: "+ x+" "+y+" "+z, -0.0165f, 0.0070f, 0.00002f);
+//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Standing on Block: "+ x+" "+y+" "+z, -0.0165f, 0.0070f, 0.00002f);
 
 
 
@@ -462,7 +463,7 @@ float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(M
 float nx = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
 //((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at Block: "+b.getX()+" "+" "+b.getY()+" "+bz, -0.0165f, 0.0060f, 0.00002f);
-((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(1)+" "+(int)pos.get(2), -0.0165f, 0.0050f, 0.00002f);
+//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(1)+" "+(int)pos.get(2), -0.0165f, 0.0050f, 0.00002f);
 
 ((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Position: "+Player.x+" "+Player.y+" "+Player.z, -0.0165f, 0.0040f, 0.00002f);
 //DisplayUtills.shader.bind();
@@ -473,13 +474,15 @@ try {
 	// TODO Auto-generated catch block
 	e1.printStackTrace();
 }
+
 Player.drawPlayerHUD();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 //DisplayUtills.shader.unbind();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
-DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
-DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
+
+
 Player.updatePostitionAndRotation();
+
 World.checkFluids();
 Player.setCamToPlayer();
 if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)&& !DisplayVariables.pressedEsc) {

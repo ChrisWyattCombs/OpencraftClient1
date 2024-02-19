@@ -14,7 +14,7 @@ import org.lwjgl.input.Mouse;
 public class Main {
 	
 	public static void main(String[] args) throws Exception {
-		runOpencraft("Alpha");
+		runOpencraft("Beta");
 
 	}
 	public static void runOpencraft(String version) throws Exception {
