@@ -3,6 +3,7 @@ package opencraft;
 import static org.lwjgl.opengl.GL11.glDepthMask;
 
 import java.awt.RenderingHints.Key;
+import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.lwjgl.input.Keyboard;
@@ -424,7 +425,7 @@ public static void leftHandAction() {
 		World.setBlock("air", (int)b.getGlobalX(),(int)b.getY(), (int)b.getGlobalZ());
 	
 	} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-			| SecurityException | ClassNotFoundException e) {
+			| SecurityException | ClassNotFoundException | FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}

@@ -70,158 +70,158 @@ public class Chunk {
 	}
 
 	public void load() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException,
-			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
-		
-		File chunkDir = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks");
-		chunkDir.mkdirs();
-		
-		if (!chunkFile.exists()) {
-			try {
-				chunkFile.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			  FileOutputStream fos = new FileOutputStream(chunkFile);
-			  BufferedOutputStream bos=new BufferedOutputStream(fos);
-			  DataOutputStream dos=new DataOutputStream(bos); 
-			  Biome currentBiome = Biomes.plainsBiome;
-			for (int x = 0; x < 16; x++) {
+	IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 
-				for (int z = 0; z < 16; z++) {
-					
-					int endHeight = NormalWorldGenerator.generateHeight(x + (this.getGlobalX() * 16), z + (this.getGlobalZ() * 16));
-					if(endHeight < 30) {
-						endHeight =30;
-					}
-					int realHeight  = endHeight;
-				
-					//float genValue = NormalWorldGenerator.BiomeGen.generateHeight(x, z);
-					
-					float genValue = NormalWorldGenerator.BiomeGen.generateHeight(x + (this.getGlobalX() * 16), z + (this.getGlobalZ() * 16))+50;
-					if(realHeight > 70 && realHeight < 90) {
-						if(genValue < 25) {
-							currentBiome = Biomes.plainsBiome;
-						}else if(genValue < 50) {
-							currentBiome = Biomes.desertBiome;
-						}else if(genValue >= 50) {
-							currentBiome = Biomes.forestBiome;
-						}
-					}else if(realHeight < 70 ) {
-						
-							currentBiome = Biomes.WaterBiome;
-						
-					}
-					else if(realHeight > 90 ) {
-						
-						currentBiome = Biomes.MoutainBiome;
-					
+File chunkDir = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks");
+chunkDir.mkdirs();
+
+if (!chunkFile.exists()) {
+	try {
+		chunkFile.createNewFile();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	  FileOutputStream fos = new FileOutputStream(chunkFile);
+	  BufferedOutputStream bos=new BufferedOutputStream(fos);
+	  DataOutputStream dos=new DataOutputStream(bos); 
+	  Biome currentBiome = Biomes.plainsBiome;
+	for (int x = 0; x < 16; x++) {
+
+		for (int z = 0; z < 16; z++) {
+			
+			int endHeight = NormalWorldGenerator.generateHeight(x + (this.getGlobalX() * 16), z + (this.getGlobalZ() * 16));
+			if(endHeight < 30) {
+				endHeight =30;
+			}
+			int realHeight  = endHeight;
+		
+			//float genValue = NormalWorldGenerator.BiomeGen.generateHeight(x, z);
+			
+			float genValue = NormalWorldGenerator.BiomeGen.generateHeight(x + (this.getGlobalX() * 16), z + (this.getGlobalZ() * 16))+50;
+			if(realHeight > 70 && realHeight < 90) {
+				if(genValue < 25) {
+					currentBiome = Biomes.plainsBiome;
+				}else if(genValue < 50) {
+					currentBiome = Biomes.desertBiome;
+				}else if(genValue >= 50) {
+					currentBiome = Biomes.forestBiome;
 				}
-					for (int height = 0; height <= endHeight; height++) {
-						if(endHeight >70) {
-						if (endHeight - height == 0) {
-							blocks[x][height][z] = currentBiome.crateBlock1(x, height, z, this.x, this.z, regionX, regionZ);
-						} else if (height >= endHeight - 4) {
-							blocks[x][height][z] = currentBiome.crateBlock2(x, height, z, this.x, this.z, regionX, regionZ);
+			}else if(realHeight < 70 ) {
+				
+					currentBiome = Biomes.WaterBiome;
+				
+			}
+			else if(realHeight > 90 ) {
+				
+				currentBiome = Biomes.MoutainBiome;
+			
+		}
+			for (int height = 0; height <= endHeight; height++) {
+				if(endHeight >70) {
+				if (endHeight - height == 0) {
+					blocks[x][height][z] = currentBiome.crateBlock1(x, height, z, this.x, this.z, regionX, regionZ);
+				} else if (height >= endHeight - 4) {
+					blocks[x][height][z] = currentBiome.crateBlock2(x, height, z, this.x, this.z, regionX, regionZ);
+				
+				}else {
+					blocks[x][height][z] = new BlockStone(x, height, z, this.x, this.z, regionX, regionZ);
+				}
+				}else {
+					endHeight = 70;
 						
-						}else {
-							blocks[x][height][z] = new BlockStone(x, height, z, this.x, this.z, regionX, regionZ);
-						}
-						}else {
-							endHeight = 70;
-								
-									
-								if (height > realHeight) {
-									blocks[x][height][z] = new BlockWater(x, height, z, this.x, this.z, regionX, regionZ);
-								
-								}else {
-									blocks[x][height][z] = new BlockSand(x, height, z, this.x, this.z, regionX, regionZ);
-								}
-								
-						}
-						// fw.write();
-					}
-					currentBiome.checkForStruture(x+(this.getGlobalX() *16), realHeight, z+(this.getGlobalZ() *16), genValue);
-					int startY = 0;
-					int lastBlockType = 0;
-					if(blocks[x][0][z] != null) {
-						lastBlockType = blocks[x][0][z].getID();
-					}  
-					int blockType = 0;
-					for (int y = 1; y < 256; y++) {
-						
-						if(blocks[x][y][z] != null) {
-							blockType = blocks[x][y][z].getID();
-						}else {
-							blockType = 0;
-						}
-						if(blockType != lastBlockType) {
-							//fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
-							//dos.append(new String(new int[] {lastBlockType, x, startY,z,((y-1)-startY)}, 0, 5));
-							dos.writeInt(lastBlockType);
-							dos.writeInt(x);
-							dos.writeInt(startY);
-							dos.writeInt(z);
-							dos.writeInt(((y-1)-startY));
 							
-							startY = y;
-							lastBlockType = blockType;
+						if (height > realHeight) {
+							blocks[x][height][z] = new BlockWater(x, height, z, this.x, this.z, regionX, regionZ);
+						
+						}else {
+							blocks[x][height][z] = new BlockSand(x, height, z, this.x, this.z, regionX, regionZ);
 						}
-					}
-					
-					//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
-					///fw.append(new String(new int[] {blockType, x, startY,z,(255-startY)}, 0, 5));
-					dos.writeInt(blockType);
+						
+				}
+				// fw.write();
+			}
+			currentBiome.checkForStruture(x+(this.getGlobalX() *16), realHeight, z+(this.getGlobalZ() *16), genValue);
+			int startY = 0;
+			int lastBlockType = 0;
+			if(blocks[x][0][z] != null) {
+				lastBlockType = blocks[x][0][z].getID();
+			}  
+			int blockType = 0;
+			for (int y = 1; y < 256; y++) {
+				
+				if(blocks[x][y][z] != null) {
+					blockType = blocks[x][y][z].getID();
+				}else {
+					blockType = 0;
+				}
+				if(blockType != lastBlockType) {
+					//fw.append(lastBlockType + " " + x + " " + startY + " " + z + " " + ((y-1)-startY)+"\n");
+					//dos.append(new String(new int[] {lastBlockType, x, startY,z,((y-1)-startY)}, 0, 5));
+					dos.writeInt(lastBlockType);
 					dos.writeInt(x);
 					dos.writeInt(startY);
 					dos.writeInt(z);
-					dos.writeInt((255-startY));
-					//dos.writeFloat(1f);	
+					dos.writeInt(((y-1)-startY));
+					
+					startY = y;
+					lastBlockType = blockType;
 				}
 			}
-			dos.close();
-			fullyLoaded = true;
-
-		} else {
-			DataInputStream chunkReader = new DataInputStream(new FileInputStream(chunkFile));
-			int code = 0;
-			while (chunkReader.available() > 0) {
-				code = chunkReader.readInt();
-				int code2 = chunkReader.readInt();
-				
-				int code3 = chunkReader.readInt();
 			
-				int code4 = chunkReader.readInt();
-		
-				int code5 = chunkReader.readInt();
-				
-				
-		
-				int data[] = {code, code2, code3, code4,code5};
-				
-				
-				int x = data[1];
-				int z = data[3];
-				
-				int endY = data[4];
-				int startPos =data[2];
-				if(data[0] != 0) {
-					
-				for (int y = startPos; y <=startPos+ endY; y++) {
-					
-					blocks[x][y][z] = (Block) Class.forName(BlockTypes[data[0]]).getConstructors()[0]
-							.newInstance(x, y, z, this.x, this.z, regionX, regionZ);
-					//blocks[x][y][z].height = height;
-				
-					}}
-				
-			}
-			chunkReader.close();
-
+			//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
+			///fw.append(new String(new int[] {blockType, x, startY,z,(255-startY)}, 0, 5));
+			dos.writeInt(blockType);
+			dos.writeInt(x);
+			dos.writeInt(startY);
+			dos.writeInt(z);
+			dos.writeInt((255-startY));
+			//dos.writeFloat(1f);	
 		}
-
 	}
+	dos.close();
+	
+
+} else {
+	DataInputStream chunkReader = new DataInputStream(new FileInputStream(chunkFile));
+	int code = 0;
+	while (chunkReader.available() > 0) {
+		code = chunkReader.readInt();
+		int code2 = chunkReader.readInt();
+		
+		int code3 = chunkReader.readInt();
+	
+		int code4 = chunkReader.readInt();
+
+		int code5 = chunkReader.readInt();
+		
+		
+
+		int data[] = {code, code2, code3, code4,code5};
+		
+		
+		int x = data[1];
+		int z = data[3];
+		
+		int endY = data[4];
+		int startPos =data[2];
+		if(data[0] != 0) {
+			
+		for (int y = startPos; y <=startPos+ endY; y++) {
+			
+			blocks[x][y][z] = (Block) Class.forName(BlockTypes[data[0]]).getConstructors()[0]
+					.newInstance(x, y, z, this.x, this.z, regionX, regionZ);
+			//blocks[x][y][z].height = height;
+		
+			}}
+		
+	}
+	chunkReader.close();
+
+}
+fullyLoaded = true;
+}
 public void calculateLighting() {
 	for(int localX = 0; localX < 16; localX++) {
 		for(int y = 0; y < 256; y++) {
@@ -261,7 +261,7 @@ public void calculateLighting() {
 				int z = ((int) blocks[localX][y][localZ].getGlobalZ());
 				
 				if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,256)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,256)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,256)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,256)!=null ) {
-					System.out.println("works");
+					//System.out.println("works");
 					
 					 blocks[localX][y][localZ].topLight = 0.3f;
 				}
@@ -402,6 +402,7 @@ public void calculateLighting() {
 						if(!blocks[x][y][z].isFluid()) {
 							int localX = x ;
 							int localZ = z;
+							if(block1 == null || block1.isFluid() || block2 == null|| block2.isFluid() || block6 == null || block6.height < 1f|| block6.isFluid() || block5 == null || block5.height < 1f|| block5.isFluid() || block3 == null || block3.height < 1f|| block3.isFluid() || block4 == null || block4.height < 1f|| block4.isFluid()) {
 							if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y,blocks[x][y][z].getGlobalZ(), 0, 1, 0,64)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 1, 0, 0,64)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), -1, 0, 0,64)!=null &&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, 1,64)!=null&&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, -1,64)!=null ) {
 								
 								
@@ -434,6 +435,8 @@ public void calculateLighting() {
 					}else {
 						blocks[localX][y][localZ].backLight = 1f;
 					}
+							}
+							
 								blocks[x][y][z].draw(block1 == null || block1.isFluid(),block2 == null|| block2.isFluid(),block6 == null || block6.height < 1f|| block6.isFluid(),block5 == null || block5.height < 1f|| block5.isFluid(),block3 == null || block3.height < 1f|| block3.isFluid(),block4 == null || block4.height < 1f|| block4.isFluid());
 							}else {
 								water.add(blocks[x][y][z]);
@@ -442,6 +445,7 @@ public void calculateLighting() {
 						
 					
 				}
+				
 			}
 			
 			}

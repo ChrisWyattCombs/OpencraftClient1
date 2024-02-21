@@ -10,6 +10,7 @@ import opencraft.physics.physicsUtils;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.lwjgl.opengl.GL11;
@@ -37,7 +38,7 @@ public class ItemStone extends Item{
 			World.setBlock("BlockStone", (int)b.getX(),(int)b.getY(), (int)b.getZ());
 			stack--;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| SecurityException | ClassNotFoundException e) {
+				| SecurityException | ClassNotFoundException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

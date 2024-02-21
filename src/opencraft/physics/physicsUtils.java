@@ -25,8 +25,9 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 		y+=directionY;
 		z+=directionZ;
 				//System.out.println(x+" "+y+" "+z);
-		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
-		if(b != null ) {
+		
+		if(World.CheckForBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z))) {
+			b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 			if(!b.isFluid()) {
 			return b;
 			}

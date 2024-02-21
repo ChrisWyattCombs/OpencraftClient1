@@ -2,7 +2,7 @@ package opencraft;
 
 public abstract class Block {
 private int x;
-private int y;
+public int y;
 private int z;
 private int chunkX;
 private int chunkZ; 

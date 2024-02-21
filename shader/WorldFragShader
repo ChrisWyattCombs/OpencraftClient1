@@ -35,5 +35,11 @@ uniform vec3 viewPos;
 		brightness = 0.8;
 	}
  	vec4 outputColor = color*brightness*light;
+ 	
+ 	
+	
+ 	
 	gl_FragColor = vec4(outputColor.r,outputColor.g,outputColor.b,light.a);
+
+	
  }

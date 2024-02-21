@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.PixelFormat;
+import org.lwjgl.opengl.PixelFormatLWJGL;
 import org.lwjgl.util.glu.GLU;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
@@ -64,7 +65,7 @@ public static void createWindow(String title, int width, int height, boolean isF
         DisplayVariables.height = height;
         Display.setFullscreen(isFullscreen);
         
-        Display.create();
+        Display.create(new PixelFormat(), new ContextAttribs(1, 4));
         GL11.glEnable(GL13.GL_MULTISAMPLE);
         //GL11.glEnable(GL13.GL_SAMPLE_ALPHA_TO_COVERAGE);
         

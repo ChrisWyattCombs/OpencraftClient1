@@ -1,10 +1,13 @@
 package opencraft;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -38,7 +41,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 8;
+	public static int renderDistance = 16;
 	public static ArrayList<Vector2i> chunksToSetup = null;
 	private static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -49,8 +52,8 @@ public class World {
 	public static void loadWorld() {
 		int chunkX =(int)x >> 4;
 		int chunkZ =(int)z >> 4;
-		for(int x = chunkX-renderDistance; x <  chunkX + renderDistance; x++) {
-			for(int z = chunkZ-renderDistance; z < chunkZ + renderDistance ; z++) {
+		for(int x = -renderDistance; x <  renderDistance; x++) {
+			for(int z =-renderDistance; z < renderDistance ; z++) {
 				try {
 				
 				loadChunk(x,z);
@@ -99,11 +102,11 @@ public class World {
 	public static void drawWorld() {
 		
 		//System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
-		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>(renderDistance*16)/3) {
+		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>16) {
 			x = Player.x;
-			System.out.println("works23");
+			//System.out.println("works23");
 			z = Player.z;
-			System.out.println();
+			//System.out.println();
 			ArrayList<Vector2i> chunks = new ArrayList<>();
 			int chunkX =(int)x >> 4;
 			int chunkZ =(int)z >> 4;
@@ -113,7 +116,7 @@ public class World {
 				for(int cx = 0; cx<16; cx++) {
 					for(int cz = 0; cz<16; cz++) {
 						if(World.regions[i].chunks[cx][cz] != null) {
-							if(Math.abs(World.regions[i].chunks[cx][cz].getGlobalX() -chunkX)> renderDistance || Math.abs(World.regions[i].chunks[cx][cz].getGlobalZ() -chunkZ)> renderDistance*16) {
+							if(Math.abs(World.regions[i].chunks[cx][cz].getGlobalX() -chunkX)> renderDistance || Math.abs(World.regions[i].chunks[cx][cz].getGlobalZ() -chunkZ)> renderDistance) {
 								World.regions[i].chunks[cx][cz].delete();
 								World.regions[i].chunks[cx][cz] = null;
 								
@@ -129,7 +132,7 @@ public class World {
 					
 					
 				}
-				System.out.println("cou");
+				//System.out.println("cou");
 				
 				}
 			Region[] newRegions = new Region[256];
@@ -142,7 +145,7 @@ public class World {
 			}
 			realRegionListLength = index;
 			regions = newRegions;
-			System.out.println("works23");
+			//System.out.println("works23");
 			
 			new Thread() {
 				public void run() {
@@ -163,6 +166,7 @@ public class World {
 						
 						System.out.println(cz);
 						}
+						
 					}
 					//calculateLighting();
 					for(Vector2i chunkPostion : chunks) {
@@ -181,7 +185,7 @@ public class World {
 	
 
 		if(chunksToSetup != null && !loadingChunks) {
-			System.out.println("works 500 " + chunksToSetup.size());
+			//System.out.println("works 500 " + chunksToSetup.size());
 			Vector2i chunkPosition = chunksToSetup.get(setupIndex);
 			
 			setupChunk(chunkPosition.getX(), chunkPosition.getY());
@@ -256,9 +260,40 @@ public class World {
 			
 		}
 		return null;
+	}public static boolean CheckForBlock(int x, int y, int z) {
+		
+		int chunkX = x >> 4;
+		int chunkZ = z >> 4;
+		
+			int regionX = chunkX >> 4;
+			int regionZ = chunkZ >> 4;
+			
+			//if(localCX < 0) {
+				//localCX += 256;
+			//}
+			//if(localCZ < 0) {
+				//localCZ += 256;
+			//}
+			int lcx = chunkX  & 0xF;
+			int lcz = chunkZ  & 0xF;
+			int localX = x  & 0xF;
+			int localZ = z  & 0xF;
+			//System.out.println("lcx: " + lcx);
+			//System.out.println("lcz " + lcz);
+			try {
+				
+			
+			if(regions[getRegionIndex(regionX, regionZ)].chunks[lcx][lcz].blocks[localX][y][localZ] != null) {
+				return true;
+			}
+			}catch (Exception e) {
+				return false;
+			}
+			return false;
+		
 	}
 	
-	public static void setBlock(String blockType, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
+	public static void setBlock(String blockType, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException, FileNotFoundException {
 		int chunkX = x >> 4;
 		int chunkZ = z >> 4;
 		int regionX = chunkX >> 4;
@@ -351,7 +386,7 @@ public class World {
 		}
 		
 	}
-	public static void setBlock(String blockType, int x, int y, int z,boolean reloadChunks) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
+	public static void setBlock(String blockType, int x, int y, int z,boolean reloadChunks) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException, FileNotFoundException {
 		int chunkX = x >> 4;
 		int chunkZ = z >> 4;
 		int regionX = chunkX >> 4;
