@@ -296,6 +296,7 @@ public static Screen loadingWorld = new Screen() {
 			  GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 			currentScreen = inGame;
 			//DisplayUtills.shader.bind();
+			/*
 			new Thread() {
 				public void run() {
 					float x = DisplayVariables.camX;
@@ -321,6 +322,7 @@ public static Screen loadingWorld = new Screen() {
 								}
 								}
 							System.out.println("works23");
+							
 							for(int cx = (int)x -8; cx <(int)x+8;cx++) {
 								
 								for(int cz = (int)z -8; cz <(int)z+8;cz++) {
@@ -347,6 +349,7 @@ public static Screen loadingWorld = new Screen() {
 					
 				}
 			};
+			*/
 			DisplayUtills.shader.unbind();
 			
 				
