@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import opencraft.physics.physicsUtils;
+
 public class Region {
 private int x;
 private int z;
@@ -42,6 +44,7 @@ public void draw() {
 }
 
 public void drawWater() {
+	//if( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(Player.x), physicsUtils.convertFloatCoordToBlockCoord(Player.y), physicsUtils.convertFloatCoordToBlockCoord(Player.z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(Player.x), physicsUtils.convertFloatCoordToBlockCoord(Player.y), physicsUtils.convertFloatCoordToBlockCoord(Player.z)).isFluid()) {
 	for(int x = 0; x < 16; x++) {
 		for(int z = 0; z < 16; z++) {
 			if(chunks[x][z] != null) {
@@ -49,6 +52,7 @@ public void drawWater() {
 			}
 		}
 	}
+	//}
 }
 public void delete() {
 	try {

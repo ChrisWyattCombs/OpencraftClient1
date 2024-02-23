@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.opengl.Texture;
 
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
@@ -26,7 +27,7 @@ import opencraft.physics.physicsUtils;
 
 public class Player {
 	public static boolean playHandSwingAnimation = false;
-	private static float handXrotation = 0;
+	public static float handXrotation = 0;
 	private static float handXrotationChnage = 0.30f;
 	public static float x =0;
 	public static float y = 500;
@@ -43,7 +44,7 @@ public class Player {
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
 	public static boolean qKeyPressed = false;
-	static float flySpeedMultiplyer = 3;
+	static float SpeedMultiplyer = 1;
 	public static int hotBarIndex = 0;
 	public static Item[] hotbar = new Item[9];
 	public static Item[][] Inventory = new Item[9][3];
@@ -65,7 +66,7 @@ public class Player {
 		if(Keyboard.isKeyDown(Keyboard.KEY_W) && currentGameScreen == null) {
 			keyBeingHeld1 = true;
 			if(backwardVelocity == 0) {
-				if(forwardVelocity < 0.01f*flySpeedMultiplyer ) {
+				if(forwardVelocity < 0.01f*SpeedMultiplyer ) {
 					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					forwardVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -86,7 +87,7 @@ public class Player {
 		if(Keyboard.isKeyDown(Keyboard.KEY_S) && !keyBeingHeld1 && currentGameScreen == null) {
 			keyBeingHeld1 = true;
 			if(forwardVelocity == 0) {
-				if(backwardVelocity < 0.01f*flySpeedMultiplyer ) {
+				if(backwardVelocity < 0.01f*SpeedMultiplyer ) {
 					backwardVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					backwardVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -108,7 +109,7 @@ public class Player {
 		if(Keyboard.isKeyDown(Keyboard.KEY_D) && !keyBeingHeld&& currentGameScreen == null) {
 			keyBeingHeld = true;
 			if(leftVelocity == 0) {
-				if(rightVelocity < 0.01f*flySpeedMultiplyer ) {
+				if(rightVelocity < 0.01f*SpeedMultiplyer ) {
 					rightVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					rightVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -130,7 +131,7 @@ public class Player {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A) && !keyBeingHeld&&currentGameScreen == null) {
 			keyBeingHeld = true;
 			if(rightVelocity == 0) {
-				if(leftVelocity < 0.01f*flySpeedMultiplyer) {
+				if(leftVelocity < 0.01f*SpeedMultiplyer) {
 					leftVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
 					leftVelocity-=0.0001f*DisplayVariables.deltaTime;
@@ -148,21 +149,37 @@ public class Player {
 				leftVelocity = 0;
 			}
 		}
-		if(!grounded && velocityY > -0.12f) {
-			//velocityY -= 0.00003f*DisplayVariables.deltaTime;
+		if(!grounded && velocityY > -0.8f && ( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())) {
+			velocityY -= 0.00003f*DisplayVariables.deltaTime;
+			SpeedMultiplyer =0.5f;
+		}else if(( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())){
+			SpeedMultiplyer =0.75f;
+			if(velocityY > -0.01f) {
+			float lastV = velocityY;
+			velocityY -= 0.00003f*DisplayVariables.deltaTime;
+			if(velocityY < -0.01f) {
+				velocityY = lastV;
+			}
+			}else {
+				velocityY += 0.01f*DisplayVariables.deltaTime;
+			}
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !keyBeingHeld&&currentGameScreen == null){
-			velocityY = 0.03f;
+		if(( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())&& Keyboard.isKeyDown(Keyboard.KEY_SPACE) &&currentGameScreen == null){
+			velocityY = 0.0060f;
+		}
+		else if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && grounded &&currentGameScreen == null){
+			velocityY = 0.01f;
 			
 		}
-		else if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && !keyBeingHeld&&currentGameScreen == null){
+		/*
+		else if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && grounded &&currentGameScreen == null){
 			velocityY = -0.03f;
 			
 		}else {
 			velocityY = 0.0f;
 		}
-		
+		*/
 		float lastX =x;
 		float lastZ =z;
 		if(DisplayVariables.fps > 5) {
@@ -287,7 +304,9 @@ public class Player {
 				if(y < downblock.getY() +3) {
 					y = downblock.getY() +3;
 					velocityY = 0;
-				
+					if(( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())){
+					SpeedMultiplyer =1f;
+					}
 				}
 				if(y == downblock.getY() +3) {
 					
@@ -334,9 +353,23 @@ public class Player {
 		}
 	}
 	public static void drawPlayerHUD() {
+		
+		if(World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid()){
+		glDepthMask(false);
+		DisplayUtills.shader.bind();
+		GL11.glColor4f(1f, 1f, 1f, 0.5f);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture)(ResourceManager.getObjectForResource("Opencraft:WaterOverlayTexture"))).getTextureID());
+		DisplayUtills.drawSqaure(4, 4, 0, 0, -0.02f);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		DisplayUtills.shader.unbind();
+		GL11.glColor4f(1f, 1f, 1f, 1f);
+		}
 		if(!Keyboard.isKeyDown(Keyboard.KEY_E)) {
 			ekeyHeld = false;
 		}
+		/*
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.4f, -0.3f, -0.5f);
 		GL11.glRotatef(180.0f+handXrotation , 0, 1, 0);
@@ -345,6 +378,7 @@ public class Player {
 		ModelPlayer.drawArm(0, 0, 0);
 		GL11.glEnd();
 		GL11.glPopMatrix();
+		*/
 		//System.out.println("hrc:"+handXrotationChnage);
 		if(playHandSwingAnimation) {
 			handXrotation += handXrotationChnage*DisplayVariables.deltaTime;
@@ -381,14 +415,21 @@ public class Player {
 		}
 		if(hotBarIndex == i) {
 			if(hotbar[i] != null) {
+				glDepthMask(true);
+				DisplayUtills.shader.bind();
 			hotbar[i].drawIcon(0.35f, -0.13f, -1f,0.1f);
+			DisplayUtills.shader.unbind();
+			glDepthMask(false);
 			}
 			GL11.glColor3f(0, 0, 0);
 		}
 		drawHotbarSquare(x, -0.008f);
 		if(hotbar[i] != null) {
+			glDepthMask(true);
+			DisplayUtills.shader.bind();
 			hotbar[i].drawIcon(x, -0.008f,-0.02f,0.0004f);
-			
+			DisplayUtills.shader.unbind();
+			glDepthMask(false);
 		}
 		if(hotbar[i] != null) {
 			((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(String.valueOf(hotbar[i].stack), x-0.0004f,-0.0079f,0.0000075f );
@@ -403,7 +444,7 @@ public class Player {
 		glDepthMask(false);
 		currentGameScreen.drawScreen();
 		Cursor.updateAndDrawMouse();
-		glDepthMask(true);
+		
 		}else {
 			DisplayUtills.drawSqaure(0.1f, 0.01f, 0, 0, -0.02f);
 			DisplayUtills.drawSqaure( 0.01f,0.1f, 0, 0, -0.02f);
@@ -412,7 +453,7 @@ public class Player {
 				ekeyHeld = true;
 			}
 		}
-
+	glDepthMask(true);
 	}
 public static void leftHandAction() {
 	if(!Player.playHandSwingAnimation && currentGameScreen == null) {
@@ -483,9 +524,14 @@ public static void drawHotbarSquare(float x, float y) {
 	DisplayUtills.drawSqaure(0.1f, 0.01f, x, y-(0.005f *0.1f), -0.02f);
 	}
 	public static void setCamToPlayer() {
-		DisplayVariables.camX = x;
-		DisplayVariables.camY = y;
-		DisplayVariables.camZ = z;
+		float nz = (float) (Math.cos(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
+		float nx = (float) (Math.sin(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
+				float ny = (float) Math.sin(Math.toRadians(Player.pitch));
+				Vector3f pos =physicsUtils.getLastPosBeforeNextBlockInDirectionIncludingNull(Player.x,Player.y,Player.z,-nx,-ny,-nz,10,0.1f);
+		
+		DisplayVariables.camX = pos.getX();
+		DisplayVariables.camY = pos.getY();
+		DisplayVariables.camZ = pos.getZ();
 		DisplayVariables.CamPitch = pitch;
 		DisplayVariables.camYaw = yaw;
 	}

@@ -207,7 +207,8 @@ public static void loadResources() throws IOException {
 	//ResourceManager.loadTexture("Textures/font.png", "fontTexture");
 	//skybox = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/image.png"));
 	
-	
+	//"C:\Opencraft\assests\textures\waterOverlay.png"
+	ResourceManager.addResource("Opencraft:WaterOverlayTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\waterOverlay.png")));
 	opencraft.graphics.ui.Font font = new opencraft.graphics.ui.Font("C:\\Opencraft\\assests\\font.ttf");
 	ResourceManager.addResource("Opencraft:Font", font);
 	Texture blockTextures = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\TexturePack.png"));
