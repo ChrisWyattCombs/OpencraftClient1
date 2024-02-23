@@ -21,12 +21,16 @@ import java.util.ArrayList;
 import javax.xml.stream.events.StartDocument;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.Drawable;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.SharedDrawable;
 import org.lwjgl.util.glu.GLU;
 
 import com.google.common.io.Files;
@@ -117,13 +121,13 @@ public static Screen worlds = new Screen() {
 			Button worldButton = new Button(world,0,yOffset,0.3f,0.1f,-0.0005f,-0.0001f,0.000006f) {
 				
 				@Override
-				public void action() {
-				
+				public void action() throws LWJGLException {
+					Drawable context = new SharedDrawable(Display.getDrawable());
 					new Thread() {
 						public void run() {
 							World.worldName = getText();
 							World.worldLoadProgress = 0;
-							World.loadWorld();
+							World.loadWorld(context);
 							
 							
 						}
@@ -181,14 +185,15 @@ public static Screen createWorld = new Screen() {
 	Button createButton = new Button("Create",0,-0.002f,0.3f,0.1f,-0.0005f,-0.0001f,0.000006f) {
 		
 		@Override
-		public void action() {
-			
+		public void action() throws LWJGLException {
+			Drawable context = new SharedDrawable(Display.getDrawable());
 			new Thread() {
 				
 				public void run() {
+					
 					World.worldName = worldName.text;
 					World.worldLoadProgress = 0;
-					World.loadWorld();
+					World.loadWorld(context);
 					
 				}
 			}.start();
@@ -236,7 +241,7 @@ public static Screen loadingWorld = new Screen() {
 		glColor3f(1,1,1);
 ((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Loading World", -0.0035f, 0.002f, 0.00002f);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		if(World.worldLoadProgress == 1) {
+		if(World.doneLoading) {
 			GL11.glClearColor(135f/255f, 206f/255f, 235f/255f,1);
 			GL11.glEnable(GL11.GL_FOG);
 		      {
@@ -252,7 +257,7 @@ public static Screen loadingWorld = new Screen() {
 		        GL11. glFogf(GL11.GL_FOG_DENSITY, 0.005f);
 		      }
 			try {
-			World.setupWorld();
+			
 			
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -391,7 +396,12 @@ positionBuffer.flip();
 GL11.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, positionBuffer);
 
 
-World.drawWorld();
+try {
+	World.drawWorld();
+} catch (LWJGLException e2) {
+	// TODO Auto-generated catch block
+	e2.printStackTrace();
+}
 
 FloatBuffer model = BufferUtils.createFloatBuffer(16);
 FloatBuffer projection = BufferUtils.createFloatBuffer(16);
@@ -468,7 +478,7 @@ GL11.glColor3f(1, 1, 1);
 
 
 //glDepthMask(false);
-//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Noise: "+NormalWorldGenerator.g.getInterpolatedNoise(Player.x, Player.z), -0.0165f, 0.0080f, 0.00002f);
+((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("FPS: "+Math.round(DisplayVariables.fps), -0.0165f, 0.0080f, 0.00002f);
 int x = physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camX);
 int y =  physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camY-2);
 int z = physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camZ);

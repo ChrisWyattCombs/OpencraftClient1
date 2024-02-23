@@ -8,7 +8,7 @@ public class NormalWorldGenerator {
 	static {
 		MoutainGen.OCTAVES=7;
 		MoutainGen.AMPLITUDE=400;
-		MoutainGen.ROUGHNESS = 0.3f;
+		MoutainGen.ROUGHNESS = 0.2f;
 	}
 	
 	public static Gen WaterGen = new Gen(seed);

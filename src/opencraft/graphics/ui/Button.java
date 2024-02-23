@@ -1,5 +1,6 @@
 package opencraft.graphics.ui;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -40,12 +41,17 @@ public void drawAndUpdate() {
 		DisplayUtills.drawSqaure(width, heght,x, y, -0.02f);
 		GL11.glColor4f(1,1,1,1);
 		if(Mouse.isButtonDown(0)) {
-			action();
+			try {
+				action();
+			} catch (LWJGLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
 public String getText() {
 	return text;
 }
-public abstract void action();
+public abstract void action() throws LWJGLException;
 }

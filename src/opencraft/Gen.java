@@ -6,7 +6,7 @@ public class Gen {
 
   	public float AMPLITUDE = 25f;
     public int OCTAVES = 8;
-    public float ROUGHNESS = 0.5f;
+    public float ROUGHNESS = 0.3f;
  
     private Random random = new Random();
     private int seed;

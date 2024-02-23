@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.Drawable;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.SharedDrawable;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -31,6 +36,7 @@ public class World {
 		
 	}
 	
+	public static boolean addingChunks = false;
 	public static int realRegionListLength = 0;
 	public static Region[] regions = new Region[256];
 	public static double worldLoadProgress = 0;
@@ -41,15 +47,25 @@ public class World {
 	public static float x = Player.x;
 	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 8;
-	public static ArrayList<Vector2i> chunksToSetup = null;
-	private static  int setupIndex= 0;
+	public static int renderDistance = 32;
+	public static ArrayList<Vector2i> chunksToSetup = new ArrayList<>();
+	public static  int setupIndex= 0;
 	public static boolean rendering = false;
 	public static int currentRegionIndex = -1;
 	public static boolean loadingChunks = false;
 	public static long checkFluidTime = 0;
+	public static boolean doneLoading = false;
 	public static ArrayList<Vector3f> uncheckedFluids = new ArrayList<>();
-	public static void loadWorld() {
+	public static void loadWorld(Drawable context) {
+		try {
+			
+			
+			context.makeCurrent();
+		} catch (LWJGLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.exit(0);
+		}
 		int chunkX =(int)x >> 4;
 		int chunkZ =(int)z >> 4;
 		for(int x = -renderDistance; x <  renderDistance; x++) {
@@ -62,11 +78,14 @@ public class World {
 					e.printStackTrace();
 					System.exit(0);
 				}
+				
 				worldLoadProgress = (float)((x-chunkX)+renderDistance)/(renderDistance *2) + (float)((z-chunkZ)+renderDistance)/((renderDistance *2)*(renderDistance *2));
 			}
 		}
+		setupWorld();
 		//calculateLighting();
 		worldLoadProgress = 1;
+		doneLoading = true;
 	}
 	
 	public static Chunk getChunk(int cx, int cz) {
@@ -83,13 +102,14 @@ public class World {
 		
 	}
 	public static void setupWorld() {
+		
 		ArrayList<Vector2i> chunks = new ArrayList<>();
 		for(int i = 0; i < realRegionListLength; i++) {
 			if(regions[i] != null) {
 			for(int x = 0; x < 16; x++) {
 				for(int z = 0; z < 16; z++) {
 					if(regions[i].chunks[x][z] != null) {
-					 chunks.add(new Vector2i( regions[i].chunks[x][z].getGlobalX(), regions[i].chunks[x][z].getGlobalZ()));
+						 chunks.add(new Vector2i( regions[i].chunks[x][z].getGlobalX(), regions[i].chunks[x][z].getGlobalZ()));
 					
 					}
 				}
@@ -97,9 +117,9 @@ public class World {
 			}
 		}
 		
-		chunksToSetup = chunks;
+		addChunksToSetup(chunks);
 	}
-	public static void drawWorld() {
+	public static void drawWorld() throws LWJGLException {
 		
 		//System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
 		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>16) {
@@ -146,10 +166,10 @@ public class World {
 			realRegionListLength = index;
 			regions = newRegions;
 			//System.out.println("works23");
-			
+			//Drawable context = new SharedDrawable(Display.getDrawable());
 			new Thread() {
 				public void run() {
-					loadingChunks = true;
+					
 					for(int cx = (int)chunkX -renderDistance;cx <(int)chunkX+renderDistance;cx++) {
 						
 						for(int cz = (int)chunkZ -renderDistance; cz <(int)chunkZ+renderDistance;cz++) {
@@ -169,34 +189,23 @@ public class World {
 						
 					}
 					//calculateLighting();
-					for(Vector2i chunkPostion : chunks) {
-					//lightChunk(chunkPostion.getX(), chunkPostion.getY());
-					}
-					if(chunks.size() > 0 && chunksToSetup == null) {
-					World.chunksToSetup = chunks;
-					}else if(chunks.size() > 0 ) {
-						World.chunksToSetup.addAll(chunks);
-					}
 					
-					loadingChunks = false;
+					
+					
+				
+					if(chunks.size() > 0 ) {
+						World.addChunksToSetup(chunks);
+					}
+				
+					
 				}
 			}.start();
 		}
 	
 
-		if(chunksToSetup != null && !loadingChunks) {
-			//System.out.println("works 500 " + chunksToSetup.size());
-			Vector2i chunkPosition = chunksToSetup.get(setupIndex);
-			
-			setupChunk(chunkPosition.getX(), chunkPosition.getY());
-			setupIndex++;
-			if(setupIndex == chunksToSetup.size()) {
-				chunksToSetup = null;
-				setupIndex=0;
-			}
-			
-			
-		}
+		
+		
+		///if(!loadingChunks) {
 		rendering = true;
 		for(int i = 0; i < realRegionListLength; i++) {
 			regions[i].draw();
@@ -205,7 +214,7 @@ public class World {
 			regions[i].drawWater();
 			}
 		rendering = false;
-		
+		//}
 	}
 	public static void loadChunk(int cx, int cz) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IOException {
 		int regionX = cx >> 4;
@@ -360,9 +369,9 @@ public class World {
 		}
 		}
 		}
-		
-		for(int ox = chunkX-1; ox < chunkX+1;ox++) {
-			for(int oz = chunkZ-1; oz < chunkZ+1;oz++) {
+		ArrayList<Vector2i>  chunks = new ArrayList<>();
+		for(int ox = chunkX-3; ox < chunkX+3;ox++) {
+			for(int oz = chunkZ-3; oz < chunkZ+3;oz++) {
 				regionX = ox >> 4;
 				 reigonZ = oz >> 4;
 				 regionIndex = getRegionIndex(regionX, reigonZ);
@@ -372,18 +381,17 @@ public class World {
 				 if(regionIndex != -1) {
 					 if(regions[regionIndex].chunks != null) {
 						 if(regions[regionIndex].chunks[oxl][ozl] != null){
-						 regions[regionIndex].chunks[oxl][ozl].delete();
+						// regions[regionIndex].chunks[oxl][ozl].delete();
 					 }
 					 }
 				 }
 				
-				 if (chunksToSetup == null) {
-					 chunksToSetup = new ArrayList<>();
-					 
-				 }
-				 chunksToSetup.add(new Vector2i(ox,oz));
+				
+				 chunks.add(new Vector2i(ox,oz));
 			}
 		}
+		 addChunksToSetup(chunks);
+		
 		
 	}
 	public static void setBlock(String blockType, int x, int y, int z,boolean reloadChunks) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException, FileNotFoundException {
@@ -453,9 +461,10 @@ public class World {
 		}
 		}
 		
-		
-		for(int ox = chunkX-1; ox < chunkX+1;ox++) {
-			for(int oz = chunkZ-1; oz < chunkZ+1;oz++) {
+		addingChunks = true;
+		ArrayList<Vector2i>  chunks = new ArrayList<>();
+		for(int ox = chunkX-3; ox < chunkX+3;ox++) {
+			for(int oz = chunkZ-3; oz < chunkZ+3;oz++) {
 				regionX = ox >> 4;
 				 reigonZ = oz >> 4;
 				 regionIndex = getRegionIndex(regionX, reigonZ);
@@ -465,18 +474,17 @@ public class World {
 				 if(regionIndex != -1) {
 					 if(regions[regionIndex].chunks != null) {
 						 if(regions[regionIndex].chunks[oxl][ozl] != null){
-						 regions[regionIndex].chunks[oxl][ozl].delete();
+						 //regions[regionIndex].chunks[oxl][ozl].delete();
 					 }
 					 }
 				 }
 				
-				 if (chunksToSetup == null) {
-					 chunksToSetup = new ArrayList<>();
-					 
-				 }
-				 chunksToSetup.add(new Vector2i(ox,oz));
+				
+				 chunks.add(new Vector2i(ox,oz));
 			}
 		}
+		 addChunksToSetup(chunks);
+		addingChunks = false;
 		}
 		}
 	}
@@ -493,6 +501,7 @@ public class World {
 		try {
 		regions[regionIndex].chunks[x][z].setup();
 		}catch(Exception e) {
+			e.printStackTrace();
 			
 		}
 		
@@ -726,4 +735,24 @@ public class World {
 		uncheckedFluids.addAll(newUncheckedFluids);
 	}
 	}
+	public static synchronized void addChunkToSetup(Vector2i pos) {
+		chunksToSetup.add(pos);
+	}
+	public static synchronized void addChunksToSetup(ArrayList<Vector2i> chunks) {
+		for(Vector2i pos : chunks) {
+		chunksToSetup.add(pos);
+		}
+	}
+	public static synchronized ArrayList<Vector2i> getChunksToSetup() {
+		return chunksToSetup;
+	}
+	public static synchronized void removeChunkToSetup(Vector2i pos) {
+		for(int i = 0; i < chunksToSetup.size();i++) {
+			if(chunksToSetup.get(i).getX() == pos.getX()&& chunksToSetup.get(i).getY() == pos.getY()) {
+				chunksToSetup.remove(i);
+				break;
+			}
+		}
+	}
+	
 }

@@ -4,14 +4,17 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.ContextAttribs;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.Drawable;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.opengl.PixelFormatLWJGL;
+import org.lwjgl.opengl.SharedDrawable;
 import org.lwjgl.util.glu.GLU;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
@@ -21,6 +24,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 import static org.lwjgl.opengl.GL13.*;
 
+import opencraft.Chunk;
 import opencraft.World;
 import opencraft.graphics.models.ModelCube;
 import opencraft.graphics.ui.Cursor;
@@ -34,6 +38,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -65,7 +70,7 @@ public static void createWindow(String title, int width, int height, boolean isF
         DisplayVariables.height = height;
         Display.setFullscreen(isFullscreen);
         
-        Display.create(new PixelFormat(), new ContextAttribs(1, 4));
+        Display.create();
         GL11.glEnable(GL13.GL_MULTISAMPLE);
         //GL11.glEnable(GL13.GL_SAMPLE_ALPHA_TO_COVERAGE);
         
@@ -76,7 +81,7 @@ public static void createWindow(String title, int width, int height, boolean isF
   
 }
 public static void setupOpenGl() throws Exception {
-	
+	DisplayVariables.openglContex = GLContext.getCapabilities();
 	glMatrixMode (GL_PROJECTION);                               // Select The Projection Matrix
     glLoadIdentity ();
     
@@ -166,8 +171,36 @@ GL11.glEnable(GL11.GL_BLEND);
 	worldShader.createUniform("tex");
 	worldShader.createUniform("viewPos");
 	Cursor.setup();
-
+	Drawable context = new SharedDrawable(Display.getDrawable());
 	
+	new Thread() {
+		@Override
+		public void run() {
+			
+			try {
+				context.makeCurrent();
+			} catch (LWJGLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			while(true) {
+				ArrayList<Vector2i> chunks = World.getChunksToSetup();
+			if(chunks.size() >0) {
+				
+				
+				Vector2i chunkPosition = chunks.get(0);
+				
+				World.setupChunk(chunkPosition.getX(), chunkPosition.getY());
+			World.removeChunkToSetup(chunkPosition);
+			}
+				
+			
+			}
+		
+	}
+	}.start();
+
 }
 public static void loadResources() throws IOException {
 	//glBindTexture(GL_TEXTURE_2D, 0);

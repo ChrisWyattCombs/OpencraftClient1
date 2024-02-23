@@ -1,5 +1,6 @@
 package opencraft;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -34,6 +35,7 @@ public class Chunk {
 	private int id = -1;
 	private int waterID = -1;
 	public boolean fullyLoaded = false;
+	public boolean updating = false;
 	public Block[][][] blocks = new Block[16][256][16];
 	public static String[] BlockTypes = {"air","opencraft.blocks.BlockGrass","opencraft.blocks.BlockDirt","opencraft.blocks.BlockStone","opencraft.blocks.BlockWater","opencraft.blocks.BlockLeaf","opencraft.blocks.BlockWood","opencraft.blocks.BlockSand"};
 	public Chunk(int x, int z, int regionX, int regionZ) {
@@ -184,7 +186,7 @@ if (!chunkFile.exists()) {
 	
 
 } else {
-	DataInputStream chunkReader = new DataInputStream(new FileInputStream(chunkFile));
+	DataInputStream chunkReader = new DataInputStream(new BufferedInputStream(new FileInputStream(chunkFile)));
 	int code = 0;
 	while (chunkReader.available() > 0) {
 		code = chunkReader.readInt();
@@ -287,6 +289,7 @@ public void calculateLighting() {
 	}
 }
 	public void save() throws IOException {
+		
 		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 		
 		
@@ -298,18 +301,7 @@ public void calculateLighting() {
 
 			for (int z = 0; z < 16; z++) {
 				
-				int endHeight = NormalWorldGenerator.generateHeight(x + (this.getGlobalX() * 16), z + (this.getGlobalZ() * 16));
-				for (int height = 0; height <= endHeight; height++) {
-					if (endHeight - height == 0) {
-						blocks[x][height][z] = new BlockGrass(x, height, z, this.x, this.z, regionX, regionZ);
-					} else if (height >= endHeight - 4) {
-						blocks[x][height][z] = new BlockDirt(x, height, z, this.x, this.z, regionX, regionZ);
-					}else {
-						blocks[x][height][z] = new BlockStone(x, height, z, this.x, this.z, regionX, regionZ);
-					}
-
-					// fw.write();
-				}
+				
 				int startY = 0;
 				int lastBlockType = 0;
 				if(blocks[x][0][z] != null) {
@@ -355,7 +347,7 @@ public void calculateLighting() {
 		if(id == -1) {
 		id = GL11.glGenLists(1);
 		}else {
-			GL11.glDeleteLists(id,1);
+			//GL11.glDeleteLists(id,1);
 		}
 		GL11.glNewList(id, GL11.GL_COMPILE);
 		
@@ -456,7 +448,7 @@ public void calculateLighting() {
 		if(waterID == -1) {
 			waterID = GL11.glGenLists(1);
 			}else {
-				GL11.glDeleteLists(waterID,1);
+				///GL11.glDeleteLists(waterID,1);
 			}
 			GL11.glNewList(waterID, GL11.GL_COMPILE);
 			GL11.glBegin(GL11.GL_QUADS);
