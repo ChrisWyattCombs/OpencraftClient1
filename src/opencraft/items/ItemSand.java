@@ -60,7 +60,7 @@ public class ItemSand extends Item{
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 5;
 	}
 
 }

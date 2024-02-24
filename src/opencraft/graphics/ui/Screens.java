@@ -432,7 +432,9 @@ GL11.glDisable(GL11.GL_TEXTURE_2D);
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 GL11.glColor4f(1,1,1,1);
 //GL11.glDisable(GL11.GL_BLEND);
+if(Player.view != 0) {
 ModelPlayer.drawModel(Player.x, Player.y-1, Player.z,-Player.yaw,0,0,Player.pitch,Player.handXrotation,25,0,25,0,25,0,-25,true);
+}
 GL11.glBegin(GL11.GL_QUADS);
 
 if(b != null) {

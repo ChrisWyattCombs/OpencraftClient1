@@ -47,7 +47,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 16;
+	public static int renderDistance = 8;
 	public static ArrayList<Vector2i> chunksToSetup = new ArrayList<>();
 	public static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -370,8 +370,8 @@ public class World {
 		}
 		}
 		ArrayList<Vector2i>  chunks = new ArrayList<>();
-		for(int ox = chunkX-3; ox < chunkX+3;ox++) {
-			for(int oz = chunkZ-3; oz < chunkZ+3;oz++) {
+		for(int ox = chunkX-2; ox < chunkX+2;ox++) {
+			for(int oz = chunkZ-2; oz < chunkZ+2;oz++) {
 				regionX = ox >> 4;
 				 reigonZ = oz >> 4;
 				 regionIndex = getRegionIndex(regionX, reigonZ);
@@ -463,8 +463,8 @@ public class World {
 		
 		addingChunks = true;
 		ArrayList<Vector2i>  chunks = new ArrayList<>();
-		for(int ox = chunkX-3; ox < chunkX+3;ox++) {
-			for(int oz = chunkZ-3; oz < chunkZ+3;oz++) {
+		for(int ox = chunkX-2; ox < chunkX+2;ox++) {
+			for(int oz = chunkZ-2; oz < chunkZ+2;oz++) {
 				regionX = ox >> 4;
 				 reigonZ = oz >> 4;
 				 regionIndex = getRegionIndex(regionX, reigonZ);

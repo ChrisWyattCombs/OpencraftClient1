@@ -44,6 +44,8 @@ public class Player {
 	public static float rightVelocity = 0;
 	public static boolean grounded = false;
 	public static boolean qKeyPressed = false;
+	public static boolean f1KeyPressed = false;
+	public static int view = 0;
 	static float SpeedMultiplyer = 1;
 	public static int hotBarIndex = 0;
 	public static Item[] hotbar = new Item[9];
@@ -328,6 +330,18 @@ public class Player {
 			}
 	}
 	public static void checkForActions() throws InstantiationException, IllegalAccessException {  		
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_F1) ) {
+			if(!f1KeyPressed) {
+				view++;
+				if(view > 2 ) {
+					view = 0;
+				}
+				f1KeyPressed = true;
+			}
+		}else {
+			f1KeyPressed = false;
+		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			if(!qKeyPressed) {
 			if(hotbar[hotBarIndex] != null) {
@@ -369,7 +383,7 @@ public class Player {
 		if(!Keyboard.isKeyDown(Keyboard.KEY_E)) {
 			ekeyHeld = false;
 		}
-		/*
+		if(view == 0) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.4f, -0.3f, -0.5f);
 		GL11.glRotatef(180.0f+handXrotation , 0, 1, 0);
@@ -378,7 +392,7 @@ public class Player {
 		ModelPlayer.drawArm(0, 0, 0);
 		GL11.glEnd();
 		GL11.glPopMatrix();
-		*/
+		}
 		//System.out.println("hrc:"+handXrotationChnage);
 		if(playHandSwingAnimation) {
 			handXrotation += handXrotationChnage*DisplayVariables.deltaTime;
@@ -524,6 +538,15 @@ public static void drawHotbarSquare(float x, float y) {
 	DisplayUtills.drawSqaure(0.1f, 0.01f, x, y-(0.005f *0.1f), -0.02f);
 	}
 	public static void setCamToPlayer() {
+		if(view == 0) {
+			
+			DisplayVariables.camX = x;
+			DisplayVariables.camY = y;
+			DisplayVariables.camZ = z;
+			DisplayVariables.CamPitch = pitch;
+			DisplayVariables.camYaw = yaw;
+			
+		}else if(view == 1) {
 		float nz = (float) (Math.cos(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
 		float nx = (float) (Math.sin(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
 				float ny = (float) Math.sin(Math.toRadians(Player.pitch));
@@ -534,5 +557,18 @@ public static void drawHotbarSquare(float x, float y) {
 		DisplayVariables.camZ = pos.getZ();
 		DisplayVariables.CamPitch = pitch;
 		DisplayVariables.camYaw = yaw;
+		}
+		else if(view == 2) {
+			float nz = (float) (Math.cos(Math.toRadians(Player.yaw-180))*Math.cos(Math.toRadians(-Player.pitch)));
+			float nx = (float) (Math.sin(Math.toRadians(Player.yaw-180))*Math.cos(Math.toRadians(-Player.pitch)));
+					float ny = (float) Math.sin(Math.toRadians(-Player.pitch));
+					Vector3f pos =physicsUtils.getLastPosBeforeNextBlockInDirectionIncludingNull(Player.x,Player.y,Player.z,-nx,-ny,-nz,10,0.1f);
+			
+			DisplayVariables.camX = pos.getX();
+			DisplayVariables.camY = pos.getY();
+			DisplayVariables.camZ = pos.getZ();
+			DisplayVariables.CamPitch = -pitch;
+			DisplayVariables.camYaw = yaw-180;
+			}
 	}
 }
