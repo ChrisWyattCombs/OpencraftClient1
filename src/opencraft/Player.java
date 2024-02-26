@@ -11,6 +11,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
+import opencraft.audio.AudioUtills;
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.ResourceManager;
@@ -20,6 +21,8 @@ import opencraft.graphics.ui.Cursor;
 import opencraft.graphics.ui.Font;
 import opencraft.graphics.ui.GameScreen;
 import opencraft.graphics.ui.GameScreens;
+import opencraft.graphics.ui.Screen;
+import opencraft.graphics.ui.Screens;
 import opencraft.items.ItemDirt;
 import opencraft.items.ItemStone;
 import opencraft.items.ItemGrass;
@@ -27,11 +30,15 @@ import opencraft.physics.physicsUtils;
 
 public class Player {
 	public static boolean playHandSwingAnimation = false;
+	public static float legRotation = 0;
+	private static float legRotationChnage = 0.15f;
 	public static float handXrotation = 0;
 	private static float handXrotationChnage = 0.30f;
 	public static float x =0;
-	public static float y = 500;
+	public static float y = 200;
 	public static float z = 0;
+	public static float health = 10;
+	public static float maxHealth = 10;
 	public static float velocityX = 0;
 	public static float velocityZ = 0;
 	public static float velocityY = 0;
@@ -45,6 +52,7 @@ public class Player {
 	public static boolean grounded = false;
 	public static boolean qKeyPressed = false;
 	public static boolean f1KeyPressed = false;
+	public static boolean playWalkngAnimation= false;
 	public static int view = 0;
 	static float SpeedMultiplyer = 1;
 	public static int hotBarIndex = 0;
@@ -67,7 +75,9 @@ public class Player {
 		boolean keyBeingHeld1 = false;
 		if(Keyboard.isKeyDown(Keyboard.KEY_W) && currentGameScreen == null) {
 			keyBeingHeld1 = true;
+			playWalkngAnimation = true;
 			if(backwardVelocity == 0) {
+				
 				if(forwardVelocity < 0.01f*SpeedMultiplyer ) {
 					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
 				}else {
@@ -151,9 +161,9 @@ public class Player {
 				leftVelocity = 0;
 			}
 		}
-		if(!grounded && velocityY > -0.8f && ( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())) {
+		if(!grounded && velocityY > -0.2f && ( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())) {
 			velocityY -= 0.00003f*DisplayVariables.deltaTime;
-			SpeedMultiplyer =0.5f;
+			//SpeedMultiplyer =0.5f;
 		}else if(( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())){
 			SpeedMultiplyer =0.75f;
 			if(velocityY > -0.01f) {
@@ -163,7 +173,7 @@ public class Player {
 				velocityY = lastV;
 			}
 			}else {
-				velocityY += 0.01f*DisplayVariables.deltaTime;
+				velocityY += 0.001f*DisplayVariables.deltaTime;
 			}
 		}
 		
@@ -302,18 +312,24 @@ public class Player {
 			
 			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.01f);
 			if(downblock  != null) {
-				
+				float lvy = velocityY;
 				if(y < downblock.getY() +3) {
 					y = downblock.getY() +3;
+					
 					velocityY = 0;
 					if(( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())){
 					SpeedMultiplyer =1f;
+					
 					}
+					
 				}
 				if(y == downblock.getY() +3) {
 					
-				     
+					if(lvy < -0.02f) {
+				    	 health += 125F * lvy;
+				     }
 					grounded = true;
+					
 				}else {
 					grounded = false;
 				}
@@ -393,7 +409,20 @@ public class Player {
 		GL11.glEnd();
 		GL11.glPopMatrix();
 		}
-		//System.out.println("hrc:"+handXrotationChnage);
+		if(playWalkngAnimation) {
+			legRotation += legRotationChnage*DisplayVariables.deltaTime;
+			if(legRotation > 25) {
+				legRotation = 25;
+				legRotationChnage*=-1f;
+			}
+			else if(legRotation < -25) {
+				legRotationChnage*=-1;
+				legRotation=0;
+				
+			}
+			
+		}
+		////System.out.println("hrc:"+handXrotationChnage);
 		if(playHandSwingAnimation) {
 			handXrotation += handXrotationChnage*DisplayVariables.deltaTime;
 			if(handXrotation > 25) {
@@ -408,13 +437,33 @@ public class Player {
 		}
 		float x = -0.005f;
 	int scroll = Mouse.getDWheel();
-	if(scroll> 0 && currentGameScreen == null) {
+	if(scroll > 0 && currentGameScreen == null) {
 	hotBarIndex -= 1;
 	
 	}else if(scroll < 0 && currentGameScreen == null) {
 		hotBarIndex += 1;
 		
 		}
+	int healthCounter = (int)health;
+	DisplayUtills.shader.bind();
+	GL11.glEnable(GL11.GL_TEXTURE_2D);
+	float offsetX = 0;
+	float offsetY = 0;
+	for(int i = 0; i < maxHealth;i++) {
+		if(healthCounter > 0) {
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture)(ResourceManager.getObjectForResource("Opencraft:HeartTexture"))).getTextureID());
+			DisplayUtills.drawSqaure(0.075f,0.075f,-0.00525f+offsetX,-0.007f+offsetY,-0.02f);
+			
+			healthCounter--;
+		}else {
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture)(ResourceManager.getObjectForResource("Opencraft:EmptyHeartTexture"))).getTextureID());
+			DisplayUtills.drawSqaure(0.075f,0.075f,-0.00525f+offsetX,-0.007f+offsetY,-0.02f);
+		}
+		offsetX+=0.00075f;
+	}
+	GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+	GL11.glDisable(GL11.GL_TEXTURE_2D);
+	DisplayUtills.shader.unbind();
 	
 	if(hotBarIndex > 8) {
 		hotBarIndex = 0;
@@ -468,6 +517,9 @@ public class Player {
 			}
 		}
 	glDepthMask(true);
+	if(health < 0) {
+		Screens.currentScreen = Screens.Died;
+	}
 	}
 public static void leftHandAction() {
 	if(!Player.playHandSwingAnimation && currentGameScreen == null) {
@@ -484,6 +536,7 @@ public static void leftHandAction() {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	AudioUtills.playSound("BlockBreak", (int)b.getGlobalX(),(int)b.getY(), (int)b.getGlobalZ());
 	
 }
 	}
@@ -571,4 +624,53 @@ public static void drawHotbarSquare(float x, float y) {
 			DisplayVariables.camYaw = yaw-180;
 			}
 	}
+	public static synchronized float getX() {
+		return x;
+	}
+	public static synchronized void setX(float x) {
+		Player.x = x;
+	}
+	public static synchronized float getY() {
+		return y;
+	}
+	public static synchronized void setY(float y) {
+		Player.y = y;
+	}
+	public static synchronized float getZ() {
+		return z;
+	}
+	public static synchronized void setZ(float z) {
+		Player.z = z;
+	}
+	public static synchronized float getVelocityX() {
+		return velocityX;
+	}
+	public static synchronized void setVelocityX(float velocityX) {
+		Player.velocityX = velocityX;
+	}
+	public static synchronized float getVelocityZ() {
+		return velocityZ;
+	}
+	public static synchronized void setVelocityZ(float velocityZ) {
+		Player.velocityZ = velocityZ;
+	}
+	public static synchronized float getVelocityY() {
+		return velocityY;
+	}
+	public static synchronized void setVelocityY(float velocityY) {
+		Player.velocityY = velocityY;
+	}
+	public static synchronized float getYaw() {
+		return yaw;
+	}
+	public static synchronized void setYaw(float yaw) {
+		Player.yaw = yaw;
+	}
+	public static synchronized float getPitch() {
+		return pitch;
+	}
+	public static synchronized void setPitch(float pitch) {
+		Player.pitch = pitch;
+	}
+	
 }

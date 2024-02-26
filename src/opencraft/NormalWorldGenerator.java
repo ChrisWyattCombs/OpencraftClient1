@@ -23,6 +23,19 @@ public class NormalWorldGenerator {
 		BiomeGen.AMPLITUDE=150;
 		BiomeGen.ROUGHNESS = 0.3f;
 	}
+	public static Gen caveGen1 = new Gen(seed);
+	static {
+		caveGen1.OCTAVES=7;
+		caveGen1.AMPLITUDE=400;
+		caveGen1.ROUGHNESS = 0.3f;
+	}
+	public static Gen caveGen2 = new Gen(seed);
+	static {
+		caveGen2.OCTAVES=7;
+		caveGen2.AMPLITUDE=300;
+		caveGen2.ROUGHNESS = 0.3f;
+	}
+	public static NoiseGenerator caveGen = new NoiseGenerator(seed);
 
 	public static int generateHeight(int x, int z) {
 		
@@ -45,4 +58,8 @@ public class NormalWorldGenerator {
 		return h;
 		//return (int) BiomeGen.generateHeight(x, z)+50;
 	}
+	
+		
+		//return (int) caveGen1.generateHeight(x, z)+70;
+	
 }

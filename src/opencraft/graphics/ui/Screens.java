@@ -267,7 +267,7 @@ public static Screen loadingWorld = new Screen() {
 
 			    // Create light components
 			    float ambientLight[] = { 0.3f, 0.3f,0.3f, 1.0f };
-			    float diffuseLight[] = { 1f, 1f, 1f, 1.0f };
+			    float diffuseLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 			    float specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 			    float position[] = { 0, 256.0f, 0, 0.0f };
 
@@ -311,7 +311,7 @@ public static Screen loadingWorld = new Screen() {
 					
 						if(Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2))>(16*8)/2) {
 							x = DisplayVariables.camX;
-							System.out.println("works23");
+							//System.out.println("works23");
 							z = DisplayVariables.camZ;
 							ArrayList<Vector2i> chunks = new ArrayList<>();
 							for(int i = 0; i <World.realRegionListLength; i++) {
@@ -326,7 +326,7 @@ public static Screen loadingWorld = new Screen() {
 									}
 								}
 								}
-							System.out.println("works23");
+							//System.out.println("works23");
 							
 							for(int cx = (int)x -8; cx <(int)x+8;cx++) {
 								
@@ -337,7 +337,7 @@ public static Screen loadingWorld = new Screen() {
 										World.loadChunk(cx,cz);
 										}catch (Exception e) {
 											e.printStackTrace();
-											System.out.println("a1");
+											//System.out.println("a1");
 											System.exit(0);
 										}
 
@@ -345,7 +345,7 @@ public static Screen loadingWorld = new Screen() {
 									
 								}
 								
-								System.out.println(cz);
+								//System.out.println(cz);
 								}
 							}
 							World.chunksToSetup = chunks;
@@ -384,7 +384,7 @@ GL11.glTranslatef (-DisplayVariables.camX, -DisplayVariables.camY, -DisplayVaria
 GL30.glUniform1ui(DisplayUtills.worldShader.uniforms.get("tex"),((Texture) ResourceManager.getObjectForResource("Opencraft:BlockTextures")).getTextureID());
 GL20.glUniform3f(DisplayUtills.worldShader.uniforms.get("viewPos"),DisplayVariables.camX,-	DisplayVariables.camY,-DisplayVariables.camZ);
 //GL13.glActiveTexture(GL13.GL_TEXTURE2);
-//System.out.println("TID: "+World.blockTextures.getTextureID());
+////System.out.println("TID: "+World.blockTextures.getTextureID());
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:BlockTextures")).getTextureID());
 
 float position[] = { -1, 100.0f, -1, 0.0f };
@@ -433,7 +433,7 @@ GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 GL11.glColor4f(1,1,1,1);
 //GL11.glDisable(GL11.GL_BLEND);
 if(Player.view != 0) {
-ModelPlayer.drawModel(Player.x, Player.y-1, Player.z,-Player.yaw,0,0,Player.pitch,Player.handXrotation,25,0,25,0,25,0,-25,true);
+ModelPlayer.drawModel(Player.x, Player.y-1, Player.z,-Player.yaw,0,0,Player.pitch,Player.handXrotation,25,0,25,0,Player.legRotation,0,-Player.legRotation,true);
 }
 GL11.glBegin(GL11.GL_QUADS);
 
@@ -554,6 +554,53 @@ if(DisplayVariables.fps > DisplayVariables.fpsRecord) {
 		if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			DisplayVariables.camY -=0.02f*DisplayVariables.deltaTime;
 		}
+	}
+	
+};
+public static Screen Died = new Screen() {
+
+	Button respawn = new Button("Resapwn", 0,0,0.3f,0.1f,-0.0005f,-0.0001f,0.000006f) {
+		
+		@Override
+		public void action() throws LWJGLException {
+			Player.x = 0;
+			Player.y = 80;
+			Player.z = 0;
+			Player.health = Player.maxHealth;
+			currentScreen = inGame;
+			
+		}
+	};
+	@Override
+	public void drawScreen() {
+glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
+		
+		
+		
+		glDepthMask(false);
+		/*
+	 glColor3f(	135f/255f, 206f/255f, 235f/255f);
+	
+		DisplayUtills.drawSkybox();
+		glColor3f(	1,1, 1);
+		
+		//glBindTexture(GL_TEXTURE_2D, 0);
+	//glDepthMask(true);
+	 * */
+	 
+		GL11.glClearColor(135f/255f, 206f/255f, 235f/255f,1);
+	GL11.glEnable(GL11.GL_TEXTURE_2D);
+	
+	
+	///glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
+	
+	glLoadIdentity();
+	respawn.drawAndUpdate();
+	
+
+	Cursor.updateAndDrawMouse();
+	GL11.glDisable(GL11.GL_TEXTURE_2D);
+	glDepthMask(true);
 	}
 	
 };

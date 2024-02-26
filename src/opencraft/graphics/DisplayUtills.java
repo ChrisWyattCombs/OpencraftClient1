@@ -26,9 +26,11 @@ import static org.lwjgl.opengl.GL13.*;
 
 import opencraft.Chunk;
 import opencraft.World;
+import opencraft.audio.AudioUtills;
 import opencraft.graphics.models.ModelCube;
 import opencraft.graphics.ui.Cursor;
 import opencraft.graphics.ui.Screens;
+import paulscode.sound.SoundSystem;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_TEXTURE_MAX_LEVEL;
@@ -65,6 +67,7 @@ public static void createWindow(String title, int width, int height, boolean isF
 	                    displayMode = modes[i];
 	               }
 	         }
+	   // AudioUtills.updateSoundSystem();
         Display.setDisplayMode(displayMode);
         DisplayVariables.width = width;
         DisplayVariables.height = height;
@@ -209,6 +212,8 @@ public static void loadResources() throws IOException {
 	
 	//"C:\Opencraft\assests\textures\waterOverlay.png"
 	ResourceManager.addResource("Opencraft:WaterOverlayTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\waterOverlay.png")));
+	ResourceManager.addResource("Opencraft:HeartTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\heart.png")));
+	ResourceManager.addResource("Opencraft:EmptyHeartTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\empty_heart.png")));
 	opencraft.graphics.ui.Font font = new opencraft.graphics.ui.Font("C:\\Opencraft\\assests\\font.ttf");
 	ResourceManager.addResource("Opencraft:Font", font);
 	Texture blockTextures = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\TexturePack.png"));
@@ -289,5 +294,9 @@ public static void drawSqaureFromTop(float width,float height, float x,float y,f
 	
 	glEnd();
 }
-
+public static void FPS(int fps, long time) throws InterruptedException {
+	if (time < 1000 / fps) {
+		Thread.sleep(1000 / fps - time);
+	}
+}
 }

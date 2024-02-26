@@ -185,7 +185,7 @@ public static void drawArm(float x,float y,float z) {
 	
 }
 public static void drawLeg(float x,float y,float z) {
-	float legLength = 0.8f;
+	float legLength = 1f;
 	float legWidth = 0.35f;
 	//front of leg
 	glVertex3f(x+(legWidth/2),y,z+0.1f);

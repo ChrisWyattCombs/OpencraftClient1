@@ -49,8 +49,8 @@ public class Texture {
         try {
            PNGDecoder decoder = new PNGDecoder(in);
          
-           System.out.println("width="+decoder.getWidth());
-           System.out.println("height="+decoder.getHeight());
+           //System.out.println("width="+decoder.getWidth());
+           //System.out.println("height="+decoder.getHeight());
          
            image = ByteBuffer.allocateDirect(4*decoder.getWidth()*decoder.getHeight());
            try {

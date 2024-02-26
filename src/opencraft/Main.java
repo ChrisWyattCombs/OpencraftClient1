@@ -3,6 +3,8 @@ package opencraft;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.util.ResourceLoader;
 
+import opencraft.audio.AudioUtills;
+import opencraft.audio.AudioVaribles;
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.ResourceManager;
@@ -21,14 +23,15 @@ public class Main {
 		DisplayUtills.createWindow("opencraft "+version, 1920, 1080, true);
 		DisplayUtills.setupOpenGl();
 	DisplayUtills.loadResources();
-		
+	AudioUtills.loadSounds();
 		while (!Display.isCloseRequested() && !DisplayVariables.close) {
 			long startTime = System.currentTimeMillis();
 			long lastTime = System.nanoTime();
 			
 			DisplayUtills.renderNextFrame();
-			
+			AudioUtills.updateSoundSystem();
             Display.update();
+            //DisplayUtills.FPS(60,System.currentTimeMillis() - startTime);
             DisplayVariables.deltaTime = System.currentTimeMillis() - startTime;
             DisplayVariables.fps = -(1000000000.0 / (lastTime - (lastTime = System.nanoTime())));
             if(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
@@ -37,6 +40,7 @@ public class Main {
            
            
 		}
+		AudioVaribles.soundSystem.cleanup();
 	}
 
 }

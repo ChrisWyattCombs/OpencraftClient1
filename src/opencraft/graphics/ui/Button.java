@@ -35,7 +35,7 @@ public void drawAndUpdate() {
 	GL11.glColor3f(0,0,0);
 	((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(text, x+reltiveTextX, y+reltiveTextY, textScale);
 	GL11.glColor3f(1,1,1);
-	//System.out.println(Mouse.getNativeCursor());
+	////System.out.println(Mouse.getNativeCursor());
 	if(Cursor.x <= 0.005f * width+x && Cursor.x  >= -0.005f * width+x &&Cursor.y <= 0.005f * heght+y && Cursor.y >= -0.005f * heght+y) {
 		GL11.glColor4f(251f/255f, 247f/255f, 25f/255f,0.25f);
 		DisplayUtills.drawSqaure(width, heght,x, y, -0.02f);

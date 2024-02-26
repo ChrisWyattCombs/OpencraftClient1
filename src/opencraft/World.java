@@ -121,12 +121,12 @@ public class World {
 	}
 	public static void drawWorld() throws LWJGLException {
 		
-		//System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
+		////System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
 		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>16) {
 			x = Player.x;
-			//System.out.println("works23");
+			////System.out.println("works23");
 			z = Player.z;
-			//System.out.println();
+			////System.out.println();
 			ArrayList<Vector2i> chunks = new ArrayList<>();
 			int chunkX =(int)x >> 4;
 			int chunkZ =(int)z >> 4;
@@ -152,7 +152,7 @@ public class World {
 					
 					
 				}
-				//System.out.println("cou");
+				////System.out.println("cou");
 				
 				}
 			Region[] newRegions = new Region[256];
@@ -165,7 +165,7 @@ public class World {
 			}
 			realRegionListLength = index;
 			regions = newRegions;
-			//System.out.println("works23");
+			////System.out.println("works23");
 			//Drawable context = new SharedDrawable(Display.getDrawable());
 			new Thread() {
 				public void run() {
@@ -184,7 +184,7 @@ public class World {
 							
 						}
 						
-						System.out.println(cz);
+						//System.out.println(cz);
 						}
 						
 					}
@@ -214,6 +214,7 @@ public class World {
 			regions[i].drawWater();
 			}
 		rendering = false;
+		
 		//}
 	}
 	public static void loadChunk(int cx, int cz) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IOException {
@@ -258,14 +259,14 @@ public class World {
 			int lcz = chunkZ  & 0xF;
 			int localX = x  & 0xF;
 			int localZ = z  & 0xF;
-			//System.out.println("lcx: " + lcx);
-			//System.out.println("lcz " + lcz);
+			////System.out.println("lcx: " + lcx);
+			////System.out.println("lcz " + lcz);
 			
 			try {
 			return regions[getRegionIndex(regionX, regionZ)].chunks[lcx][lcz].blocks[localX][y][localZ];
 		}catch( Exception e){
 			//e.printStackTrace();
-			//System.out.println("a2");
+			////System.out.println("a2");
 			
 		}
 		return null;
@@ -287,8 +288,8 @@ public class World {
 			int lcz = chunkZ  & 0xF;
 			int localX = x  & 0xF;
 			int localZ = z  & 0xF;
-			//System.out.println("lcx: " + lcx);
-			//System.out.println("lcz " + lcz);
+			////System.out.println("lcx: " + lcx);
+			////System.out.println("lcz " + lcz);
 			try {
 				
 			

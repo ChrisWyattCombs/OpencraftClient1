@@ -31,13 +31,13 @@ public class Font {
 		Face face = ft.newFace(path, 0);
 		face.setPixelSizes( 0, 48);  
 		
-		//System.out.println("works");
+		////System.out.println("works");
 		
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
 		  
 		for (char c = 0; c < 128; c++)
 		{
-			//System.out.println("works1.5");
+			////System.out.println("works1.5");
 		    // load character glyph 
 			
 		    face.loadChar(c, FT_LOAD_RENDER);
@@ -45,7 +45,7 @@ public class Font {
 		    
 		    
 		    // generate texture
-		    System.out.println("works2");
+		    //System.out.println("works2");
 		    int texture = GL11.glGenTextures();
 		    glBindTexture(GL_TEXTURE_2D, texture);
 		    glTexImage2D(
@@ -72,7 +72,7 @@ public class Font {
 		    //             0, GL_RGBA, GL_UNSIGNED_BYTE, buffer2);
 		  
 
-		    System.out.println("works3");
+		    //System.out.println("works3");
 		    // set texture options
 		    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
 		    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
@@ -87,7 +87,7 @@ public class Font {
 		    );
 		    Characters.put(c, character);
 		}
-		//System.out.println("works4");
+		////System.out.println("works4");
 	face.delete();
 	ft.delete();
 	//glBindTexture(GL_TEXTURE_2D,0);
@@ -100,13 +100,13 @@ public class Font {
 		for(char c : text.toCharArray() )
 	    {
 	        CharacterData ch = Characters.get(c);
-	        //System.out.println("ID: "+ ch.TextureID);
+	        ////System.out.println("ID: "+ ch.TextureID);
 	        float xpos = x + ch.Bearing.getX() * scale;
 	        float ypos = y - (ch.Size.getY() - ch.Bearing.getY()) * scale;
 
 	        float w = ch.Size.getX() * scale;
 	        float h = ch.Size.getY() * scale;
-	        //System.out.println("w: "+w);
+	        ////System.out.println("w: "+w);
 	        GL30.glUniform1ui(DisplayUtills.fontShader.uniforms.get("tex"), ch.TextureID);
 	        //GL13.glActiveTexture(GL13.GL_TEXTURE0);
 	        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
@@ -125,7 +125,7 @@ public class Font {
 			for(char c : text.toCharArray() )
 		    {
 		        CharacterData ch = Characters.get(c);
-		        //System.out.println("ID: "+ ch.TextureID);
+		        ////System.out.println("ID: "+ ch.TextureID);
 		        float xpos = x + ch.Bearing.getX() * scale;
 		        float ypos = y - (ch.Size.getY() - ch.Bearing.getY()) * scale;
 		        if(n == textFieldInsertPos) {
@@ -135,7 +135,7 @@ public class Font {
 		        }
 		        float w = ch.Size.getX() * scale;
 		        float h = ch.Size.getY() * scale;
-		        //System.out.println("w: "+w);
+		        ////System.out.println("w: "+w);
 		        GL30.glUniform1ui(DisplayUtills.fontShader.uniforms.get("tex"), ch.TextureID);
 		        //GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		        glBindTexture(GL_TEXTURE_2D, ch.TextureID);

@@ -18,14 +18,14 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 	float x = startX;
 	float y =  startY;
 	float z = startZ;
-	//System.out.println(x+" "+y+" "+z);
+	////System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
 	while(count < range) {
 		x+=directionX;
 		y+=directionY;
 		z+=directionZ;
-				//System.out.println(x+" "+y+" "+z);
+				////System.out.println(x+" "+y+" "+z);
 		
 		if(World.CheckForBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z))) {
 			b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
@@ -41,20 +41,20 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 	float x = startX;
 	float y =  startY;
 	float z = startZ;
-	//System.out.println(x+" "+y+" "+z);
+	////System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
 	while( count < range/step ) {
 		x+=directionX*step;
 		y+=directionY*step;
 		z+=-directionZ*step;
-				//System.out.println(x+" "+y+" "+z);
+				////System.out.println(x+" "+y+" "+z);
 		
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 		//
 		if(b != null) {
 			if(!b.isFluid()) {
-			System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
+			//System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
 			return b;
 			}
 		}
@@ -67,7 +67,7 @@ public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float s
 	float x = startX;
 	float y =  startY;
 	float z = startZ;
-	//System.out.println(x+" "+y+" "+z);
+	////System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
 	while( count < range/step ) {
@@ -77,13 +77,13 @@ public static Vector3f getLastPosBeforeNextBlockInDirection(float startX,float s
 		x+=directionX*step;
 		y+=directionY*step;
 		z+=-directionZ*step;
-				//System.out.println(x+" "+y+" "+z);
+				////System.out.println(x+" "+y+" "+z);
 		
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 		//
 		if(b != null) {
 			if(!b.isFluid()) {
-			//System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
+			////System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
 			return new Vector3f(convertFloatCoordToBlockCoord(lastX), convertFloatCoordToBlockCoord(lastY), convertFloatCoordToBlockCoord(lastZ));
 			}
 			}
@@ -95,7 +95,7 @@ public static Vector3f getLastPosBeforeNextBlockInDirectionIncludingNull(float s
 	float x = startX;
 	float y =  startY;
 	float z = startZ;
-	//System.out.println(x+" "+y+" "+z);
+	////System.out.println(x+" "+y+" "+z);
 	Block b = null;
 	int count = 0;
 	while( count < range/step ) {
@@ -105,13 +105,13 @@ public static Vector3f getLastPosBeforeNextBlockInDirectionIncludingNull(float s
 		x+=directionX*step;
 		y+=directionY*step;
 		z+=-directionZ*step;
-				//System.out.println(x+" "+y+" "+z);
+				////System.out.println(x+" "+y+" "+z);
 		
 		b = World.getBlock(convertFloatCoordToBlockCoord(x), convertFloatCoordToBlockCoord(y), convertFloatCoordToBlockCoord(z));
 		//
 		if(b != null) {
 			if(!b.isFluid()) {
-			//System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
+			////System.out.println(b.getGlobalZ()+":"+ convertFloatCoordToBlockCoord(z));
 			return new Vector3f(lastX, lastY, lastZ);
 			}
 			}
