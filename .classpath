@@ -5,7 +5,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="OpencraftClient1/natives"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-18">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -29,5 +29,20 @@
 	<classpathentry kind="lib" path="libs/freetype-jni.jar"/>
 	<classpathentry kind="lib" path="libs/guava-32.1.2-jre.jar"/>
 	<classpathentry kind="lib" path="libs/Paulscode-SoundSystem-2013.04.17.jar"/>
+	<classpathentry kind="lib" path="libs/java-openal-1.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/jna-jpms-5.14.0.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-javadoc.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-linux.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-linux-arm32.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-linux-arm64.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-linux-ppc64le.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-linux-riscv64.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-macos.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-macos-arm64.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-windows.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-windows-arm64.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-windows-x86.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-freetype-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

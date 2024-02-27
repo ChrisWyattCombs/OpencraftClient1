@@ -210,7 +210,8 @@ public static void loadResources() throws IOException {
 	//ResourceManager.loadTexture("Textures/font.png", "fontTexture");
 	//skybox = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/image.png"));
 	
-	//"C:\Opencraft\assests\textures\waterOverlay.png"
+	//"C:\Opencraft\assests\textures\waterOverlay.png"`
+	ResourceManager.addResource("Opencraft:SkinTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\skin.png")));
 	ResourceManager.addResource("Opencraft:WaterOverlayTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\waterOverlay.png")));
 	ResourceManager.addResource("Opencraft:HeartTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\heart.png")));
 	ResourceManager.addResource("Opencraft:EmptyHeartTexture", TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("C:\\Opencraft\\assests\\textures\\empty_heart.png")));
@@ -220,10 +221,21 @@ public static void loadResources() throws IOException {
 	ResourceManager.addResource("Opencraft:BlockTextures", blockTextures);
 	glBindTexture(GL_TEXTURE_2D, blockTextures.getTextureID());
 	GL30.glGenerateMipmap(GL_TEXTURE_2D);
+	
+
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 4);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
+	GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:SkinTexture")).getTextureID());
+	GL30.glGenerateMipmap(GL_TEXTURE_2D);
+	
+
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 4);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 
 }
 

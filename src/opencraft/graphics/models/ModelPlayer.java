@@ -26,7 +26,7 @@ glEnd();
 glPopMatrix();
 
 glPushMatrix();
-glTranslatef(0.45f, 0.75f, 0);
+glTranslatef(0.35f, 0.75f, 0);
 glRotatef(rightArmYaw, 0, 1, 0);
 glRotatef(rightArmPitch, 1, 0, 0);
 glBegin(GL_QUADS);
@@ -35,7 +35,7 @@ glEnd();
 glPopMatrix();
 
 glPushMatrix();
-glTranslatef(-0.45f, 0.75f, 0);
+glTranslatef(-0.35f, 0.75f, 0);
 glRotatef(leftArmYaw, 0, 1, 0);
 glRotatef(leftArmPitch, 1, 0, 0);
 glBegin(GL_QUADS);
@@ -44,7 +44,7 @@ glEnd();
 glPopMatrix();
 
 glPushMatrix();
-glTranslatef(0.35f/2, 0f, 0);
+glTranslatef(0.25f/2, 0f, 0);
 glRotatef(rightLegYaw, 0, 1, 0);
 glRotatef(rightLegPitch, 1, 0, 0);
 glBegin(GL_QUADS);
@@ -53,7 +53,7 @@ glEnd();
 glPopMatrix();
 
 glPushMatrix();
-glTranslatef(-0.35f/2, 0f, 0);
+glTranslatef(-0.25f/2, 0f, 0);
 glRotatef(leftLegYaw, 0, 1, 0);
 glRotatef(leftLegPitch, 1, 0, 0);
 glBegin(GL_QUADS);
@@ -70,81 +70,82 @@ glPopMatrix();
 public static void drawHead(float x, float y, float z) {
 
 	//font of head
-	glVertex3f(x-0.2f,y-0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y-0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y+0.2f,z+-0.2f);
-	glVertex3f(x+-0.2f,y+0.2f,z+-0.2f);
+	
+	glTexCoord2f(16f/64f,(16f)/64f); glVertex3f(x-0.2f,y-0.2f,z+-0.2f);
+	glTexCoord2f(8f/64f,(16f)/64f);glVertex3f(x+0.2f,y-0.2f,z+-0.2f);
+	glTexCoord2f(8f/64f,(8f)/64f);glVertex3f(x+0.2f,y+0.2f,z+-0.2f);
+	glTexCoord2f(16f/64f,(8f)/64f);glVertex3f(x+-0.2f,y+0.2f,z+-0.2f);
 	
 	//back of head
-	glVertex3f(x+-0.2f,y-0.2f,z+0.2f);
-	glVertex3f(x+0.2f,y-0.2f,z+0.2f);
-	glVertex3f(x+0.2f,y+0.2f,z+0.2f);
-	glVertex3f(x+-0.2f,y+0.2f,z+0.2f);
+	glTexCoord2f(24f/64f,(16f)/64f);glVertex3f(x+-0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(32f/64f,(16f)/64f);glVertex3f(x+0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(32f/64f,(8f)/64f);glVertex3f(x+0.2f,y+0.2f,z+0.2f);
+	glTexCoord2f(24f/64f,(8f)/64f);glVertex3f(x+-0.2f,y+0.2f,z+0.2f);
 	
 	//top of head
-	glVertex3f(x+-0.2f,y-0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y-0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y-0.2f,z+0.2f);
-	glVertex3f(x+-0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(8f/64f,(8f)/64f);glVertex3f(x+-0.2f,y-0.2f,z+-0.2f);
+	glTexCoord2f(16f/64f,(8f)/64f);glVertex3f(x+0.2f,y-0.2f,z+-0.2f);
+	glTexCoord2f(16f/64f,(0f)/64f);glVertex3f(x+0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(8f/64f,(0f)/64f);glVertex3f(x+-0.2f,y-0.2f,z+0.2f);
 	
 	//bottom of head
-	glVertex3f(x+-0.2f,y+0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y+0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y+0.2f,z+0.2f);
-	glVertex3f(x+-0.2f,y+0.2f,z+0.2f);
+	glTexCoord2f(16f/64f,(8f)/64f);glVertex3f(x+-0.2f,y+0.2f,z+-0.2f);
+	glTexCoord2f(23f/64f,(8f)/64f);glVertex3f(x+0.2f,y+0.2f,z+-0.2f);
+	glTexCoord2f(23f/64f,(0f)/64f);glVertex3f(x+0.2f,y+0.2f,z+0.2f);
+	glTexCoord2f(16f/64f,(0f)/64f);glVertex3f(x+-0.2f,y+0.2f,z+0.2f);
 	
 	//right of head
-	glVertex3f(x+0.2f,y-0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y+0.2f,z+-0.2f);
-	glVertex3f(x+0.2f,y+0.2f,z+0.2f);
-	glVertex3f(x+0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(0f/64f,(15f+1f)/64f);glVertex3f(x+0.2f,y-0.2f,z+-0.2f);
+	glTexCoord2f(0f/64f,(15f+1f)/64f);glVertex3f(x+0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(7f/64f,(8f)/64f);glVertex3f(x+0.2f,y+0.2f,z+0.2f);
+	glTexCoord2f(7f/64f,(8f)/64f);glVertex3f(x+0.2f,y+0.2f,z-0.2f);
 	
 	//left of head
-	glVertex3f(x+-0.2f,y-0.2f,z+-0.2f);
-	glVertex3f(x+-0.2f,y+0.2f,z+-0.2f);
-	glVertex3f(x+-0.2f,y+0.2f,z+0.2f);
-	glVertex3f(x+-0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f(16f/64f,(15f+1f)/64f);glVertex3f(x+-0.2f,y-0.2f,z+-0.2f);
+	glTexCoord2f(16f/64f,(15f+1f)/64f);glVertex3f(x+-0.2f,y-0.2f,z+0.2f);
+	glTexCoord2f((21f+1f)/64f,(8f)/64f);glVertex3f(x+-0.2f,y+0.2f,z+0.2f);
+	glTexCoord2f(16f/64f,(8f)/64f);glVertex3f(x+-0.2f,y+0.2f,z-0.2f);
 }
 public static void drawbody(float x, float y, float z) {
 
-	float bodyWidth = 0.7f;
+	float bodyWidth = 0.509f;
 	float bodyHeight = 0.8f;
 	
 	//front of body
-	glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+-0.1f); 
-	glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+-0.1f);
-	glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+-0.1f);
-	glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+-0.1f);
+	glTexCoord2f(20f/64f,(20f)/64f);glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+-0.1f); 
+	glTexCoord2f(28f/64f,(20f)/64f);glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+-0.1f);
+	glTexCoord2f(28f/64f,(32f)/64f);glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+-0.1f);
+	glTexCoord2f(20f/64f,(32f)/64f);glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+-0.1f);
 		
 	//back of body
-	glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
-	glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+0.1f);
-	glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+0.1f);
-	glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+0.1f);
+	glTexCoord2f(39f/64f,(20f)/64f);glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(32f/64f,(20f)/64f);glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+0.1f);
+	glTexCoord2f(32f/64f,(32f)/64f);glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+0.1f);
+	glTexCoord2f(39f/64f,(32f)/64f);glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+0.1f);
 		
 	//top of body
-	glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
-	glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+0.1f);
-	glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z-0.1f);
-	glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z-0.1f);
+	glTexCoord2f(28f/64f,(16f)/64f);glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(20f/64f,(16f)/64f);glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+0.1f);
+	glTexCoord2f(20f/64f,(20f)/64f);glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z-0.1f);
+	glTexCoord2f(28f/64f,(20f)/64f);glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z-0.1f);
 		
 	//bottom of body
-	glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+0.1f); 
-	glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+0.1f);
-	glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z-0.1f);
-	glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z-0.1f);
+	glTexCoord2f(36f/64f,(16f)/64f);glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(28f/64f,(16f)/64f);glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+0.1f);
+	glTexCoord2f(28f/64f,(20f)/64f);glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z-0.1f);
+	glTexCoord2f(36f/64f,(20f)/64f);glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z-0.1f);
 		
 	//right of body 
-	glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
-	glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+0.1f); 
-	glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z-0.1f); 
-	glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z-0.1f); 
+	glTexCoord2f(20f/64f,(20f)/64f);glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(20f/64f,(32f)/64f);glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(16f/64f,(32f)/64f);glVertex3f(x+(bodyWidth/2),y-(bodyHeight/2),z-0.1f); 
+	glTexCoord2f(16f/64f,(20f)/64f);glVertex3f(x+(bodyWidth/2),y+(bodyHeight/2),z-0.1f); 
 		
 	//left of body 
-	glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
-	glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+0.1f); 
-	glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z-0.1f); 
-	glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z-0.1f);
+	glTexCoord2f(32f/64f,(20f)/64f);glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(32f/64f,(32f)/64f);glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z+0.1f); 
+	glTexCoord2f(28f/64f,(32f)/64f);glVertex3f(x-(bodyWidth/2),y-(bodyHeight/2),z-0.1f); 
+	glTexCoord2f(28f/64f,(20f)/64f);glVertex3f(x-(bodyWidth/2),y+(bodyHeight/2),z-0.1f);
 }
 public static void drawArm(float x,float y,float z) {
 	float armLength = 0.8f;

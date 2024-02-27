@@ -10,6 +10,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
+import org.urish.openal.ALException;
 
 import opencraft.audio.AudioUtills;
 import opencraft.graphics.DisplayUtills;
@@ -536,7 +537,12 @@ public static void leftHandAction() {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	AudioUtills.playSound("BlockBreak", (int)b.getGlobalX(),(int)b.getY(), (int)b.getGlobalZ());
+	try {
+		AudioUtills.playSound("BlockBreak", (int)b.getGlobalX(),(int)b.getY(), (int)b.getGlobalZ());
+	} catch (ALException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
 }
 	}
