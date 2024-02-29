@@ -47,7 +47,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 8;
+	public static int renderDistance = 16;
 	public static ArrayList<Vector2i> chunksToSetup = new ArrayList<>();
 	public static  int setupIndex= 0;
 	public static boolean rendering = false;

@@ -460,15 +460,16 @@ if(b != null) {
 ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
 }
 if(Mouse.isButtonDown(0)) {
-	if(!LbuttonDownLast) {
+	//if(!LbuttonDownLast) {
 	if(Player.hotbar[Player.hotBarIndex] != null) {
 	Player.hotbar[Player.hotBarIndex].leftClickAction();
 	}else {
 		Player.leftHandAction();
 		}
-	}
+	//}
 	LbuttonDownLast = true;
 }else {
+	Player.miningProgress = 0;
 	LbuttonDownLast = false;
 }
 GL11.glEnd();

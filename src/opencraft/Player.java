@@ -38,6 +38,7 @@ public class Player {
 	public static float x =0;
 	public static float y = 400;
 	public static float z = 0;
+	public static float miningProgress = 0;
 	public static float health = 10f;
 	public static float maxHealth = 10f;
 	public static float velocityX = 0;
@@ -444,6 +445,9 @@ public class Player {
 				playHandSwingAnimation = false;
 			}
 		}
+		GL11.glColor3f(0,1f,0);
+		DisplayUtills.drawSqaureFromLeft(-0.5f+((float)miningProgress),0.01f,-0.00055f, -0.00732f,-0.02f);
+		GL11.glColor3f(1f, 1f, 1f);
 		float x = -0.005f;
 	int scroll = Mouse.getDWheel();
 	if(scroll > 0 && currentGameScreen == null) {
@@ -531,10 +535,14 @@ public class Player {
 	}
 	}
 public static void leftHandAction() {
-	if(!Player.playHandSwingAnimation && currentGameScreen == null) {
+	if(currentGameScreen == null) {
 		Player.playHandSwingAnimation = true;
 	Block b = physicsUtils.getBlockLookingAt();
+	
 	if(b != null) {
+		miningProgress += 0.001f * DisplayVariables.deltaTime;
+		if(miningProgress >= 1f) {
+		miningProgress = 0;
 	World.items.add(b.getDrop());
 	try {
 		
@@ -550,6 +558,7 @@ public static void leftHandAction() {
 	} catch (ALException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	}
 	}
 	
 }
