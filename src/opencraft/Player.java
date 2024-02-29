@@ -36,10 +36,10 @@ public class Player {
 	public static float handXrotation = 0;
 	private static float handXrotationChnage = 0.30f;
 	public static float x =0;
-	public static float y = 200;
+	public static float y = 400;
 	public static float z = 0;
-	public static float health = 10;
-	public static float maxHealth = 10;
+	public static float health = 10f;
+	public static float maxHealth = 10f;
 	public static float velocityX = 0;
 	public static float velocityZ = 0;
 	public static float velocityY = 0;
@@ -162,7 +162,7 @@ public class Player {
 				leftVelocity = 0;
 			}
 		}
-		if(!grounded && velocityY > -0.2f && ( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())) {
+		if(!grounded && ( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())) {
 			velocityY -= 0.00003f*DisplayVariables.deltaTime;
 			//SpeedMultiplyer =0.5f;
 		}else if(( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())){
@@ -195,7 +195,9 @@ public class Player {
 		*/
 		float lastX =x;
 		float lastZ =z;
-		if(DisplayVariables.fps > 5) {
+		int chunkX = physicsUtils.convertFloatCoordToBlockCoord(x) >> 4;
+		int chunkZ = physicsUtils.convertFloatCoordToBlockCoord(z) >> 4;
+		if(DisplayVariables.fps > 5 && World.getChunk(chunkX, chunkZ) != null && World.getChunk(chunkX, chunkZ).fullyLoaded ) {
 		x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		z-=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		
@@ -327,7 +329,7 @@ public class Player {
 				if(y == downblock.getY() +3) {
 					
 					if(lvy < -0.02f) {
-				    	 health += 125F * lvy;
+				    	 health -= 4*Math.pow(17f * lvy,2);
 				     }
 					grounded = true;
 					
@@ -384,9 +386,9 @@ public class Player {
 		}
 	}
 	public static void drawPlayerHUD() {
-		
-		if(World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid()){
 		glDepthMask(false);
+		if(World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y), physicsUtils.convertFloatCoordToBlockCoord(z))!=null && World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid()){
+		
 		DisplayUtills.shader.bind();
 		GL11.glColor4f(1f, 1f, 1f, 0.5f);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -401,6 +403,9 @@ public class Player {
 			ekeyHeld = false;
 		}
 		if(view == 0) {
+			glDepthMask(true);
+		DisplayUtills.shader.bind();
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:SkinTexture")).getTextureID());
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.4f, -0.3f, -0.5f);
 		GL11.glRotatef(180.0f+handXrotation , 0, 1, 0);
@@ -409,6 +414,9 @@ public class Player {
 		ModelPlayer.drawArm(0, 0, 0);
 		GL11.glEnd();
 		GL11.glPopMatrix();
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D,0);
+		DisplayUtills.shader.unbind();
+		glDepthMask(false);
 		}
 		if(playWalkngAnimation) {
 			legRotation += legRotationChnage*DisplayVariables.deltaTime;

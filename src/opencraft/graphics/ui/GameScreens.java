@@ -29,8 +29,9 @@ public class GameScreens {
 					GL11.glColor3f(1, 1, 1);
 					if(y == 0) {
 						if(Player.hotbar[x] != null) {
+							DisplayUtills.shader.bind();
 							Player.hotbar[x].drawIcon(0.005f * -1f+(x*((0.005f * 1f *2)/9)), 0.005f * -0.8f + (y*0.005f *0.2f),-0.02f,0.0004f);
-				
+							DisplayUtills.shader.unbind();
 							GL11.glColor3f(0, 0, 0);
 							((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(String.valueOf(Player.hotbar[x].stack), (0.005f * -1f+(x*((0.005f * 1f *2)/9)))-0.0004f,(0.005f * -0.8f + (y*0.005f *0.2f))+0.0001f,0.0000075f );
 							GL11.glColor3f(1, 1, 1);
@@ -79,8 +80,9 @@ public class GameScreens {
 						}
 					}else {
 						if(Player.Inventory[x][y-1] != null) {
+							DisplayUtills.shader.bind();
 							Player.Inventory[x][y-1].drawIcon(0.005f * -1f+(x*((0.005f * 1f *2)/9)), 0.005f * -0.8f + (y*0.005f *0.2f),-0.02f,0.0004f);
-				
+							DisplayUtills.shader.unbind();
 							GL11.glColor3f(0, 0, 0);
 							((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(String.valueOf(Player.Inventory[x][y-1].stack), (0.005f * -1f+(x*((0.005f * 1f *2)/9)))-0.0004f,(0.005f * -0.8f + (y*0.005f *0.2f))+0.0001f,0.0000075f );
 							GL11.glColor3f(1, 1, 1);
@@ -133,7 +135,9 @@ public class GameScreens {
 				}
 			}
 			if(mouseItem != null) {
+			DisplayUtills.shader.bind();
 			mouseItem.drawIcon(Cursor.x, Cursor.y, -0.02f,0.0004f);
+			DisplayUtills.shader.unbind();
 			GL11.glColor3f(0, 0, 0);
 			((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(String.valueOf(mouseItem.stack), Cursor.x-0.0004f,Cursor.y+0.0001f,0.0000075f );
 			GL11.glColor3f(1, 1, 1);

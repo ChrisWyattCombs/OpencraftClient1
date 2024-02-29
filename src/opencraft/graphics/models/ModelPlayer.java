@@ -18,6 +18,7 @@ drawHead(0,0,0);
 glEnd();
 glPopMatrix();
 }
+
 glPushMatrix();
 glTranslatef(0, 0.4f, 0);
 glBegin(GL_QUADS);
@@ -150,15 +151,15 @@ public static void drawbody(float x, float y, float z) {
 public static void drawArm(float x,float y,float z) {
 	float armLength = 0.8f;
 	//front of arm
-	glVertex3f(x+0.1f,y,z+0.1f);
-	glVertex3f(x-0.1f,y,z+0.1f);
-	glVertex3f(x-0.1f,y-armLength,z+0.1f);
-	glVertex3f(x+0.1f,y-armLength,z+0.1f);
+	glTexCoord2f(44f/64f,(32f)/64f);glVertex3f(x+0.1f,y,z+0.1f);
+	glTexCoord2f(44f/64f,(20f)/64f);glVertex3f(x-0.1f,y,z+0.1f);
+	glTexCoord2f(48f/64f,(20f)/64f);glVertex3f(x-0.1f,y-armLength,z+0.1f);
+	glTexCoord2f(48f/64f,(32f)/64f);glVertex3f(x+0.1f,y-armLength,z+0.1f);
 	//back of arm
-	glVertex3f(x+0.1f,y,z+0.1f);
-	glVertex3f(x-0.1f,y,z+0.1f);
-	glVertex3f(x-0.1f,y-armLength,z+0.1f);
-	glVertex3f(x+0.1f,y-armLength,z+0.1f);
+	glTexCoord2f(52f/64f,(32f)/64f);glVertex3f(x+0.1f,y,z-0.1f);
+	glTexCoord2f(52f/64f,(20f)/64f);glVertex3f(x-0.1f,y,z-0.1f);
+	glTexCoord2f(55f/64f,(20f)/64f);glVertex3f(x-0.1f,y-armLength,z-0.1f);
+	glTexCoord2f(55f/64f,(32f)/64f);glVertex3f(x+0.1f,y-armLength,z-0.1f);
 	
 	//top of arm
 	glVertex3f(x+0.1f,y,z+0.1f);
@@ -173,16 +174,16 @@ public static void drawArm(float x,float y,float z) {
 	glVertex3f(x+0.1f,y-armLength,z-0.1f);
 	
 	//right of arm
-	glVertex3f(x+0.1f,y,z+0.1f);
-	glVertex3f(x+0.1f,y-armLength,z+0.1f);
-	glVertex3f(x+0.1f,y-armLength,z-0.1f);
-	glVertex3f(x+0.1f,y,z-0.1f);
+	glTexCoord2f(40f/64f,(32f)/64f);glVertex3f(x+0.1f,y,z+0.1f);
+	glTexCoord2f(40f/64f,(32f)/64f);glVertex3f(x+0.1f,y-armLength,z+0.1f);
+	glTexCoord2f(44f/64f,(20f)/64f);glVertex3f(x+0.1f,y-armLength,z-0.1f);
+	glTexCoord2f(44f/64f,(20f)/64f);glVertex3f(x+0.1f,y,z-0.1f);
 	
 	//left of arm
-	glVertex3f(x-0.1f,y,z+0.1f);
-	glVertex3f(x-0.1f,y-armLength,z+0.1f);
-	glVertex3f(x-0.1f,y-armLength,z-0.1f);
-	glVertex3f(x-0.1f,y,z-0.1f);
+	glTexCoord2f(48f/64f,(32f)/64f);glVertex3f(x-0.1f,y,z+0.1f);
+	glTexCoord2f(52f/64f,(32f)/64f);glVertex3f(x-0.1f,y-armLength,z+0.1f);
+	glTexCoord2f(52f/64f,(20f)/64f);glVertex3f(x-0.1f,y-armLength,z-0.1f);
+	glTexCoord2f(48f/64f,(20f)/64f);glVertex3f(x-0.1f,y,z-0.1f);
 	
 }
 public static void drawLeg(float x,float y,float z) {

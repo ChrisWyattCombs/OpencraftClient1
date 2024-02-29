@@ -371,6 +371,7 @@ public class World {
 		}
 		}
 		ArrayList<Vector2i>  chunks = new ArrayList<>();
+		 addChunkToSetup(new Vector2i(chunkX,chunkZ));
 		for(int ox = chunkX-2; ox < chunkX+2;ox++) {
 			for(int oz = chunkZ-2; oz < chunkZ+2;oz++) {
 				regionX = ox >> 4;
@@ -464,6 +465,7 @@ public class World {
 		
 		addingChunks = true;
 		ArrayList<Vector2i>  chunks = new ArrayList<>();
+		addChunkToSetup(new Vector2i(chunkX,chunkZ));
 		for(int ox = chunkX-2; ox < chunkX+2;ox++) {
 			for(int oz = chunkZ-2; oz < chunkZ+2;oz++) {
 				regionX = ox >> 4;

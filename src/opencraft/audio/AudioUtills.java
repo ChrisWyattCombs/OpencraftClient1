@@ -60,7 +60,7 @@ AudioVaribles.soundSystem.setListenerAngle(Player.yaw);
 	AudioVaribles.soundSystem.setListenerPosition(Player.x, Player.y, Player.z);
 	AudioVaribles.soundSystem.setListenerVelocity(Player.velocityX, Player.velocityY, Player.velocityZ);
 	AudioVaribles.soundSystem.setPosition(sourceName, x, y, z);
-	AudioVaribles.soundSystem.quickPlay(false, "/stone1.ogg", false, x, y, z, 0, z);
+	AudioVaribles.soundSystem.quickPlay(false, "/stone1.ogg", false, x, y, z, 1, 1f);
 
 //	source.setPosition(x-Player.x, y-Player.y, z-Player.z);
 //	AudioVaribles.soundSystem.setVolume(sourceName,1 );

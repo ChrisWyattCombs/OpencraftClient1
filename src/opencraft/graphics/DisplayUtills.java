@@ -188,14 +188,15 @@ GL11.glEnable(GL11.GL_BLEND);
 			}
 			
 			while(true) {
-				ArrayList<Vector2i> chunks = World.getChunksToSetup();
+				ArrayList<Vector2i> chunks = (ArrayList<Vector2i>) World.getChunksToSetup().clone();
 			if(chunks.size() >0) {
 				
 				
-				Vector2i chunkPosition = chunks.get(0);
-				
+				for(Vector2i chunkPosition : chunks){
+					
 				World.setupChunk(chunkPosition.getX(), chunkPosition.getY());
 			World.removeChunkToSetup(chunkPosition);
+				}
 			}
 				
 			

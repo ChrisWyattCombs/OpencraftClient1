@@ -363,6 +363,7 @@ public static Screen loadingWorld = new Screen() {
 	
 };
 public static Screen inGame = new Screen() {
+	
 	boolean RbuttonDownLast = false;
 	boolean LbuttonDownLast = false;
 	@Override
