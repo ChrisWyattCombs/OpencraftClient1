@@ -19,6 +19,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 import opencraft.blocks.BlockWater;
+import opencraft.entities.EntityZombie;
 import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
@@ -33,6 +34,15 @@ public class World {
 		Item grass =new ItemGrass();
 		grass.y = 200;
 		items.add(grass);
+		
+	}
+	public static ArrayList<Entity> entities = new ArrayList<>();
+	
+	static {
+		
+		for(int i = 0; i<1;i++) {
+		entities.add(new EntityZombie(0, 200, 0));
+		}
 		
 	}
 	
@@ -755,6 +765,14 @@ public class World {
 				chunksToSetup.remove(i);
 				break;
 			}
+		}
+	}
+	public static void drawAndUpdateEntities() {
+		for(int i = 0; i < entities.size();i++){
+			Entity entity  = entities.get(i);
+			
+			entity.update();
+			entity.draw();
 		}
 	}
 	

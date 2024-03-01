@@ -1,6 +1,7 @@
 package opencraft.physics;
 
 import opencraft.Block;
+import opencraft.Entity;
 import opencraft.Player;
 import opencraft.World;
 import opencraft.graphics.DisplayVariables;
@@ -130,5 +131,29 @@ public static Vector3f getBlockPlacePos() {
 			float nx = (float) (Math.sin(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
 					float ny = (float) Math.sin(Math.toRadians(Player.pitch));
 	return getLastPosBeforeNextBlockInDirection(Player.x,Player.y,Player.z,nx,ny,nz,10,0.001f);
+}
+public static int getEnitityHiting(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,float range,float step) {
+	float x = startX;
+	float y =  startY;
+	float z = startZ;
+	////System.out.println(x+" "+y+" "+z);
+	Block b = null;
+	int count = 0;
+	while( count < range/step ) {
+		x+=directionX*step;
+		y+=directionY*step;
+		z+=-directionZ*step;
+				////System.out.println(x+" "+y+" "+z);
+		for(int i = 0; i < World.entities.size(); i++) {
+			Entity entity = World.entities.get(i);
+			if(entity.pointInHitRadius(x, y, z)) {
+				return i;
+			}
+		}
+		
+		count++;
+	}
+	return -1;
+	
 }
 }

@@ -364,8 +364,7 @@ public static Screen loadingWorld = new Screen() {
 };
 public static Screen inGame = new Screen() {
 	
-	boolean RbuttonDownLast = false;
-	boolean LbuttonDownLast = false;
+	
 	@Override
 	public void drawScreen() {
 	
@@ -386,6 +385,17 @@ GL30.glUniform1ui(DisplayUtills.worldShader.uniforms.get("tex"),((Texture) Resou
 GL20.glUniform3f(DisplayUtills.worldShader.uniforms.get("viewPos"),DisplayVariables.camX,-	DisplayVariables.camY,-DisplayVariables.camZ);
 //GL13.glActiveTexture(GL13.GL_TEXTURE2);
 ////System.out.println("TID: "+World.blockTextures.getTextureID());
+DisplayUtills.shader.bind();
+World.drawAndUpdateItems();
+
+GL11.glColor4f(1,1,1,1);
+//GL11.glDisable(GL11.GL_BLEND);
+if(Player.view != 0) {
+	GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:SkinTexture")).getTextureID());
+ModelPlayer.drawModel(Player.x, Player.y-1, Player.z,-Player.yaw,0,0,Player.pitch,Player.handXrotation,25,0,25,0,Player.legRotation,0,-Player.legRotation,true,Player.hotbar[Player.hotBarIndex],false);
+}
+World.drawAndUpdateEntities();
+DisplayUtills.shader.unbind();
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:BlockTextures")).getTextureID());
 
 float position[] = { -1, 100.0f, -1, 0.0f };
@@ -426,16 +436,7 @@ Vector3f b = physicsUtils.getBlockPlacePos();
 GL11.glDisable(GL11.GL_LIGHTING);
 GL11.glEnable(GL11.GL_FOG);
 //DisplayUtills.worldShader.unbind();
-DisplayUtills.shader.bind();
-World.drawAndUpdateItems();
 
-GL11.glColor4f(1,1,1,1);
-//GL11.glDisable(GL11.GL_BLEND);
-if(Player.view != 0) {
-	GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Texture) ResourceManager.getObjectForResource("Opencraft:SkinTexture")).getTextureID());
-ModelPlayer.drawModel(Player.x, Player.y-1, Player.z,-Player.yaw,0,0,Player.pitch,Player.handXrotation,25,0,25,0,Player.legRotation,0,-Player.legRotation,true);
-}
-DisplayUtills.shader.unbind();
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 GL11.glBegin(GL11.GL_QUADS);
@@ -444,17 +445,18 @@ if(b != null) {
 	
 ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
 }
+
 if(Mouse.isButtonDown(1)) {
-	if(!RbuttonDownLast) {
+	if(!Player.RbuttonDownLast) {
 	if(Player.hotbar[Player.hotBarIndex] != null) {
 	Player.hotbar[Player.hotBarIndex].rightClickAction();
 	}else {
 		Player.rightHandAction();
 		}
 	}
-	RbuttonDownLast = true;
+	Player.RbuttonDownLast = true;
 }else {
-	RbuttonDownLast = false;
+	Player.RbuttonDownLast = false;
 }
 if(b != null) {
 ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
@@ -464,13 +466,13 @@ if(Mouse.isButtonDown(0)) {
 	if(Player.hotbar[Player.hotBarIndex] != null) {
 	Player.hotbar[Player.hotBarIndex].leftClickAction();
 	}else {
-		Player.leftHandAction();
+		Player.leftClickAction();
 		}
 	//}
-	LbuttonDownLast = true;
+	
 }else {
 	Player.miningProgress = 0;
-	LbuttonDownLast = false;
+	Player.LbuttonDownLast = false;
 }
 GL11.glEnd();
 //GL11.glEnable(GL11.GL_BLEND);

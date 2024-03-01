@@ -16,7 +16,9 @@ public abstract class Item {
 	
 	public abstract void rightClickAction();
 	
-	public abstract void leftClickAction();
+	public void leftClickAction() {
+		Player.leftClickAction();
+	}
 	
 	public abstract int getMaxStack();
 	

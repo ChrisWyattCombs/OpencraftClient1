@@ -19,14 +19,14 @@ public class ItemStone extends Item{
 	@Override
 	public void drawIcon(float x, float y, float z,float size) {
 		// TODO Auto-generated method stub
-		glPushMatrix();
+		
 		//glScalef(0.4f, 0.5f, 0.5f);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D,((Texture) ResourceManager.getObjectForResource("Opencraft:BlockTextures")).getTextureID());
 		glBegin(GL_QUADS);
 		ModelCube.drawModel(x, y, z,new float[] {0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0,0.3f,0},1f,1f,1f,1f,1f,1f,1f,size);
 		glEnd();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-		glPopMatrix();
+		
 	}
 
 	@Override
@@ -45,12 +45,7 @@ public class ItemStone extends Item{
 		
 	}
 	}
-	@Override
-	public void leftClickAction() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public int getMaxStack() {
 		// TODO Auto-generated method stub

@@ -38,6 +38,8 @@ public class Player {
 	public static float x =0;
 	public static float y = 400;
 	public static float z = 0;
+	public static boolean RbuttonDownLast = false;
+	public static boolean LbuttonDownLast = false;
 	public static float miningProgress = 0;
 	public static float health = 10f;
 	public static float maxHealth = 10f;
@@ -63,6 +65,7 @@ public class Player {
 	public static ItemGrass test = new ItemGrass();
 	public static boolean ekeyHeld = false;
 	public static void updatePostitionAndRotation() {
+	
 		if(currentGameScreen == null) {
 		yaw+= Mouse.getDX()/4f;
 		pitch += Mouse.getDY()/4f;
@@ -410,9 +413,10 @@ public class Player {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.4f, -0.3f, -0.5f);
 		GL11.glRotatef(180.0f+handXrotation , 0, 1, 0);
-		GL11.glRotatef(-90, 1, 0, 0);
+		GL11.glRotatef(90, 1, 0, 0);
+		GL11.glRotatef(180, 0, 0, 1);
 		GL11.glBegin(GL11.GL_QUADS);
-		ModelPlayer.drawArm(0, 0, 0);
+		ModelPlayer.drawArm(0, 0, 0,hotbar[hotBarIndex]);
 		GL11.glEnd();
 		GL11.glPopMatrix();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D,0);
@@ -493,7 +497,7 @@ public class Player {
 			if(hotbar[i] != null) {
 				glDepthMask(true);
 				DisplayUtills.shader.bind();
-			hotbar[i].drawIcon(0.35f, -0.13f, -1f,0.1f);
+			
 			DisplayUtills.shader.unbind();
 			glDepthMask(false);
 			}
@@ -534,12 +538,16 @@ public class Player {
 		Screens.currentScreen = Screens.Died;
 	}
 	}
-public static void leftHandAction() {
+public static void leftClickAction() {
 	if(currentGameScreen == null) {
+		if(!Player.LbuttonDownLast) {
 		Player.playHandSwingAnimation = true;
 	Block b = physicsUtils.getBlockLookingAt();
-	
-	if(b != null) {
+	float nz = (float) (Math.cos(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
+	float nx = (float) (Math.sin(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
+			float ny = (float) Math.sin(Math.toRadians(Player.pitch));
+	int indexOfEntity = physicsUtils.getEnitityHiting(x, y, z, nx, ny, nz, 2f, 0.1f);
+	if(b != null && indexOfEntity ==-1) {
 		miningProgress += 0.001f * DisplayVariables.deltaTime;
 		if(miningProgress >= 1f) {
 		miningProgress = 0;
@@ -561,7 +569,14 @@ public static void leftHandAction() {
 	}
 	}
 	
+}else {
+	
+	if(indexOfEntity != -1) {
+	World.entities.get(indexOfEntity).dealDamage(2);
+	}
+	Player.LbuttonDownLast = true;
 }
+		}
 	}
 
 
