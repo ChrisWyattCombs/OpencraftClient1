@@ -198,6 +198,7 @@ public class Player {
 		}
 		*/
 		float lastX =x;
+		float lastY = y;
 		float lastZ =z;
 		int chunkX = physicsUtils.convertFloatCoordToBlockCoord(x) >> 4;
 		int chunkZ = physicsUtils.convertFloatCoordToBlockCoord(z) >> 4;
@@ -211,17 +212,18 @@ public class Player {
 		
 		
 		//Block block2 = physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1, 2, 0.001f);
-		Block block1 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z, 0, -1, 0, 2, 0.1f);
-		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.25f, 0, -1, 0, 2, 0.1f);
-		Block block3 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z, 0, -1, 0, 2, 0.1f);
-		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.25f, 0, -1, 0, 2, 0.1f);
-		Block block5 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z+0.25f, 0, -1, 0, 2, 0.1f);
-		Block block6 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z+0.25f, 0, -1, 0, 2, 0.1f);
-		Block block7 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
-		Block block8 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+		Block block1 = physicsUtils.getNextBlockInDirection(x+0.5f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.5f, 0, -1, 0, 2, 0.1f);
+		Block block3 = physicsUtils.getNextBlockInDirection(x-0.5f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.5f, 0, -1, 0, 2, 0.1f);
+		Block block5 = physicsUtils.getNextBlockInDirection(x+0.5f, y, z+0.5f, 0, -1, 0, 2, 0.1f);
+		Block block6 = physicsUtils.getNextBlockInDirection(x-0.5f, y, z+0.5f, 0, -1, 0, 2, 0.1f);
+		Block block7 = physicsUtils.getNextBlockInDirection(x-0.5f, y, z-0.5f, 0, -1, 0, 2, 0.1f);
+		Block block8 = physicsUtils.getNextBlockInDirection(x+0.5f, y, z-0.5f, 0, -1, 0, 2, 0.1f);
 			
 			if(block1  != null) {	
 				if(y < block1.getY() +2.5) {
+				
 					x = lastX;
 					z = lastZ;
 					float temp = forwardVelocity;
@@ -296,6 +298,7 @@ public class Player {
 				if(y < block7.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+
 					float temp = forwardVelocity;
 					forwardVelocity = backwardVelocity;
 					backwardVelocity = temp;
@@ -308,6 +311,7 @@ public class Player {
 				if(y < block8.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
+					
 					float temp = forwardVelocity;
 					forwardVelocity = backwardVelocity;
 					backwardVelocity = temp;
@@ -546,7 +550,7 @@ public static void leftClickAction() {
 	float nz = (float) (Math.cos(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
 	float nx = (float) (Math.sin(Math.toRadians(Player.yaw))*Math.cos(Math.toRadians(Player.pitch)));
 			float ny = (float) Math.sin(Math.toRadians(Player.pitch));
-	int indexOfEntity = physicsUtils.getEnitityHiting(x, y, z, nx, ny, nz, 2f, 0.1f);
+	int indexOfEntity = physicsUtils.getEnitityHiting(x, y, z, nx, ny, nz, 3f, 0.1f);
 	if(b != null && indexOfEntity ==-1) {
 		miningProgress += 0.001f * DisplayVariables.deltaTime;
 		if(miningProgress >= 1f) {

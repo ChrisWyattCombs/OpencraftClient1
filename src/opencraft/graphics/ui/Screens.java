@@ -127,7 +127,15 @@ public static Screen worlds = new Screen() {
 						public void run() {
 							World.worldName = getText();
 							World.worldLoadProgress = 0;
-							World.loadWorld(context);
+							World.doneLoading = false;
+							try {
+								World.loadWorld(context);
+							} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+									| InvocationTargetException | SecurityException | ClassNotFoundException
+									| IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							
 							
 						}
@@ -192,8 +200,21 @@ public static Screen createWorld = new Screen() {
 				public void run() {
 					
 					World.worldName = worldName.text;
+					if(!worldSeed.text.equals("")) {
+					NormalWorldGenerator.seed = Integer.parseInt(worldSeed.text);
+					NormalWorldGenerator.randomSeed = false;
+					}else {
+						NormalWorldGenerator.randomSeed = true;
+					}
 					World.worldLoadProgress = 0;
-					World.loadWorld(context);
+					World.doneLoading = false;
+					try {
+						World.loadWorld(context);
+					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+							| InvocationTargetException | SecurityException | ClassNotFoundException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 			}.start();

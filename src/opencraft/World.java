@@ -1,6 +1,13 @@
 package opencraft;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.FloatBuffer;
@@ -28,6 +35,7 @@ import opencraft.physics.physicsUtils;
 
 
 public class World {
+	public static String[] itemTypes = {"empty","opencraft.items.ItemGrass","opencraft.items.ItemDirt","opencraft.items.ItemStone","opencraft.items.ItemWood","opencraft.items.ItemSand"};
 	//public static int[] chunkDrawIDs = new int[257];
 	public static ArrayList<Item> items = new ArrayList<>();
 	static {
@@ -39,10 +47,9 @@ public class World {
 	public static ArrayList<Entity> entities = new ArrayList<>();
 	
 	static {
-		
-		for(int i = 0; i<1;i++) {
+	
 		entities.add(new EntityZombie(0, 200, 0));
-		}
+		
 		
 	}
 	
@@ -57,7 +64,7 @@ public class World {
 	public static float x = Player.x;
 	public static float z = Player.z;
 	public static String worldName = "";
-	public static int renderDistance = 16;
+	public static int renderDistance = 8;
 	public static ArrayList<Vector2i> chunksToSetup = new ArrayList<>();
 	public static  int setupIndex= 0;
 	public static boolean rendering = false;
@@ -66,7 +73,7 @@ public class World {
 	public static long checkFluidTime = 0;
 	public static boolean doneLoading = false;
 	public static ArrayList<Vector3f> uncheckedFluids = new ArrayList<>();
-	public static void loadWorld(Drawable context) {
+	public static void loadWorld(Drawable context) throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
 		try {
 			
 			
@@ -76,20 +83,97 @@ public class World {
 			e1.printStackTrace();
 			System.exit(0);
 		}
-		int chunkX =(int)x >> 4;
-		int chunkZ =(int)z >> 4;
+		File dataFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\level.opecraftData");
+		if(dataFile.exists()) {
+		DataInputStream dataReader = new DataInputStream(new BufferedInputStream(new FileInputStream(dataFile)));
+		Player.x = dataReader.readFloat();
+		Player.y = dataReader.readFloat();
+		Player.z = dataReader.readFloat();
+		Player.yaw = dataReader.readFloat();
+		Player.pitch = dataReader.readFloat();
+		Player.forwardVelocity = dataReader.readFloat();
+		Player.backwardVelocity = dataReader.readFloat();
+		Player.rightVelocity = dataReader.readFloat();
+		Player.leftVelocity = dataReader.readFloat();
+		Player.velocityY = dataReader.readFloat();
+		Player.health = dataReader.readFloat();
+		
+		for(int x = 0; x < 9; x++) {
+			int itemID = dataReader.readInt();
+			if(itemID != 0) {
+			Player.hotbar[x]=(Item) Class.forName(itemTypes[itemID]).getConstructors()[0]
+					.newInstance();
+			Player.hotbar[x].stack = dataReader.readInt();
+			}else {
+				Player.hotbar[x] = null;
+			}
+		}
+		for(int x = 0; x < 9; x++) {
+			for(int y = 0; y < 3; y++) {
+				int itemID = dataReader.readInt();
+				if(itemID != 0) {
+				Player.Inventory[x][y]=(Item) Class.forName(itemTypes[itemID]).getConstructors()[0]
+						.newInstance();
+				Player.Inventory[x][y].stack = dataReader.readInt();
+				}else {
+					Player.Inventory[x][y] =null;
+				}
+		}
+		}
+		
+		NormalWorldGenerator.seed = dataReader.readInt();
+		dataReader.close();
+		}else {
+			if(NormalWorldGenerator.randomSeed) {
+			NormalWorldGenerator.seed = (int)(Math.random()*(1000000-(-1000000)+1)-1000000);
+			}
+		}
+		NormalWorldGenerator.g = new Gen(NormalWorldGenerator.seed);
+		NormalWorldGenerator.MoutainGen = new Gen(NormalWorldGenerator.seed);
+		
+		NormalWorldGenerator.MoutainGen.OCTAVES=7;
+		NormalWorldGenerator.MoutainGen.AMPLITUDE=400;
+		NormalWorldGenerator.MoutainGen.ROUGHNESS = 0.2f;
+		
+		
+		NormalWorldGenerator.WaterGen = new Gen(NormalWorldGenerator.seed);
+		
+		NormalWorldGenerator.WaterGen.OCTAVES=7;
+		NormalWorldGenerator.WaterGen.AMPLITUDE=400;
+		NormalWorldGenerator.WaterGen.ROUGHNESS = 0.3f;
+		
+		NormalWorldGenerator.BiomeGen = new Gen(NormalWorldGenerator.seed);
+		
+		NormalWorldGenerator.BiomeGen .OCTAVES=9;
+		NormalWorldGenerator.BiomeGen.AMPLITUDE=150;
+		NormalWorldGenerator.BiomeGen.ROUGHNESS = 0.3f;
+		
+		NormalWorldGenerator.caveGen1 = new Gen(NormalWorldGenerator.seed);
+		
+		NormalWorldGenerator.caveGen1.OCTAVES=7;
+		NormalWorldGenerator.caveGen1.AMPLITUDE=400;
+		NormalWorldGenerator.caveGen1.ROUGHNESS = 0.3f;
+		
+		NormalWorldGenerator.caveGen2 = new Gen(NormalWorldGenerator.seed);
+		
+		NormalWorldGenerator.caveGen2.OCTAVES=7;
+		NormalWorldGenerator.caveGen2.AMPLITUDE=300;
+		NormalWorldGenerator.caveGen2.ROUGHNESS = 0.3f;
+		
+		int chunkX =(int)Player.x >> 4;
+		int chunkZ =(int)Player.z >> 4;
 		for(int x = -renderDistance; x <  renderDistance; x++) {
 			for(int z =-renderDistance; z < renderDistance ; z++) {
 				try {
 				
-				loadChunk(x,z);
+				loadChunk(x+chunkX,z+chunkZ);
 				
 				}catch (Exception e) {
 					e.printStackTrace();
 					System.exit(0);
 				}
 				
-				worldLoadProgress = (float)((x-chunkX)+renderDistance)/(renderDistance *2) + (float)((z-chunkZ)+renderDistance)/((renderDistance *2)*(renderDistance *2));
+				worldLoadProgress = (float)((x)+renderDistance)/(renderDistance *2) + (float)((z)+renderDistance)/((renderDistance *2)*(renderDistance *2));
 			}
 		}
 		setupWorld();
@@ -590,6 +674,46 @@ public class World {
 		}		
 	}
 	public static void saveAndUnloadAllLoadedChunks() throws IOException {
+		File dataFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\level.opecraftData");
+		dataFile.createNewFile();
+		  FileOutputStream fos = new FileOutputStream(dataFile);
+		  BufferedOutputStream bos=new BufferedOutputStream(fos);
+		  DataOutputStream dos=new DataOutputStream(bos); 
+		  dos.writeFloat(Player.x);
+		  dos.writeFloat(Player.y);
+		  dos.writeFloat(Player.z);
+		  dos.writeFloat(Player.yaw);
+		  dos.writeFloat(Player.pitch);
+		  dos.writeFloat(Player.forwardVelocity);
+		  dos.writeFloat(Player.backwardVelocity);
+		  dos.writeFloat(Player.rightVelocity);
+		  dos.writeFloat(Player.leftVelocity);
+		  dos.writeFloat(Player.velocityY);
+		  dos.writeFloat(Player.health);
+		  for(Item item : Player.hotbar) {
+			  if(item != null) {
+			  dos.writeInt(item.getID());
+			  dos.writeInt(item.stack);
+			  }else {
+				  dos.writeInt(0);
+			  }
+			 
+			  
+		  }
+		  for(int x = 0; x < 9; x++) {
+			  for(int y = 0; y < 3; y++) {
+				  if(Player.Inventory[x][y] != null) {
+				  dos.writeInt(Player.Inventory[x][y].getID());
+				  dos.writeInt(Player.Inventory[x][y].stack);
+				  }else {
+					  dos.writeInt(0);
+				  }
+			  }
+			  
+		  }
+		  dos.writeInt(NormalWorldGenerator.seed);
+		  dos.close();
+		  
 		for(int i = 0; i <World.realRegionListLength; i++) {
 			for(int cx = 0; cx<16; cx++) {
 				for(int cz = 0; cz<16; cz++) {

@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class DisplayUtills {
+
 private static int[] skyboxTextures = new int[6];
 
 

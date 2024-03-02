@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -169,6 +170,16 @@ if (!chunkFile.exists()) {
 				lastBlockType = blocks[x][0][z].getID();
 			}  
 			int blockType = 0;
+			if(blocks[x][0][z] != null) {
+			if(blocks[x][0][z].height < 1f) {
+				dos.writeInt(-1);
+				dos.writeInt(x);
+				dos.writeInt(0);
+				dos.writeInt(z);
+				dos.writeFloat(blocks[x][0][z].height);
+			
+			}
+			}
 			for (int y = 1; y < 256; y++) {
 				
 				if(blocks[x][y][z] != null) {
@@ -184,10 +195,21 @@ if (!chunkFile.exists()) {
 					dos.writeInt(startY);
 					dos.writeInt(z);
 					dos.writeInt(((y-1)-startY));
-					
+				
 					startY = y;
 					lastBlockType = blockType;
 				}
+	if(blocks[x][y][z] != null) {
+					
+					if(blocks[x][y][z].height < 1f) {
+						dos.writeInt(-1);
+						dos.writeInt(x);
+						dos.writeInt(y);
+						dos.writeInt(z);
+						dos.writeFloat(blocks[x][y][z].height);
+					
+					}
+					}
 			}
 			
 			//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
@@ -206,8 +228,22 @@ if (!chunkFile.exists()) {
 } else {
 	DataInputStream chunkReader = new DataInputStream(new BufferedInputStream(new FileInputStream(chunkFile)));
 	int code = 0;
+	BlockProperties[][][] blockProperties = new BlockProperties[16][256][16];
+	
 	while (chunkReader.available() > 0) {
 		code = chunkReader.readInt();
+		
+		if(code == -1) {
+			int x=chunkReader.readInt();
+			int y=chunkReader.readInt();
+			int z=chunkReader.readInt();
+			blockProperties[x][y][z] = new BlockProperties();
+			blockProperties[x][y][z].height = chunkReader.readFloat();
+			continue;
+			
+		}
+		
+		
 		int code2 = chunkReader.readInt();
 		
 		int code3 = chunkReader.readInt();
@@ -232,6 +268,9 @@ if (!chunkFile.exists()) {
 			
 			blocks[x][y][z] = (Block) Class.forName(BlockTypes[data[0]]).getConstructors()[0]
 					.newInstance(x, y, z, this.x, this.z, regionX, regionZ);
+			if(blockProperties[x][y][z] != null) {
+			blocks[x][y][z].height = blockProperties[x][y][z].height;
+			}
 			//blocks[x][y][z].height = height;
 		
 			}}
@@ -324,8 +363,18 @@ public void calculateLighting() {
 				int lastBlockType = 0;
 				if(blocks[x][0][z] != null) {
 					lastBlockType = blocks[x][0][z].getID();
-				}
+				}  
 				int blockType = 0;
+				if(blocks[x][0][z] != null) {
+				if(blocks[x][0][z].height < 1f) {
+					dos.writeInt(-1);
+					dos.writeInt(x);
+					dos.writeInt(0);
+					dos.writeInt(z);
+					dos.writeFloat(blocks[x][0][z].height);
+				
+				}
+				}
 				for (int y = 1; y < 256; y++) {
 					
 					if(blocks[x][y][z] != null) {
@@ -341,10 +390,21 @@ public void calculateLighting() {
 						dos.writeInt(startY);
 						dos.writeInt(z);
 						dos.writeInt(((y-1)-startY));
-						
+					
 						startY = y;
 						lastBlockType = blockType;
 					}
+					if(blocks[x][y][z] != null) {
+						
+						if(blocks[x][y][z].height < 1f) {
+							dos.writeInt(-1);
+							dos.writeInt(x);
+							dos.writeInt(y);
+							dos.writeInt(z);
+							dos.writeFloat(blocks[x][y][z].height);
+						
+						}
+						}
 				}
 				
 				//fw.append(blockType + " " + x + " " + startY + " " + z + " " + (255-startY)+"\n");
@@ -354,8 +414,9 @@ public void calculateLighting() {
 				dos.writeInt(startY);
 				dos.writeInt(z);
 				dos.writeInt((255-startY));
-				
+				//dos.writeFloat(1f);	
 			}
+			
 		}
 		dos.close();
 			

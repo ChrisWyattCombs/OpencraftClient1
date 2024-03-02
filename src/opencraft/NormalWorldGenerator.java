@@ -2,7 +2,8 @@ package opencraft;
 
 public class NormalWorldGenerator {
 //  static int seed =(int)(Math.random()*(1000000-0+1)+0);
-	static int seed =-2345;
+	public static int seed =-2345;
+	public static boolean randomSeed = true;
 	public static Gen g = new Gen(seed);
 	public static Gen MoutainGen = new Gen(seed);
 	static {

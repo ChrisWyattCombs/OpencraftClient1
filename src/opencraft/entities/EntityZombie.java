@@ -192,7 +192,7 @@ public class EntityZombie extends Entity {
 				if(y == downblock.getY() +3) {
 					
 					if(lvy < -0.02f) {
-				    	 health -= 4*Math.pow(17f * lvy,2);
+				    	// health -= 4*Math.pow(17f * lvy,2);
 				     }
 					grounded = true;
 					
