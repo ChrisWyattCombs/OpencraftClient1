@@ -26,6 +26,8 @@ import opencraft.blocks.BlockSand;
 import opencraft.blocks.BlockStone;
 import opencraft.blocks.BlockWater;
 import opencraft.graphics.DisplayUtills;
+import opencraft.network.NetworkUtills;
+import opencraft.network.NetworkVariables;
 import opencraft.physics.physicsUtils;
 
 public class Chunk {
@@ -74,6 +76,65 @@ public class Chunk {
 
 	public void load() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException,
 	IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+
+	if(World.server) {
+	NetworkUtills.send(1);
+	NetworkUtills.send(getGlobalX());
+	NetworkUtills.send(getGlobalZ());
+	NetworkVariables.writer.flush();
+	int code = 0;
+	BlockProperties[][][] blockProperties = new BlockProperties[16][256][16];
+	
+	while (true) {
+		code = NetworkUtills.readInt();
+		
+		if(code == -1) {
+			int x=NetworkUtills.readInt();
+			int y=NetworkUtills.readInt();
+			int z=NetworkUtills.readInt();
+			blockProperties[x][y][z] = new BlockProperties();
+			blockProperties[x][y][z].height = NetworkUtills.readFloat();
+			continue;
+			
+		}
+		if(code == -2) {
+			break;
+		}
+		
+		
+		int code2 = NetworkUtills.readInt();
+		
+		int code3 = NetworkUtills.readInt();
+	
+		int code4 =NetworkUtills.readInt();
+
+		int code5 = NetworkUtills.readInt();
+		
+		
+
+		int data[] = {code, code2, code3, code4,code5};
+		
+		
+		int x = data[1];
+		int z = data[3];
+		
+		int endY = data[4];
+		int startPos =data[2];
+		if(data[0] != 0) {
+			
+		for (int y = startPos; y <=startPos+ endY; y++) {
+			
+			blocks[x][y][z] = (Block) Class.forName(BlockTypes[data[0]]).getConstructors()[0]
+					.newInstance(x, y, z, this.x, this.z, regionX, regionZ);
+			if(blockProperties[x][y][z] != null) {
+			blocks[x][y][z].height = blockProperties[x][y][z].height;
+			}
+			//blocks[x][y][z].height = height;
+		
+			}}
+		
+	}
+}else {
 File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 
 File chunkDir = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks");
@@ -223,7 +284,7 @@ if (!chunkFile.exists()) {
 		}
 	}
 	dos.close();
-	
+
 
 } else {
 	DataInputStream chunkReader = new DataInputStream(new BufferedInputStream(new FileInputStream(chunkFile)));
@@ -279,6 +340,8 @@ if (!chunkFile.exists()) {
 	chunkReader.close();
 
 }
+}
+	
 fullyLoaded = true;
 }
 public void calculateLighting() {
@@ -346,7 +409,7 @@ public void calculateLighting() {
 	}
 }
 	public void save() throws IOException {
-		
+		if(!World.server) {
 		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 		
 		
@@ -419,6 +482,7 @@ public void calculateLighting() {
 			
 		}
 		dos.close();
+		}
 			
 	}
 	public void setup() {

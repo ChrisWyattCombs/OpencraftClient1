@@ -23,7 +23,7 @@ public class TextField extends UIComponent {
 		this.width = width;
 		this.maxCharacterrs = maxCharacterrs;
 		id = lastID+1;
-		lastID++;                            
+		TextField.lastID++;                            
 		
 	}
 
@@ -40,12 +40,12 @@ public class TextField extends UIComponent {
 		GL11.glColor3f(1, 1,1);
 		((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText(text, x-width*0.005f + 0.0001f+textOffset, y-0.0001f, 0.000006f, width*0.005f - 0.0001f , -width*0.005f + 0.0001f , insertPos);
 		if(Cursor.x <= 0.005f * width+x && Cursor.x  >= -0.005f * width+x &&Cursor.y <= 0.005f * 0.075f+y && Cursor.y >= -0.005f * 0.075f+y && Mouse.isButtonDown(0)) {
-			selectedID = id;
+			TextField.selectedID = id;
 		}
-		
+		if(TextField.selectedID == id) {
 		while (Keyboard.next())
         {
-			if(selectedID == id) {
+			
             if (Keyboard.getEventKeyState())
             {
                 // get key info

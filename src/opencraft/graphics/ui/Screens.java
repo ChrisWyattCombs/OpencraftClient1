@@ -49,6 +49,7 @@ import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
 import opencraft.graphics.models.ModelCube;
 import opencraft.graphics.models.ModelPlayer;
+import opencraft.network.NetworkUtills;
 import opencraft.physics.physicsUtils;
 
 public class Screens {
@@ -128,6 +129,9 @@ public static Screen worlds = new Screen() {
 							World.worldName = getText();
 							World.worldLoadProgress = 0;
 							World.doneLoading = false;
+							if(World.server) {
+								NetworkUtills.connectToServer("localhost", 50000);
+							}
 							try {
 								World.loadWorld(context);
 							} catch (InstantiationException | IllegalAccessException | IllegalArgumentException

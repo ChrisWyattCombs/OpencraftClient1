@@ -1,6 +1,9 @@
 package opencraft;
 
+import java.io.IOException;
+
 import opencraft.graphics.DisplayVariables;
+import opencraft.network.NetworkUtills;
 import opencraft.physics.physicsUtils;
 
 public abstract class Item {
@@ -8,7 +11,7 @@ public abstract class Item {
 	
 	
 	public int stack = 1;
-	
+	public int serverEntityID = -1;
 	public float x = 0, y = 0, z = 0;
 	public float vx = 0, vy = 0, vz = 0;
 	public boolean grounded;
@@ -25,6 +28,26 @@ public abstract class Item {
 	public abstract int getID();
 
 	public void updatePosition() {
+		if(World.server) {
+		/*
+		NetworkUtills.send(2);
+		NetworkUtills.send(serverEntityID);
+		
+		try {
+			int code = NetworkUtills.readInt();
+			if(code == 0) {
+			x = NetworkUtills.readFloat();
+			y = NetworkUtills.readFloat();
+			z = NetworkUtills.readFloat();
+			}else if(code == 1) {
+				World.items.remove(this);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		}else {
 		if(!grounded && vy > -0.12f) {
 			vy -= 0.00003f*DisplayVariables.deltaTime;
 		}
@@ -128,5 +151,7 @@ public abstract class Item {
 				}
 			}
 	}
+	}
+
 	
 }

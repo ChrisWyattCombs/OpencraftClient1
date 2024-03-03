@@ -31,6 +31,7 @@ import opencraft.graphics.DisplayVariables;
 import opencraft.graphics.Vector2i;
 import opencraft.graphics.Vector3f;
 import opencraft.items.ItemGrass;
+import opencraft.network.NetworkUtills;
 import opencraft.physics.physicsUtils;
 
 
@@ -52,7 +53,7 @@ public class World {
 		
 		
 	}
-	
+	public static boolean server = true;
 	public static boolean addingChunks = false;
 	public static int realRegionListLength = 0;
 	public static Region[] regions = new Region[256];
@@ -74,6 +75,48 @@ public class World {
 	public static boolean doneLoading = false;
 	public static ArrayList<Vector3f> uncheckedFluids = new ArrayList<>();
 	public static void loadWorld(Drawable context) throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
+	
+		if(server) {
+			/*
+			 NetworkUtills.send(0);
+			Player.x = NetworkUtills.readFloat();
+			Player.y = NetworkUtills.readFloat();
+			Player.z = NetworkUtills.readFloat();
+			Player.yaw = NetworkUtills.readFloat();
+			Player.pitch = NetworkUtills.readFloat();
+			Player.forwardVelocity = NetworkUtills.readFloat();
+			Player.backwardVelocity = NetworkUtills.readFloat();
+			Player.rightVelocity = NetworkUtills.readFloat();
+			Player.leftVelocity = NetworkUtills.readFloat();
+			Player.velocityY = NetworkUtills.readFloat();
+			Player.health = NetworkUtills.readFloat();
+			
+			for(int x = 0; x < 9; x++) {
+				int itemID = NetworkUtills.readInt();
+				if(itemID != 0) {
+				Player.hotbar[x]=(Item) Class.forName(itemTypes[itemID]).getConstructors()[0]
+						.newInstance();
+				Player.hotbar[x].stack = NetworkUtills.readInt();
+				}else {
+					Player.hotbar[x] = null;
+				}
+			}
+			for(int x = 0; x < 9; x++) {
+				for(int y = 0; y < 3; y++) {
+					int itemID = NetworkUtills.readInt();
+					if(itemID != 0) {
+					Player.Inventory[x][y]=(Item) Class.forName(itemTypes[itemID]).getConstructors()[0]
+							.newInstance();
+					Player.Inventory[x][y].stack = NetworkUtills.readInt();
+					}else {
+						Player.Inventory[x][y] =null;
+					}
+			}
+			}
+			
+			NormalWorldGenerator.seed = NetworkUtills.readInt();
+		*/
+		}else {
 		try {
 			
 			
@@ -159,7 +202,7 @@ public class World {
 		NormalWorldGenerator.caveGen2.OCTAVES=7;
 		NormalWorldGenerator.caveGen2.AMPLITUDE=300;
 		NormalWorldGenerator.caveGen2.ROUGHNESS = 0.3f;
-		
+		}
 		int chunkX =(int)Player.x >> 4;
 		int chunkZ =(int)Player.z >> 4;
 		for(int x = -renderDistance; x <  renderDistance; x++) {

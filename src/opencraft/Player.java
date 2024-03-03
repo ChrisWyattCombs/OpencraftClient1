@@ -26,6 +26,7 @@ import opencraft.graphics.ui.Screen;
 import opencraft.graphics.ui.Screens;
 import opencraft.items.ItemDirt;
 import opencraft.items.ItemStone;
+import opencraft.network.NetworkUtills;
 import opencraft.items.ItemGrass;
 import opencraft.physics.physicsUtils;
 
@@ -212,14 +213,14 @@ public class Player {
 		
 		
 		//Block block2 = physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1, 2, 0.001f);
-		Block block1 = physicsUtils.getNextBlockInDirection(x+0.5f, y, z, 0, -1, 0, 2, 0.1f);
-		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.5f, 0, -1, 0, 2, 0.1f);
-		Block block3 = physicsUtils.getNextBlockInDirection(x-0.5f, y, z, 0, -1, 0, 2, 0.1f);
-		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.5f, 0, -1, 0, 2, 0.1f);
-		Block block5 = physicsUtils.getNextBlockInDirection(x+0.5f, y, z+0.5f, 0, -1, 0, 2, 0.1f);
-		Block block6 = physicsUtils.getNextBlockInDirection(x-0.5f, y, z+0.5f, 0, -1, 0, 2, 0.1f);
-		Block block7 = physicsUtils.getNextBlockInDirection(x-0.5f, y, z-0.5f, 0, -1, 0, 2, 0.1f);
-		Block block8 = physicsUtils.getNextBlockInDirection(x+0.5f, y, z-0.5f, 0, -1, 0, 2, 0.1f);
+		Block block1 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.01f, 0, -1, 0, 2, 0.1f);
+		Block block3 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.01f, 0, -1, 0, 2, 0.1f);
+		Block block5 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
+		Block block6 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
+		Block block7 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
+		Block block8 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
 			
 			if(block1  != null) {	
 				if(y < block1.getY() +2.5) {
@@ -354,6 +355,44 @@ public class Player {
 				 y = upblock.getY() - 0.4f;
 				 velocityY *=-1;
 			 }
+			}
+			if(World.server) {
+				/*
+				
+				NetworkUtills.send(Player.x);
+				  NetworkUtills.send(Player.y);
+				  NetworkUtills.send(Player.z);
+				  NetworkUtills.send(Player.yaw);
+				  NetworkUtills.send(Player.pitch);
+				  NetworkUtills.send(Player.forwardVelocity);
+				  NetworkUtills.send(Player.backwardVelocity);
+				  NetworkUtills.send(Player.rightVelocity);
+				  NetworkUtills.send(Player.leftVelocity);
+				  NetworkUtills.send(Player.velocityY);
+				  NetworkUtills.send(Player.health);
+				  for(Item item : Player.hotbar) {
+					  if(item != null) {
+						  NetworkUtills.send(item.getID());
+						  NetworkUtills.send(item.stack);
+					  }else {
+						  NetworkUtills.send(0);
+					  }
+					 
+					  
+				  }
+				  for(int x = 0; x < 9; x++) {
+					  for(int y = 0; y < 3; y++) {
+						  if(Player.Inventory[x][y] != null) {
+							  NetworkUtills.send(Player.Inventory[x][y].getID());
+							  NetworkUtills.send(Player.Inventory[x][y].stack);
+						  }else {
+							  NetworkUtills.send(0);
+						  }
+					  }
+					  
+				  }
+				  
+				*/
 			}
 	}
 	public static void checkForActions() throws InstantiationException, IllegalAccessException {  		
