@@ -14,10 +14,10 @@ public class NetworkUtills {
 
 public static void connectToServer(String ip,int port) {
 	
-		NetworkVariables.socket = new Socket();
+		
 	
 	try {
-		NetworkVariables.socket.connect(new InetSocketAddress(ip, port));
+		NetworkVariables.socket = new Socket(ip, port);
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

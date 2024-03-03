@@ -130,7 +130,7 @@ public static Screen worlds = new Screen() {
 							World.worldLoadProgress = 0;
 							World.doneLoading = false;
 							if(World.server) {
-								NetworkUtills.connectToServer("localhost", 50000);
+								NetworkUtills.connectToServer("192.168.5.178", 50000);
 							}
 							try {
 								World.loadWorld(context);
@@ -212,6 +212,9 @@ public static Screen createWorld = new Screen() {
 					}
 					World.worldLoadProgress = 0;
 					World.doneLoading = false;
+					if(World.server) {
+						NetworkUtills.connectToServer("192.168.5.178", 50000);
+					}
 					try {
 						World.loadWorld(context);
 					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
