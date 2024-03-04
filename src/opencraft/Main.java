@@ -14,8 +14,12 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 public class Main {
-	
+	///public static int userID = -1;
+	//public static int code = -1;
 	public static void main(String[] args) throws Exception {
+		//userID = Integer.valueOf(args[0]);
+		//code = Integer.valueOf(args[1]);
+		
 		runOpencraft("Beta");
 
 	}
@@ -27,7 +31,6 @@ public class Main {
 		while (!Display.isCloseRequested() && !DisplayVariables.close) {
 			long startTime = System.currentTimeMillis();
 			long lastTime = System.nanoTime();
-			
 			DisplayUtills.renderNextFrame();
 			AudioUtills.updateSoundSystem();
             Display.update();

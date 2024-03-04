@@ -53,7 +53,8 @@ public class World {
 		
 		
 	}
-	public static boolean server = true;
+	
+	public static boolean server = false;
 	public static boolean addingChunks = false;
 	public static int realRegionListLength = 0;
 	public static Region[] regions = new Region[256];
