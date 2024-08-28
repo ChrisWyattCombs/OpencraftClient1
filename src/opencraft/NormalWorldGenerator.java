@@ -21,7 +21,7 @@ public class NormalWorldGenerator {
 	public static Gen BiomeGen = new Gen(seed);
 	static {
 		BiomeGen .OCTAVES=9;
-		BiomeGen.AMPLITUDE=150;
+		BiomeGen.AMPLITUDE=300;
 		BiomeGen.ROUGHNESS = 0.3f;
 	}
 	public static Gen caveGen1 = new Gen(seed);

@@ -24,7 +24,7 @@ public class Main {
 
 	}
 	public static void runOpencraft(String version) throws Exception {
-		DisplayUtills.createWindow("opencraft "+version, 1280, 720, false);
+		DisplayUtills.createWindow("opencraft "+version, 1920, 1080, false);
 		DisplayUtills.setupOpenGl();
 	DisplayUtills.loadResources();
 	AudioUtills.loadSounds();
