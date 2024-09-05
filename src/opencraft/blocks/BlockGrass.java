@@ -4,6 +4,7 @@ import opencraft.Block;
 import opencraft.Item;
 import opencraft.graphics.models.ModelCube;
 import opencraft.items.ItemGrass;
+import opencraft.items.ItemSword;
 
 public class BlockGrass extends Block {
 
@@ -27,7 +28,7 @@ public class BlockGrass extends Block {
 	@Override
 	public Item getDrop() {
 		// TODO Auto-generated method stub
-		ItemGrass drop = new ItemGrass();
+		Item drop = new ItemSword();
 		drop.x = getGlobalX();
 		drop.y = getY() + 3f;
 		drop.z = getGlobalZ();

@@ -36,7 +36,7 @@ import opencraft.physics.physicsUtils;
 
 
 public class World {
-	public static String[] itemTypes = {"empty","opencraft.items.ItemGrass","opencraft.items.ItemDirt","opencraft.items.ItemStone","opencraft.items.ItemWood","opencraft.items.ItemSand"};
+	public static String[] itemTypes = {"empty","opencraft.items.ItemGrass","opencraft.items.ItemDirt","opencraft.items.ItemStone","opencraft.items.ItemWood","opencraft.items.ItemSand","opencraft.items.ItemSword"};
 	//public static int[] chunkDrawIDs = new int[257];
 	public static ArrayList<Item> items = new ArrayList<>();
 	static {
