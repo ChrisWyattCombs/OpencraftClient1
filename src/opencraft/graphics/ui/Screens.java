@@ -282,7 +282,7 @@ public static Screen loadingWorld = new Screen() {
 			    	color.flip();
 			    	//color.put()
 		        GL11.glFog(GL11.GL_FOG_COLOR, color);
-		        GL11. glFogf(GL11.GL_FOG_DENSITY, 0.005f);
+		        GL11. glFogf(GL11.GL_FOG_DENSITY, (0.05f/((float)World.renderDistance)));
 		      }
 			try {
 			

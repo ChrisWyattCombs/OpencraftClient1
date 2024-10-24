@@ -29,6 +29,7 @@ import opencraft.items.ItemStone;
 import opencraft.network.NetworkUtills;
 import opencraft.items.*;
 import opencraft.physics.physicsUtils;
+import opencraft.physics.smartVector3D;
 
 public class Player {
 	public static boolean playHandSwingAnimation = false;
@@ -65,6 +66,8 @@ public class Player {
 	public static Item[][] Inventory = new Item[9][3];
 	public static ItemGrass test = new ItemGrass();
 	public static boolean ekeyHeld = false;
+	public static  smartVector3D position = new smartVector3D(new Vector3f(0,400, 0));
+	public static smartVector3D velocity = new smartVector3D(0,0,0);
 	public static void updatePostitionAndRotation() {
 	
 		if(currentGameScreen == null) {
@@ -77,95 +80,48 @@ public class Player {
 			pitch = -90;
 		}
 		}
-	
+		if(!Keyboard.isKeyDown(Keyboard.KEY_W) && !Keyboard.isKeyDown(Keyboard.KEY_S) && !Keyboard.isKeyDown(Keyboard.KEY_A) && !Keyboard.isKeyDown(Keyboard.KEY_D) && velocity.getMagnitude() != 0) {
+			velocity.setMagnitudeAndDirection(velocity.getMagnitude() - (0.0001f * DisplayVariables.deltaTime), velocity.getYaw(), 0);
+			}
+		else {
 		boolean keyBeingHeld1 = false;
-		if(Keyboard.isKeyDown(Keyboard.KEY_W) && currentGameScreen == null) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_W)&&!Keyboard.isKeyDown(Keyboard.KEY_S) && currentGameScreen == null) {
 			keyBeingHeld1 = true;
 			playWalkngAnimation = true;
-			if(backwardVelocity == 0) {
-				
-				if(forwardVelocity < 0.01f*SpeedMultiplyer ) {
-					forwardVelocity+=0.00005f*DisplayVariables.deltaTime;
-				}else {
-					forwardVelocity-=0.0001f*DisplayVariables.deltaTime;
+		
+			velocity.add(new smartVector3D(0.00025f* DisplayVariables.deltaTime, -yaw+180, 0),false);
+			if(velocity.getMagnitude() > 0.01f*SpeedMultiplyer) {
+				velocity.setMagnitudeAndDirection(0.01f*SpeedMultiplyer,velocity.getYaw(), 0);
 				}
 				
-			}else {
-				backwardVelocity -= 0.0005f*DisplayVariables.deltaTime;
-			}
+			
 		
-		}else {
-			if(forwardVelocity > 0) {
-				forwardVelocity-=0.0001f*DisplayVariables.deltaTime;
-			}
-			if(forwardVelocity < 0) {
-				forwardVelocity = 0;
-			}
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_S) && !keyBeingHeld1 && currentGameScreen == null) {
-			keyBeingHeld1 = true;
-			if(forwardVelocity == 0) {
-				if(backwardVelocity < 0.01f*SpeedMultiplyer ) {
-					backwardVelocity+=0.00005f*DisplayVariables.deltaTime;
-				}else {
-					backwardVelocity-=0.0001f*DisplayVariables.deltaTime;
+		else if(Keyboard.isKeyDown(Keyboard.KEY_S)&&!Keyboard.isKeyDown(Keyboard.KEY_W) && currentGameScreen == null) {
+			
+			velocity.add(new smartVector3D(0.00025f* DisplayVariables.deltaTime, -yaw, 0),false);
+			if(velocity.getMagnitude() > 0.01f*SpeedMultiplyer) {
+				velocity.setMagnitudeAndDirection(0.01f*SpeedMultiplyer, velocity.getYaw(), 0);
 				}
-				
-			}else {
-				forwardVelocity -= 0.0005f*DisplayVariables.deltaTime;
-			}
 		
-		}else {
-			if(backwardVelocity > 0) {
-				backwardVelocity-=0.0001f*DisplayVariables.deltaTime;
-			}
-			if(backwardVelocity < 0) {
-				backwardVelocity = 0;
-			}
 		}
 		boolean keyBeingHeld = false;
 		if(Keyboard.isKeyDown(Keyboard.KEY_D) && !keyBeingHeld&& currentGameScreen == null) {
 			keyBeingHeld = true;
-			if(leftVelocity == 0) {
-				if(rightVelocity < 0.01f*SpeedMultiplyer ) {
-					rightVelocity+=0.00005f*DisplayVariables.deltaTime;
-				}else {
-					rightVelocity-=0.0001f*DisplayVariables.deltaTime;
+			velocity.add(new smartVector3D(0.00025f* DisplayVariables.deltaTime, (-yaw+180)-90, 0),false);
+			if(velocity.getMagnitude() > 0.01f*SpeedMultiplyer) {
+				velocity.setMagnitudeAndDirection(0.01f*SpeedMultiplyer,velocity.getYaw(), 0);
 				}
-				
-			}else {
-				leftVelocity -= 0.0005f*DisplayVariables.deltaTime;
-			}
 		
-		}else {
-			if(rightVelocity > 0) {
-				rightVelocity-=0.0001f*DisplayVariables.deltaTime;
-			}
-			if(rightVelocity < 0) {
-				rightVelocity = 0;
-			}
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_A) && !keyBeingHeld&&currentGameScreen == null) {
+		else if(Keyboard.isKeyDown(Keyboard.KEY_A) &&!Keyboard.isKeyDown(Keyboard.KEY_D)&&currentGameScreen == null) {
 			keyBeingHeld = true;
-			if(rightVelocity == 0) {
-				if(leftVelocity < 0.01f*SpeedMultiplyer) {
-					leftVelocity+=0.00005f*DisplayVariables.deltaTime;
-				}else {
-					leftVelocity-=0.0001f*DisplayVariables.deltaTime;
+			velocity.add(new smartVector3D(0.00025f* DisplayVariables.deltaTime, (-yaw+180)+90, 0),false);
+			if(velocity.getMagnitude() > 0.01f*SpeedMultiplyer) {
+				velocity.setMagnitudeAndDirection(0.01f*SpeedMultiplyer,velocity.getYaw(), 0);
 				}
-				
-			}else {
-				rightVelocity -= 0.0005f*DisplayVariables.deltaTime;
-			}
-		
-		}else {
-			if(leftVelocity > 0) {
-				leftVelocity-=0.0001f*DisplayVariables.deltaTime;
-			}
-			if(leftVelocity < 0) {
-				leftVelocity = 0;
-			}
+		}
 		}
 		if(!grounded && ( World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z))==null || !World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y-1), physicsUtils.convertFloatCoordToBlockCoord(z)).isFluid())) {
 			velocityY -= 0.00003f*DisplayVariables.deltaTime;
@@ -206,126 +162,172 @@ public class Player {
 		if(DisplayVariables.fps > 5 && World.getChunk(chunkX, chunkZ) != null && World.getChunk(chunkX, chunkZ).fullyLoaded ) {
 		x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		z-=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
-		
+		position.add(velocity, true);
+		x = position.getX();
+		z= position.getZ();
 		y+=velocityY * DisplayVariables.deltaTime;
 		}
 		//z+=(rightVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
 		
+		Block b1 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x+0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-1, physicsUtils.convertFloatCoordToBlockCoord(z));
+		Block b2 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x+0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-2, physicsUtils.convertFloatCoordToBlockCoord(z));
+		Block b3 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x-0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-1, physicsUtils.convertFloatCoordToBlockCoord(z));
+		Block b4 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x-0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-2, physicsUtils.convertFloatCoordToBlockCoord(z));
+		Block b5 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y)-1, physicsUtils.convertFloatCoordToBlockCoord(z+0.15f));
+		Block b6 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y)-2, physicsUtils.convertFloatCoordToBlockCoord(z+0.15f));
+		Block b7 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y)-1, physicsUtils.convertFloatCoordToBlockCoord(z-0.15f));
+		Block b8 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x), physicsUtils.convertFloatCoordToBlockCoord(y)-2, physicsUtils.convertFloatCoordToBlockCoord(z-0.15f));
+		
+		if(b1 != null) {
+		if(b1.isFluid()) {
+			b1 = null;
+		}
+		}
+		if(b2 != null) {
+		if(b2.isFluid()) {
+			b2 = null;
+		}
+		}
+		if(b1 != null || b2 != null) {
+			x = lastX;
+			z = lastZ;
+			if(b2 == null || b4 == null || b6 == null || b8 == null) {
+				velocity.setMagnitudeAndDirection(velocity.getMagnitude(), -yaw, 0);
+			}
+		}
+		
+		if(b3 != null) {
+		if(b3.isFluid()) {
+			b3 = null;
+		}
+		}
+		if(b4 != null) {
+		if(b4.isFluid()) {
+			b4 = null;
+		}
+		}
+		if(b3 != null || b4 != null) {
+			x = lastX;
+			z = lastZ;
+			if(b2 == null || b4 == null || b6 == null || b8 == null) {
+				velocity.setMagnitudeAndDirection(velocity.getMagnitude(), -yaw, 0);
+			}
+		}
+		
+		if(b5 != null) {
+		if(b5.isFluid()) {
+			b5 = null;
+		}
+		}
+		if(b6 != null) {
+		if(b6.isFluid()) {
+			b6 = null;
+		}
+		}
+		if(b5 != null || b6 != null) {
+			x = lastX;
+			z = lastZ;
+			if(b2 == null || b4 == null || b6 == null || b8 == null) {
+				velocity.setMagnitudeAndDirection(velocity.getMagnitude(), -yaw, 0);
+			}
+		}
+		
+		if(b7 != null) {
+		if(b7.isFluid()) {
+			b7 = null;
+		}
+		}
+		if(b8 != null) {
+		if(b8.isFluid()) {
+			b8 = null;
+		}
+		}
+		if(b7 != null || b8 != null) {
+			x = lastX;
+			z = lastZ;
+			if(b2 == null || b4 == null || b6 == null || b8 == null) {
+				velocity.setMagnitudeAndDirection(velocity.getMagnitude(), -yaw, 0);
+			}
+		}
+		
 		
 		//Block block2 = physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1, 2, 0.001f);
-		Block block1 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z, 0, -1, 0, 2, 0.1f);
-		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.01f, 0, -1, 0, 2, 0.1f);
-		Block block3 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z, 0, -1, 0, 2, 0.1f);
-		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.01f, 0, -1, 0, 2, 0.1f);
-		Block block5 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
-		Block block6 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
-		Block block7 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
-		Block block8 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
-			
+		Block block1 = physicsUtils.getNextBlockInDirection(x, y, z, 1, 0, 0, 3, 0.1f);
+		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z, 0, 0, 1, 3, 0.1f);
+		Block block3 = physicsUtils.getNextBlockInDirection(x, y, z, -1, 0, 0, 3, 0.1f);
+		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z, 0, 0, -1, 3, 0.1f);
+		//Block block5 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
+		//Block block6 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
+		//Block block7 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
+		//Block block8 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
+			/*
 			if(block1  != null) {	
-				if(y < block1.getY() +2.5) {
-				
-					x = lastX;
-					z = lastZ;
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+				if(checkForIntersectionWithBlock(block1)) {
+					x =lastX;
+					z =lastZ;
+					
+					velocity.add(new smartVector3D(new Vector3f(-velocity.getX(),0,0)), false);
 				}
 			}
 			if(block2  != null) {	
-				if(y < block2.getY() +2.5) {
-					x = lastX;
-					z = lastZ;
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+				
+				if(checkForIntersectionWithBlock(block2)) {
+					x =lastX;
+					z =lastZ;
+					velocity.add(new smartVector3D(new Vector3f(0,0,-velocityZ)), false);
 				}
 			}
 			if(block3  != null) {	
-				if(y < block3.getY() +2.5) {
-					x = lastX;
-					z = lastZ;
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+				x =lastX;
+				z =lastZ;
+				if(checkForIntersectionWithBlock(block3)) {
+					
+					velocity.add(new smartVector3D(new Vector3f(-velocity.getX(),0,0)), false);
 				}
 			}
 			if(block4  != null) {	
-				if(y < block4.getY() +2.5) {
-					x = lastX;
-					z = lastZ;
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+				x =lastX;
+				z =lastZ;
+				if(checkForIntersectionWithBlock(block4)) {
+				
+					velocity.add(new smartVector3D(new Vector3f(0,0,-velocityZ)), false);
 				}
 			}
+			/*
 			if(block5  != null) {	
 				if(y < block5.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+					velocity.add(new smartVector3D(velocity.getMagnitude()*2,velocity.getYaw()+180, 0), false);
 				}
 			}
 			if(block6  != null) {	
 				if(y < block6.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+					velocity.add(new smartVector3D(velocity.getMagnitude()*2,velocity.getYaw()+180, 0), false);
 				}
 			}
 			if(block7  != null) {	
 				if(y < block7.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
-
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+					velocity.add(new smartVector3D(velocity.getMagnitude()*2,velocity.getYaw()+180, 0), false);
 				}
 			}
 			if(block8  != null) {	
 				if(y < block8.getY() +2.5) {
 					x = lastX;
 					z = lastZ;
-					
-					float temp = forwardVelocity;
-					forwardVelocity = backwardVelocity;
-					backwardVelocity = temp;
-					temp = rightVelocity;
-					rightVelocity  = leftVelocity;
-					leftVelocity = temp;
+					velocity.add(new smartVector3D(velocity.getMagnitude()*2,velocity.getYaw()+180, 0), false);
 				}
 			}
-			
+			*/
 			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.01f);
 			if(downblock  != null) {
 				float lvy = velocityY;
 				if(y < downblock.getY() +3) {
+				
 					y = downblock.getY() +3;
 					
 					velocityY = 0;
@@ -333,6 +335,7 @@ public class Player {
 					SpeedMultiplyer =1f;
 					
 					}
+					
 					
 				}
 				if(y == downblock.getY() +3) {
@@ -704,6 +707,12 @@ public static void drawHotbarSquare(float x, float y) {
 			DisplayVariables.CamPitch = -pitch;
 			DisplayVariables.camYaw = yaw-180;
 			}
+	}
+	private static boolean checkForIntersectionWithBlock(Block block1) {
+		
+		return (Math.abs(block1.getGlobalX() - x) < 2) && (Math.abs(block1.getY() - y) < 1) && (Math.abs(block1.getGlobalZ() - z) < 2);
+		
+	
 	}
 	public static synchronized float getX() {
 		return x;
