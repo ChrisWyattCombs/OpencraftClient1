@@ -44,5 +44,6 @@
 	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-windows-arm64.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-freetype-natives-windows-x86.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-freetype-sources.jar"/>
+	<classpathentry kind="lib" path="libs/react-1.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

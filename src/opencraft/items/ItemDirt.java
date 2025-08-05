@@ -59,4 +59,10 @@ public class ItemDirt extends Item{
 		return 2;
 	}
 
+	@Override
+	public int getMiningPower() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

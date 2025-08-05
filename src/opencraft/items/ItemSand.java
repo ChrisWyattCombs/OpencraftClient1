@@ -58,4 +58,10 @@ public class ItemSand extends Item{
 		return 5;
 	}
 
+	@Override
+	public int getMiningPower() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

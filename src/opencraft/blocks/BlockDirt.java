@@ -20,7 +20,11 @@ public class BlockDirt extends Block {
 		visible = ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.2f,0,0.2f,0,0.2f,0,0.2f,0,0.2f,0,0.2f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,1f,top,bottom,front,back,right,left);
 	
 	}
-
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	@Override
 	public int getID() {
 	
@@ -36,10 +40,18 @@ public class BlockDirt extends Block {
 		return  drop;
 	}
 
+	
+
 	@Override
-	public boolean isFluid() {
+	public boolean isAir() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }

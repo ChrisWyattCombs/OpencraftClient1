@@ -17,13 +17,6 @@ public class BlockWater extends Block {
 		visible = ModelCube.drawModel(getGlobalX(), getY(), getGlobalZ(),new float[] {0.5f,0,0.5f,0,0.5f,0,0.5f,0,0.5f,0,0.5f,0},topLight, bottomLight, frontLight, backLight, rightLight, leftLight,0.8f,top,bottom,front,back,right,left,height);
 		//glDepthMask(true);
 	}
-
-	@Override
-	public int getID() {
-		// TODO Auto-generated method stub
-		return 4;
-	}
-
 	@Override
 	public boolean isFluid() {
 		// TODO Auto-generated method stub
@@ -31,9 +24,29 @@ public class BlockWater extends Block {
 	}
 
 	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 4;
+	}
+
+	
+
+	@Override
 	public Item getDrop() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isAir() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

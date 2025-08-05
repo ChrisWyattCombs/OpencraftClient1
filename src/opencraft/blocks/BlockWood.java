@@ -24,6 +24,11 @@ public class BlockWood extends Block {
 	public int getID() {
 		return 6;
 	}
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public Item getDrop() {
@@ -35,10 +40,18 @@ public class BlockWood extends Block {
 		return  drop;
 	}
 
+	
+
 	@Override
-	public boolean isFluid() {
+	public boolean isAir() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }

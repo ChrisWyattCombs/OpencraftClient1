@@ -24,7 +24,11 @@ public class BlockGrass extends Block {
 	public int getID() {
 		return 1;
 	}
-
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	@Override
 	public Item getDrop() {
 		// TODO Auto-generated method stub
@@ -35,10 +39,18 @@ public class BlockGrass extends Block {
 		return  drop;
 	}
 
+	
+
 	@Override
-	public boolean isFluid() {
+	public boolean isAir() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }

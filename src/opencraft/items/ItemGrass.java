@@ -59,4 +59,10 @@ public class ItemGrass extends Item{
 		return 1;
 	}
 
+	@Override
+	public int getMiningPower() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

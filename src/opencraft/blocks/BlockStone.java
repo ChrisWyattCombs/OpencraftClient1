@@ -23,6 +23,11 @@ public class BlockStone extends Block {
 		
 		return 3;
 	}
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public Item getDrop() {
@@ -33,10 +38,17 @@ public class BlockStone extends Block {
 		return  drop;
 	}
 
+
 	@Override
-	public boolean isFluid() {
+	public boolean isAir() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 3;
 	}
 	
 

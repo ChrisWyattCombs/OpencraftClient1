@@ -270,10 +270,9 @@ public static Screen loadingWorld = new Screen() {
 ((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Loading World", -0.0035f, 0.002f, 0.00002f);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		if(World.doneLoading) {
-			GL11.glClearColor(135f/255f, 206f/255f, 235f/255f,1);
+			
 			GL11.glEnable(GL11.GL_FOG);
-		      {
-		    	  GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
+		      { GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
 			    	FloatBuffer color = BufferUtils.createFloatBuffer(4);
 			    	color.put(135f/255f);
 			    	color.put(206f/255f);
@@ -294,6 +293,7 @@ public static Screen loadingWorld = new Screen() {
 			GL11.glEnable(GL11.GL_LIGHT0);
 
 			    // Create light components
+		
 			    float ambientLight[] = { 0.3f, 0.3f,0.3f, 1.0f };
 			    float diffuseLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 			    float specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
@@ -325,11 +325,12 @@ public static Screen loadingWorld = new Screen() {
 			    GL11.glLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, diffuseLightBuffer);
 			  GL11.glLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, specularLightBuffer);
 			   GL11.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, positionBuffer);
+			 
 			  GL11.glShadeModel(GL11.GL_SMOOTH);
 			  GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 			currentScreen = inGame;
 			//DisplayUtills.shader.bind();
-			/*
+			
 			new Thread() {
 				public void run() {
 					float x = DisplayVariables.camX;
@@ -382,7 +383,7 @@ public static Screen loadingWorld = new Screen() {
 					
 				}
 			};
-			*/
+		
 			DisplayUtills.shader.unbind();
 			
 				
@@ -395,7 +396,17 @@ public static Screen inGame = new Screen() {
 	
 	@Override
 	public void drawScreen() {
-	
+		GL11.glClearColor((120f/255f)*World.sunlight, (167f/255f)*World.sunlight, (255f/255f)*World.sunlight,1);
+		GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
+    	FloatBuffer color = BufferUtils.createFloatBuffer(4);
+    	color.put((120f/255f)*World.sunlight);
+    	color.put((167f/255f)*World.sunlight);
+    	color.put((255f/255f)*World.sunlight);
+    	color.put(1);	
+    	color.flip();
+    	//color.put()
+    GL11.glFog(GL11.GL_FOG_COLOR, color);
+    GL11. glFogf(GL11.GL_FOG_DENSITY, (0.05f/((float)World.renderDistance)));
 		glDepthMask(true);
 		//DisplayUtills.worldShader.bind();
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -468,12 +479,12 @@ GL11.glEnable(GL11.GL_FOG);
 GL11.glDisable(GL11.GL_TEXTURE_2D);
 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 GL11.glBegin(GL11.GL_QUADS);
-
+/*
 if(b != null) {
 	
 ModelCube.drawModel(b.getX(), b.getY(), b.getZ(), new float[]{0,0,0.2f,0,0.1f,0,0.1f,0,0.1f,0,0.1f,0}, 1,1,1,1,1,1,0.25f);
 }
-
+*/
 if(Mouse.isButtonDown(1)) {
 	if(!Player.RbuttonDownLast) {
 	if(Player.hotbar[Player.hotBarIndex] != null) {
@@ -494,7 +505,7 @@ if(Mouse.isButtonDown(0)) {
 	if(Player.hotbar[Player.hotBarIndex] != null) {
 	Player.hotbar[Player.hotBarIndex].leftClickAction();
 	}else {
-		Player.leftClickAction();
+		Player.leftClickAction(1);
 		}
 	//}
 	
@@ -527,10 +538,12 @@ int z = physicsUtils.convertFloatCoordToBlockCoord(DisplayVariables.camZ);
 float nz = (float) (Math.cos(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 float nx = (float) (Math.sin(Math.toRadians(DisplayVariables.camYaw))*Math.cos(Math.toRadians(DisplayVariables.CamPitch)));
 float ny = (float) Math.sin(Math.toRadians(DisplayVariables.CamPitch));
-//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at Block: "+b.getX()+" "+" "+b.getY()+" "+bz, -0.0165f, 0.0060f, 0.00002f);
-//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(1)+" "+(int)pos.get(2), -0.0165f, 0.0050f, 0.00002f);
+Block b2 = physicsUtils.getBlockLookingAt();
+if(b2 != null) {
+((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at Block: "+b2.getGlobalX()+" "+" "+b2.getY()+" "+b2.getGlobalZ(), -0.0165f, 0.0060f, 0.00002f);
+}//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("looking at: "+(int)pos.get(0)+" "+" "+(int)pos.get(1)+" "+(int)pos.get(2), -0.0165f, 0.0050f, 0.00002f);
 
-//((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Position: "+Player.x+" "+Player.y+" "+Player.z, -0.0165f, 0.0040f, 0.00002f);
+((Font) ResourceManager.getObjectForResource("Opencraft:Font")).drawText("Position: "+Player.x+" "+Player.y+" "+Player.z, -0.0165f, 0.0040f, 0.00002f);
 //DisplayUtills.shader.bind();
 GL11.glEnable(GL11.GL_TEXTURE_2D);
 try {
@@ -622,7 +635,7 @@ glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glDepthMask(true);
 	 * */
 	 
-		GL11.glClearColor(135f/255f, 206f/255f, 235f/255f,1);
+		GL11.glClearColor(120f/255f, 167f/255f, 255f/255f,1);
 	GL11.glEnable(GL11.GL_TEXTURE_2D);
 	
 	

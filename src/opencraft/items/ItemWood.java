@@ -59,4 +59,10 @@ public class ItemWood extends Item{
 		return 4;
 	}
 
+	@Override
+	public int getMiningPower() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

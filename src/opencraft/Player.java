@@ -12,6 +12,10 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.urish.openal.ALException;
 
+
+import com.flowpowered.react.collision.shape.AABB;
+import com.flowpowered.react.math.Vector3;
+
 import opencraft.audio.AudioUtills;
 import opencraft.graphics.DisplayUtills;
 import opencraft.graphics.DisplayVariables;
@@ -28,6 +32,7 @@ import opencraft.items.ItemDirt;
 import opencraft.items.ItemStone;
 import opencraft.network.NetworkUtills;
 import opencraft.items.*;
+import opencraft.physics.Hitbox;
 import opencraft.physics.physicsUtils;
 import opencraft.physics.smartVector3D;
 
@@ -44,6 +49,7 @@ public class Player {
 	public static boolean LbuttonDownLast = false;
 	public static float miningProgress = 0;
 	public static float health = 10f;
+	public static AABB hitbox = new AABB(new Vector3(-0.25f+x,-2+y,-0.25f+z) ,new Vector3( 0.25f+x, 2+y, 0.25f+z));
 	public static float maxHealth = 10f;
 	public static float velocityX = 0;
 	public static float velocityZ = 0;
@@ -160,15 +166,39 @@ public class Player {
 		int chunkX = physicsUtils.convertFloatCoordToBlockCoord(x) >> 4;
 		int chunkZ = physicsUtils.convertFloatCoordToBlockCoord(z) >> 4;
 		if(DisplayVariables.fps > 5 && World.getChunk(chunkX, chunkZ) != null && World.getChunk(chunkX, chunkZ).fullyLoaded ) {
-		x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
-		z-=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
+		//x += ((forwardVelocity-backwardVelocity )*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime)+((rightVelocity - leftVelocity)*Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
+		//z-=((forwardVelocity-backwardVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime) - ((rightVelocity - leftVelocity)*Math.sin(Math.toRadians(yaw)) * DisplayVariables.deltaTime);
 		position.add(velocity, true);
 		x = position.getX();
 		z= position.getZ();
 		y+=velocityY * DisplayVariables.deltaTime;
 		}
-		//z+=(rightVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
+		/*
+		hitbox = new AABB(new Vector3(-0.25f+x,-2+y,-0.25f+z) ,new Vector3( 0.25f+x, 2+y, 0.25f+z));
 		
+		int bx = physicsUtils.convertFloatCoordToBlockCoord(x);
+		int by = physicsUtils.convertFloatCoordToBlockCoord(y);
+		int bz = physicsUtils.convertFloatCoordToBlockCoord(z);
+		
+		for(int x =-5; x < 5; x++) {
+			for(int y =-1; y < 1; y++) {
+				for(int z =-5; z < 5; z++) {
+					Block b = World.getBlock(bx+x, by+y, bz+z);
+					
+					if(b != null) {
+						
+					if(hitbox.testCollision(b.hitbox)) {
+						velocity.setMagnitudeAndDirection(velocity.getMagnitude()*2, velocity.getYaw()+180, 0);
+					
+						break;
+						}
+					}
+				}
+			}
+		}
+		*/
+		//z+=(rightVelocity)  * Math.cos(Math.toRadians(yaw)) * DisplayVariables.deltaTime;
+		/*
 		Block b1 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x+0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-1, physicsUtils.convertFloatCoordToBlockCoord(z));
 		Block b2 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x+0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-2, physicsUtils.convertFloatCoordToBlockCoord(z));
 		Block b3 = World.getBlock(physicsUtils.convertFloatCoordToBlockCoord(x-0.15f), physicsUtils.convertFloatCoordToBlockCoord(y)-1, physicsUtils.convertFloatCoordToBlockCoord(z));
@@ -249,13 +279,13 @@ public class Player {
 				velocity.setMagnitudeAndDirection(velocity.getMagnitude(), -yaw, 0);
 			}
 		}
-		
+		*/
 		
 		//Block block2 = physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1, 2, 0.001f);
-		Block block1 = physicsUtils.getNextBlockInDirection(x, y, z, 1, 0, 0, 3, 0.1f);
-		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z, 0, 0, 1, 3, 0.1f);
-		Block block3 = physicsUtils.getNextBlockInDirection(x, y, z, -1, 0, 0, 3, 0.1f);
-		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z, 0, 0, -1, 3, 0.1f);
+		//Block block1 = physicsUtils.getNextBlockInDirection(x, y, z, 1, 0, 0, 3, 0.1f);
+		//Block block2 = physicsUtils.getNextBlockInDirection(x, y, z, 0, 0, 1, 3, 0.1f);
+		//Block block3 = physicsUtils.getNextBlockInDirection(x, y, z, -1, 0, 0, 3, 0.1f);
+		//Block block4 = physicsUtils.getNextBlockInDirection(x, y, z, 0, 0, -1, 3, 0.1f);
 		//Block block5 = physicsUtils.getNextBlockInDirection(x+0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
 		//Block block6 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z+0.01f, 0, -1, 0, 2, 0.1f);
 		//Block block7 = physicsUtils.getNextBlockInDirection(x-0.01f, y, z-0.01f, 0, -1, 0, 2, 0.1f);
@@ -266,7 +296,7 @@ public class Player {
 					x =lastX;
 					z =lastZ;
 					
-					velocity.add(new smartVector3D(new Vector3f(-velocity.getX(),0,0)), false);
+					velocity.setMagnitudeAndDirection(velocity.getMagnitude(), 0, -90);
 				}
 			}
 			if(block2  != null) {	
@@ -274,7 +304,7 @@ public class Player {
 				if(checkForIntersectionWithBlock(block2)) {
 					x =lastX;
 					z =lastZ;
-					velocity.add(new smartVector3D(new Vector3f(0,0,-velocityZ)), false);
+					velocity.setMagnitudeAndDirection(velocity.getMagnitude(), 0, 180);
 				}
 			}
 			if(block3  != null) {	
@@ -282,7 +312,7 @@ public class Player {
 				z =lastZ;
 				if(checkForIntersectionWithBlock(block3)) {
 					
-					velocity.add(new smartVector3D(new Vector3f(-velocity.getX(),0,0)), false);
+					velocity.setMagnitudeAndDirection(velocity.getMagnitude(), 0, 90);
 				}
 			}
 			if(block4  != null) {	
@@ -290,7 +320,7 @@ public class Player {
 				z =lastZ;
 				if(checkForIntersectionWithBlock(block4)) {
 				
-					velocity.add(new smartVector3D(new Vector3f(0,0,-velocityZ)), false);
+					velocity.setMagnitudeAndDirection(velocity.getMagnitude(), 0, 0);
 				}
 			}
 			/*
@@ -323,6 +353,74 @@ public class Player {
 				}
 			}
 			*/
+		
+		
+		//Block block2 = physicsUtils.getNextBlockInDirection(x, y-1, z, 0, 0, -1, 2, 0.001f);
+		Block block1 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block2 = physicsUtils.getNextBlockInDirection(x, y, z+0.25f, 0, -1, 0, 2, 0.1f);
+		Block block3 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z, 0, -1, 0, 2, 0.1f);
+		Block block4 = physicsUtils.getNextBlockInDirection(x, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+		Block block5 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z+0.25f, 0, -1, 0, 2, 0.1f);
+		Block block6 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z+0.25f, 0, -1, 0, 2, 0.1f);
+		Block block7 = physicsUtils.getNextBlockInDirection(x-0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+		Block block8 = physicsUtils.getNextBlockInDirection(x+0.25f, y, z-0.25f, 0, -1, 0, 2, 0.1f);
+			
+			if(block1  != null) {	
+				if(y < block1.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block2  != null) {	
+				if(y < block2.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block3  != null) {	
+				if(y < block3.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block4  != null) {	
+				if(y < block4.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block5  != null) {	
+				if(y < block5.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block6  != null) {	
+				if(y < block6.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block7  != null) {	
+				if(y < block7.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
+			if(block8  != null) {	
+				if(y < block8.getY() +2.5) {
+					x = lastX;
+					z = lastZ;
+					velocity.setPosition(-velocity.getX(), 0, -velocity.getZ());
+				}
+			}
 			Block downblock = physicsUtils.getNextBlockInDirection(x, y, z, 0, -1, 0, 2, 0.01f);
 			if(downblock  != null) {
 				float lvy = velocityY;
@@ -584,7 +682,7 @@ public class Player {
 		Screens.currentScreen = Screens.Died;
 	}
 	}
-public static void leftClickAction() {
+public static void leftClickAction(int power) {
 	if(currentGameScreen == null) {
 		if(!Player.LbuttonDownLast) {
 		Player.playHandSwingAnimation = true;
@@ -594,7 +692,7 @@ public static void leftClickAction() {
 			float ny = (float) Math.sin(Math.toRadians(Player.pitch));
 	int indexOfEntity = physicsUtils.getEnitityHiting(x, y, z, nx, ny, nz, 3f, 0.1f);
 	if(b != null && indexOfEntity ==-1) {
-		miningProgress += 0.001f * DisplayVariables.deltaTime;
+		miningProgress += 0.001f *power * DisplayVariables.deltaTime;
 		if(miningProgress >= 1f) {
 		miningProgress = 0;
 	World.items.add(b.getDrop());
@@ -657,7 +755,7 @@ public static boolean addItemToInventory(Item item) {
 		}
 	}
 	for(int x = 0; x < 9; x++) {
-		for(int y = 0; x < 3; y++) {
+		for(int y = 0; y < 3; y++) {
 			if(Inventory[x][y] == null) {
 				Inventory[x][y] = item;
 				return true;
@@ -710,7 +808,7 @@ public static void drawHotbarSquare(float x, float y) {
 	}
 	private static boolean checkForIntersectionWithBlock(Block block1) {
 		
-		return (Math.abs(block1.getGlobalX() - x) < 2) && (Math.abs(block1.getY() - y) < 1) && (Math.abs(block1.getGlobalZ() - z) < 2);
+		return Math.sqrt(Math.pow(block1.getGlobalX() - physicsUtils.convertFloatCoordToBlockCoord(x),2)+Math.pow(block1.getY() - physicsUtils.convertFloatCoordToBlockCoord(y),2)+Math.pow(block1.getGlobalZ() - physicsUtils.convertFloatCoordToBlockCoord(z),2)) > 0.1;
 		
 	
 	}

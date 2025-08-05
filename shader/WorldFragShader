@@ -34,7 +34,7 @@ uniform vec3 viewPos;
 	if(brightness > 0.8){
 		brightness = 0.8;
 	}
- 	vec4 outputColor = color*brightness*light;
+ 	vec4 outputColor = color*light;
  	
  	
 	

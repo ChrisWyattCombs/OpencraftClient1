@@ -25,6 +25,10 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
+import com.flowpowered.react.ReactDefaults;
+import com.flowpowered.react.engine.DynamicsWorld;
+import com.flowpowered.react.math.Vector3;
+
 import opencraft.blocks.BlockWater;
 import opencraft.entities.EntityZombie;
 import opencraft.graphics.DisplayVariables;
@@ -53,7 +57,8 @@ public class World {
 		
 		
 	}
-	
+
+	public static float sunlight = 1;
 	public static boolean server = false;
 	public static boolean addingChunks = false;
 	public static int realRegionListLength = 0;
@@ -256,9 +261,12 @@ public class World {
 		}
 		
 		addChunksToSetup(chunks);
+
+
+ 
 	}
 	public static void drawWorld() throws LWJGLException {
-		
+	
 		////System.out.println("d"+Math.sqrt(Math.pow(DisplayVariables.camX-x, 2)+Math.pow(DisplayVariables.camZ-z, 2)));
 		if(Math.sqrt(Math.pow(Player.x-x, 2)+Math.pow(Player.z-z, 2))>16) {
 			x = Player.x;
@@ -407,7 +415,37 @@ public class World {
 			////System.out.println("a2");
 			
 		}
-		return null;
+			return null;
+	}
+			public static float getAirLightVlaue(int x, int y, int z) {
+				
+				int chunkX = x >> 4;
+				int chunkZ = z >> 4;
+				
+					int regionX = chunkX >> 4;
+					int regionZ = chunkZ >> 4;
+					
+					//if(localCX < 0) {
+						//localCX += 256;
+					//}
+					//if(localCZ < 0) {
+						//localCZ += 256;
+					//}
+					int lcx = chunkX  & 0xF;
+					int lcz = chunkZ  & 0xF;
+					int localX = x  & 0xF;
+					int localZ = z  & 0xF;
+					////System.out.println("lcx: " + lcx);
+					////System.out.println("lcz " + lcz);
+					
+					try {
+					return regions[getRegionIndex(regionX, regionZ)].chunks[lcx][lcz].airLightValues[localX][y][localZ];
+				}catch( Exception e){
+					//e.printStackTrace();
+					////System.out.println("a2");
+					
+				}
+		return 0;
 	}public static boolean CheckForBlock(int x, int y, int z) {
 		
 		int chunkX = x >> 4;
@@ -440,7 +478,28 @@ public class World {
 			return false;
 		
 	}
-	
+	public static void setAirLightValue(float value, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException, FileNotFoundException {
+		int chunkX = x >> 4;
+		int chunkZ = z >> 4;
+		int regionX = chunkX >> 4;
+		int reigonZ = chunkZ >> 4;
+		int lcx = chunkX  & 0xF;
+		int lcz = chunkZ  & 0xF;
+		int localX = x  & 0xF;
+		int localZ = z  & 0xF;
+		int regionIndex = getRegionIndex(regionX, reigonZ);
+		if(regionIndex == -1) {
+			regionIndex = realRegionListLength;
+			regions[realRegionListLength] = new Region(regionX, reigonZ, new Chunk[16][16]);
+			realRegionListLength++;
+		}
+		if(regions[regionIndex].chunks[lcx][lcz]==null) {
+			regions[regionIndex].chunks[lcx][lcz] = new Chunk(lcx, lcz, regionX, reigonZ);
+			
+		}
+		regions[regionIndex].chunks[lcx][lcz].airLightValues[localX][y][localZ] = value;
+	}
+		
 	public static void setBlock(String blockType, int x, int y, int z) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException, FileNotFoundException {
 		int chunkX = x >> 4;
 		int chunkZ = z >> 4;
@@ -615,7 +674,8 @@ public class World {
 				 if(regionIndex != -1) {
 					 if(regions[regionIndex].chunks != null) {
 						 if(regions[regionIndex].chunks[oxl][ozl] != null){
-						 //regions[regionIndex].chunks[oxl][ozl].delete();
+							 regions[regionIndex].chunks[oxl][ozl].airLightValues = new float[16][256][16];
+							 //regions[regionIndex].chunks[oxl][ozl].delete();
 					 }
 					 }
 				 }

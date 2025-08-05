@@ -69,6 +69,7 @@ public static void createWindow(String title, int width, int height, boolean isF
 	               }
 	         }
 	   // AudioUtills.updateSoundSystem();
+	    
         Display.setDisplayMode(displayMode);
         DisplayVariables.width = width;
         DisplayVariables.height = height;
@@ -91,7 +92,7 @@ public static void setupOpenGl() throws Exception {
     
 // Reset The Projection Matrix
     GLU.gluPerspective (50f,(float)DisplayVariables.width/(float)DisplayVariables.height, 0.01f, 10000.0f);        // Calculate The Aspect Ratio Of The Window 
-    
+    GL11.glHint(GL_TEXTURE_COMPRESSION_HINT, GL_NICEST);
     
     glMatrixMode (GL_MODELVIEW);                                // Select The Modelview Matrix
     glLoadIdentity ();   

@@ -35,4 +35,10 @@ public class ItemSword extends Item {
 		return 6;
 	}
 
+	@Override
+	public int getMiningPower() {
+		// TODO Auto-generated method stub
+		return 5;
+	}
+
 }

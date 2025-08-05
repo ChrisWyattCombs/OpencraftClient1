@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,6 +20,8 @@ import java.util.Scanner;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
+
+import com.flowpowered.react.collision.shape.ConvexMeshShape;
 
 import opencraft.blocks.BlockDirt;
 import opencraft.blocks.BlockGrass;
@@ -39,6 +42,7 @@ public class Chunk {
 	private int waterID = -1;
 	public boolean fullyLoaded = false;
 	public boolean updating = false;
+	public float[][][] airLightValues = new float[16][256][16];
 	public Block[][][] blocks = new Block[16][256][16];
 	public static String[] BlockTypes = {"air","opencraft.blocks.BlockGrass","opencraft.blocks.BlockDirt","opencraft.blocks.BlockStone","opencraft.blocks.BlockWater","opencraft.blocks.BlockLeaf","opencraft.blocks.BlockWood","opencraft.blocks.BlockSand"};
 	public Chunk(int x, int z, int regionX, int regionZ) {
@@ -135,9 +139,9 @@ public class Chunk {
 		
 	}
 }else {
-File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
+File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\overworld\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 
-File chunkDir = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks");
+File chunkDir = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\overworld\\chunks");
 chunkDir.mkdirs();
 
 if (!chunkFile.exists()) {
@@ -410,7 +414,7 @@ public void calculateLighting() {
 }
 	public void save() throws IOException {
 		if(!World.server) {
-		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
+		File chunkFile = new File("C:\\Opencraft\\worlds\\"+World.worldName+"\\overworld\\chunks\\chunk(" +(x+(16*regionX)) + "," + (z+(16*regionZ)) + ").opencraftChunk");
 		
 		
 		  FileOutputStream fos = new FileOutputStream(chunkFile);
@@ -485,20 +489,90 @@ public void calculateLighting() {
 		}
 			
 	}
+	public void spreadLight(int x, int y ,int z,float value) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException, FileNotFoundException {
+		if(value == 0) {
+			return;
+		}
+		if(World.getBlock(x+1, y, z) == null) {
+			if(World.getAirLightVlaue(x+1, y, z) < value/4f) {
+				World.setAirLightValue(value/4f, x + 1, y, z);
+				spreadLight(x+1, y, z, value-1);
+			
+			}
+		
+		}
+		if(World.getBlock(x-1, y, z) == null) {
+			if(World.getAirLightVlaue(x-1, y, z) < value/4f) {
+			World.setAirLightValue(value/4f, x - 1, y, z);
+			spreadLight(x-1, y, z, value-1);
+			}
+		}
+		if(World.getBlock(x, y+1, z) == null) {
+			if(World.getAirLightVlaue(x, y+1, z) < value/4f) {
+			World.setAirLightValue(value/4f, x, y+1, z);
+			spreadLight(x, y+1, z, value-1);
+			}
+		}
+		if(World.getBlock(x, y-1, z) == null) {
+			if(World.getAirLightVlaue(x, y-1, z) < value/4f) {
+			World.setAirLightValue(value/4f, x, y-1, z);
+			spreadLight(x, y-1, z, value-1);
+			}
+		}
+		if(World.getBlock(x, y, z+1) == null) {
+			if(World.getAirLightVlaue(x, y, z+1) < value/4f) {
+			World.setAirLightValue(value/4f, x, y, z+1);
+			spreadLight(x, y, z+1, value-1);
+			}
+		}
+		if(World.getBlock(x, y, z-1) == null) {
+			if(World.getAirLightVlaue(x, y, z-1) < value/4f) {
+			World.setAirLightValue(value/4f, x, y, z-1);
+			spreadLight(x, y, z-1, value-1);
+			}
+		}
+	}
 	public void setup() {
+		airLightValues = new float[16][256][16];
 		//if(physicsUtils.getNextBlockInDirection(x, y, z, 0, 1, 0,255- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 1, 0, 0,255- (int)y)!=null && physicsUtils.getNextBlockInDirection(x, y+1, z, -1, 0, 0,255- (int)y)!=null &&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, 1,255- (int)y)!=null&&physicsUtils.getNextBlockInDirection(x, y+1, z, 0, 0, -1,255- (int)y)!=null )
 		if(id == -1) {
 		id = GL11.glGenLists(1);
 		}else {
 			//GL11.glDeleteLists(id,1);
 		}
-		GL11.glNewList(id, GL11.GL_COMPILE);
-		
-		GL11.glBegin(GL11.GL_QUADS);
+		for (int x = 0; x < 16; x++) {
+			for (int y = 0; y < 256; y++) {
+				
+				for (int z = 0; z < 16; z++) {
+					if(blocks[x][y][z] != null) {
+		if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), blocks[x][y][z].getY(), blocks[x][y][z].getGlobalZ(), 0, 1, 0,256) == null) {
+			blocks[x][y][z].topLight = 1*World.sunlight;
+			try {
+				World.setAirLightValue(1, (int)blocks[x][y][z].getGlobalX(), y+1, (int)blocks[x][y][z].getGlobalZ());
+				spreadLight((int)blocks[x][y][z].getGlobalX(),  y+1, (int)blocks[x][y][z].getGlobalZ(), Math.round(4*World.sunlight));
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | SecurityException | ClassNotFoundException
+					| FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else {
+//			blocks[x][y][z]
+		}
 		//DisplayUtills.shader.bind();
 		//GL30.glUniform1ui(DisplayUtills.shader.uniforms.get("tex"),World.blockTextures.getTextureID());
 		//GL11.glBindTexture(GL11.GL_TEXTURE_2D, World.blockTextures.getTextureID());
 		//GL11.glBegin(GL11.GL_QUADS);
+					}
+				}
+			}
+		}
+		GL11.glNewList(id, GL11.GL_COMPILE);
+		
+		GL11.glBegin(GL11.GL_QUADS);
+		
+	
 		ArrayList<Block> water = new ArrayList<>();
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 256; y++) {
@@ -534,11 +608,41 @@ public void calculateLighting() {
 					}
 					///if(block1 != null || block2 == null)
 					///blocks[x][y][z].visible = true;
-						if(!blocks[x][y][z].isFluid()) {
-							int localX = x ;
+				
+					if(!blocks[x][y][z].isFluid()) {
+						blocks[x][y][z].frontLight = World.getAirLightVlaue((int) blocks[x][y][z].getGlobalX(), blocks[x][y][z].getY(),(int) (blocks[x][y][z].getGlobalZ()-1));
+						blocks[x][y][z].backLight = World.getAirLightVlaue((int) blocks[x][y][z].getGlobalX(), blocks[x][y][z].getY(),(int) (blocks[x][y][z].getGlobalZ()+1));
+						blocks[x][y][z].rightLight = World.getAirLightVlaue((int) blocks[x][y][z].getGlobalX()+1, blocks[x][y][z].getY(),(int) blocks[x][y][z].getGlobalZ());
+						blocks[x][y][z].leftLight = World.getAirLightVlaue((int) blocks[x][y][z].getGlobalX()-1, blocks[x][y][z].getY(),(int) blocks[x][y][z].getGlobalZ());
+						blocks[x][y][z].topLight = World.getAirLightVlaue((int) blocks[x][y][z].getGlobalX(), blocks[x][y][z].getY()+1,(int) blocks[x][y][z].getGlobalZ());
+						blocks[x][y][z].bottomLight = World.getAirLightVlaue((int) blocks[x][y][z].getGlobalX(), blocks[x][y][z].getY()-1,(int) blocks[x][y][z].getGlobalZ());
+							
+						if(blocks[x][y][z].frontLight < 0.1f) {
+							blocks[x][y][z].frontLight = 0.1f;
+						}
+						if(blocks[x][y][z].backLight < 0.1f) {
+							blocks[x][y][z].backLight = 0.1f;
+						}
+						if(blocks[x][y][z].rightLight < 0.1f) {
+							blocks[x][y][z].rightLight = 0.1f;
+						}
+						if(blocks[x][y][z].leftLight < 0.1f) {
+							blocks[x][y][z].leftLight = 0.1f;
+						}
+						if(blocks[x][y][z].topLight < 0.1f) {
+							blocks[x][y][z].topLight = 0.1f;
+						}
+						if(blocks[x][y][z].bottomLight < 0.1f) {
+							blocks[x][y][z].bottomLight = 0.1f;
+						}
+						
+						int localX = x ;
 							int localZ = z;
+							
+							/*
 							if(block1 == null || block1.isFluid() || block2 == null|| block2.isFluid() || block6 == null || block6.height < 1f|| block6.isFluid() || block5 == null || block5.height < 1f|| block5.isFluid() || block3 == null || block3.height < 1f|| block3.isFluid() || block4 == null || block4.height < 1f|| block4.isFluid()) {
-							if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y,blocks[x][y][z].getGlobalZ(), 0, 1, 0,64)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 1, 0, 0,64)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), -1, 0, 0,64)!=null &&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, 1,64)!=null&&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, -1,64)!=null ) {
+							
+								if(physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y,blocks[x][y][z].getGlobalZ(), 0, 1, 0,64)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 1, 0, 0,64)!=null && physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), -1, 0, 0,64)!=null &&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, 1,64)!=null&&physicsUtils.getNextBlockInDirection(blocks[x][y][z].getGlobalX(), y+1,blocks[x][y][z].getGlobalZ(), 0, 0, -1,64)!=null ) {
 								
 								
 								 blocks[localX][y][localZ].topLight = 0.3f;
@@ -571,6 +675,7 @@ public void calculateLighting() {
 						blocks[localX][y][localZ].backLight = 1f;
 					}
 							}
+						*/
 							
 								blocks[x][y][z].draw(block1 == null || block1.isFluid(),block2 == null|| block2.isFluid(),block6 == null || block6.height < 1f|| block6.isFluid(),block5 == null || block5.height < 1f|| block5.isFluid(),block3 == null || block3.height < 1f|| block3.isFluid(),block4 == null || block4.height < 1f|| block4.isFluid());
 							}else {

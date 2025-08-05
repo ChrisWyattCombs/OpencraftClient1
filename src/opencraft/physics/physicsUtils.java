@@ -1,5 +1,7 @@
 package opencraft.physics;
 
+import java.util.ArrayList;
+
 import opencraft.Block;
 import opencraft.Entity;
 import opencraft.Player;
@@ -37,6 +39,11 @@ public static Block getNextBlockInDirection(float startX,float startY,float star
 		count++;
 	}
 	return null;
+}
+public static void addVertexToArrayList(ArrayList<Float> arrayList, float x, float y, float z) {
+	arrayList.add(x);
+	arrayList.add(y);
+	arrayList.add(z);
 }
 public static Block getNextBlockInDirection(float startX,float startY,float startZ, float directionX,float directionY,float directionZ,int range,float step) {
 	float x = startX;

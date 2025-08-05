@@ -20,11 +20,11 @@ public abstract class Item {
 	public abstract void rightClickAction();
 	
 	public void leftClickAction() {
-		Player.leftClickAction();
+		Player.leftClickAction(getMiningPower());
 	}
 	
 	public abstract int getMaxStack();
-	
+	public abstract int getMiningPower();
 	public abstract int getID();
 
 	public void updatePosition() {

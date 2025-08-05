@@ -23,6 +23,11 @@ public class BlockLeaf extends Block {
 	public int getID() {
 		return 5;
 	}
+	@Override
+	public boolean isFluid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public Item getDrop() {
@@ -34,10 +39,18 @@ public class BlockLeaf extends Block {
 		return  drop;
 	}
 
+	
+
 	@Override
-	public boolean isFluid() {
+	public boolean isAir() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public float getStrength() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }
